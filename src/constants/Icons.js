@@ -3,7 +3,7 @@ const { SvgIcon } = require("@material-ui/core");
 export const LogoIcon = (props) => {
   return (
     <SvgIcon viewBox={"0 0 125 125"} {...props}>
-      <g clip-path="url(#clip0)">
+      <g clipPath="url(#clip0)">
         <path d="M125.04 0H0V125.04H125.04V0Z" fill="#A1242D" />
         <path
           d="M42.09 34.77L38.68 47.5C38.4823 48.2202 38.053 48.8553 37.4584 49.3071C36.8637 49.759 36.1368 50.0025 35.39 50H22.63L26.05 37.3C26.2436 36.5751 26.671 35.9343 27.2658 35.4769C27.8606 35.0195 28.5897 34.771 29.34 34.77H42.09Z"

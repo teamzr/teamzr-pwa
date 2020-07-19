@@ -6,7 +6,7 @@ import { useLoginFormBtnComponentStyle } from "./LoginFormBtnComponent.Style";
 function LoginFormBtnComponent(props) {
   const classes = useLoginFormBtnComponentStyle();
   return (
-    <Button classes={{ root: classes.root }} variant={"contained"}>
+    <Button classes={{ root: classes.root }} variant={"contained"} {...props}>
       Log In
     </Button>
   );
