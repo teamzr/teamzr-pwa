@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Grid, Container, Box } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
-import { LogoIcon } from '../constants/Icons';
+import { Logo } from '../constants/Icons';
 import LoginFormComponent from '../components/LoginForm/LoginFormComponent';
 import { useLoginPageStyle } from './login.Style';
 import useAuthContext from '../context/AuthContext';
@@ -19,15 +19,15 @@ function LogIn() {
   }, [authContext]);
 
   return (
-    <Container>
+    <Container classes={{ root: classes.container }}>
       <Grid container direction={'column'} alignItems={'center'}>
-        <Grid item>
-          <LogoIcon className={classes.logo} />
+        <Grid item xs={4}>
+          <Logo className={classes.logo} />
         </Grid>
-        <Grid item>
+        <Grid item xs={4}>
           <LoginFormComponent />
         </Grid>
-        <Grid item></Grid>
+        <Grid item xs={4}></Grid>
       </Grid>
     </Container>
   );

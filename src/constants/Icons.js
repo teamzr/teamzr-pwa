@@ -1,8 +1,8 @@
-const { SvgIcon } = require("@material-ui/core");
+const { SvgIcon } = require('@material-ui/core');
 
 export const LogoIcon = (props) => {
   return (
-    <SvgIcon viewBox={"0 0 125 125"} {...props}>
+    <SvgIcon viewBox={'0 0 125 125'} {...props}>
       <g clipPath="url(#clip0)">
         <path d="M125.04 0H0V125.04H125.04V0Z" fill="#A1242D" />
         <path
@@ -19,6 +19,14 @@ export const LogoIcon = (props) => {
           <rect width="125.04" height="125.04" fill="white" />
         </clipPath>
       </defs>
+    </SvgIcon>
+  );
+};
+
+export const Logo = (props) => {
+  return (
+    <SvgIcon viewBox={'0 0 97.45 97.43'} {...props}>
+      <path d="M0,0V97.43H97.45V0ZM30.16,37a2.66,2.66,0,0,1-2.56,2h-10l2.67-9.9a2.63,2.63,0,0,1,2.56-2h9.94Zm47,0A2.62,2.62,0,0,1,74.6,39h-21L45.7,68.4a2.66,2.66,0,0,1-2.56,1.94H32.86L41.27,39l3.18-11.88H79.82Z" />
     </SvgIcon>
   );
 };

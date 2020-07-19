@@ -43,19 +43,23 @@ export const AuthProvider = ({ children }) => {
   const login = React.useCallback(async (email, password) => {
     try {
       const res = await axios.post('/auth', { email, password });
-      Cookies.set('token', res.data.token);
+      const token = res.data && res.data.token;
+
+      Cookies.set('token', token);
       const user = await getUserFromToken(token);
 
       setUser(user);
       setLoading(false);
+      return user;
     } catch (e) {
-      return { error: 'Invalid name or password!' };
+      throw { message: 'Invalid name or password!' };
     }
   }, []);
 
   const logout = React.useCallback(() => {
     Cookies.remove('token');
     setUser(null);
+    apolloClient.resetStore();
     window.location.pathname = '/login';
   }, []);
 
