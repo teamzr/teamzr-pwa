@@ -4,6 +4,7 @@ import {
   ApolloLink,
   createHttpLink,
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import Cookies from 'js-cookie';
 import { setContext } from 'apollo-link-context';
 
@@ -23,9 +24,13 @@ const httpLink = createHttpLink({
   credentials: 'same-origin',
 });
 
+const error = onError(({ response, operation, networkError }) => {
+  console.log('Network error', networkError);
+});
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([authLink, httpLink]),
+  link: ApolloLink.from([authLink, error, httpLink]),
 });
 
 export default client;

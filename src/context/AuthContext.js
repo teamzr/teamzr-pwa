@@ -4,6 +4,8 @@ import { gql } from '@apollo/client';
 
 import apolloClient from '../utils/ApolloClient';
 import axios from '../utils/Axios';
+import { useRouter } from 'next/router';
+import { notAuthFallback } from '../constants/AuthFallback';
 
 const getUserFromToken = async (token) => {
   const result = await apolloClient.query({
@@ -17,7 +19,7 @@ const getUserFromToken = async (token) => {
     `,
   });
 
-  return result.data.me;
+  return result?.data?.me;
 };
 
 const AuthContext = React.createContext({});
@@ -25,6 +27,8 @@ const AuthContext = React.createContext({});
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState();
   const [loading, setLoading] = React.useState(true);
+
+  const router = useRouter();
 
   React.useEffect(() => {
     async function getUserFromCookies() {
@@ -60,7 +64,10 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove('token');
     setUser(null);
     apolloClient.resetStore();
-    window.location.pathname = '/login';
+    if (typeof window !== 'undefined') {
+      router.push(notAuthFallback);
+      window.location.pathname = '/';
+    }
   }, []);
 
   return (

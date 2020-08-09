@@ -35,6 +35,10 @@ class MyDocument extends Document {
             type="image/png"
             href="../static/favicon.ico"
           />
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:300,400,700,800,Regular"
+            rel="stylesheet"
+          />
           <style>{`body { margin: 0 } /* custom! */`}</style>
           <meta
             name="viewport"

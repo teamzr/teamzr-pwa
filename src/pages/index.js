@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Container, Box, Button } from '@material-ui/core';
 
-import { useLoginPageStyle } from './login.Style';
 import useAuthContext from '../context/AuthContext';
 import { useQuery, gql } from '@apollo/client';
+import { protectRoute } from '../utils/ProtectRoute';
+import Start from './start';
 
 const ME_QUERY = gql`
   {
@@ -15,7 +16,6 @@ const ME_QUERY = gql`
 `;
 
 function HomePage() {
-  const classes = useLoginPageStyle();
   const authContext = useAuthContext();
   const { loading, error, data } = useQuery(ME_QUERY);
 
@@ -36,5 +36,5 @@ function HomePage() {
     </Container>
   );
 }
-
-export default HomePage;
+const Page = protectRoute(HomePage, Start);
+export default Page;

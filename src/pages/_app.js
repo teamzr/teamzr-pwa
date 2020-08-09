@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core';
 
 import client from '../utils/ApolloClient';
 import { AuthProvider } from '../context/AuthContext';
-import theme from '../theme';
+import theme from '../constants/DefaultTheme';
 
 function App({ Component, pageprops }) {
   React.useEffect(() => {
