@@ -1,14 +1,11 @@
-import * as React from "react";
-import { Input, Button } from "@material-ui/core";
-
-import { useLoginFormBtnComponentStyle } from "./LoginFormBtnComponent.Style";
+import * as React from 'react';
+import LoginButton from '../buttons/LoginButton';
 
 function LoginFormBtnComponent(props) {
-  const classes = useLoginFormBtnComponentStyle();
   return (
-    <Button classes={{ root: classes.root }} variant={"contained"} {...props}>
+    <LoginButton variant={'contained'} color={'secondary'} {...props}>
       Log In
-    </Button>
+    </LoginButton>
   );
 }
 

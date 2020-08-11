@@ -6,8 +6,8 @@ export const useStartPageStyle = makeStyles((theme) => ({
     marginBottom: theme.spacing(12),
   },
   logo: {
-    width: theme.spacing(27),
-    height: theme.spacing(20),
+    width: '100%',
+    height: 'auto',
     color: '#f4f9fd',
   },
   container: {
@@ -15,5 +15,8 @@ export const useStartPageStyle = makeStyles((theme) => ({
   },
   background: {
     ...PUBLIC_PAGES_BACKGROUND,
+  },
+  button: {
+    borderRadius: theme.spacing(2),
   },
 }));

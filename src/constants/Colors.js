@@ -14,3 +14,7 @@ export const PUBLIC_PAGES_BACKGROUND = {
   background:
     'linear-gradient(90deg, rgba(20, 216, 200, 1) 0%, rgba(6, 173, 183, 1) 100%)',
 };
+
+export const COLORS = {
+  white: '#ffffff',
+};

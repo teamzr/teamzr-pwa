@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core';
+import { COLORS } from './Colors';
 
 const theme = createMuiTheme({
   typography: ['Lato', 'Roboto'].join(', '),
@@ -6,10 +7,10 @@ const theme = createMuiTheme({
     primary: {
       main: '#06ADB7',
       light: '#14D8C8',
-      contrastText: '#FFFFFF',
+      contrastText: COLORS.white,
     },
     secondary: {
-      main: '#FFFFFF',
+      main: COLORS.white,
       dark: '#F1F6F7',
       contrastText: '#06ADB7',
     },
@@ -19,6 +20,13 @@ const theme = createMuiTheme({
     },
   },
   shadows: 'none',
+  overrides: {
+    MuiTextField: {
+      root: {
+        background: COLORS.white,
+      },
+    },
+  },
 });
 
 export default theme;

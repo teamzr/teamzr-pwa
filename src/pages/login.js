@@ -6,6 +6,8 @@ import { Logo } from '../constants/Icons';
 import LoginFormComponent from '../components/LoginForm/LoginFormComponent';
 import { useLoginPageStyle } from '../pagesStyle/login.Style';
 import useAuthContext from '../context/AuthContext';
+import { useLoginFormTextField } from '../components/LoginForm/LoginFormTextField.Style';
+import LogoPublicTitlePanel from '../components/LogoPublicTitlePanel';
 
 function LogIn() {
   const authContext = useAuthContext();
@@ -28,50 +30,23 @@ function LogIn() {
           alignItems={'stretch'}
           className={classes.container}
           justify={'center'}
+          spacing={5}
         >
-          <Grid item>
+          <Grid item xs={12}>
             <Grid
               container
               direction={'row'}
-              alignContent={'center'}
-              alignItems={'center'}
               justify={'center'}
-              spacing={5}
+              alignItems={'stretch'}
+              alignContent={'center'}
             >
-              <Grid item xs={4}>
-                <Divider className={classes.divider} />
-              </Grid>
-              <Grid item xs={4}>
-                <Grid
-                  container
-                  direction={'column'}
-                  justify={'center'}
-                  alignItems={'center'}
-                  alignItems={'center'}
-                  spacing={1}
-                >
-                  <Grid item xs={12}>
-                    <Logo className={classes.logo} />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography
-                      color={'secondary'}
-                      variant={'h4'}
-                      className={classes.title}
-                    >
-                      Log In
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={4}>
-                <Divider className={classes.divider} />
-              </Grid>
+              <LogoPublicTitlePanel title={'Log In'} />
+              <Grid item xs={12}></Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <Grid container direction={'row'} justify={'center'}>
-              <Grid item>
+              <Grid item xs={12} md={8}>
                 <LoginFormComponent />
               </Grid>
             </Grid>

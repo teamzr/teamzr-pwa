@@ -29,38 +29,61 @@ function Start() {
 
   return (
     <div className={classes.background}>
-      <Container>
+      <Container maxWidth={'md'}>
         <Grid
           container
           direction={'column'}
-          alignItems={'center'}
-          alignContent={'center'}
+          alignItems={'stretch'}
+          alignContent={'stretch'}
           className={classes.container}
           justify={'center'}
           spacing={2}
         >
-          <Grid item xs={12} className={classes.logoContainer}>
-            <LogoTeamzrVertical className={classes.logo} />
+          <Grid item xs={12}>
+            <Grid
+              className={classes.logoContainer}
+              container
+              direction={'column'}
+              justify={'center'}
+              alignItems={'center'}
+              spacing={6}
+            >
+              <Grid item xs={12}>
+                <Box>
+                  <LogoTeamzrVertical className={classes.logo} />
+                </Box>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
-            <LoginButton
-              fullWidth={true}
-              variant={'contained'}
-              color={'secondary'}
-              onClick={handleLogin}
-            >
-              Log In
-            </LoginButton>
+            <Grid container direction={'row'} justify={'center'}>
+              <Grid item xs={9} md={4}>
+                <LoginButton
+                  className={classes.button}
+                  fullWidth={true}
+                  variant={'contained'}
+                  color={'secondary'}
+                  onClick={handleLogin}
+                >
+                  Log In
+                </LoginButton>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
-            <LoginButton
-              fullWidth={true}
-              variant={'outlined'}
-              onClick={handleSignUp}
-              color={'secondary'}
-            >
-              Sign Up
-            </LoginButton>
+            <Grid container direction={'row'} justify={'center'}>
+              <Grid item xs={9} md={4}>
+                <LoginButton
+                  className={classes.button}
+                  fullWidth={true}
+                  variant={'outlined'}
+                  onClick={handleSignUp}
+                  color={'secondary'}
+                >
+                  Sign Up
+                </LoginButton>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>

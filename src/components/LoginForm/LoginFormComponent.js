@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Grid } from '@material-ui/core';
+import { useRouter } from 'next/router';
+
 import LoginFormBtnComponent from './LoginFormBtnComponent';
 import LoginFormTextField from './LoginFormTextField';
 import useAuthContext from '../../context/AuthContext';
-import { useRouter } from 'next/router';
+import { LetterIcon, LockIcon } from '../../constants/Icons';
 
 function LoginFormComponent(props) {
   const [error, setError] = React.useState(null);
@@ -24,15 +26,35 @@ function LoginFormComponent(props) {
   }, [emailRef, passRef]);
 
   return (
-    <Grid container direction={'column'} alignItems={'center'} spacing={2}>
-      <Grid item>
-        <LoginFormTextField ref={emailRef} />
+    <Grid
+      container
+      direction={'column'}
+      alignItems={'stretch'}
+      justify={'center'}
+      spacing={2}
+    >
+      <Grid item xs={12}>
+        <LoginFormTextField ref={emailRef} icon={<LetterIcon />} />
       </Grid>
-      <Grid item>
-        <LoginFormTextField ref={passRef} type={'password'} />
+      <Grid item xs={12}>
+        <LoginFormTextField
+          ref={passRef}
+          icon={<LockIcon />}
+          type={'password'}
+        />
       </Grid>
-      <Grid item>
-        <LoginFormBtnComponent onClick={handleSubmit} />
+      <Grid item xs={12}>
+        <Grid
+          container
+          direction={'row'}
+          alignItems={'stretch'}
+          alignContent={'stretch'}
+          justify={'center'}
+        >
+          <Grid item xs={6}>
+            <LoginFormBtnComponent onClick={handleSubmit} />
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
