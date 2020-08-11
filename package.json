@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next -p 9000",
     "build": "next build",
-    "start": "next start",
+    "preStart": "npm run build",
+    "start": "next start -p $PORT",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
