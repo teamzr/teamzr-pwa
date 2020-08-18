@@ -33,7 +33,7 @@ function NavigationMainBottomPanel(props) {
         </Grid>
         <Grid item xs={3} md={2} className={classes.item}>
           <IconButton>
-            <MessagesIcon />
+            <MessagesIcon className={classes.item} />
           </IconButton>
         </Grid>
       </Grid>
@@ -49,6 +49,7 @@ const useMavigationMainBottomPanelStyle = makeStyles((theme) => ({
   },
   item: {
     textAlign: 'center',
+    color: 'transparent',
   },
 }));
 

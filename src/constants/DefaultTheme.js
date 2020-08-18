@@ -29,9 +29,7 @@ const theme = createMuiTheme({
       },
     },
     MuiSvgIcon: {
-      root: {
-        fill: 'none',
-      },
+      root: {},
     },
   },
 });
