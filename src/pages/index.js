@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Container, Box, Button } from '@material-ui/core';
 
+import DefautltLayout from '../pagesLayouts/DefaultLayout';
 import useAuthContext from '../context/AuthContext';
 import { useQuery, gql } from '@apollo/client';
 import { protectRoute } from '../utils/ProtectRoute';
@@ -23,7 +24,7 @@ function HomePage() {
     authContext.logout();
   });
   return (
-    <Container>
+    <DefautltLayout>
       <Box>
         {!loading && (
           <>
@@ -33,7 +34,7 @@ function HomePage() {
         )}
       </Box>
       <Button onClick={handleLogout}>Log out</Button>
-    </Container>
+    </DefautltLayout>
   );
 }
 const Page = protectRoute(HomePage, Start);

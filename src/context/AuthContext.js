@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }) => {
 
       setLoading(false);
     }
+    const token = Cookies.get('token');
+    setUser(token);
 
     getUserFromCookies();
   }, []);

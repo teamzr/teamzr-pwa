@@ -16,6 +16,8 @@ const theme = createMuiTheme({
     },
     other: {},
     background: {
+      default: '#F1F6F7',
+      paper: COLORS.white,
       login: 'black',
     },
   },
@@ -24,6 +26,11 @@ const theme = createMuiTheme({
     MuiTextField: {
       root: {
         background: COLORS.white,
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        fill: 'none',
       },
     },
   },
