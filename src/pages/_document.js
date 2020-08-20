@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
+import { COLORS } from '../constants/Colors';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -44,6 +45,7 @@ class MyDocument extends Document {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
+          <meta name="theme-color" content={COLORS.primaryLight} />
         </Head>
         <body className="custom_class">
           <Main />

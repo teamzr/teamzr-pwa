@@ -16,5 +16,7 @@ export const PUBLIC_PAGES_BACKGROUND = {
 };
 
 export const COLORS = {
+  primaryMain: '#06ADB7',
+  primaryLight: '#14D8C8',
   white: '#ffffff',
 };
