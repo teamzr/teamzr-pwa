@@ -315,3 +315,54 @@ export const MessagesIcon = (props) => (
     </defs>
   </SvgIcon>
 );
+
+export const BackArrowIcon = (prop) => {
+  return (
+    <SvgIcon
+      width="23"
+      height="17"
+      viewBox="0 0 23 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8.34485 1.328L1.17285 8.50801L8.34485 15.688"
+        stroke="url(#paint0_linear)"
+        stroke-width="1.619"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M1.17285 8.508H21.3539"
+        stroke="url(#paint1_linear)"
+        stroke-width="1.619"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear"
+          x1="4.75885"
+          y1="1.328"
+          x2="4.75885"
+          y2="15.688"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#00EFD1" />
+          <stop offset="1" stop-color="#00ACEA" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear"
+          x1="11.2634"
+          y1="8.508"
+          x2="11.2634"
+          y2="9.508"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#00EFD1" />
+          <stop offset="1" stop-color="#00ACEA" />
+        </linearGradient>
+      </defs>
+    </SvgIcon>
+  );
+};
