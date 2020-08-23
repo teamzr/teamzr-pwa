@@ -4,10 +4,13 @@ import { TextField, makeStyles, ThemeProvider } from '@material-ui/core';
 import clsx from 'clsx';
 
 function MessagesInputBarTextFieldComponent(props) {
-  const { onFocus, onBlur, multiline } = props;
+  const { input, onFocus, onBlur, multiline, onChange } = props;
   const classes = useMessagesInputBarTextFieldComponent();
+
   return (
     <TextField
+      value={input}
+      onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
       classes={{ root: clsx(classes.root, { [classes.multiline]: multiline }) }}
@@ -21,9 +24,11 @@ function MessagesInputBarTextFieldComponent(props) {
   );
 }
 MessagesInputBarTextFieldComponent.proTypes = {
+  value: proTypes.string,
   multiline: proTypes.bool,
   onFocus: proTypes.func,
   onBlur: proTypes.func,
+  onChange: proTypes.func,
 };
 
 const useMessagesInputBarTextFieldComponent = makeStyles((theme) => ({

@@ -1,25 +1,93 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import {
-  Box,
-  makeStyles,
-  Grid,
-  TextField,
-  IconButton,
-} from '@material-ui/core';
-import { ImagesIcon } from '../../constants/Icons';
+import { Box, makeStyles, Grid } from '@material-ui/core';
+import clsx from 'clsx';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
 import MessagesInputBarTextFieldComponent from './MesssagesInputBarTextFieldComponent';
 import MessagesInputBarSendButtonComponent from './MessagesInputBarSendButtonComponent';
 import MessagesInputBarImagesButtonComponent from './MessagesInputBarImagesButtonComponent';
-import clsx from 'clsx';
+
+const GET_MESSAGES_FROM_QUERY = gql`
+  query messages($conversationId: ID, $recipients: [ID]) {
+    messages(conversationId: $conversationId, recpients: $recipients) {
+      id
+      author {
+        id
+        name
+      }
+      text
+      createdAt
+    }
+  }
+`;
+
+const SEND_MESSAGE_MUTATION = gql`
+  mutation createMessage(
+    $conversationId: ID
+    $recipients: [ID]
+    $text: String!
+  ) {
+    createMessage(
+      conversationId: $conversationId
+      recipients: $recipients
+      text: $text
+    ) {
+      id
+      author {
+        id
+      }
+      text
+    }
+  }
+`;
 
 function MessagesInputBarComponent(props) {
+  const { conversationId } = props;
+
   const classes = useMessagesInputBarComponent();
   const [multiline, setMultiline] = React.useState(false);
+  const [inputText, setInputText] = React.useState(null);
+
+  const [createMessage, { data }] = useMutation(SEND_MESSAGE_MUTATION, {
+    onCompleted: () => {
+      setInputText(null);
+    },
+    update(cache, { data: { createMessage } }) {
+      const { messages } = cache.readQuery({
+        query: GET_MESSAGES_FROM_QUERY,
+        variables: { conversationId },
+      });
+      createMessage.createdAt = Date.now();
+
+      cache.writeQuery({
+        query: GET_MESSAGES_FROM_QUERY,
+        data: { messages: messages.concat([createMessage]) },
+        variables: { conversationId },
+      });
+    },
+  });
+
+  // TODO: Add: recipinets in order to create new conversation
+  const handleSend = React.useCallback(() => {
+    if (inputText == '') return;
+    createMessage({
+      variables: { conversationId, text: inputText },
+    });
+  }, [inputText]);
 
   const toggleMultiline = React.useCallback(() => {
     setMultiline(!multiline);
   }, [multiline, setMultiline]);
+
+  const onMessageChange = React.useCallback((event) => {
+    const value = event.target.value;
+    setInputText(value);
+
+    event.preventDefault();
+  });
+
   return (
     <Box className={clsx(classes.container, { [classes.focused]: multiline })}>
       <Grid
@@ -46,6 +114,8 @@ function MessagesInputBarComponent(props) {
           >
             <Grid item xs={12}>
               <MessagesInputBarTextFieldComponent
+                onChange={onMessageChange}
+                value={inputText}
                 multiline={multiline}
                 onFocus={toggleMultiline}
                 onBlur={toggleMultiline}
@@ -56,7 +126,7 @@ function MessagesInputBarComponent(props) {
         <Grid item xs={1}>
           <Grid container direction={'column'} justify={'flex-start'}>
             <Grid item>
-              <MessagesInputBarSendButtonComponent />
+              <MessagesInputBarSendButtonComponent onClick={handleSend} />
             </Grid>
           </Grid>
         </Grid>
@@ -64,6 +134,10 @@ function MessagesInputBarComponent(props) {
     </Box>
   );
 }
+
+MessagesInputBarComponent.propTypes = {
+  conversationId: propTypes.string,
+};
 
 const useMessagesInputBarComponent = makeStyles((theme) => ({
   container: {

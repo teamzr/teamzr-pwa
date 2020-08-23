@@ -1,10 +1,12 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/react-hooks';
+import moment from 'moment';
+import { Grid, makeStyles } from '@material-ui/core';
+
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import MessageComponent from './MessageComponent';
 import useAuthContext from '../../context/AuthContext';
-import { Grid, makeStyles } from '@material-ui/core';
 
 export const GET_MESSAGES_FROM_QUERY = gql`
   query messages($recipients: [ID], $conversationId: ID) {
@@ -37,6 +39,7 @@ function MessagesComponent(props) {
     variables: {
       conversationId,
     },
+    pollInterval: 800,
   });
   const authCtx = useAuthContext();
 
@@ -50,9 +53,10 @@ function MessagesComponent(props) {
       alignContent={'stretch'}
       className={classes.container}
     >
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={12} className={classes.messagesGridItem}>
         {data.messages.map((m) => {
           const fromMe = m.author.id == authCtx.user.id;
+          const date = moment(parseInt(m.createdAt)).format('DD.MM. HH:mm');
           return (
             <Grid
               container
@@ -64,6 +68,7 @@ function MessagesComponent(props) {
                   fromMe={fromMe}
                   text={m.text}
                   authorName={m.author.name}
+                  date={date}
                 />
               </Grid>
             </Grid>
@@ -80,6 +85,9 @@ MessagesComponent.propTypes = {
 
 const useMessagesComponent = makeStyles((theme) => ({
   container: {},
+  messagesGridItem: {
+    paddingBottom: theme.spacing(8),
+  },
 }));
 
 export default MessagesComponent;

@@ -48,7 +48,8 @@ function ConversationComponent(props) {
         <Grid item xs={true}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
           <Typography variant={'subtitle2'}>
-            {messages[0] && messages[0].text.substring(0, 10)}
+            {messages[messages.length - 1] &&
+              messages[messages.length - 1].text.substring(0, 10)}
           </Typography>
         </Grid>
         <Grid item xs={4} direction={'column'}>

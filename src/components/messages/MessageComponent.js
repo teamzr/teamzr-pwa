@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { COLORS } from '../../constants/Colors';
 
 function MessageComponent(props) {
-  const { authorName, text, fromMe } = props;
+  const { authorName, text, fromMe, date } = props;
   const classes = useMessageComponentStyle();
 
   return (
@@ -16,8 +16,11 @@ function MessageComponent(props) {
       })}
     >
       <Grid container direction={'column'} spacing={2}>
-        <Grid item xs={3}>
-          {authorName}
+        <Grid item xs={12}>
+          <Grid container spacing={2} justify={'space-between'}>
+            <Grid item>{authorName}</Grid>
+            <Grid item>{date}</Grid>
+          </Grid>
         </Grid>
         <Grid item xs={12}>
           {text}

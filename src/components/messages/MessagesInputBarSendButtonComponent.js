@@ -5,7 +5,7 @@ import { SendIcon } from '../../constants/Icons';
 
 function MessagesInputBarSendButtonComponent(props) {
   return (
-    <IconButton>
+    <IconButton {...props}>
       <SendIcon />
     </IconButton>
   );

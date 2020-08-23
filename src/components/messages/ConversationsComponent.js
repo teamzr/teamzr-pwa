@@ -84,7 +84,9 @@ function ConversationsComponent(props) {
               <MessagesComponent conversationId={conversationId} />
             </Grid>
             <Grid item style={{ position: 'relative' }}>
-              <MessagesInputBarComponent />
+              {!!conversationId && (
+                <MessagesInputBarComponent conversationId={conversationId} />
+              )}
             </Grid>
           </Grid>
         </Grid>
