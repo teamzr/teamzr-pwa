@@ -48,7 +48,6 @@ function MessagesComponent(props) {
       direction={'column'}
       justify={'center'}
       alignContent={'stretch'}
-      spacing={4}
       className={classes.container}
     >
       <Grid item xs={12} md={12}>
@@ -60,7 +59,7 @@ function MessagesComponent(props) {
               direction={'row'}
               justify={fromMe ? 'flex-end' : 'flex-start'}
             >
-              <Grid item xs={6}>
+              <Grid item xs={8}>
                 <MessageComponent
                   fromMe={fromMe}
                   text={m.text}

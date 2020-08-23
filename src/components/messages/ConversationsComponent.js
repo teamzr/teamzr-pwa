@@ -2,7 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Hidden } from '@material-ui/core';
 
 import ConversationComponent from './ConversationComponent';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
@@ -10,6 +10,7 @@ import { BackArrowIcon } from '../../constants/Icons';
 import ConversationsSearchBarComponent from './ConversationsSearchBarComponent';
 import { useRouter } from 'next/router';
 import MessagesComponent from './MessagesComponent';
+import MessagesInputBarComponent from './MessagesInputBarComponent';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -51,33 +52,43 @@ function ConversationsComponent(props) {
       justify={'flex-start'}
       alignContent={'flex-start'}
       alignItems={'flex-start'}
-      spacing={3}
     >
-      <Grid item xs={12} md={3} className={classes.container}>
-        <Grid container justify={'flex-start'} direction={'column'}>
-          <Grid item xs={12}>
-            <BackArrowIcon style={{ color: 'transparent' }} />
-          </Grid>
-          <Grid item>
-            <ConversationsSearchBarComponent />
-          </Grid>
-          <Grid item xs={12} style={{ marginBottom: '50px' }}>
-            {conversations.map((c) => (
-              <ConversationComponent
-                id={c.id}
-                name={c.name}
-                conversationId={c.id}
-                updatedAt={c.updatedAt}
-                users={c.users}
-                messages={c.messages}
-              />
-            ))}
+      <Hidden mdDown={!!conversationId ? true : false}>
+        <Grid item xs={12} md={3} className={classes.container}>
+          <Grid container justify={'flex-start'} direction={'column'}>
+            <Grid item xs={12}>
+              <BackArrowIcon style={{ color: 'transparent' }} />
+            </Grid>
+            <Grid item>
+              <ConversationsSearchBarComponent />
+            </Grid>
+            <Grid item xs={12} style={{ marginBottom: '50px' }}>
+              {conversations.map((c) => (
+                <ConversationComponent
+                  id={c.id}
+                  name={c.name}
+                  conversationId={c.id}
+                  updatedAt={c.updatedAt}
+                  users={c.users}
+                  messages={c.messages}
+                />
+              ))}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={0} md={9} className={classes.container}>
-        <MessagesComponent conversationId={conversationId} />
-      </Grid>
+      </Hidden>
+      <Hidden mdDown={!!conversationId ? false : true}>
+        <Grid item xs={12} md={9}>
+          <Grid container direction={'column'}>
+            <Grid item className={classes.container}>
+              <MessagesComponent conversationId={conversationId} />
+            </Grid>
+            <Grid item style={{ position: 'relative' }}>
+              <MessagesInputBarComponent />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Hidden>
     </Grid>
   );
 }
@@ -86,7 +97,8 @@ ConversationsComponent.propType = {};
 
 const useConversationComponentStyle = makeStyles((theme) => ({
   container: {
-    maxHeight: '100vh',
+    height: 'calc(100vh - 49px)',
+
     overflowY: 'scroll',
   },
 }));
