@@ -14,6 +14,10 @@ const theme = createMuiTheme({
       dark: '#F1F6F7',
       contrastText: '#06ADB7',
     },
+    text: {
+      primary: COLORS.textPrimary,
+      secondary: COLORS.textSecondary,
+    },
     other: {
       text: {
         primary: '#424242',

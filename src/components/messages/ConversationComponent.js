@@ -9,16 +9,32 @@ import {
   Badge,
 } from '@material-ui/core';
 import moment from 'moment';
+import { useRouter } from 'next/router';
+import { route } from 'next/dist/next-server/server/router';
+import clsx from 'clsx';
 
 function ConversationComponent(props) {
-  const { name, updatedAt, messages, users } = props;
+  const { id, name, updatedAt, messages, users } = props;
   const classes = useConversationComponentStyle();
+
+  const router = useRouter();
+  const { conversationId } = router.query;
 
   const date = moment(moment(parseInt(updatedAt))).format('DD.MM.YYYY');
 
+  const handleClick = React.useCallback(() => {
+    router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
+  }, [router, id]);
+
   const conversationName = users.length > 2 ? name : users[0].name;
   return (
-    <Box margin={2}>
+    <Box
+      margin={2}
+      onClick={handleClick}
+      className={clsx(classes.conversationBox, {
+        [classes.active]: conversationId === id,
+      })}
+    >
       <Grid
         container
         direction={'row'}
@@ -35,7 +51,7 @@ function ConversationComponent(props) {
             {messages[0] && messages[0].text.substring(0, 10)}
           </Typography>
         </Grid>
-        <Grid item xs={2} direction={'column'}>
+        <Grid item xs={4} direction={'column'}>
           <Grid container>
             <Grid item xs={12}>
               <Typography variant={'subtitle2'}>{date}</Typography>
@@ -58,6 +74,18 @@ const useConversationComponentStyle = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(10),
     height: theme.spacing(10),
+  },
+  conversationBox: {
+    cursor: 'pointer',
+    borderRadius: theme.spacing(2),
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.secondary.main,
+    },
+  },
+  active: {
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.secondary.main,
   },
 }));
 

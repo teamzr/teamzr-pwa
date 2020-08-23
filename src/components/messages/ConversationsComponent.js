@@ -2,12 +2,14 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 
 import ConversationComponent from './ConversationComponent';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import { BackArrowIcon } from '../../constants/Icons';
 import ConversationsSearchBarComponent from './ConversationsSearchBarComponent';
+import { useRouter } from 'next/router';
+import MessagesComponent from './MessagesComponent';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -33,7 +35,12 @@ const GET_CONVERSATIONS_QUERY = gql`
 `;
 
 function ConversationsComponent(props) {
+  const classes = useConversationComponentStyle();
   const { loading, error, data } = useQuery(GET_CONVERSATIONS_QUERY);
+
+  const router = useRouter();
+
+  const { conversationId } = router.query;
 
   if (loading) return <LoadingIndicatorComponent />;
   const { conversations } = data;
@@ -41,14 +48,15 @@ function ConversationsComponent(props) {
     <Grid
       container
       direction={'row'}
-      justify={'center'}
-      alignContent={'center'}
-      alignItems={'center'}
+      justify={'flex-start'}
+      alignContent={'flex-start'}
+      alignItems={'flex-start'}
+      spacing={3}
     >
-      <Grid item xs={12} md={3}>
-        <Grid container justify={'center'} direction={'column'}>
+      <Grid item xs={12} md={3} className={classes.container}>
+        <Grid container justify={'flex-start'} direction={'column'}>
           <Grid item xs={12}>
-            <BackArrowIcon />
+            <BackArrowIcon style={{ color: 'transparent' }} />
           </Grid>
           <Grid item>
             <ConversationsSearchBarComponent />
@@ -56,6 +64,7 @@ function ConversationsComponent(props) {
           <Grid item xs={12} style={{ marginBottom: '50px' }}>
             {conversations.map((c) => (
               <ConversationComponent
+                id={c.id}
                 name={c.name}
                 conversationId={c.id}
                 updatedAt={c.updatedAt}
@@ -66,11 +75,20 @@ function ConversationsComponent(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={0} md={9}></Grid>
+      <Grid item xs={0} md={9} className={classes.container}>
+        <MessagesComponent conversationId={conversationId} />
+      </Grid>
     </Grid>
   );
 }
 
 ConversationsComponent.propType = {};
+
+const useConversationComponentStyle = makeStyles((theme) => ({
+  container: {
+    maxHeight: '100vh',
+    overflowY: 'scroll',
+  },
+}));
 
 export default ConversationsComponent;

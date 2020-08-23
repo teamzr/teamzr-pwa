@@ -19,4 +19,7 @@ export const COLORS = {
   primaryMain: '#06ADB7',
   primaryLight: '#14D8C8',
   white: '#ffffff',
+  fromOthersMesageColor: '#E4DFE5;',
+  textPrimary: '#424242',
+  textSecondary: '#757575',
 };
