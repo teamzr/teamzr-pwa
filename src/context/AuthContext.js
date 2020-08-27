@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.post('/auth', { email, password });
       const token = res.data && res.data.token;
 
-      Cookies.set('token', token);
+      Cookies.set('token', token, { expires: 365 });
       const user = await getUserFromToken(token);
 
       setUser(user);
