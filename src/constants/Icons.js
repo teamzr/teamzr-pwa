@@ -145,8 +145,8 @@ export const CompassIcon = (props) => (
         y2="14.0735"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint1_linear"
@@ -156,8 +156,8 @@ export const CompassIcon = (props) => (
         y2="15.6788"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint2_linear"
@@ -167,8 +167,8 @@ export const CompassIcon = (props) => (
         y2="15.6788"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint3_linear"
@@ -178,8 +178,8 @@ export const CompassIcon = (props) => (
         y2="15.6788"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint4_linear"
@@ -189,8 +189,8 @@ export const CompassIcon = (props) => (
         y2="15.6789"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint5_linear"
@@ -200,8 +200,8 @@ export const CompassIcon = (props) => (
         y2="9.03934"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint6_linear"
@@ -211,8 +211,8 @@ export const CompassIcon = (props) => (
         y2="22.3182"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
     </defs>
   </SvgIcon>
@@ -239,8 +239,8 @@ export const TeamzrButtonIcon = (props) => (
         y2="17.5836"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
     </defs>
   </SvgIcon>
@@ -276,8 +276,8 @@ export const MessagesIcon = (props) => (
         y2="12.0735"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint1_linear"
@@ -287,8 +287,8 @@ export const MessagesIcon = (props) => (
         y2="11.2759"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint2_linear"
@@ -298,8 +298,8 @@ export const MessagesIcon = (props) => (
         y2="11.2759"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
       <linearGradient
         id="paint3_linear"
@@ -309,8 +309,8 @@ export const MessagesIcon = (props) => (
         y2="11.2759"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#14D8C8" />
-        <stop offset="1" stop-color="#06ADB7" />
+        <stop stopColor="#14D8C8" />
+        <stop offset="1" stopColor="#06ADB7" />
       </linearGradient>
     </defs>
   </SvgIcon>
@@ -342,8 +342,8 @@ export const BackArrowIcon = (props) => {
           y2="15.688"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#00EFD1" />
-          <stop offset="1" stop-color="#00ACEA" />
+          <stop stopColor="#00EFD1" />
+          <stop offset="1" stopColor="#00ACEA" />
         </linearGradient>
         <linearGradient
           id="paint1_linear"
@@ -353,8 +353,8 @@ export const BackArrowIcon = (props) => {
           y2="9.508"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#00EFD1" />
-          <stop offset="1" stop-color="#00ACEA" />
+          <stop stopColor="#00EFD1" />
+          <stop offset="1" stopColor="#00ACEA" />
         </linearGradient>
       </defs>
     </SvgIcon>

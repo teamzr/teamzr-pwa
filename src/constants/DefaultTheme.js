@@ -29,7 +29,7 @@ const theme = createMuiTheme({
       login: 'black',
     },
   },
-  shadows: 'none',
+  shadows: ['none'],
   overrides: {
     MuiTextField: {
       root: {

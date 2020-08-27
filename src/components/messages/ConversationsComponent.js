@@ -2,7 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { Grid, makeStyles, Hidden } from '@material-ui/core';
+import { Grid, makeStyles, Hidden, Button } from '@material-ui/core';
 
 import ConversationComponent from './ConversationComponent';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
@@ -43,6 +43,10 @@ function ConversationsComponent(props) {
 
   const { conversationId } = router.query;
 
+  const handleAddCampaign = React.useCallback(() => {
+    router.push({ pathname: '/campaigns/new', query: { conversationId } });
+  }, [conversationId]);
+
   if (loading) return <LoadingIndicatorComponent />;
   const { conversations } = data;
   return (
@@ -79,6 +83,22 @@ function ConversationsComponent(props) {
       </Hidden>
       <Hidden mdDown={!!conversationId ? false : true}>
         <Grid item xs={12} md={9}>
+          {conversationId && (
+            <Grid item xs={12} className={classes.panel}>
+              <Grid
+                container
+                direction={'row'}
+                justify={'flex-end'}
+                spacing={2}
+              >
+                <Grid item>
+                  <Button variant={'contained'} onClick={handleAddCampaign}>
+                    + Add campaign
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
           <Grid container direction={'column'}>
             <Grid item className={classes.container}>
               <MessagesComponent conversationId={conversationId} />
@@ -102,6 +122,10 @@ const useConversationComponentStyle = makeStyles((theme) => ({
     height: 'calc(100vh - 49px)',
 
     overflowY: 'scroll',
+  },
+  panel: {
+    height: theme.spacing(7),
+    background: theme.palette.secondary.light,
   },
 }));
 
