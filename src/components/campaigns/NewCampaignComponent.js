@@ -20,7 +20,7 @@ const stepComponentMap = {
 };
 
 function NewCampaignComponent(props) {
-  const [step, setStep] = React.useState(NEW_CAMPAING_STEPS.START_DATE);
+  const [step, setStep] = React.useState(NEW_CAMPAING_STEPS.DETAILS);
   const [data, setData] = React.useState({
     name: '',
     description: '',

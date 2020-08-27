@@ -24,7 +24,7 @@ function NewCampaignDetailsStepComponent(props) {
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
-        <Typography>Name & Description</Typography>
+        <Typography>Campaign Name & Description</Typography>
       </Grid>
       <Grid item>
         <TextField
