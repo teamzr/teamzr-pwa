@@ -1,6 +1,7 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
+import moment from 'moment';
 
 import NewCampaignDetailsStepComponent from './NewCampaignDetailsStepComponent';
 import NewCampaignStartDateStepComponent from './NewCampaignStartDateStepComponent';
@@ -24,7 +25,7 @@ function NewCampaignComponent(props) {
   const [data, setData] = React.useState({
     name: '',
     description: '',
-    startDate: null,
+    startDate: moment(),
   });
 
   const onDataChange = React.useCallback(

@@ -2,6 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
+import moment from 'moment';
 
 import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
 
@@ -25,7 +26,12 @@ function NewCampaignStartDateStepComponent(props) {
       <Grid item>
         <Typography>Start Date</Typography>
       </Grid>
-      <KeyboardDatePicker value={startDate} onChange={handleDateChange} />
+      <KeyboardDatePicker
+        format={'DD/MM/YY'}
+        value={startDate}
+        minDate={moment()}
+        onChange={handleDateChange}
+      />
       <Grid item>
         <Grid container direction={'row'} justify={'space-between'}>
           <Grid item>
