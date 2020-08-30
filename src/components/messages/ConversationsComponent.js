@@ -56,8 +56,12 @@ function ConversationsComponent(props) {
     router.push({ pathname: '/campaigns/new', query: { conversationId } });
   }, [conversationId]);
 
-  const hnadleGoBack = React.useCallback(() => {
+  const handleGoBack = React.useCallback(() => {
     router.push('/');
+  }, []);
+
+  const handleBackToConversations = React.useCallback(() => {
+    router.push('/messages');
   }, []);
 
   if (loading) return <LoadingIndicatorComponent />;
@@ -70,11 +74,11 @@ function ConversationsComponent(props) {
       alignContent={'flex-start'}
       alignItems={'flex-start'}
     >
-      <Hidden mdDown={!!conversationId ? true : false}>
+      <Hidden smDown={!!conversationId ? true : false}>
         <Grid item xs={12} md={3} className={classes.container}>
           <Grid container justify={'flex-start'} direction={'column'}>
             <Grid item xs={12}>
-              <IconButton onClick={hnadleGoBack}>
+              <IconButton onClick={handleGoBack}>
                 <BackArrowIcon style={{ color: 'transparent' }} />
               </IconButton>
             </Grid>
@@ -97,16 +101,23 @@ function ConversationsComponent(props) {
           </Grid>
         </Grid>
       </Hidden>
-      <Hidden mdDown={!!conversationId ? false : true}>
+      <Hidden smDown={!!conversationId ? false : true}>
         <Grid item xs={12} md={9}>
           {conversationId && (
             <Grid item xs={12} className={classes.panel}>
               <Grid
                 container
                 direction={'row'}
-                justify={'flex-end'}
+                justify={'space-between'}
                 spacing={2}
               >
+                <Grid item>
+                  <Hidden mdUp>
+                    <IconButton onClick={handleBackToConversations}>
+                      <BackArrowIcon style={{ color: 'transparent' }} />
+                    </IconButton>
+                  </Hidden>
+                </Grid>
                 <Grid item>
                   <Button variant={'contained'} onClick={handleAddCampaign}>
                     + Add campaign
