@@ -1,35 +1,39 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography, Button, TextField } from '@material-ui/core';
 
-import NewCampaignStepDurationRadioButtons from './NewCampaignStepDurationRadioButtons';
 import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
 
-function NewCampaignDurationStepComponent(props) {
+function NewCampaignRewardStepComponent(props) {
   const { data, onDataChange, setStep } = props;
-  const { stepDuration } = data;
+  const { rewardDescription } = data;
 
   const handleChange = React.useCallback((event) => {
     onDataChange(event.target.name, event.target.value);
   }, []);
 
-  const handleNextClick = React.useCallback(() => {
-    setStep(NEW_CAMPAING_STEPS.REWARD);
-  }, []);
-
   const handleBackClick = React.useCallback(() => {
-    setStep(NEW_CAMPAING_STEPS.START_DATE);
+    setStep(NEW_CAMPAING_STEPS.STEP_DURATION);
   }, []);
 
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
-        <Typography variant={'h5'}>Default Duration of New Step</Typography>
+        <Typography variant={'h5'}>Reward</Typography>
+        <Typography>
+          Define what will the participants rewarded with, after finishing the
+          campaign
+        </Typography>
       </Grid>
-      <Grid item>
-        <NewCampaignStepDurationRadioButtons
+      <Grid item xs={12}>
+        <TextField
+          multiline
+          fullWidth
+          inputProps={{ style: { height: 140 } }}
+          name={'rewardDescription'}
+          value={rewardDescription}
           onChange={handleChange}
-          value={stepDuration}
+          placeholder={'Describe the reward'}
         />
       </Grid>
 
@@ -40,21 +44,16 @@ function NewCampaignDurationStepComponent(props) {
               {'<'}
             </Button>
           </Grid>
-          <Grid item>
-            <Button variant={'contained'} onClick={handleNextClick}>
-              {'>'}
-            </Button>
-          </Grid>
         </Grid>
       </Grid>
     </Grid>
   );
 }
 
-NewCampaignDurationStepComponent.propTypes = {
+NewCampaignRewardStepComponent.propTypes = {
   data: propTypes.array,
   setStep: propTypes.func,
   onDataChange: propTypes.func,
 };
 
-export default NewCampaignDurationStepComponent;
+export default NewCampaignRewardStepComponent;

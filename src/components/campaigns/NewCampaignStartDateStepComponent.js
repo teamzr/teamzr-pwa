@@ -19,12 +19,12 @@ function NewCampaignStartDateStepComponent(props) {
   }, []);
 
   const handleNextClick = React.useCallback(() => {
-    setStep(NEW_CAMPAING_STEPS.START_DATE);
+    setStep(NEW_CAMPAING_STEPS.STEP_DURATION);
   }, []);
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
-        <Typography>Start Date</Typography>
+        <Typography variant={'h5'}>Start Date</Typography>
       </Grid>
       <KeyboardDatePicker
         format={'DD/MM/YY'}

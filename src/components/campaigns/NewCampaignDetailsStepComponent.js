@@ -24,10 +24,11 @@ function NewCampaignDetailsStepComponent(props) {
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
-        <Typography>Campaign Name & Description</Typography>
+        <Typography variant={'h5'}>Campaign Name & Description</Typography>
       </Grid>
       <Grid item>
         <TextField
+          fullWidth
           value={name}
           onChange={handleChange}
           name={'name'}
@@ -36,6 +37,7 @@ function NewCampaignDetailsStepComponent(props) {
       </Grid>
       <Grid item>
         <TextField
+          fullWidth
           value={description}
           onChange={handleChange}
           name={'description'}
@@ -47,7 +49,11 @@ function NewCampaignDetailsStepComponent(props) {
         <Grid container direction={'row'} justify={'space-between'}>
           <Grid item></Grid>
           <Grid item>
-            <Button variant={'contained'} onClick={handleNextClick}>
+            <Button
+              variant={'contained'}
+              onClick={handleNextClick}
+              disabled={name && description ? false : true}
+            >
               {'>'}
             </Button>
           </Grid>
