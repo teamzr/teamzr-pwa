@@ -12,13 +12,31 @@ import moment from 'moment';
 import { useRouter } from 'next/router';
 import { route } from 'next/dist/next-server/server/router';
 import clsx from 'clsx';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/client';
+
+const MARK_CONVERSATION_AS_READ_MUTATION = gql`
+  mutation markConversationAsRead($id: ID!) {
+    markConversationAsRead(id: $id) {
+      id
+      readByIds
+    }
+  }
+`;
 
 function ConversationComponent(props) {
-  const { id, name, updatedAt, messages, users } = props;
+  const { id, name, updatedAt, messages, users, read } = props;
   const classes = useConversationComponentStyle();
 
   const router = useRouter();
   const { conversationId } = router.query;
+
+  const [markConversationAsRead] = useMutation(
+    MARK_CONVERSATION_AS_READ_MUTATION
+  );
+  if (conversationId == id && !read) {
+    markConversationAsRead({ variables: { id: conversationId } });
+  }
 
   const date = moment(moment(parseInt(updatedAt))).format('DD.MM.YYYY');
 
@@ -33,6 +51,7 @@ function ConversationComponent(props) {
       onClick={handleClick}
       className={clsx(classes.conversationBox, {
         [classes.active]: conversationId === id,
+        [classes.bold]: !read,
       })}
     >
       <Grid
@@ -52,13 +71,19 @@ function ConversationComponent(props) {
               messages[messages.length - 1].text.substring(0, 10)}
           </Typography>
         </Grid>
-        <Grid item xs={4} direction={'column'}>
-          <Grid container>
+        <Grid item xs={4}>
+          <Grid
+            container
+            direction={'row'}
+            justify={'flex-end'}
+            alignContent={'flex-end'}
+            alignItems={'flex-end'}
+          >
             <Grid item xs={12}>
               <Typography variant={'subtitle2'}>{date}</Typography>
             </Grid>
             <Grid item xs={12}>
-              <ConversationsCircle />
+              {!read && <ConversationsCircle />}
             </Grid>
           </Grid>
         </Grid>
@@ -88,6 +113,11 @@ const useConversationComponentStyle = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.secondary.main,
   },
+  bold: {
+    '& *': {
+      fontWeight: 'bold',
+    },
+  },
 }));
 
 export default ConversationComponent;
@@ -100,9 +130,10 @@ const ConversationsCircle = (props) => {
 const useConversationCircleStyle = makeStyles((theme) => ({
   circle: {
     display: 'block',
-    width: theme.spacing(1),
-    height: theme.spacing(1),
+
+    width: theme.spacing(2.5),
+    height: theme.spacing(2.5),
     borderRadius: '50%',
-    backgroundColor: theme.palette.other.primary,
+    backgroundColor: theme.palette.primary.main,
   },
 }));

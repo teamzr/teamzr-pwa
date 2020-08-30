@@ -158,7 +158,7 @@ const useMessagesInputBarComponent = makeStyles((theme) => ({
     background: 'linear-gradient(90deg, #14D8C8 0%, #06ADB7 100%)',
     backgroundColor: theme.palette.primary.main,
     position: 'absolute',
-    bottom: 0,
+    bottom: '47px',
     zIndex: 200,
   },
   focused: {

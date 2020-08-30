@@ -2,7 +2,13 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { Grid, makeStyles, Hidden, Button } from '@material-ui/core';
+import {
+  Grid,
+  makeStyles,
+  Hidden,
+  Button,
+  IconButton,
+} from '@material-ui/core';
 
 import ConversationComponent from './ConversationComponent';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
@@ -11,6 +17,7 @@ import ConversationsSearchBarComponent from './ConversationsSearchBarComponent';
 import { useRouter } from 'next/router';
 import MessagesComponent from './MessagesComponent';
 import MessagesInputBarComponent from './MessagesInputBarComponent';
+import useAuthContext from '../../context/AuthContext';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -37,8 +44,10 @@ const GET_CONVERSATIONS_QUERY = gql`
 
 function ConversationsComponent(props) {
   const classes = useConversationComponentStyle();
-  const { loading, error, data } = useQuery(GET_CONVERSATIONS_QUERY);
-
+  const { loading, error, data } = useQuery(GET_CONVERSATIONS_QUERY, {
+    pollInterval: 1000,
+  });
+  const authCtx = useAuthContext();
   const router = useRouter();
 
   const { conversationId } = router.query;
@@ -46,6 +55,10 @@ function ConversationsComponent(props) {
   const handleAddCampaign = React.useCallback(() => {
     router.push({ pathname: '/campaigns/new', query: { conversationId } });
   }, [conversationId]);
+
+  const hnadleGoBack = React.useCallback(() => {
+    router.push('/');
+  }, []);
 
   if (loading) return <LoadingIndicatorComponent />;
   const { conversations } = data;
@@ -61,7 +74,9 @@ function ConversationsComponent(props) {
         <Grid item xs={12} md={3} className={classes.container}>
           <Grid container justify={'flex-start'} direction={'column'}>
             <Grid item xs={12}>
-              <BackArrowIcon style={{ color: 'transparent' }} />
+              <IconButton onClick={hnadleGoBack}>
+                <BackArrowIcon style={{ color: 'transparent' }} />
+              </IconButton>
             </Grid>
             <Grid item>
               <ConversationsSearchBarComponent />
@@ -75,6 +90,7 @@ function ConversationsComponent(props) {
                   updatedAt={c.updatedAt}
                   users={c.users}
                   messages={c.messages}
+                  read={c.readByIds.includes(authCtx.user.id)}
                 />
               ))}
             </Grid>
