@@ -86,17 +86,24 @@ function ConversationsComponent(props) {
               <ConversationsSearchBarComponent />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
-              {conversations.map((c) => (
-                <ConversationComponent
-                  id={c.id}
-                  name={c.name}
-                  conversationId={c.id}
-                  updatedAt={c.updatedAt}
-                  users={c.users}
-                  messages={c.messages}
-                  read={c.readByIds.includes(authCtx.user.id)}
-                />
-              ))}
+              {conversations.map((c) => {
+                const isRead = c.readByIds.includes(authCtx.user.id);
+                if (!isRead) {
+                  notifyMe(c.messages[c.messages.length - 1].text);
+                }
+
+                return (
+                  <ConversationComponent
+                    id={c.id}
+                    name={c.name}
+                    conversationId={c.id}
+                    updatedAt={c.updatedAt}
+                    users={c.users}
+                    messages={c.messages}
+                    read={isRead}
+                  />
+                );
+              })}
             </Grid>
           </Grid>
         </Grid>
@@ -157,3 +164,29 @@ const useConversationComponentStyle = makeStyles((theme) => ({
 }));
 
 export default ConversationsComponent;
+
+function notifyMe(text) {
+  // Let's check if the browser supports notifications
+  if (!('Notification' in window)) {
+    alert('This browser does not support desktop notification');
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === 'granted') {
+    // If it's okay let's create a notification
+    var notification = new Notification(text);
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === 'granted') {
+        var notification = new Notification(text);
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you
+  // want to be respectful there is no need to bother them any more.
+}
