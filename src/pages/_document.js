@@ -34,12 +34,13 @@ class MyDocument extends Document {
           <link
             rel="shortcut icon"
             type="image/png"
-            href="../static/favicon.ico"
+            href="../public/favicon.ico"
           />
           <link
             href="https://fonts.googleapis.com/css?family=Lato:300,400,700,800,Regular"
             rel="stylesheet"
           />
+          <link rel="manifest" href="/manifest.webmanifest"></link>
           <style>{`body { margin: 0 } /* custom! */`}</style>
           <meta
             name="viewport"
