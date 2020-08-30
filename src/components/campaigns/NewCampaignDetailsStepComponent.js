@@ -32,17 +32,19 @@ function NewCampaignDetailsStepComponent(props) {
           value={name}
           onChange={handleChange}
           name={'name'}
-          label={'Name'}
+          label={`Name (${name.length} characters out of 30 max)`}
+          inputProps={{ maxlength: 30 }}
         />
       </Grid>
       <Grid item>
         <TextField
           fullWidth
+          multiline
           value={description}
           onChange={handleChange}
           name={'description'}
-          label={'Description'}
-          multiline
+          label={`Description (${description.length} characters out of 200 max)`}
+          inputProps={{ maxlength: 200 }}
         />
       </Grid>
       <Grid item>
