@@ -1,6 +1,6 @@
 const next = require('next');
 const express = require('express');
-const sslRedirect = require('heroku-ssl-redirect');
+const { default: sslRedirect } = require('heroku-ssl-redirect');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -9,7 +9,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-
+  console.log(1111, sslRedirect);
   // redirect to SSL
   server.use(sslRedirect());
 
@@ -19,6 +19,6 @@ app.prepare().then(() => {
 
   server.listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Teamzr pwa ready on http://localhost:${port}`);
   });
 });
