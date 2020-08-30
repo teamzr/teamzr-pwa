@@ -88,10 +88,6 @@ function ConversationsComponent(props) {
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
               {conversations.map((c) => {
                 const isRead = c.readByIds.includes(authCtx.user.id);
-                if (!isRead) {
-                  notifyMe(c.messages[c.messages.length - 1].text);
-                }
-
                 return (
                   <ConversationComponent
                     id={c.id}
