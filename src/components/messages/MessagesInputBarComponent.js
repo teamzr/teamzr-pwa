@@ -48,11 +48,11 @@ function MessagesInputBarComponent(props) {
 
   const classes = useMessagesInputBarComponent();
   const [multiline, setMultiline] = React.useState(false);
-  const [inputText, setInputText] = React.useState(null);
+  const [inputText, setInputText] = React.useState('');
 
   const [createMessage, { data }] = useMutation(SEND_MESSAGE_MUTATION, {
     onCompleted: () => {
-      setInputText(null);
+      setInputText('');
     },
     update(cache, { data: { createMessage } }) {
       const { messages } = cache.readQuery({
@@ -93,6 +93,7 @@ function MessagesInputBarComponent(props) {
     (e) => {
       if (e.keyCode == 13) {
         handleSend();
+        e.preventDefault();
       }
     },
     [handleSend]
