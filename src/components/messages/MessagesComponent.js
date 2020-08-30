@@ -53,12 +53,13 @@ function MessagesComponent(props) {
       alignContent={'stretch'}
       className={classes.container}
     >
-      <Grid item xs={12} md={12} className={classes.messagesGridItem}>
-        {data.messages.map((m) => {
+      <Grid item xs={12} className={classes.messagesGridItem}>
+        {data.messages.map((m, key) => {
           const fromMe = m.author.id == authCtx.user.id;
           const date = moment(parseInt(m.createdAt)).format('DD.MM. HH:mm');
           return (
             <Grid
+              key={key}
               container
               direction={'row'}
               justify={fromMe ? 'flex-end' : 'flex-start'}
@@ -86,7 +87,9 @@ MessagesComponent.propTypes = {
 const useMessagesComponent = makeStyles((theme) => ({
   container: {},
   messagesGridItem: {
-    paddingBottom: theme.spacing(8),
+    '& > :last-child': {
+      paddingBottom: theme.spacing(2),
+    },
   },
 }));
 

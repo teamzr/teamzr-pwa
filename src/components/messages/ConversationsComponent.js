@@ -64,6 +64,17 @@ function ConversationsComponent(props) {
     router.push('/messages');
   }, []);
 
+  const messagesRef = React.useRef();
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }, 500);
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messagesRef, conversationId]);
+
   if (loading) return <LoadingIndicatorComponent />;
   const { conversations } = data;
   return (
@@ -86,10 +97,11 @@ function ConversationsComponent(props) {
               <ConversationsSearchBarComponent />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
-              {conversations.map((c) => {
+              {conversations.map((c, key) => {
                 const isRead = c.readByIds.includes(authCtx.user.id);
                 return (
                   <ConversationComponent
+                    key={key}
                     id={c.id}
                     name={c.name}
                     conversationId={c.id}
@@ -130,7 +142,7 @@ function ConversationsComponent(props) {
             </Grid>
           )}
           <Grid container direction={'column'}>
-            <Grid item className={classes.container}>
+            <Grid item className={classes.container} innerRef={messagesRef}>
               <MessagesComponent conversationId={conversationId} />
             </Grid>
             <Grid item style={{ position: 'relative' }}>
@@ -150,7 +162,6 @@ ConversationsComponent.propType = {};
 const useConversationComponentStyle = makeStyles((theme) => ({
   container: {
     height: 'calc(100vh - 49px)',
-
     overflowY: 'scroll',
   },
   panel: {
