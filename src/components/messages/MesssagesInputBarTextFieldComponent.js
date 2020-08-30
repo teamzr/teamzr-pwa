@@ -1,10 +1,10 @@
 import * as React from 'react';
-import proTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { TextField, makeStyles, ThemeProvider } from '@material-ui/core';
 import clsx from 'clsx';
 
 function MessagesInputBarTextFieldComponent(props) {
-  const { input, onFocus, onBlur, multiline, onChange } = props;
+  const { input, onFocus, onBlur, multiline, onChange, onKeyDown } = props;
   const classes = useMessagesInputBarTextFieldComponent();
 
   return (
@@ -13,6 +13,7 @@ function MessagesInputBarTextFieldComponent(props) {
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      onKeyDown={onKeyDown}
       classes={{ root: clsx(classes.root, { [classes.multiline]: multiline }) }}
       fullWidth
       multiline
@@ -24,11 +25,12 @@ function MessagesInputBarTextFieldComponent(props) {
   );
 }
 MessagesInputBarTextFieldComponent.proTypes = {
-  value: proTypes.string,
-  multiline: proTypes.bool,
-  onFocus: proTypes.func,
-  onBlur: proTypes.func,
-  onChange: proTypes.func,
+  value: propTypes.string,
+  multiline: propTypes.bool,
+  onFocus: propTypes.func,
+  onBlur: propTypes.func,
+  onChange: propTypes.func,
+  onKeyDown: propTypes.func,
 };
 
 const useMessagesInputBarTextFieldComponent = makeStyles((theme) => ({

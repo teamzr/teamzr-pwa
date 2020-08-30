@@ -25,6 +25,15 @@ function LoginFormComponent(props) {
     }
   }, [emailRef, passRef]);
 
+  const keyEnterPress = React.useCallback(
+    (e) => {
+      if (e.keyCode == 13) {
+        handleSubmit();
+      }
+    },
+    [handleSubmit]
+  );
+
   return (
     <Grid
       container
@@ -34,13 +43,18 @@ function LoginFormComponent(props) {
       spacing={2}
     >
       <Grid item xs={12}>
-        <LoginFormTextField ref={emailRef} icon={<LetterIcon />} />
+        <LoginFormTextField
+          onKeyDown={keyEnterPress}
+          ref={emailRef}
+          icon={<LetterIcon />}
+        />
       </Grid>
       <Grid item xs={12}>
         <LoginFormTextField
           ref={passRef}
           icon={<LockIcon />}
           type={'password'}
+          onKeyDown={keyEnterPress}
         />
       </Grid>
       <Grid item xs={12}>

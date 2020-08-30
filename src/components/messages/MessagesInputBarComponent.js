@@ -75,6 +75,7 @@ function MessagesInputBarComponent(props) {
     createMessage({
       variables: { conversationId, text: inputText },
     });
+    setInputText('');
   }, [inputText]);
 
   const toggleMultiline = React.useCallback(() => {
@@ -87,6 +88,15 @@ function MessagesInputBarComponent(props) {
 
     event.preventDefault();
   });
+
+  const keyEnterPress = React.useCallback(
+    (e) => {
+      if (e.keyCode == 13) {
+        handleSend();
+      }
+    },
+    [handleSend]
+  );
 
   return (
     <Box className={clsx(classes.container, { [classes.focused]: multiline })}>
@@ -119,6 +129,7 @@ function MessagesInputBarComponent(props) {
                 multiline={multiline}
                 onFocus={toggleMultiline}
                 onBlur={toggleMultiline}
+                onKeyDown={keyEnterPress}
               />
             </Grid>
           </Grid>
