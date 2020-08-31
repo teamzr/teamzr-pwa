@@ -54,7 +54,7 @@ function NewCampaignDetailsStepComponent(props) {
             <Button
               variant={'contained'}
               onClick={handleNextClick}
-              disabled={name && description ? false : true}
+              disabled={name.length > 0 ? false : true}
             >
               {'>'}
             </Button>
