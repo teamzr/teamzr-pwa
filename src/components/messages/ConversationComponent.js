@@ -44,7 +44,7 @@ function ConversationComponent(props) {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
   }, [router, id]);
 
-  const conversationName = users.length > 2 ? name : users[0].name;
+  const conversationName = users.length > 1 ? name : users[0].name;
   return (
     <Box
       margin={2}
