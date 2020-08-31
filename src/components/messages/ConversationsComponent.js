@@ -67,13 +67,13 @@ function ConversationsComponent(props) {
   const messagesRef = React.useRef();
 
   React.useEffect(() => {
-    setTimeout(() => {
-      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    }, 500);
     if (messagesRef.current) {
+      setTimeout(() => {
+        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+      }, 200);
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  }, [messagesRef, conversationId]);
+  }, [messagesRef.current, conversationId]);
 
   if (loading) return <LoadingIndicatorComponent />;
   const { conversations } = data;
