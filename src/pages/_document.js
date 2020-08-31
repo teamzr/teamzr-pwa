@@ -44,7 +44,7 @@ class MyDocument extends Document {
           <style>{`body { margin: 0 } /* custom! */`}</style>
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
           />
           <meta name="theme-color" content={COLORS.primaryLight} />
         </Head>

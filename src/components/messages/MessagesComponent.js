@@ -88,7 +88,7 @@ const useMessagesComponent = makeStyles((theme) => ({
   container: {},
   messagesGridItem: {
     '& > :last-child': {
-      paddingBottom: theme.spacing(2),
+      marginBottom: theme.spacing(13),
     },
   },
 }));
