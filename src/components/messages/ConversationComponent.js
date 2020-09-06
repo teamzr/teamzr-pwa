@@ -25,7 +25,7 @@ const MARK_CONVERSATION_AS_READ_MUTATION = gql`
 `;
 
 function ConversationComponent(props) {
-  const { id, name, updatedAt, messages, users, read } = props;
+  const { id, name, messageAt, messages, users, read } = props;
   const classes = useConversationComponentStyle();
 
   const router = useRouter();
@@ -38,7 +38,7 @@ function ConversationComponent(props) {
     markConversationAsRead({ variables: { id: conversationId } });
   }
 
-  const date = moment(moment(parseInt(updatedAt))).format('DD.MM.YYYY');
+  const date = moment(moment(parseInt(messageAt))).format('DD.MM.YYYY');
 
   const handleClick = React.useCallback(() => {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
@@ -94,6 +94,7 @@ function ConversationComponent(props) {
 
 ConversationComponent.propTypes = {
   name: propTypes.string,
+  messageAt: propTypes.string,
 };
 
 const useConversationComponentStyle = makeStyles((theme) => ({

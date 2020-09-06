@@ -13,7 +13,7 @@ const Protector = (props) => {
   }
   return (
     <>
-      {ctx.isAuthenticated && <Page {...props} />}
+      {!ctx.loading && ctx.isAuthenticated && <Page {...props} />}
       {!ctx.isAuthenticated && !!FallbackRoute && <FallbackRoute {...props} />}
     </>
   );

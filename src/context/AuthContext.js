@@ -8,18 +8,20 @@ import { useRouter } from 'next/router';
 import { notAuthFallback } from '../constants/AuthFallback';
 
 const getUserFromToken = async (token) => {
-  const result = await apolloClient.query({
-    query: gql`
-      {
-        me {
-          id
-          name
+  try {
+    const result = await apolloClient.query({
+      query: gql`
+        {
+          me {
+            id
+            name
+          }
         }
-      }
-    `,
-  });
+      `,
+    });
 
-  return result?.data?.me;
+    return result?.data?.me || null;
+  } catch (e) {}
 };
 
 const AuthContext = React.createContext({});

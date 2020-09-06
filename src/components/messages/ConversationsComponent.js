@@ -26,6 +26,7 @@ const GET_CONVERSATIONS_QUERY = gql`
       name
       readByIds
       updatedAt
+      messageAt
       messages {
         id
         text
@@ -76,7 +77,6 @@ function ConversationsComponent(props) {
   }, [messagesRef.current, conversationId]);
 
   if (loading) return <LoadingIndicatorComponent />;
-  const { conversations } = data;
   return (
     <Grid
       container
@@ -97,21 +97,22 @@ function ConversationsComponent(props) {
               <ConversationsSearchBarComponent />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
-              {conversations.map((c, key) => {
-                const isRead = c.readByIds.includes(authCtx.user.id);
-                return (
-                  <ConversationComponent
-                    key={key}
-                    id={c.id}
-                    name={c.name}
-                    conversationId={c.id}
-                    updatedAt={c.updatedAt}
-                    users={c.users}
-                    messages={c.messages}
-                    read={isRead}
-                  />
-                );
-              })}
+              {data.conversations &&
+                data.conversations.map((c, key) => {
+                  const isRead = c.readByIds.includes(authCtx.user.id);
+                  return (
+                    <ConversationComponent
+                      key={key}
+                      id={c.id}
+                      name={c.name}
+                      conversationId={c.id}
+                      messageAt={c.messageAt}
+                      users={c.users}
+                      messages={c.messages}
+                      read={isRead}
+                    />
+                  );
+                })}
             </Grid>
           </Grid>
         </Grid>
