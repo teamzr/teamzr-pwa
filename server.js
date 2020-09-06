@@ -9,8 +9,6 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-  console.log(1111, sslRedirect);
-  // redirect to SSL
   server.use(sslRedirect());
 
   server.all('*', (req, res) => {
