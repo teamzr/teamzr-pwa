@@ -21,9 +21,6 @@ function DefaultLayout(props) {
           {children}
         </Grid>
       </Grid>
-      <Box style={{ position: 'fixed', bottom: 0, left: 0, width: '100%' }}>
-        <NavigationMainBottomPanel />
-      </Box>
     </>
   );
 }

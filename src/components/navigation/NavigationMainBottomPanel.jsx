@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid, IconButton, makeStyles } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Box } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 import {
@@ -9,11 +9,13 @@ import {
   MessagesIcon,
 } from '../../constants/Icons';
 import { route } from 'next/dist/next-server/server/router';
+import useAuthContext from '../../context/AuthContext';
 
 function NavigationMainBottomPanel(props) {
   const classes = useMavigationMainBottomPanelStyle();
-
   const router = useRouter();
+
+  const authCtx = useAuthContext();
 
   const handleExplore = React.useCallback(() => {
     router.push('/explore');
@@ -27,8 +29,9 @@ function NavigationMainBottomPanel(props) {
     router.push('/messages');
   }, [router]);
 
+  if (!authCtx.isAuthenticated) return false;
   return (
-    <>
+    <Box style={{ position: 'fixed', bottom: 0, left: 0, width: '100%' }}>
       <Grid
         container
         direction={'row'}
@@ -53,7 +56,7 @@ function NavigationMainBottomPanel(props) {
           </IconButton>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 

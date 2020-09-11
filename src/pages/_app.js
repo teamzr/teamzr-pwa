@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, Box } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
 import client from '../utils/ApolloClient';
 import { AuthProvider } from '../context/AuthContext';
 import theme from '../constants/DefaultTheme';
+import NavigationMainBottomPanel from '../components/navigation/NavigationMainBottomPanel';
 
 function App({ Component, pageprops }) {
   React.useEffect(() => {
@@ -24,6 +25,8 @@ function App({ Component, pageprops }) {
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <CssBaseline />
             <Component {...pageprops} />
+
+            <NavigationMainBottomPanel />
           </MuiPickersUtilsProvider>
         </ThemeProvider>
       </ApolloProvider>
