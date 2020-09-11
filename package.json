@@ -20,6 +20,9 @@
     "url": "https://github.com/teamzr/teamzr-pwa/issues"
   },
   "homepage": "https://github.com/teamzr/teamzr-pwa#readme",
+  "engines": {
+    "node": "12.16.1"
+  },
   "dependencies": {
     "@apollo/client": "^3.0.2",
     "@apollo/react-hooks": "^4.0.0",
