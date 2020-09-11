@@ -7,10 +7,11 @@ import NewCampaignComponent from '../../components/campaigns/NewCampaignComponen
 
 function NewCampaign() {
   const router = useRouter();
+  const { conversationId } = router.query;
 
   return (
     <DefaultLayout>
-      <NewCampaignComponent />
+      <NewCampaignComponent conversationId={conversationId} />
     </DefaultLayout>
   );
 }

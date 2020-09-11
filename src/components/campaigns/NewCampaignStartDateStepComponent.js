@@ -11,7 +11,7 @@ function NewCampaignStartDateStepComponent(props) {
   const { startDate } = data;
 
   const handleDateChange = React.useCallback((value) => {
-    onDataChange('startDate', value.toISOString());
+    onDataChange('startDate', moment(value));
   }, []);
 
   const handleBackClick = React.useCallback(() => {
