@@ -2,7 +2,6 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { Button, Grid } from '@material-ui/core';
 import { useQuery, gql } from '@apollo/client';
-import { SpeedDial } from '@material-ui/lab';
 
 import DefaultLayout from '../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
