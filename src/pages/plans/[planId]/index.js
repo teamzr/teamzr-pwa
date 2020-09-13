@@ -9,7 +9,7 @@ import LoadingIndicatorComponent from '../../../components/LoadingIndicatorCompo
 import { Grid, Typography } from '@material-ui/core';
 
 const PLAN_QUERY = gql`
-  query campaign($planId: ID!) {
+  query plan($planId: ID!) {
     plan(id: $planId) {
       id
       name

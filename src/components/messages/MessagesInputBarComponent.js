@@ -121,7 +121,7 @@ function MessagesInputBarComponent(props) {
             container
             direction={'column'}
             justify={'center'}
-            alignContent={'center)'}
+            alignContent={'stretch'}
           >
             <Grid item xs={12}>
               <MessagesInputBarTextFieldComponent

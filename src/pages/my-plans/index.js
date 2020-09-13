@@ -18,10 +18,6 @@ const PLANS_QUERY = gql`
         name
       }
     }
-    conversations {
-      id
-      name
-    }
   }
 `;
 
@@ -29,13 +25,22 @@ function Campaigns(props) {
   const { data, error, loading } = useQuery(PLANS_QUERY);
   const [conversationId, setConversationId] = React.useState(null);
 
+  const conversationsObject = {};
+  data &&
+    data.plans.forEach((p) => {
+      const conversation = p.conversation;
+      conversationsObject[conversation.id] = conversation;
+    });
+  const conversations = Object.values(conversationsObject);
+
   if (loading) return <LoadingIndicatorComponent />;
+
   return (
     <DefaultLayout>
       <Grid container direction={'column'}>
         <Grid item xs={12}>
           <MyPlansConversationFilterComponent
-            conversations={data.conversations}
+            conversations={conversations}
             conversationId={conversationId}
             setConversationId={setConversationId}
           />

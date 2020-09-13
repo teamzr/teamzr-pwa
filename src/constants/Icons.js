@@ -323,14 +323,14 @@ export const BackArrowIcon = (props) => {
         d="M8.34485 1.328L1.17285 8.50801L8.34485 15.688"
         stroke="url(#paint0_linear)"
         strokeWidth="1.619"
-        stroke-linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M1.17285 8.508H21.3539"
         stroke="url(#paint1_linear)"
         strokeWidth="1.619"
-        stroke-linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
       <defs>

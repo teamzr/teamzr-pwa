@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import MessagesComponent from './MessagesComponent';
 import MessagesInputBarComponent from './MessagesInputBarComponent';
 import useAuthContext from '../../context/AuthContext';
+import ConversationTitleComponent from './ConversationTitleComponent';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -135,6 +136,9 @@ function ConversationsComponent(props) {
                   </Hidden>
                 </Grid>
                 <Grid item>
+                  <ConversationTitleComponent conversationId={conversationId} />
+                </Grid>
+                <Grid item>
                   <Button variant={'contained'} onClick={handleAddCampaign}>
                     Create plan
                   </Button>
@@ -146,7 +150,7 @@ function ConversationsComponent(props) {
             <Grid item className={classes.container} innerRef={messagesRef}>
               <MessagesComponent conversationId={conversationId} />
             </Grid>
-            <Grid item style={{ position: 'relative' }}>
+            <Grid item xs={12} style={{ position: 'relative' }}>
               {!!conversationId && (
                 <MessagesInputBarComponent conversationId={conversationId} />
               )}

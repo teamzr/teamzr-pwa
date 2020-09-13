@@ -26,7 +26,7 @@ const stepComponentMap = {
 };
 
 const CREATE_PLAN_MUTATION = gql`
-  mutation createPlan($input: CreatePlanInputType!) {
+  mutation createPlan($input: PlanCreateInputType!) {
     createPlan(input: $input) {
       id
       name
@@ -60,7 +60,7 @@ function NewPlanComponent(props) {
   const handleCreate = React.useCallback(async () => {
     const res = await createPlan({ variables: { input: data } });
     const planId = res.data.createPlan.id;
-    router.push(`/palans/[planId]`, `/plans/${planId}`);
+    router.push(`/plans/[planId]`, `/plans/${planId}`);
   }, [data, createPlan]);
 
   const Step = stepComponentMap[step];
