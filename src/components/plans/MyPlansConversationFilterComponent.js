@@ -1,41 +1,40 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid, Button } from '@material-ui/core';
-import ConversationFilterButton from './CampaignsConversationFilterButton';
-import { set } from 'js-cookie';
+import { Grid, Button, Box } from '@material-ui/core';
+import ConversationFilterButton from './MyPlansConversationFilterButton';
 
-function CampaignsConversationFilterComponent(props) {
+function MyPlansConversationFilterComponent(props) {
   const { conversations, conversationId, setConversationId } = props;
 
   return (
-    <Grid container direction={'row'}>
-      <Grid item>
+    <Box overflow={'scroll'} height={'auto'} paddingBottom={1}>
+      <Box display={'inline'} display={'inline-flex'} width={'max-content'}>
         <ConversationFilterButton
           setConversationId={setConversationId}
           active={conversationId == null}
         >
           All
         </ConversationFilterButton>
-      </Grid>
-      {conversations.map((c, i) => (
-        <Grid item key={i}>
+
+        {conversations.map((c, i) => (
           <ConversationFilterButton
+            key={i}
             active={conversationId == c.id}
             conversationId={c.id}
             setConversationId={setConversationId}
           >
             {c.name}
           </ConversationFilterButton>
-        </Grid>
-      ))}
-    </Grid>
+        ))}
+      </Box>
+    </Box>
   );
 }
 
-CampaignsConversationFilterComponent.propTypes = {
+MyPlansConversationFilterComponent.propTypes = {
   conversations: propTypes.array,
   conversationId: propTypes.string,
   setConversationId: propTypes.func,
 };
 
-export default CampaignsConversationFilterComponent;
+export default MyPlansConversationFilterComponent;

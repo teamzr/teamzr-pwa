@@ -54,7 +54,7 @@ function ConversationsComponent(props) {
   const { conversationId } = router.query;
 
   const handleAddCampaign = React.useCallback(() => {
-    router.push({ pathname: '/campaigns/new', query: { conversationId } });
+    router.push({ pathname: '/plans/new', query: { conversationId } });
   }, [conversationId]);
 
   const handleGoBack = React.useCallback(() => {
@@ -136,7 +136,7 @@ function ConversationsComponent(props) {
                 </Grid>
                 <Grid item>
                   <Button variant={'contained'} onClick={handleAddCampaign}>
-                    + Add campaign
+                    Create plan
                   </Button>
                 </Grid>
               </Grid>

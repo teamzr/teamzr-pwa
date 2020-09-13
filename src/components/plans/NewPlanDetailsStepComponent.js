@@ -1,9 +1,9 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
+import { NEW_CAMPAING_STEPS } from './NewPlanComponent';
 import { Grid, TextField, Typography, Button } from '@material-ui/core';
 
-function NewCampaignDetailsStepComponent(props) {
+function NewPlanDetailsStepComponent(props) {
   const { data, onDataChange, setStep } = props;
   const { name, description } = data;
 
@@ -24,7 +24,7 @@ function NewCampaignDetailsStepComponent(props) {
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
-        <Typography variant={'h5'}>Campaign Name & Description</Typography>
+        <Typography variant={'h5'}>Plan Name & Description</Typography>
       </Grid>
       <Grid item>
         <TextField
@@ -64,9 +64,9 @@ function NewCampaignDetailsStepComponent(props) {
     </Grid>
   );
 }
-NewCampaignDetailsStepComponent.propTypes = {
+NewPlanDetailsStepComponent.propTypes = {
   setStep: propTypes.func,
   onChange: propTypes.func,
 };
 
-export default NewCampaignDetailsStepComponent;
+export default NewPlanDetailsStepComponent;

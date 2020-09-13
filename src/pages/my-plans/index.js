@@ -1,16 +1,16 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useQuery, gql } from '@apollo/client';
 
 import DefaultLayout from '../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
-import CampaignsConversationFilterComponent from '../../components/campaigns/CampaignsConversationFilterComponent';
-import CampaingListComponent from '../../components/campaigns/CampaingListComponent';
+import MyPlansConversationFilterComponent from '../../components/plans/MyPlansConversationFilterComponent';
+import MyPlansListComponent from '../../components/plans/PlanListComponent';
 
-const CAMPAIGNS_QUERY = gql`
+const PLANS_QUERY = gql`
   {
-    campaigns {
+    plans {
       id
       name
       conversation {
@@ -26,15 +26,15 @@ const CAMPAIGNS_QUERY = gql`
 `;
 
 function Campaigns(props) {
-  const { data, error, loading } = useQuery(CAMPAIGNS_QUERY);
+  const { data, error, loading } = useQuery(PLANS_QUERY);
   const [conversationId, setConversationId] = React.useState(null);
 
   if (loading) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
       <Grid container direction={'column'}>
-        <Grid item>
-          <CampaignsConversationFilterComponent
+        <Grid item xs={12}>
+          <MyPlansConversationFilterComponent
             conversations={data.conversations}
             conversationId={conversationId}
             setConversationId={setConversationId}
@@ -43,8 +43,8 @@ function Campaigns(props) {
         <Grid item xs={12}>
           <Grid container direction={'row'} justify={'center'}>
             <Grid item>
-              <CampaingListComponent
-                campaigns={data.campaigns}
+              <MyPlansListComponent
+                campaigns={data.plans}
                 conversationId={conversationId}
               />
             </Grid>

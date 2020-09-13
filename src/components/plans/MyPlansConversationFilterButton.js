@@ -2,7 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 
-function ConversationFilterButton(props) {
+function MyPlansConversationFilterButton(props) {
   const { active, conversationId, setConversationId, children } = props;
 
   const handleClick = React.useCallback(() => {
@@ -10,17 +10,21 @@ function ConversationFilterButton(props) {
   }, [conversationId, setConversationId]);
 
   return (
-    <Button variant={active ? 'contained' : 'outline'} onClick={handleClick}>
+    <Button
+      variant={active ? 'contained' : 'text'}
+      color={'primary'}
+      onClick={handleClick}
+    >
       {children}
     </Button>
   );
 }
 
-ConversationFilterButton.propTypes = {
+MyPlansConversationFilterButton.propTypes = {
   active: propTypes.bool,
   conversationId: propTypes.string,
   children: propTypes.any,
   setConversationId: propTypes.func,
 };
 
-export default ConversationFilterButton;
+export default MyPlansConversationFilterButton;

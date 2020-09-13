@@ -4,10 +4,10 @@ import { Grid, Button } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 
-import NewCampaignDetailsStepComponent from './NewCampaignDetailsStepComponent';
-import NewCampaignStartDateStepComponent from './NewCampaignStartDateStepComponent';
-import NewCampaignDurationStepComponent from './NewCampaignDurationStepComponent';
-import NewCampaignRewardStepComponent from './NewCampaignRewardStepComponent';
+import NewCampaignDetailsStepComponent from './NewPlanDetailsStepComponent';
+import NewCampaignStartDateStepComponent from './NewPlanStartDateStepComponent';
+import NewCampaignDurationStepComponent from './NewPlanDurationStepComponent';
+import NewCampaignRewardStepComponent from './NewPlanRewardStepComponent';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 
@@ -25,9 +25,9 @@ const stepComponentMap = {
   [NEW_CAMPAING_STEPS.REWARD]: NewCampaignRewardStepComponent,
 };
 
-const CREATE_CAMPAIGN_MUTATION = gql`
-  mutation createCampaign($input: CreateCampaignInputType!) {
-    createCampaign(input: $input) {
+const CREATE_PLAN_MUTATION = gql`
+  mutation createPlan($input: CreatePlanInputType!) {
+    createPlan(input: $input) {
       id
       name
       description
@@ -35,7 +35,7 @@ const CREATE_CAMPAIGN_MUTATION = gql`
   }
 `;
 
-function NewCampaignComponent(props) {
+function NewPlanComponent(props) {
   const { conversationId } = props;
   const [step, setStep] = React.useState(NEW_CAMPAING_STEPS.DETAILS);
   const [data, setData] = React.useState({
@@ -48,7 +48,7 @@ function NewCampaignComponent(props) {
   });
   const router = useRouter();
 
-  const [createCampaign] = useMutation(CREATE_CAMPAIGN_MUTATION);
+  const [createPlan] = useMutation(CREATE_PLAN_MUTATION);
 
   const onDataChange = React.useCallback(
     (name, value) => {
@@ -58,10 +58,10 @@ function NewCampaignComponent(props) {
   );
 
   const handleCreate = React.useCallback(async () => {
-    const res = await createCampaign({ variables: { input: data } });
-    const campaignId = res.data.createCampaign.id;
-    router.push(`/campaigns/[campaignId]`, `/campaigns/${campaignId}`);
-  }, [data, createCampaign]);
+    const res = await createPlan({ variables: { input: data } });
+    const planId = res.data.createPlan.id;
+    router.push(`/palans/[planId]`, `/plans/${planId}`);
+  }, [data, createPlan]);
 
   const Step = stepComponentMap[step];
   return (
@@ -81,8 +81,8 @@ function NewCampaignComponent(props) {
   );
 }
 
-NewCampaignComponent.propTypes = {
+NewPlanComponent.propTypes = {
   conversationId: propTypes.string,
 };
 
-export default NewCampaignComponent;
+export default NewPlanComponent;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, Button } from '@material-ui/core';
-import CampaignListItemComponent from './CampaignListItemComponent';
+import PlanListItemComponent from './PlanListItemComponent';
 
-function CampaingListComponent(props) {
+function PlanListComponent(props) {
   const { campaigns, conversationId } = props;
 
   const campaignsSelection = campaigns.filter(
@@ -15,16 +15,16 @@ function CampaingListComponent(props) {
     <Grid container direction={'column'}>
       {campaignsSelection.map((c, i) => (
         <Grid item key={i}>
-          <CampaignListItemComponent name={c.name} campaignId={c.id} />
+          <PlanListItemComponent name={c.name} campaignId={c.id} />
         </Grid>
       ))}
     </Grid>
   );
 }
 
-CampaingListComponent.propTypes = {
+PlanListComponent.propTypes = {
   campaings: propTypes.array,
   conversationId: propTypes.string,
 };
 
-export default CampaingListComponent;
+export default PlanListComponent;

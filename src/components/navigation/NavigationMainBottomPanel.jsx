@@ -22,7 +22,7 @@ function NavigationMainBottomPanel(props) {
   }, [router]);
 
   const handleCampaings = React.useCallback(() => {
-    router.push('/campaigns');
+    router.push('/my-plans');
   }, [router]);
 
   const handleMessages = React.useCallback(() => {

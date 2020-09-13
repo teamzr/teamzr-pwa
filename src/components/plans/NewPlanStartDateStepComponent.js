@@ -4,7 +4,7 @@ import { Grid, Typography, Button } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import moment from 'moment';
 
-import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
+import { NEW_CAMPAING_STEPS } from './NewPlanComponent';
 
 function NewCampaignStartDateStepComponent(props) {
   const { data, setStep, onDataChange } = props;

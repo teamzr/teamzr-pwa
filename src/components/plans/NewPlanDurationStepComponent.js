@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { Grid, Typography, Button } from '@material-ui/core';
 
 import NewCampaignStepDurationRadioButtons from './NewCampaignStepDurationRadioButtons';
-import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
+import { NEW_CAMPAING_STEPS } from './NewPlanComponent';
 
 function NewCampaignDurationStepComponent(props) {
   const { data, onDataChange, setStep } = props;
@@ -12,7 +12,6 @@ function NewCampaignDurationStepComponent(props) {
   const handleChange = React.useCallback((event) => {
     onDataChange(event.target.name, event.target.value);
   }, []);
-
   const handleNextClick = React.useCallback(() => {
     setStep(NEW_CAMPAING_STEPS.REWARD);
   }, []);

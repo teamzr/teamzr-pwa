@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 import DefaultLayout from '../../pagesLayouts/DefaultLayout';
-import NewCampaignComponent from '../../components/campaigns/NewCampaignComponent';
+import NewPlannComponent from '../../components/plans/NewPlanComponent';
 
 function NewCampaign() {
   const router = useRouter();
@@ -11,7 +11,7 @@ function NewCampaign() {
 
   return (
     <DefaultLayout>
-      <NewCampaignComponent conversationId={conversationId} />
+      <NewPlannComponent conversationId={conversationId} />
     </DefaultLayout>
   );
 }

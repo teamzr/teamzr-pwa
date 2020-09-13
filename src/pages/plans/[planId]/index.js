@@ -8,9 +8,9 @@ import DefaultLayout from '../../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../../components/LoadingIndicatorComponent';
 import { Grid, Typography } from '@material-ui/core';
 
-const CAMPAIGN_QUERY = gql`
-  query campaign($campaignId: ID!) {
-    campaign(id: $campaignId) {
+const PLAN_QUERY = gql`
+  query campaign($planId: ID!) {
+    plan(id: $planId) {
       id
       name
       description
@@ -28,18 +28,18 @@ const CAMPAIGN_QUERY = gql`
 
 function Campaign(props) {
   const router = useRouter();
-  const { campaignId } = router.query;
+  const { planId } = router.query;
 
-  const { data, error, loading } = useQuery(CAMPAIGN_QUERY, {
-    variables: { campaignId },
-    skip: !campaignId,
+  const { data, error, loading } = useQuery(PLAN_QUERY, {
+    variables: { planId },
+    skip: !planId,
   });
 
-  if (!campaignId || loading) return <LoadingIndicatorComponent />;
+  if (!planId || loading) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
-      <Typography variant={'h4'}>{data.campaign.name}</Typography>
-      <Typography variant={'body1'}>{data.campaign.description}</Typography>
+      <Typography variant={'h4'}>{data.plan.name}</Typography>
+      <Typography variant={'body1'}>{data.plan.description}</Typography>
     </DefaultLayout>
   );
 }

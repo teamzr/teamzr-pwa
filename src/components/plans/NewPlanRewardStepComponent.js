@@ -2,9 +2,9 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, Typography, Button, TextField } from '@material-ui/core';
 
-import { NEW_CAMPAING_STEPS } from './NewCampaignComponent';
+import { NEW_CAMPAING_STEPS } from './NewPlanComponent';
 
-function NewCampaignRewardStepComponent(props) {
+function NewPlanRewardStepComponent(props) {
   const { data, onDataChange, setStep } = props;
   const { rewardDescription } = data;
 
@@ -50,10 +50,10 @@ function NewCampaignRewardStepComponent(props) {
   );
 }
 
-NewCampaignRewardStepComponent.propTypes = {
+NewPlanRewardStepComponent.propTypes = {
   data: propTypes.array,
   setStep: propTypes.func,
   onDataChange: propTypes.func,
 };
 
-export default NewCampaignRewardStepComponent;
+export default NewPlanRewardStepComponent;

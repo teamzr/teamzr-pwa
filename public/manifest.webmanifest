@@ -4,12 +4,12 @@
   "description": "Teamzr app",
   "icons": [
     {
-      "src": "static/icons-192.png",
+      "src": "static/teamzr@128.png",
       "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "static/icons-512.png",
+      "src": "static/teamzr@512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

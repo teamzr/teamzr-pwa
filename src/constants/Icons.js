@@ -251,9 +251,9 @@ export const MessagesIcon = (props) => (
     <path
       d="M14.1001 0.599976C6.9001 0.599976 1.1001 5.39999 1.1001 11.3C1.1001 15.3 3.80009 18.9 7.90009 20.7C7.90009 20.7 6.60009 23.2 5.50009 23.7C5.50009 23.7 8.8001 23.2 10.7001 21.7C11.8001 21.9 12.9001 22.1 14.1001 22.1C21.3001 22.1 27.1001 17.3 27.1001 11.4C27.1001 5.30002 21.3001 0.599976 14.1001 0.599976Z"
       stroke="url(#paint0_linear)"
-      stroke-width="1.0091"
-      stroke-miterlimit="10"
-      stroke-linejoin="round"
+      strokeWidth="1.0091"
+      strokemiterlimitt="10"
+      strokeLinejoin="round"
     />
     <path
       d="M14.3001 13C16.5001 13 16.5001 9.59998 14.3001 9.59998C12.1001 9.59998 12.1001 13 14.3001 13Z"
@@ -322,16 +322,16 @@ export const BackArrowIcon = (props) => {
       <path
         d="M8.34485 1.328L1.17285 8.50801L8.34485 15.688"
         stroke="url(#paint0_linear)"
-        stroke-width="1.619"
+        strokeWidth="1.619"
         stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M1.17285 8.508H21.3539"
         stroke="url(#paint1_linear)"
-        stroke-width="1.619"
+        strokeWidth="1.619"
         stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <defs>
         <linearGradient
