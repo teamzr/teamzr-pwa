@@ -29,6 +29,19 @@ function ConversationTitleComponent(props) {
   });
   const [updateConversation] = useMutation(UPDATE);
 
+  const [name, setName] = React.useState('');
+
+  React.useEffect(() => {
+    setName(data?.conversation?.name);
+  }, [data, setName]);
+
+  const handleChange = React.useCallback(
+    (event) => {
+      setName(event.target.value);
+    },
+    [setName]
+  );
+
   const handleRename = React.useCallback(async (event) => {
     const value = event.target.value;
     await updateConversation({
@@ -39,8 +52,9 @@ function ConversationTitleComponent(props) {
   if (loading) return '';
   return (
     <TextField
-      defaultValue={data.conversation.name}
+      value={name}
       variant={'standard'}
+      onChange={handleChange}
       onBlur={handleRename}
     />
   );

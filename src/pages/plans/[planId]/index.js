@@ -6,7 +6,8 @@ import { useQuery } from '@apollo/client';
 
 import DefaultLayout from '../../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../../components/LoadingIndicatorComponent';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, IconButton, Typography } from '@material-ui/core';
+import { BackArrowIcon } from '../../../constants/Icons';
 
 const PLAN_QUERY = gql`
   query plan($planId: ID!) {
@@ -35,9 +36,20 @@ function Campaign(props) {
     skip: !planId,
   });
 
+  const handleBack = React.useCallback(() => {
+    router.back();
+  }, []);
+
   if (!planId || loading) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
+      <Grid container>
+        <Grid item xs={12}>
+          <IconButton onClick={handleBack}>
+            <BackArrowIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
       <Typography variant={'h4'}>{data.plan.name}</Typography>
       <Typography variant={'body1'}>{data.plan.description}</Typography>
     </DefaultLayout>

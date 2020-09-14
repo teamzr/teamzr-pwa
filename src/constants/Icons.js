@@ -318,7 +318,13 @@ export const MessagesIcon = (props) => (
 
 export const BackArrowIcon = (props) => {
   return (
-    <SvgIcon width="23" height="17" viewBox="0 0 23 17" fill="none" {...props}>
+    <SvgIcon
+      width="23"
+      height="17"
+      viewBox="0 0 23 17"
+      fill="transparent"
+      {...props}
+    >
       <path
         d="M8.34485 1.328L1.17285 8.50801L8.34485 15.688"
         stroke="url(#paint0_linear)"
