@@ -34,6 +34,7 @@ function NewPlanDetailsStepComponent(props) {
           name={'name'}
           label={`Name (${name.length} characters out of 30 max)`}
           inputProps={{ maxlength: 30 }}
+          autoComplete={false}
         />
       </Grid>
       <Grid item>
@@ -45,6 +46,7 @@ function NewPlanDetailsStepComponent(props) {
           name={'description'}
           label={`Description (${description.length} characters out of 200 max)`}
           inputProps={{ maxlength: 200 }}
+          autoComplete={false}
         />
       </Grid>
       <Grid item>

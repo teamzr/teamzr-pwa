@@ -68,12 +68,6 @@ function PlanStepsComponentAddStepBtn(props) {
         data: { plan: newPlan },
         variables: { planId },
       });
-
-      const { plan: planx } = cache.readQuery({
-        query: PLAN_QUERY,
-        variables: { planId },
-      });
-      debugger;
     },
   });
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -131,6 +125,8 @@ function PlanStepsComponentAddStepBtn(props) {
                 label={'Step name'}
                 name={'name'}
                 onChange={handleValueChange}
+                autoComplete={false}
+                InputProps={{ autoComplete: false }}
               />
             </Grid>
             <Grid item>
@@ -139,6 +135,8 @@ function PlanStepsComponentAddStepBtn(props) {
                 label={'Step description'}
                 name={'description'}
                 onChange={handleValueChange}
+                autoComplete={false}
+                InputProps={{ autoComplete: false }}
               />
             </Grid>
           </Grid>
