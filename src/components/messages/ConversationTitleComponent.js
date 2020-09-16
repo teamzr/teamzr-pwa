@@ -33,7 +33,7 @@ function ConversationTitleComponent(props) {
 
   React.useEffect(() => {
     setName(data?.conversation?.name);
-  }, [data, setName]);
+  }, [data?.conversation?.name, setName]);
 
   const handleChange = React.useCallback(
     (event) => {
@@ -42,12 +42,15 @@ function ConversationTitleComponent(props) {
     [setName]
   );
 
-  const handleRename = React.useCallback(async (event) => {
-    const value = event.target.value;
-    await updateConversation({
-      variables: { input: { id: conversationId, name: value } },
-    });
-  }, []);
+  const handleRename = React.useCallback(
+    async (event) => {
+      const value = event.target.value;
+      await updateConversation({
+        variables: { input: { id: conversationId, name: value } },
+      });
+    },
+    [name]
+  );
 
   if (loading) return '';
   return (

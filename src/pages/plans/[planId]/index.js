@@ -8,6 +8,7 @@ import DefaultLayout from '../../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../../components/LoadingIndicatorComponent';
 import { Grid, IconButton, Typography } from '@material-ui/core';
 import { BackArrowIcon } from '../../../constants/Icons';
+import PlanStepsComponent from '../../../components/planSteps/PlanStepsComponent';
 
 const PLAN_QUERY = gql`
   query plan($planId: ID!) {
@@ -22,6 +23,12 @@ const PLAN_QUERY = gql`
       conversation {
         id
         name
+      }
+      steps {
+        id
+        name
+        description
+        startDate
       }
     }
   }
@@ -43,15 +50,25 @@ function Campaign(props) {
   if (!planId || loading) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
-      <Grid container>
-        <Grid item xs={12}>
+      <Grid container direction={'row'} justify={'center'}>
+        <Grid item xs={12} style={{ position: 'static' }}>
           <IconButton onClick={handleBack}>
             <BackArrowIcon />
           </IconButton>
         </Grid>
+
+        <Grid item>
+          <Grid container direction={'column'} spacing={2}>
+            <Grid item>
+              <Typography variant={'h4'}>{data.plan.name}</Typography>
+              <Typography variant={'body1'}>{data.plan.description}</Typography>
+            </Grid>
+            <Grid item>
+              <PlanStepsComponent planId={planId} planSteps={data.plan.steps} />
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-      <Typography variant={'h4'}>{data.plan.name}</Typography>
-      <Typography variant={'body1'}>{data.plan.description}</Typography>
     </DefaultLayout>
   );
 }
