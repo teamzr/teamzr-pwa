@@ -29,6 +29,9 @@ const PLAN_QUERY = gql`
         name
         description
         startDate
+        parent {
+          id
+        }
       }
     }
   }

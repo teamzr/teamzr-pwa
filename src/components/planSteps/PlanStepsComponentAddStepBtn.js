@@ -26,6 +26,9 @@ const CREATE_PLAN_TASK_MUTATION = gql`
         name
         description
       }
+      parent {
+        id
+      }
     }
   }
 `;
