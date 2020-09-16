@@ -26,7 +26,7 @@ const stepComponentMap = {
 };
 
 const CREATE_PLAN_MUTATION = gql`
-  mutation createPlan($input: PlanCreateInputType!) {
+  mutation createPlan($input: PlanCreateInput!) {
     createPlan(input: $input) {
       id
       name
