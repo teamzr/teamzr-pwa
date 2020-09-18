@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { useQuery, gql } from '@apollo/client';
 
 import DefaultLayout from '../../pagesLayouts/DefaultLayout';
@@ -8,6 +8,7 @@ import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponen
 import MyPlansConversationFilterComponent from '../../components/plans/MyPlansConversationFilterComponent';
 import MyPlansListComponent from '../../components/plans/PlanListComponent';
 import { useRouter } from 'next/router';
+import MyPlansHeaderComponent from '../../components/plans/MyPlansHeaderComponent';
 
 const PLANS_QUERY = gql`
   {
@@ -42,25 +43,30 @@ function Campaigns(props) {
 
   return (
     <DefaultLayout>
-      <Grid container direction={'column'}>
-        <Grid item xs={12}>
-          <MyPlansConversationFilterComponent
-            conversations={conversations}
-            conversationId={conversationId}
-            setConversationId={setConversationId}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container direction={'row'} justify={'center'}>
-            <Grid item>
-              <MyPlansListComponent
-                campaigns={data.plans}
-                conversationId={conversationId}
-              />
+      <Container style={{ marginTop: '8px' }}>
+        <Grid container direction={'column'} spacing={1}>
+          <Grid item xs={12}>
+            <MyPlansHeaderComponent />
+          </Grid>
+          <Grid item xs={12}>
+            <MyPlansConversationFilterComponent
+              conversations={conversations}
+              conversationId={conversationId}
+              setConversationId={setConversationId}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container direction={'row'} justify={'center'}>
+              <Grid item>
+                <MyPlansListComponent
+                  campaigns={data.plans}
+                  conversationId={conversationId}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </DefaultLayout>
   );
 }
