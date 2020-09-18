@@ -22,10 +22,10 @@ function MyPlansHeaderComponent(props) {
             justify={'space-between'}
             alignItems={'center'}
           >
-            <Grid item xs={1}>
+            <Grid item xs={'auto'}>
               <Avatar />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={9}>
               <Typography>My Plans</Typography>
             </Grid>
             <Grid item xs={1}>
