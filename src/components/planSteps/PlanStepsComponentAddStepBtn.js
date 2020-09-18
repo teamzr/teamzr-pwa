@@ -128,8 +128,9 @@ function PlanStepsComponentAddStepBtn(props) {
                 label={'Step name'}
                 name={'name'}
                 onChange={handleValueChange}
-                autoComplete={false}
-                InputProps={{ autoComplete: false }}
+                autoComplete={'off'}
+                InputProps={{ autoComplete: 'off' }}
+                inputProps={{ autoComplete: 'off' }}
               />
             </Grid>
             <Grid item>
@@ -138,8 +139,9 @@ function PlanStepsComponentAddStepBtn(props) {
                 label={'Step description'}
                 name={'description'}
                 onChange={handleValueChange}
-                autoComplete={false}
-                InputProps={{ autoComplete: false }}
+                autoComplete={'off'}
+                InputProps={{ autoComplete: 'off' }}
+                inputProps={{ autoComplete: 'off' }}
               />
             </Grid>
           </Grid>
