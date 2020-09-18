@@ -150,12 +150,12 @@ function ConversationsComponent(props) {
             <Grid item className={classes.container} innerRef={messagesRef}>
               <MessagesComponent conversationId={conversationId} />
             </Grid>
-            <Grid item xs={12} style={{ position: 'relative' }}>
-              {!!conversationId && (
-                <MessagesInputBarComponent conversationId={conversationId} />
-              )}
-            </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={12} style={{ position: 'relative' }}>
+          {!!conversationId && (
+            <MessagesInputBarComponent conversationId={conversationId} />
+          )}
         </Grid>
       </Hidden>
     </Grid>

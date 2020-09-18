@@ -36,9 +36,11 @@ MessagesInputBarTextFieldComponent.proTypes = {
 const useMessagesInputBarTextFieldComponent = makeStyles((theme) => ({
   root: {
     borderRadius: '20px',
-    height: '35px',
+    minHeight: '35px',
+    maxHeight: '55px',
     overflowY: 'scroll',
-    padding: theme.spacing(),
+    paddingLeft: theme.spacing(),
+    paddingRight: theme.spacing(),
   },
   multiline: {
     height: '75px',

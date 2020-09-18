@@ -128,8 +128,6 @@ function MessagesInputBarComponent(props) {
                 onChange={onMessageChange}
                 value={inputText}
                 multiline={multiline}
-                onFocus={toggleMultiline}
-                onBlur={toggleMultiline}
                 onKeyDown={keyEnterPress}
               />
             </Grid>
@@ -158,7 +156,7 @@ const useMessagesInputBarComponent = makeStyles((theme) => ({
     background: 'linear-gradient(90deg, #14D8C8 0%, #06ADB7 100%)',
     backgroundColor: theme.palette.primary.main,
     position: 'absolute',
-    bottom: '47px',
+    bottom: 0,
     zIndex: 200,
   },
   focused: {
