@@ -7,6 +7,7 @@ import DefaultLayout from '../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 import MyPlansConversationFilterComponent from '../../components/plans/MyPlansConversationFilterComponent';
 import MyPlansListComponent from '../../components/plans/PlanListComponent';
+import { useRouter } from 'next/router';
 
 const PLANS_QUERY = gql`
   {
@@ -23,7 +24,11 @@ const PLANS_QUERY = gql`
 
 function Campaigns(props) {
   const { data, error, loading } = useQuery(PLANS_QUERY);
-  const [conversationId, setConversationId] = React.useState(null);
+
+  const router = useRouter();
+  const [conversationId, setConversationId] = React.useState(
+    router?.query?.conversationId
+  );
 
   const conversationsObject = {};
   data &&

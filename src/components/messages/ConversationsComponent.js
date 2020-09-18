@@ -19,6 +19,8 @@ import MessagesComponent from './MessagesComponent';
 import MessagesInputBarComponent from './MessagesInputBarComponent';
 import useAuthContext from '../../context/AuthContext';
 import ConversationTitleComponent from './ConversationTitleComponent';
+import ConversationPopperComponent from './ConversationPopperComponent';
+import BackBtnComponent from '../BackBtnComponent';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -54,16 +56,8 @@ function ConversationsComponent(props) {
 
   const { conversationId } = router.query;
 
-  const handleAddCampaign = React.useCallback(() => {
-    router.push({ pathname: '/plans/new', query: { conversationId } });
-  }, [conversationId]);
-
   const handleGoBack = React.useCallback(() => {
     router.push('/');
-  }, []);
-
-  const handleBackToConversations = React.useCallback(() => {
-    router.push('/messages');
   }, []);
 
   const messagesRef = React.useRef();
@@ -126,22 +120,20 @@ function ConversationsComponent(props) {
                 container
                 direction={'row'}
                 justify={'space-between'}
+                alignItems={'center'}
+                alignContent={'center'}
                 spacing={2}
               >
-                <Grid item>
+                <Grid item xs={2}>
                   <Hidden mdUp>
-                    <IconButton onClick={handleBackToConversations}>
-                      <BackArrowIcon style={{ color: 'transparent' }} />
-                    </IconButton>
+                    <BackBtnComponent />
                   </Hidden>
                 </Grid>
-                <Grid item>
+                <Grid item xs={8}>
                   <ConversationTitleComponent conversationId={conversationId} />
                 </Grid>
-                <Grid item>
-                  <Button variant={'contained'} onClick={handleAddCampaign}>
-                    Create plan
-                  </Button>
+                <Grid item xs={2}>
+                  <ConversationPopperComponent />
                 </Grid>
               </Grid>
             </Grid>

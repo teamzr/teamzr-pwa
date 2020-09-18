@@ -55,6 +55,8 @@ function ConversationTitleComponent(props) {
   if (loading) return '';
   return (
     <TextField
+      InputProps={{ disableUnderline: true }}
+      fullWidth
       value={name}
       variant={'standard'}
       onChange={handleChange}

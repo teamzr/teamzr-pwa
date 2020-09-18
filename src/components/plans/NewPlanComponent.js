@@ -10,6 +10,7 @@ import NewCampaignDurationStepComponent from './NewPlanDurationStepComponent';
 import NewCampaignRewardStepComponent from './NewPlanRewardStepComponent';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
+import BackBtnComponent from '../BackBtnComponent';
 
 export const NEW_CAMPAING_STEPS = {
   DETAILS: 'DETAILS',
@@ -66,7 +67,9 @@ function NewPlanComponent(props) {
   const Step = stepComponentMap[step];
   return (
     <Grid container direction={'row'} justify={'center'} spacing={1}>
-      <Grid item></Grid>
+      <Grid item>
+        <BackBtnComponent />
+      </Grid>
       <Grid item>
         <Step setStep={setStep} data={data} onDataChange={onDataChange} />
         <Grid item>
