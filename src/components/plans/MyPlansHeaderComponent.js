@@ -25,13 +25,17 @@ function MyPlansHeaderComponent(props) {
             <Grid item xs={'auto'}>
               <Avatar />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={9} md={10}>
               <Typography>My Plans</Typography>
             </Grid>
             <Grid item xs={1}>
-              <IconButton>
-                <DrawerToggleIcon />
-              </IconButton>
+              <Grid container justify={'flex-end'}>
+                <Grid item>
+                  <IconButton>
+                    <DrawerToggleIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

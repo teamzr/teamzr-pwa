@@ -2,12 +2,16 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import {
+  Box,
   Button,
+  Divider,
+  IconButton,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core';
-import { MoneyRewardIcon } from '../../constants/Icons';
+import { MoneyRewardIcon, VerticalDotsIcon } from '../../constants/Icons';
+import PlanListItemPopoverComponent from './PlanListItemPopoverComponent';
 
 function PlanListItemComponent(props) {
   const { planId, name, conversationName } = props;
@@ -17,11 +21,17 @@ function PlanListItemComponent(props) {
     router.push('/plans/[planId]', `/plans/${planId}`);
   }, [planId]);
   return (
-    <ListItem onClick={handleClick}>
+    <ListItem>
+      <ListItem button onClick={handleClick}>
+        <ListItemIcon>
+          <MoneyRewardIcon style={{ width: '40px', height: '40px' }} />
+        </ListItemIcon>
+        <ListItemText primary={name} secondary={conversationName} />
+        <Divider />
+      </ListItem>
       <ListItemIcon>
-        <MoneyRewardIcon style={{ width: '40px', height: '40px' }} />
+        <PlanListItemPopoverComponent />
       </ListItemIcon>
-      <ListItemText primary={name} secondary={conversationName} />
     </ListItem>
   );
 }

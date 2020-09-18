@@ -1,6 +1,7 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import {
+  Button,
   IconButton,
   List,
   ListItem,
@@ -8,6 +9,7 @@ import {
   ListItemText,
   Paper,
   Popover,
+  Popper,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import {
@@ -16,20 +18,16 @@ import {
   VerticalDotsIcon,
 } from '../../constants/Icons';
 
-function ConversationPopperComponent(props) {
+function PlanListItemPopperComponent(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
   const router = useRouter();
   const conversationId = router.query.conversationId;
 
-  const handleAddCampaign = React.useCallback(() => {
-    router.push({ pathname: '/plans/new', query: { conversationId } });
-  }, [conversationId]);
+  const handleEdit = React.useCallback(() => {}, [conversationId]);
 
-  const handleViewPlans = React.useCallback(() => {
-    router.push({ pathname: '/my-plans', query: { conversationId } });
-  }, [conversationId]);
+  const handleRemove = React.useCallback(() => {}, [conversationId]);
 
   const togglePopover = React.useCallback(
     (event) => {
@@ -45,22 +43,16 @@ function ConversationPopperComponent(props) {
   return (
     <>
       <IconButton onClick={togglePopover}>
-        <VerticalDotsIcon />
+        <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
       </IconButton>
-      <Popover open={open} anchorEl={anchorEl} onClose={togglePopover}>
+      <Popover open={open} onClose={togglePopover} anchorEl={anchorEl}>
         <Paper>
           <List component={'nav'}>
-            <ListItem button onClick={handleAddCampaign}>
-              <ListItemIcon>
-                <AddStepIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Create Plan'} />
+            <ListItem button onClick={handleEdit}>
+              <ListItemText primary={'Edit Plan'} />
             </ListItem>
-            <ListItem button onClick={handleViewPlans}>
-              <ListItemIcon>
-                <TeamzrButtonIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Plans'} />
+            <ListItem button onClick={handleRemove}>
+              <ListItemText primary={'Remove Plan'} />
             </ListItem>
           </List>
         </Paper>
@@ -69,4 +61,4 @@ function ConversationPopperComponent(props) {
   );
 }
 
-export default ConversationPopperComponent;
+export default PlanListItemPopperComponent;

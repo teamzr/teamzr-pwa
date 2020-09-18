@@ -133,7 +133,11 @@ function ConversationsComponent(props) {
                   <ConversationTitleComponent conversationId={conversationId} />
                 </Grid>
                 <Grid item xs={2}>
-                  <ConversationPopperComponent />
+                  <Grid container direction={'row'} justify={'flex-end'}>
+                    <Grid item>
+                      <ConversationPopperComponent />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
