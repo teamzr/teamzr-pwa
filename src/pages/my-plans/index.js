@@ -6,7 +6,7 @@ import { useQuery, gql } from '@apollo/client';
 import DefaultLayout from '../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 import MyPlansConversationFilterComponent from '../../components/plans/MyPlansConversationFilterComponent';
-import MyPlansListComponent from '../../components/plans/PlanListComponent';
+import PlanListComponent from '../../components/plans/PlanListComponent';
 import { useRouter } from 'next/router';
 import MyPlansHeaderComponent from '../../components/plans/MyPlansHeaderComponent';
 
@@ -57,9 +57,9 @@ function Campaigns(props) {
           </Grid>
           <Grid item xs={12}>
             <Grid container direction={'row'} justify={'center'}>
-              <Grid item>
-                <MyPlansListComponent
-                  campaigns={data.plans}
+              <Grid item xs={12}>
+                <PlanListComponent
+                  plans={data.plans}
                   conversationId={conversationId}
                 />
               </Grid>
