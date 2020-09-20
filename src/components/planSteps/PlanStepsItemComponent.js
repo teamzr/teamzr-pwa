@@ -11,10 +11,40 @@ import {
 } from '@material-ui/core';
 import PlanStepItemComponentIcon from './PlanStepsItemComponentIcon';
 import PlanStepsItemDragIconComponent from './PlanStepsItemDragIconComponent';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/client';
+
+const UPDATE_PLAN_STEP_MUTATION = gql`
+  mutation updatePlanStep($input: PlanStepUpdateInput!) {
+    updatePlanStep(input: $input) {
+      id
+      name
+      description
+    }
+  }
+`;
 
 function PlanStepsItemComponent(props) {
-  const { name, description, startDate, number, status } = props;
+  const { planStepId, name, description, startDate, number, status } = props;
   const classes = usePlanStepsItemComponent();
+
+  const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
+
+  const handleUpdate = React.useCallback(
+    (event) => {
+      const target = event.target;
+      const name = target.getElementsByClassName('MuiListItemText-primary')[0]
+        .innerText;
+      const description = target.getElementsByClassName(
+        'MuiListItemText-secondary'
+      )[0].innerText;
+
+      updatePlanStep({
+        variables: { input: { id: planStepId, name, description } },
+      });
+    },
+    [planStepId, updatePlanStep]
+  );
 
   return (
     <>
@@ -27,6 +57,8 @@ function PlanStepsItemComponent(props) {
           className={classes.itemTest}
           primary={name}
           secondary={description}
+          contentEditable={true}
+          onBlur={handleUpdate}
         />
         <ListItemText
           className={classes.date}
