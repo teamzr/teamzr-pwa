@@ -39,6 +39,7 @@ function PlanStepsComponent(props) {
   });
 
   if (loading) return <LoadingIndicatorComponent />;
+
   return (
     <Grid container direction={'column'} style={{ paddingBottom: '45px' }}>
       <Grid item>

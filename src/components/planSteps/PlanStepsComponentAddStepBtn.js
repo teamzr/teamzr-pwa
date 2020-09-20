@@ -13,6 +13,7 @@ const CREATE_PLAN_TASK_MUTATION = gql`
       name
       description
       number
+      status
       plan {
         id
         name
@@ -47,9 +48,15 @@ function PlanStepsComponentAddStepBtn(props) {
       const newPlanSteps = [...planSteps];
       newPlanSteps.splice(parentIndex + 1, 0, createPlanStep);
 
+      const toWrite = newPlanSteps.map((step, i) => {
+        const newStep = { ...step };
+        newStep.number = i + 1;
+        return newStep;
+      });
+
       apolloCLient.writeQuery({
         query: PLAN_STEPS_QUERY,
-        data: { planSteps: newPlanSteps },
+        data: { planSteps: toWrite },
         variables: { planId },
       });
     },
