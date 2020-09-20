@@ -45,7 +45,7 @@ function PlanStepsComponentAddStepBtn(props) {
       );
 
       const newPlanSteps = [...planSteps];
-      newPlanSteps.splice(parentIndex, 0, createPlanStep);
+      newPlanSteps.splice(parentIndex + 1, 0, createPlanStep);
 
       apolloCLient.writeQuery({
         query: PLAN_STEPS_QUERY,
