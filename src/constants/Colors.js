@@ -22,4 +22,7 @@ export const COLORS = {
   fromOthersMesageColor: '#E4DFE5;',
   textPrimary: '#424242',
   textSecondary: '#757575',
+  planStepCompleted: '#A9E164',
+  planStepUpcoming: '#06ADB7',
+  planStepCurrent: '#FF512F',
 };

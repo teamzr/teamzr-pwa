@@ -7,50 +7,19 @@ import { useQuery } from '@apollo/client';
 import DefaultLayout from '../../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../../components/LoadingIndicatorComponent';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-import { BackArrowIcon } from '../../../constants/Icons';
-import PlanStepsComponent from '../../../components/planSteps/PlanStepsComponent';
 
-const PLAN_QUERY = gql`
-  query plan($planId: ID!) {
-    plan(id: $planId) {
-      id
-      name
-      description
-      author {
-        id
-        name
-      }
-      conversation {
-        id
-        name
-      }
-      steps {
-        id
-        name
-        description
-        startDate
-        parent {
-          id
-        }
-      }
-    }
-  }
-`;
+import { BackArrowIcon } from '../../../constants/Icons';
+import PlanComponent from '../../../components/plans/PlanComponent';
 
 function Campaign(props) {
   const router = useRouter();
   const { planId } = router.query;
 
-  const { data, error, loading } = useQuery(PLAN_QUERY, {
-    variables: { planId },
-    skip: !planId,
-  });
-
   const handleBack = React.useCallback(() => {
     router.back();
   }, []);
 
-  if (!planId || loading) return <LoadingIndicatorComponent />;
+  if (!planId) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
       <Grid container direction={'row'} justify={'center'}>
@@ -59,17 +28,8 @@ function Campaign(props) {
             <BackArrowIcon />
           </IconButton>
         </Grid>
-
         <Grid item>
-          <Grid container direction={'column'} spacing={2}>
-            <Grid item>
-              <Typography variant={'h4'}>{data.plan.name}</Typography>
-              <Typography variant={'body1'}>{data.plan.description}</Typography>
-            </Grid>
-            <Grid item>
-              <PlanStepsComponent planId={planId} planSteps={data.plan.steps} />
-            </Grid>
-          </Grid>
+          <PlanComponent planId={planId} />
         </Grid>
       </Grid>
     </DefaultLayout>

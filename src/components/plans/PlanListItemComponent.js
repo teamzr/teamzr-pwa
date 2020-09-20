@@ -21,18 +21,20 @@ function PlanListItemComponent(props) {
     router.push('/plans/[planId]', `/plans/${planId}`);
   }, [planId]);
   return (
-    <ListItem>
-      <ListItem button onClick={handleClick}>
+    <>
+      <ListItem>
+        <ListItem button onClick={handleClick}>
+          <ListItemIcon>
+            <MoneyRewardIcon style={{ width: '40px', height: '40px' }} />
+          </ListItemIcon>
+          <ListItemText primary={name} secondary={conversationName} />
+        </ListItem>
         <ListItemIcon>
-          <MoneyRewardIcon style={{ width: '40px', height: '40px' }} />
+          <PlanListItemPopoverComponent />
         </ListItemIcon>
-        <ListItemText primary={name} secondary={conversationName} />
-        <Divider />
       </ListItem>
-      <ListItemIcon>
-        <PlanListItemPopoverComponent />
-      </ListItemIcon>
-    </ListItem>
+      <Divider variant={'inset'} component={'li'} />
+    </>
   );
 }
 
