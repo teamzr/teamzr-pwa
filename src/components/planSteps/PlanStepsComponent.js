@@ -48,6 +48,7 @@ function PlanStepsComponent(props) {
             <>
               <PlanStepsItemComponent
                 key={i}
+                planId={planId}
                 planStepId={step.id}
                 name={step.name}
                 description={step.description}
@@ -57,6 +58,7 @@ function PlanStepsComponent(props) {
               <PlanStepsComponentAddStepBtn
                 parentId={step.id}
                 planId={planId}
+                number={step.number}
               />
             </>
           ))}

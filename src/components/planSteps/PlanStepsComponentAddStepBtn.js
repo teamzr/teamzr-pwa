@@ -36,7 +36,7 @@ function PlanStepsComponentAddStepBtn(props) {
   const apolloCLient = useApolloClient();
   const [createPlanStep] = useMutation(CREATE_PLAN_TASK_MUTATION, {
     update: (cache, { data: { createPlanStep } }) => {
-      const { planSteps } = cache.readQuery({
+      const { planSteps } = apolloCLient.readQuery({
         query: PLAN_STEPS_QUERY,
         variables: { planId },
       });
@@ -46,6 +46,7 @@ function PlanStepsComponentAddStepBtn(props) {
       );
 
       const newPlanSteps = [...planSteps];
+
       newPlanSteps.splice(parentIndex + 1, 0, createPlanStep);
 
       const toWrite = newPlanSteps.map((step, i) => {

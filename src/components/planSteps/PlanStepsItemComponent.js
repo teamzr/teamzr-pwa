@@ -13,6 +13,7 @@ import PlanStepItemComponentIcon from './PlanStepsItemComponentIcon';
 import PlanStepsItemDragIconComponent from './PlanStepsItemDragIconComponent';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
+import PlanStepsItemComponentPopover from './PlanStepsItemComponentPopover';
 
 const UPDATE_PLAN_STEP_MUTATION = gql`
   mutation updatePlanStep($input: PlanStepUpdateInput!) {
@@ -25,7 +26,15 @@ const UPDATE_PLAN_STEP_MUTATION = gql`
 `;
 
 function PlanStepsItemComponent(props) {
-  const { planStepId, name, description, startDate, number, status } = props;
+  const {
+    planId,
+    planStepId,
+    name,
+    description,
+    startDate,
+    number,
+    status,
+  } = props;
   const classes = usePlanStepsItemComponent();
 
   const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
@@ -64,7 +73,13 @@ function PlanStepsItemComponent(props) {
           className={classes.date}
           secondary={startDate && moment(startDate).format('DD.mm.yyyy')}
         />
-        <ListItemIcon></ListItemIcon>
+        <ListItemIcon>
+          <PlanStepsItemComponentPopover
+            planId={planId}
+            planStepId={planStepId}
+            number={number}
+          />
+        </ListItemIcon>
       </ListItem>
     </>
   );
