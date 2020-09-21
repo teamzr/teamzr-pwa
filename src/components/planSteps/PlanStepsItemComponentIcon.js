@@ -30,6 +30,7 @@ function PlanStepItemComponentIcon(props) {
     <>
       <Typography
         className={clsx(classes.iconText, {
+          [classes.undefined]: status == PLAN_STEP_STATUSES.UNDEFINED,
           [classes.completed]: status == PLAN_STEP_STATUSES.COMPLETED,
           [classes.upcoming]: status == PLAN_STEP_STATUSES.UPCOMING,
           [classes.current]: status == PLAN_STEP_STATUSES.CURRENT,
