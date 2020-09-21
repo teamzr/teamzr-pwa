@@ -15,16 +15,6 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 import PlanStepsItemComponentPopover from './PlanStepsItemComponentPopover';
 
-const UPDATE_PLAN_STEP_MUTATION = gql`
-  mutation updatePlanStep($input: PlanStepUpdateInput!) {
-    updatePlanStep(input: $input) {
-      id
-      name
-      description
-    }
-  }
-`;
-
 function PlanStepsItemComponent(props) {
   const {
     planId,
@@ -34,54 +24,39 @@ function PlanStepsItemComponent(props) {
     startDate,
     number,
     status,
+    onClick,
   } = props;
   const classes = usePlanStepsItemComponent();
 
-  const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
-
-  const handleUpdate = React.useCallback(
-    (event) => {
-      const target = event.target;
-      const name = target.getElementsByClassName('MuiListItemText-primary')[0]
-        .innerText;
-      const description = target.getElementsByClassName(
-        'MuiListItemText-secondary'
-      )[0].innerText;
-
-      updatePlanStep({
-        variables: { input: { id: planStepId, name, description } },
-      });
-    },
-    [planStepId, updatePlanStep]
-  );
+  const handleCLick = React.useCallback(() => {
+    onClick(planStepId);
+  }, [planStepId]);
 
   return (
-    <>
-      <ListItem>
-        <PlanStepsItemDragIconComponent />
-        <ListItemIcon>
-          <PlanStepItemComponentIcon status={status} number={number} />
-        </ListItemIcon>
-        <ListItemText
-          className={classes.itemTest}
-          primary={name}
-          secondary={description}
-          contentEditable={true}
-          onBlur={handleUpdate}
+    <ListItem>
+      <PlanStepsItemDragIconComponent />
+      <ListItemIcon onClick={handleCLick} style={{ cursor: 'pointer' }}>
+        <PlanStepItemComponentIcon status={status} number={number} />
+      </ListItemIcon>
+      <ListItemText
+        onClick={handleCLick}
+        style={{ cursor: 'pointer' }}
+        className={classes.itemTest}
+        primary={name}
+        secondary={description}
+      />
+      <ListItemText
+        className={classes.date}
+        secondary={startDate && moment(startDate).format('DD.mm.yyyy')}
+      />
+      <ListItemIcon>
+        <PlanStepsItemComponentPopover
+          planId={planId}
+          planStepId={planStepId}
+          number={number}
         />
-        <ListItemText
-          className={classes.date}
-          secondary={startDate && moment(startDate).format('DD.mm.yyyy')}
-        />
-        <ListItemIcon>
-          <PlanStepsItemComponentPopover
-            planId={planId}
-            planStepId={planStepId}
-            number={number}
-          />
-        </ListItemIcon>
-      </ListItem>
-    </>
+      </ListItemIcon>
+    </ListItem>
   );
 }
 
@@ -89,6 +64,7 @@ PlanStepsItemComponent.propTypes = {
   name: propTypes.string,
   description: propTypes.string,
   startDate: propTypes.number,
+  onClick: propTypes.func,
 };
 
 const usePlanStepsItemComponent = makeStyles((theme) => ({

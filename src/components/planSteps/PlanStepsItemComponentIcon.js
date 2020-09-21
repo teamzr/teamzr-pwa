@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import {
   CompletedStepIcon,
   CurrentStepIcon,
+  UndefinedStepIcon,
   UpcomingStepIcon,
 } from '../../constants/Icons';
 import { usePlanStepsItemComponentIconStyle } from './PlanStepsItemComponentIcon.Style';
@@ -17,6 +18,7 @@ function PlanStepItemComponentIcon(props) {
   const classes = usePlanStepsItemComponentIconStyle();
 
   const StepIconMap = {
+    [PLAN_STEP_STATUSES.UNDEFINED]: UndefinedStepIcon,
     [PLAN_STEP_STATUSES.COMPLETED]: CompletedStepIcon,
     [PLAN_STEP_STATUSES.UPCOMING]: UpcomingStepIcon,
     [PLAN_STEP_STATUSES.CURRENT]: CurrentStepIcon,
@@ -41,7 +43,7 @@ function PlanStepItemComponentIcon(props) {
 }
 
 PlanStepItemComponentIcon.propTypes = {
-  status: propTypes.oneOf(['COMPLETED', 'CURRENT', 'UPCOMING']),
+  status: propTypes.oneOf(['COMPLETED', 'CURRENT', 'UPCOMING', 'UNDEFINED']),
 };
 
 export default PlanStepItemComponentIcon;
