@@ -432,7 +432,7 @@ export const AddStepIcon = (props) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#14D8C8" />
-          <stop offset="1" stop-color="#06ADB7" />
+          <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient
           id="paint1_linear"
@@ -443,7 +443,7 @@ export const AddStepIcon = (props) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#14D8C8" />
-          <stop offset="1" stop-color="#06ADB7" />
+          <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
       </defs>
     </SvgIcon>
@@ -646,7 +646,7 @@ export const UpcomingStepIcon = (props) => {
           y2="85.8851"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
+          <stop stopColor="#14D8C8" />
           <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient

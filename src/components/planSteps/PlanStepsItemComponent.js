@@ -20,7 +20,7 @@ function PlanStepsItemComponent(props) {
     planId,
     planStepId,
     name,
-    description,
+    description: descriptionProp,
     startDate,
     number,
     status,
@@ -32,6 +32,8 @@ function PlanStepsItemComponent(props) {
     onClick(planStepId);
   }, [planStepId]);
 
+  const description =
+    descriptionProp || (status == 'UNDEFINED' && 'Tap to specify step details');
   return (
     <ListItem>
       <PlanStepsItemDragIconComponent />

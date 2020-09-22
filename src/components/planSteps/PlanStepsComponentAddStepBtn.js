@@ -30,8 +30,8 @@ function PlanStepsComponentAddStepBtn(props) {
   const { parentId, planId } = props;
 
   const [inputState, setInputState] = React.useState({
-    name: 'New Step',
-    description: 'New Step',
+    name: '',
+    description: '',
   });
   const apolloCLient = useApolloClient();
   const [createPlanStep] = useMutation(CREATE_PLAN_TASK_MUTATION, {
