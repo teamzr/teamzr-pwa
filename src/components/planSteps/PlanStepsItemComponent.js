@@ -18,6 +18,7 @@ import PlanStepsItemDragIconComponent from './PlanStepsItemDragIconComponent';
 import PlanStepsItemComponentPopover from './PlanStepsItemComponentPopover';
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
 import { ItemTypes } from './PlanStepsConstants';
+import isTouchDevice from 'is-touch-device';
 
 function PlanStepsItemComponent(props) {
   const {
@@ -65,7 +66,7 @@ function PlanStepsItemComponent(props) {
     onClick(planStepId);
   }, [planStepId]);
 
-  const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging && !isTouchDevice() ? 0 : 1;
 
   const description =
     descriptionProp || (status == 'UNDEFINED' && 'Tap to specify step details');

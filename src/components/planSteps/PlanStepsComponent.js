@@ -32,6 +32,10 @@ function PlanStepsComponent(props) {
 
   const [planSteps, setPlanSteps] = React.useState(planStepsData);
 
+  React.useEffect(() => {
+    setPlanSteps(planStepsData);
+  }, [planStepsData]);
+
   const [stepDialogState, setStepDialogState] = React.useState({
     planStepId: null,
   });
