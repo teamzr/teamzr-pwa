@@ -25,4 +25,5 @@ export const COLORS = {
   planStepCompleted: '#A9E164',
   planStepUpcoming: '#06ADB7',
   planStepCurrent: '#FF512F',
+  planStepUndefined: '#647688',
 };

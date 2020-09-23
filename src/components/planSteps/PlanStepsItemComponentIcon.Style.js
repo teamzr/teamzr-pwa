@@ -16,7 +16,7 @@ export const usePlanStepsItemComponentIconStyle = makeStyles((theme) => ({
     left: theme.spacing(4),
   },
   undefined: {
-    display: 'none',
+    color: COLORS.planStepUndefined,
   },
   completed: {
     color: COLORS.planStepCompleted,
