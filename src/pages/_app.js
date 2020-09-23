@@ -6,6 +6,8 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import isTouchDevice from 'is-touch-device';
 
 import client from '../utils/ApolloClient';
 import { AuthProvider } from '../context/AuthContext';
@@ -23,7 +25,7 @@ function App({ Component, pageprops }) {
   return (
     <AuthProvider>
       <ApolloProvider client={client}>
-        <DndProvider backend={DndProvider}>
+        <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
           <ThemeProvider theme={theme}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <CssBaseline />

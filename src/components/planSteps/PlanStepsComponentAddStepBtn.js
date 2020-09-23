@@ -4,7 +4,7 @@ import { AddStepIcon } from '../../constants/Icons';
 import { IconButton, ListItem } from '@material-ui/core';
 import { gql } from 'apollo-boost';
 import { useApolloClient, useMutation } from '@apollo/client';
-import { PLAN_STEPS_QUERY } from '../planSteps/PlanStepsComponent';
+import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
 
 const CREATE_PLAN_TASK_MUTATION = gql`
   mutation createPlanStep($input: PlanStepCreateInput!) {

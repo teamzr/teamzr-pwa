@@ -24,7 +24,7 @@ const GET_PLANSTEP_QUERY = gql`
   }
 `;
 
-const UPDATE_PLAN_STEP_MUTATION = gql`
+export const UPDATE_PLAN_STEP_MUTATION = gql`
   mutation updatePlanStep($input: PlanStepUpdateInput!) {
     updatePlanStep(input: $input) {
       id

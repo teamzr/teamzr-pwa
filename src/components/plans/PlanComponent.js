@@ -25,6 +25,24 @@ const PLAN_QUERY = gql`
   }
 `;
 
+export const PLAN_STEPS_QUERY = gql`
+  query planSteps($planId: ID!) {
+    planSteps(where: { plan: $planId }) {
+      id
+      name
+      description
+      number
+      status
+      plan {
+        id
+      }
+      parent {
+        id
+      }
+    }
+  }
+`;
+
 function PlanComponent(props) {
   const { planId } = props;
 
@@ -33,7 +51,15 @@ function PlanComponent(props) {
     skip: !planId,
   });
 
-  if (loading) return <LoadingIndicatorComponent />;
+  const {
+    loading: planStepsLoading,
+    error: planStepsError,
+    data: planStepsData,
+  } = useQuery(PLAN_STEPS_QUERY, {
+    variables: { planId },
+  });
+
+  if (loading || planStepsLoading) return <LoadingIndicatorComponent />;
   return (
     <>
       <Grid container direction={'column'} spacing={2}>
@@ -42,7 +68,10 @@ function PlanComponent(props) {
           <Typography variant={'body1'}>{data.plan.description}</Typography>
         </Grid>
         <Grid item>
-          <PlanStepsComponent planId={planId} />
+          <PlanStepsComponent
+            planStepsData={planStepsData.planSteps}
+            planId={planId}
+          />
         </Grid>
       </Grid>
     </>

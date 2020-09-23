@@ -431,7 +431,7 @@ export const AddStepIcon = (props) => {
           y2="14.2702"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
+          <stop stopColor="#14D8C8" />
           <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient
@@ -442,7 +442,7 @@ export const AddStepIcon = (props) => {
           y2="14.2779"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
+          <stop stopColor="#14D8C8" />
           <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
       </defs>
@@ -668,7 +668,7 @@ export const UpcomingStepIcon = (props) => {
           y2="51.7"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
+          <stop stopColor="#14D8C8" />
           <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient

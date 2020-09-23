@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import { gql, useApolloClient, useMutation } from '@apollo/client';
 
 import { VerticalDotsIcon } from '../../constants/Icons';
-import { PLAN_STEPS_QUERY } from './PlanStepsComponent';
+import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
 
 const DELETE_PLAN_STEP_MUTATION = gql`
   mutation deltePlanStep($id: ID!) {
