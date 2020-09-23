@@ -4,6 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, Box } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import { TouchBackend } from 'react-dnd-touch-backend';
+import { DndProvider } from 'react-dnd';
 
 import client from '../utils/ApolloClient';
 import { AuthProvider } from '../context/AuthContext';
@@ -21,14 +23,16 @@ function App({ Component, pageprops }) {
   return (
     <AuthProvider>
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
-            <CssBaseline />
-            <Component {...pageprops} />
+        <DndProvider backend={DndProvider}>
+          <ThemeProvider theme={theme}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <CssBaseline />
+              <Component {...pageprops} />
 
-            <NavigationMainBottomPanel />
-          </MuiPickersUtilsProvider>
-        </ThemeProvider>
+              <NavigationMainBottomPanel />
+            </MuiPickersUtilsProvider>
+          </ThemeProvider>
+        </DndProvider>
       </ApolloProvider>
     </AuthProvider>
   );
