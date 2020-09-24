@@ -18,7 +18,8 @@ import PlanStepsItemComponent from './PlanStepsItemComponent';
 import PlanStepsDialogComponent from './PlanStepsDialogComponent';
 import { ItemTypes } from './PlanStepsConstants';
 import { UPDATE_PLAN_STEP_MUTATION } from './PlanStepsDialogComponent';
-import { useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
+import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
 
 export const PLAN_STEP_STATUSES = {
   UNDEFINED: 'UNDEFINED',
@@ -53,10 +54,35 @@ function PlanStepsComponent(props) {
 
   const [, drop] = useDrop({ accept: ItemTypes.PLAN_STEP });
 
-  const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
+  const apolloCLient = useApolloClient();
+  const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION, {
+    update: (cache, { data: { updatePlanStep } }) => {
+      const { planSteps } = apolloCLient.readQuery({
+        query: PLAN_STEPS_QUERY,
+        variables: { planId },
+      });
+
+      const newPlanSteps = [...planSteps];
+      const index = newPlanSteps.findIndex((s) => s.id == updatePlanStep.id);
+      newPlanSteps.splice(index, 1);
+      newPlanSteps.splice(updatePlanStep.number - 1, 0, updatePlanStep);
+
+      const toWrite = newPlanSteps.map((step, i) => {
+        const newStep = { ...step };
+        newStep.number = i + 1;
+        return newStep;
+      });
+
+      apolloCLient.writeQuery({
+        query: PLAN_STEPS_QUERY,
+        data: { planSteps: toWrite },
+        variables: { planId },
+      });
+    },
+  });
 
   const moveStep = React.useCallback(
-    (id, atIndex) => {
+    (id, atIndex, didDrop) => {
       const { planStep, index } = findStep(id);
       setPlanSteps(
         update(planSteps, {
@@ -66,14 +92,6 @@ function PlanStepsComponent(props) {
           ],
         })
       );
-      updatePlanStep({
-        variables: {
-          input: {
-            id,
-            number: atIndex + 1,
-          },
-        },
-      });
     },
     [planSteps, setPlanSteps]
   );
@@ -109,6 +127,7 @@ function PlanStepsComponent(props) {
                 number={step.number}
                 status={step.status}
                 onClick={handleStepClick}
+                updatePlanStep={updatePlanStep}
               />
             ))}
           </List>

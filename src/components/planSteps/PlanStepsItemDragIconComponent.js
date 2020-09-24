@@ -6,7 +6,7 @@ import { DragStepIcon } from '../../constants/Icons';
 function PlanStepsItemDragIconComponent(props) {
   const classes = usePlanStepsItemDragIconComponent();
   return (
-    <IconButton className={classes.root}>
+    <IconButton className={classes.root} itemID={'Drag'} id={'drag'}>
       <DragStepIcon />
     </IconButton>
   );

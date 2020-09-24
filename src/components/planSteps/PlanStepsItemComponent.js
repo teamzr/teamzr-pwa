@@ -32,6 +32,7 @@ function PlanStepsItemComponent(props) {
     onClick,
     moveStep,
     findStep,
+    updatePlanStep,
   } = props;
   const classes = usePlanStepsItemComponent();
 
@@ -42,11 +43,24 @@ function PlanStepsItemComponent(props) {
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
+    canDrag: (monitor) => {
+      return true;
+    },
     end: (dropResult, monitor) => {
       const { id: droppedId, originalIndex } = monitor.getItem();
       const didDrop = monitor.didDrop();
       if (!didDrop) {
-        moveStep(droppedId, originalIndex);
+        moveStep(droppedId, originalIndex, didDrop);
+      } else {
+        const { planStep, index } = findStep(droppedId);
+        updatePlanStep({
+          variables: {
+            input: {
+              id: droppedId,
+              number: index + 1,
+            },
+          },
+        });
       }
     },
   });
