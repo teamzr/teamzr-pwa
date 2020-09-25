@@ -36,6 +36,14 @@ function PlanStepsItemComponent(props) {
   } = props;
   const classes = usePlanStepsItemComponent();
 
+  const [isDragActive, setIsDragActive] = React.useState(false);
+  const onMouseDown = React.useCallback(
+    (event) => {
+      setIsDragActive(true);
+    },
+    [setIsDragActive]
+  );
+
   const originalIndex = findStep(planStepId).index;
 
   const [{ isDragging }, drag] = useDrag({
@@ -44,7 +52,7 @@ function PlanStepsItemComponent(props) {
       isDragging: monitor.isDragging(),
     }),
     canDrag: (monitor) => {
-      return true;
+      return isDragActive;
     },
     end: (dropResult, monitor) => {
       const { id: droppedId, originalIndex } = monitor.getItem();
@@ -62,12 +70,12 @@ function PlanStepsItemComponent(props) {
           },
         });
       }
+      setIsDragActive(false);
     },
   });
 
   const [, drop] = useDrop({
     accept: ItemTypes.PLAN_STEP,
-    canDrop: () => false,
     hover({ id: draggedId }) {
       if (draggedId !== planStepId) {
         const { index: overIndex } = findStep(planStepId);
@@ -87,7 +95,7 @@ function PlanStepsItemComponent(props) {
   return (
     <li ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
-        <PlanStepsItemDragIconComponent />
+        <PlanStepsItemDragIconComponent onMouseDown={onMouseDown} />
         <ListItemIcon onClick={handleCLick} style={{ cursor: 'pointer' }}>
           <PlanStepItemComponentIcon status={status} number={number} />
         </ListItemIcon>

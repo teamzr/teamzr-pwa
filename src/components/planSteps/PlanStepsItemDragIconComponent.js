@@ -4,9 +4,16 @@ import { IconButton, makeStyles } from '@material-ui/core';
 import { DragStepIcon } from '../../constants/Icons';
 
 function PlanStepsItemDragIconComponent(props) {
+  const { onMouseDown } = props;
   const classes = usePlanStepsItemDragIconComponent();
   return (
-    <IconButton className={classes.root} itemID={'Drag'} id={'drag'}>
+    <IconButton
+      className={classes.root}
+      itemID={'Drag'}
+      id={'drag'}
+      onMouseDown={onMouseDown}
+      onTouchStart={onMouseDown}
+    >
       <DragStepIcon />
     </IconButton>
   );
