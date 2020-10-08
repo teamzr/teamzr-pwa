@@ -10,7 +10,15 @@ import {
   Grid,
   TextField,
   Button,
+  Typography,
+  IconButton,
+  Divider,
+  makeStyles,
 } from '@material-ui/core';
+import { LeftChevronIcon, VerticalDotsIcon } from '../../constants/Icons';
+import PlanStepsDialogPhaseDiagram from './PlanStepsDialogPhaseDiagram';
+import PlanStepsDialogSubstepsComponent from './PlanStepsDialogSubstepsComponent';
+import PlanStepsDialogDurationComponent from './PlanStepsDialogDurationComponent';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -43,6 +51,8 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
 const PlanStepsDialogComponent = (props) => {
   const { planStepId, handleClose } = props;
 
+  const classes = makePlanStepsDialogComponent();
+
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
     description: '',
@@ -70,7 +80,6 @@ const PlanStepsDialogComponent = (props) => {
     await updatePlanStep({
       variables: { input: { id: planStepId, name, description } },
     });
-    handleClose();
   }, [planStepId, planStepState, updatePlanStep, handleClose]);
 
   const handleValueChange = React.useCallback(
@@ -90,45 +99,85 @@ const PlanStepsDialogComponent = (props) => {
       open={!!planStepId}
       scroll={'body'}
       fullWidth={true}
-      maxWidth={'xs'}
+      maxWidth={'md'}
     >
-      <DialogTitle>{`Step ${data.planStep.number} ${planStepState.name}`}</DialogTitle>
+      <Grid
+        container
+        direction={'row'}
+        justify={'space-between'}
+        alignItems={'center'}
+        alignContent={'center'}
+      >
+        <Grid item xs={1}>
+          <IconButton onClick={handleClose}>
+            <LeftChevronIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={10}>
+          <Typography align={'center'} variant={'h5'}>
+            Step definition
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton>
+            <VerticalDotsIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+
       <DialogContent>
-        <Grid container direction={'column'}>
+        <Grid container direction={'column'} spacing={2}>
           <Grid item>
+            <Grid container justify={'center'}>
+              <Grid item>
+                <PlanStepsDialogPhaseDiagram />
+              </Grid>
+            </Grid>
+            <Divider />
+          </Grid>
+          <Grid item>
+            <Typography variant={'h6'}>About</Typography>
             <TextField
+              className={classes.input}
               fullWidth
+              style={{ borderRadius: '12px' }}
               value={planStepState.name}
               onChange={handleValueChange}
-              label={'Step name'}
+              placeholder={'Step name'}
               name={'name'}
               autoComplete={'off'}
-              InputProps={{ autoComplete: 'off' }}
+              InputProps={{ autoComplete: 'off', disableUnderline: true }}
               inputProps={{ autoComplete: 'off' }}
+              onBlur={handleUpdate}
             />
           </Grid>
           <Grid item>
             <TextField
+              className={classes.input}
+              multiline
+              rows={3}
+              rowsMax={6}
               fullWidth
-              label={'Step description'}
+              placeholder={'Describe step briefly'}
               name={'description'}
               value={planStepState.description}
               onChange={handleValueChange}
               autoComplete={'off'}
-              InputProps={{ autoComplete: 'off' }}
+              InputProps={{ autoComplete: 'off', disableUnderline: true }}
               inputProps={{ autoComplete: 'off' }}
+              onBlur={handleUpdate}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'h6'}>Substeps</Typography>
+            <PlanStepsDialogSubstepsComponent />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant={'h6'}>Step duration</Typography>
+            <PlanStepsDialogDurationComponent />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions>
-        <Button variant={'outlined'} onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button variant={'contained'} color={'primary'} onClick={handleUpdate}>
-          Save
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };
@@ -137,5 +186,12 @@ PlanStepsDialogComponent.propTypes = {
   stepId: propTypes.string,
   handleClose: propTypes.func,
 };
+
+const makePlanStepsDialogComponent = makeStyles((theme) => ({
+  input: {
+    border: '1.84px solid #DDDDDB',
+    borderRadius: theme.spacing(1),
+  },
+}));
 
 export default PlanStepsDialogComponent;
