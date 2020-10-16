@@ -1,16 +1,17 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { Button, Grid } from '@material-ui/core';
-import MyPlansConversationFilterButton from '../plans/MyPlansConversationFilterButton';
 
 function PlanStepsDialogDurationComponent(props) {
-  const [duration, setDuration] = React.useState('1week');
+  const { duration, handleUpdate } = props;
 
   const hadleDurationClick = React.useCallback(
-    (d) => {
-      setDuration(d);
+    (value) => {
+      handleUpdate({
+        duration: value,
+      });
     },
-    [setDuration]
+    [handleUpdate]
   );
 
   return (
@@ -18,8 +19,17 @@ function PlanStepsDialogDurationComponent(props) {
       <Grid item>
         <Button
           color={'primary'}
-          variant={duration == '1week' ? 'contained' : 'outlined'}
-          onClick={() => hadleDurationClick('1week')}
+          variant={duration == 'DAY' ? 'contained' : 'outlined'}
+          onClick={() => hadleDurationClick('DAY')}
+        >
+          1 day
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button
+          color={'primary'}
+          variant={duration == 'WEEK' ? 'contained' : 'outlined'}
+          onClick={() => hadleDurationClick('WEEK')}
         >
           1 Week
         </Button>
@@ -27,8 +37,8 @@ function PlanStepsDialogDurationComponent(props) {
       <Grid item>
         <Button
           color={'primary'}
-          variant={duration == '2weeks' ? 'contained' : 'outlined'}
-          onClick={() => hadleDurationClick('2weeks')}
+          variant={duration == 'WEEK2' ? 'contained' : 'outlined'}
+          onClick={() => hadleDurationClick('WEEK2')}
         >
           2 Week
         </Button>
@@ -36,8 +46,8 @@ function PlanStepsDialogDurationComponent(props) {
       <Grid item>
         <Button
           color={'primary'}
-          variant={duration == '1month' ? 'contained' : 'outlined'}
-          onClick={() => hadleDurationClick('1month')}
+          variant={duration == 'MONTH' ? 'contained' : 'outlined'}
+          onClick={() => hadleDurationClick('MONTH')}
         >
           1 Month
         </Button>
@@ -45,5 +55,10 @@ function PlanStepsDialogDurationComponent(props) {
     </Grid>
   );
 }
+
+PlanStepsDialogDurationComponent.propTypes = {
+  handleUpdate: propTypes.func,
+  duration: propTypes.string,
+};
 
 export default PlanStepsDialogDurationComponent;

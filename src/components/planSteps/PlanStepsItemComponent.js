@@ -26,7 +26,7 @@ function PlanStepsItemComponent(props) {
     planStepId,
     name,
     description: descriptionProp,
-    startDate,
+    endDate,
     number,
     status,
     onClick,
@@ -108,7 +108,7 @@ function PlanStepsItemComponent(props) {
         />
         <ListItemText
           className={classes.date}
-          secondary={startDate && moment(startDate).format('DD.mm.yyyy')}
+          secondary={endDate && moment(new Date(endDate)).format('DD.MM.YYYY')}
         />
         <ListItemIcon>
           <PlanStepsItemComponentPopover
@@ -131,7 +131,7 @@ function PlanStepsItemComponent(props) {
 PlanStepsItemComponent.propTypes = {
   name: propTypes.string,
   description: propTypes.string,
-  startDate: propTypes.number,
+  endDate: propTypes.number,
   onClick: propTypes.func,
 };
 

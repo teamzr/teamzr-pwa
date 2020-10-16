@@ -21,17 +21,22 @@ function NewCampaignStepDurationRadioButtons(props) {
         onChange={onChange}
       >
         <FormControlLabel
-          value={'7'}
+          value={'DAY'}
           control={<Radio color={'primary'} />}
-          label="1 week"
+          label="1 day"
         />
         <FormControlLabel
-          value={'14'}
+          value={'WEEK'}
           control={<Radio color={'primary'} />}
-          label="2 weeks (default)"
+          label="1 week (default)"
         />
         <FormControlLabel
-          value={'30'}
+          value={'WEEK2'}
+          control={<Radio color={'primary'} />}
+          label="2 weeks)"
+        />
+        <FormControlLabel
+          value={'MONTH'}
           control={<Radio color={'primary'} />}
           label="1 month"
         />

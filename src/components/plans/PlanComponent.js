@@ -2,10 +2,12 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { gql } from 'apollo-boost';
+import moment from 'moment';
 
 import PlanStepsComponent from '../planSteps/PlanStepsComponent';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
+import { DatePicker } from '@material-ui/pickers';
 
 const PLAN_QUERY = gql`
   query plan($planId: ID!) {
@@ -13,6 +15,7 @@ const PLAN_QUERY = gql`
       id
       name
       description
+      startDate
       author {
         id
         name
@@ -31,14 +34,28 @@ export const PLAN_STEPS_QUERY = gql`
       id
       name
       description
+      startDate
+      endDate
       number
       status
+      duration
       plan {
         id
       }
       parent {
         id
       }
+    }
+  }
+`;
+
+const UPDATE_PLAN_MUTATION = gql`
+  mutation updatePlan($input: PlanUpdateInput!) {
+    updatePlan(input: $input) {
+      id
+      name
+      description
+      startDate
     }
   }
 `;
@@ -51,12 +68,23 @@ function PlanComponent(props) {
     skip: !planId,
   });
 
+  const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
+
   const {
     loading: planStepsLoading,
     error: planStepsError,
     data: planStepsData,
   } = useQuery(PLAN_STEPS_QUERY, {
+    fetchPolicy: 'network-only',
     variables: { planId },
+  });
+
+  const handlePlanStartDateChange = React.useCallback((value) => {
+    updatePlan({
+      variables: {
+        input: { id: planId, startDate: value.utc() },
+      },
+    });
   });
 
   if (loading || planStepsLoading) return <LoadingIndicatorComponent />;
@@ -68,9 +96,22 @@ function PlanComponent(props) {
           <Typography variant={'body1'}>{data.plan.description}</Typography>
         </Grid>
         <Grid item>
+          <Grid direction={'row'}>
+            <Grid item>
+              <DatePicker
+                format={'DD.MM.YYYY'}
+                label={'Start Date'}
+                value={data.plan.startDate}
+                onChange={handlePlanStartDateChange}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
           <PlanStepsComponent
             planStepsData={planStepsData.planSteps}
             planId={planId}
+            planStartDate={data.plan.startDate}
           />
         </Grid>
       </Grid>

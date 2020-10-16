@@ -1,32 +1,16 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import {
-  Box,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  Typography,
-} from '@material-ui/core';
-import moment from 'moment';
+import { Grid, List } from '@material-ui/core';
 import update from 'immutability-helper';
 import { useDrop } from 'react-dnd';
 
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
-import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import PlanStepsItemComponent from './PlanStepsItemComponent';
 import PlanStepsDialogComponent from './PlanStepsDialogComponent';
 import { ItemTypes } from './PlanStepsConstants';
 import { UPDATE_PLAN_STEP_MUTATION } from './PlanStepsDialogComponent';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
-
-export const PLAN_STEP_STATUSES = {
-  UNDEFINED: 'UNDEFINED',
-  COMPLETED: 'COMPLETED',
-  UPCOMING: 'UPCOMING',
-  CURRENT: 'CURRENT',
-};
 
 function PlanStepsComponent(props) {
   const { planId, planStepsData } = props;
@@ -126,6 +110,7 @@ function PlanStepsComponent(props) {
                 description={step.description}
                 number={step.number}
                 status={step.status}
+                endDate={step.endDate}
                 onClick={handleStepClick}
                 updatePlanStep={updatePlanStep}
               />

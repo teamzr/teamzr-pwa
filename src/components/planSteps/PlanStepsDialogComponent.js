@@ -4,12 +4,9 @@ import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
 import {
   Dialog,
-  DialogActions,
   DialogContent,
-  DialogTitle,
   Grid,
   TextField,
-  Button,
   Typography,
   IconButton,
   Divider,
@@ -19,6 +16,7 @@ import { LeftChevronIcon, VerticalDotsIcon } from '../../constants/Icons';
 import PlanStepsDialogPhaseDiagram from './PlanStepsDialogPhaseDiagram';
 import PlanStepsDialogSubstepsComponent from './PlanStepsDialogSubstepsComponent';
 import PlanStepsDialogDurationComponent from './PlanStepsDialogDurationComponent';
+import { PLAN_STEP_STATUSES } from './PlanStepsConstants';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -28,6 +26,7 @@ const GET_PLANSTEP_QUERY = gql`
       description
       status
       number
+      duration
     }
   }
 `;
@@ -40,6 +39,8 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
       description
       number
       status
+      duration
+      startDate
       parent {
         id
         name
@@ -66,21 +67,31 @@ const PlanStepsDialogComponent = (props) => {
 
   React.useEffect(() => {
     if (!loading) {
+      const planStep = data.planStep;
       setPlanStepState({
-        name: data.planStep.name,
-        description: data.planStep.description,
+        name: planStep.name,
+        description: planStep.description,
+        duration: planStep.duration,
+        status:
+          planStep.status == PLAN_STEP_STATUSES.UNDEFINED
+            ? PLAN_STEP_STATUSES.UPCOMING
+            : planStep.status,
       });
     }
   }, [loading, data]);
 
   const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
 
-  const handleUpdate = React.useCallback(async () => {
-    const { name, description } = planStepState;
-    await updatePlanStep({
-      variables: { input: { id: planStepId, name, description } },
-    });
-  }, [planStepId, planStepState, updatePlanStep, handleClose]);
+  const handleUpdate = React.useCallback(
+    async (values) => {
+      const inputVariables = values ? values : planStepState;
+
+      await updatePlanStep({
+        variables: { input: { id: planStepId, ...inputVariables } },
+      });
+    },
+    [planStepId, planStepState, updatePlanStep, handleClose]
+  );
 
   const handleValueChange = React.useCallback(
     (event) => {
@@ -148,7 +159,7 @@ const PlanStepsDialogComponent = (props) => {
               autoComplete={'off'}
               InputProps={{ autoComplete: 'off', disableUnderline: true }}
               inputProps={{ autoComplete: 'off' }}
-              onBlur={handleUpdate}
+              onBlur={() => handleUpdate()}
             />
           </Grid>
           <Grid item>
@@ -165,7 +176,7 @@ const PlanStepsDialogComponent = (props) => {
               autoComplete={'off'}
               InputProps={{ autoComplete: 'off', disableUnderline: true }}
               inputProps={{ autoComplete: 'off' }}
-              onBlur={handleUpdate}
+              onBlur={() => handleUpdate()}
             />
           </Grid>
           <Grid item xs={12}>
@@ -174,7 +185,11 @@ const PlanStepsDialogComponent = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant={'h6'}>Step duration</Typography>
-            <PlanStepsDialogDurationComponent />
+            <PlanStepsDialogDurationComponent
+              handleValueChange={handleValueChange}
+              duration={planStepState.duration}
+              handleUpdate={handleUpdate}
+            />
           </Grid>
         </Grid>
       </DialogContent>

@@ -10,7 +10,7 @@ import {
   UpcomingStepIcon,
 } from '../../constants/Icons';
 import { usePlanStepsItemComponentIconStyle } from './PlanStepsItemComponentIcon.Style';
-import { PLAN_STEP_STATUSES } from './PlanStepsComponent';
+import { PLAN_STEP_STATUSES } from './PlanStepsConstants';
 
 function PlanStepItemComponentIcon(props) {
   const { status, number } = props;
