@@ -59,8 +59,8 @@ function PlanStepsDialogPhaseDiagram(Props) {
           y2="15.5599"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
-          <stop offset="1" stop-color="#06ADB7" />
+          <stop stopColor="#14D8C8" />
+          <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient
           id="paint1_linear"
@@ -70,8 +70,8 @@ function PlanStepsDialogPhaseDiagram(Props) {
           y2="2838.3"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
-          <stop offset="1" stop-color="#06ADB7" />
+          <stop stopColor="#14D8C8" />
+          <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
         <linearGradient
           id="paint2_linear"
@@ -81,8 +81,8 @@ function PlanStepsDialogPhaseDiagram(Props) {
           y2="2838.3"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#14D8C8" />
-          <stop offset="1" stop-color="#06ADB7" />
+          <stop stopColor="#14D8C8" />
+          <stop offset="1" stopColor="#06ADB7" />
         </linearGradient>
       </defs>
     </svg>

@@ -96,7 +96,7 @@ function PlanComponent(props) {
           <Typography variant={'body1'}>{data.plan.description}</Typography>
         </Grid>
         <Grid item>
-          <Grid direction={'row'}>
+          <Grid container direction={'row'}>
             <Grid item>
               <DatePicker
                 format={'DD.MM.YYYY'}

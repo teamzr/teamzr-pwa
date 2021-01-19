@@ -103,6 +103,7 @@ function PlanStepsComponent(props) {
                 key={step.id}
                 id={step.id}
                 planId={planId}
+                parentId={step?.parent?.id}
                 findStep={findStep}
                 moveStep={moveStep}
                 planStepId={step.id}

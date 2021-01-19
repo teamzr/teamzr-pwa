@@ -30,6 +30,7 @@ function PlanStepsItemComponent(props) {
     number,
     status,
     onClick,
+    parentId,
     moveStep,
     findStep,
     updatePlanStep,
@@ -109,6 +110,10 @@ function PlanStepsItemComponent(props) {
         <ListItemText
           className={classes.date}
           secondary={endDate && moment(new Date(endDate)).format('DD.MM.YYYY')}
+        />
+        <ListItemText
+          className={classes.date}
+          secondary={`${planStepId} parent: ${parentId}`}
         />
         <ListItemIcon>
           <PlanStepsItemComponentPopover
