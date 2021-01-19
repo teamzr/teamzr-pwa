@@ -9,7 +9,10 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-  server.use(sslRedirect());
+
+  if (process.env.NEXT_PUBLIC_SSL === 'true') {
+    server.use(sslRedirect());
+  }
 
   server.all('*', (req, res) => {
     return handle(req, res);
