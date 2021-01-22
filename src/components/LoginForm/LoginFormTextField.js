@@ -10,7 +10,8 @@ const LoginFormTextField = React.forwardRef((props, ref) => {
   return (
     <TextField
       classes={{ root: classes.textField }}
-      inputProps={{ ref }}
+      error={error}
+      inputProps={{ ref, error }}
       InputProps={{
         classes: { root: classes.root },
         disableUnderline: true,

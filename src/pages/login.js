@@ -45,7 +45,7 @@ function LogIn() {
           className={classes.container}
           justify={'center'}
         >
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{ marginBottom: 24 }}>
             <Grid
               container
               direction={'row'}
@@ -54,7 +54,6 @@ function LogIn() {
               alignContent={'center'}
             >
               <LogoPublicTitlePanel title={'Log In'} />
-              <Grid item xs={12}></Grid>
             </Grid>
           </Grid>
           <Grid item xs={12}>

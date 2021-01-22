@@ -51,7 +51,8 @@ function LoginFormComponent(props) {
           onKeyDown={keyEnterPress}
           ref={emailRef}
           icon={<LetterIcon />}
-          error={!!error}
+          error={error}
+          placeholder={'your@email.com'}
         />
       </Grid>
       <Grid item xs={12}>
@@ -60,7 +61,8 @@ function LoginFormComponent(props) {
           icon={<LockIcon />}
           type={'password'}
           onKeyDown={keyEnterPress}
-          error={!!error}
+          placeholder={'**********'}
+          error={error}
         />
       </Grid>
       <Grid item xs={12}>
