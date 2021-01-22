@@ -13,6 +13,8 @@ import client from '../utils/ApolloClient';
 import { AuthProvider } from '../context/AuthContext';
 import theme from '../constants/DefaultTheme';
 import NavigationMainBottomPanel from '../components/navigation/NavigationMainBottomPanel';
+import Head from 'next/head';
+import { COLORS } from '../constants/Colors';
 
 function App({ Component, pageprops }) {
   React.useEffect(() => {
@@ -23,20 +25,36 @@ function App({ Component, pageprops }) {
     }
   }, []);
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
-          <ThemeProvider theme={theme}>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-              <CssBaseline />
-              <Component {...pageprops} />
+    <>
+      <Head>
+        <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Lato:300,400,700,800,Regular"
+          rel="stylesheet"
+        />
+        <link rel="manifest" href="/manifest.webmanifest"></link>
+        <style>{`body { margin: 0 } /* custom! */`}</style>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+        <meta name="theme-color" content={COLORS.primaryLight} />
+      </Head>
+      <AuthProvider>
+        <ApolloProvider client={client}>
+          <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
+            <ThemeProvider theme={theme}>
+              <MuiPickersUtilsProvider utils={MomentUtils}>
+                <CssBaseline />
+                <Component {...pageprops} />
 
-              <NavigationMainBottomPanel />
-            </MuiPickersUtilsProvider>
-          </ThemeProvider>
-        </DndProvider>
-      </ApolloProvider>
-    </AuthProvider>
+                <NavigationMainBottomPanel />
+              </MuiPickersUtilsProvider>
+            </ThemeProvider>
+          </DndProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </>
   );
 }
 

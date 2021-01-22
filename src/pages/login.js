@@ -30,7 +30,6 @@ function LogIn() {
           alignItems={'stretch'}
           className={classes.container}
           justify={'center'}
-          spacing={5}
         >
           <Grid item xs={12}>
             <Grid
