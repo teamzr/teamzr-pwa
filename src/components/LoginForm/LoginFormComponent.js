@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Grid } from '@material-ui/core';
+import { Chip, Grid, Paper, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 import LoginFormBtnComponent from './LoginFormBtnComponent';
 import LoginFormTextField from './LoginFormTextField';
 import useAuthContext from '../../context/AuthContext';
-import { LetterIcon, LockIcon } from '../../constants/Icons';
+import { LetterIcon, LockIcon, MessagesIcon } from '../../constants/Icons';
 
 function LoginFormComponent(props) {
   const [error, setError] = React.useState(null);
@@ -24,6 +24,10 @@ function LoginFormComponent(props) {
       setError(e.message);
     }
   }, [emailRef, passRef]);
+
+  const handleDeleteError = React.useCallback(() => {
+    setError(null);
+  }, [setError]);
 
   const keyEnterPress = React.useCallback(
     (e) => {
@@ -47,6 +51,7 @@ function LoginFormComponent(props) {
           onKeyDown={keyEnterPress}
           ref={emailRef}
           icon={<LetterIcon />}
+          error={!!error}
         />
       </Grid>
       <Grid item xs={12}>
@@ -55,16 +60,28 @@ function LoginFormComponent(props) {
           icon={<LockIcon />}
           type={'password'}
           onKeyDown={keyEnterPress}
+          error={!!error}
         />
       </Grid>
       <Grid item xs={12}>
         <Grid
           container
           direction={'row'}
-          alignItems={'stretch'}
-          alignContent={'stretch'}
+          alignItems={'center'}
+          alignContent={'center'}
           justify={'center'}
         >
+          <Grid item style={{ marginBottom: 12, minHeight: 32 }}>
+            {error && (
+              <Chip
+                icon={<MessagesIcon />}
+                label={error}
+                onDelete={handleDeleteError}
+                color={'primary'}
+              />
+            )}
+          </Grid>
+
           <Grid item xs={6}>
             <LoginFormBtnComponent onClick={handleSubmit} />
           </Grid>

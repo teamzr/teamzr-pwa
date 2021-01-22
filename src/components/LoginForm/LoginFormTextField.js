@@ -5,7 +5,7 @@ import { TextField, InputAdornment, Grid } from '@material-ui/core';
 import { useLoginFormTextField } from './LoginFormTextField.Style';
 
 const LoginFormTextField = React.forwardRef((props, ref) => {
-  const { icon } = props;
+  const { icon, error } = props;
   const classes = useLoginFormTextField();
   return (
     <TextField
@@ -14,6 +14,7 @@ const LoginFormTextField = React.forwardRef((props, ref) => {
       InputProps={{
         classes: { root: classes.root },
         disableUnderline: true,
+        error: error,
 
         startAdornment: (
           <>

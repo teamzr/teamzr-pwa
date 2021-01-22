@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Grid, Container, Box, Typography, Divider } from '@material-ui/core';
+import {
+  Grid,
+  Container,
+  Box,
+  Typography,
+  Divider,
+  Button,
+  Link,
+} from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 import { Logo } from '../constants/Icons';
@@ -20,6 +28,12 @@ function LogIn() {
     }
   }, [authContext]);
 
+  const handleBack = React.useCallback(() => {
+    router.push('/');
+  });
+  const handleSignup = React.useCallback(() => {
+    router.push('/signup');
+  });
   return (
     <div className={classes.background}>
       <Container maxWidth={'sm'}>
@@ -47,6 +61,28 @@ function LogIn() {
             <Grid container direction={'row'} justify={'center'}>
               <Grid item xs={12} md={8}>
                 <LoginFormComponent />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              direction={'row'}
+              justify={'center'}
+              alignContent={'flex-end'}
+              alignItems={'baseline'}
+              spacing={1}
+            >
+              <Grid item>
+                <Link href="#" onClick={handleSignup} color={'secondary'}>
+                  Sign Up
+                </Link>
+              </Grid>
+              <Grid item>
+                <Typography color={'secondary'}> or </Typography>
+              </Grid>
+              <Grid item>
+                <Link href="#" onClick={handleBack} color={'secondary'}>
+                  Go Back
+                </Link>
               </Grid>
             </Grid>
           </Grid>
