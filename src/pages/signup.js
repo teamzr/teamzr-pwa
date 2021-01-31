@@ -38,6 +38,7 @@ function SignUp() {
           alignContent={'center'}
           className={classes.container}
           justify={'center'}
+          spacing={5}
         >
           <Grid item xs={12}>
             <LogoTeamzrVertical className={classes.logo} />

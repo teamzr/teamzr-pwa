@@ -39,57 +39,58 @@ function LoginFormComponent(props) {
   );
 
   return (
-    <Grid
-      container
-      direction={'column'}
-      alignItems={'stretch'}
-      justify={'center'}
-      spacing={2}
-    >
-      <Grid item xs={12}>
-        <LoginFormTextField
-          onKeyDown={keyEnterPress}
-          ref={emailRef}
-          icon={<LetterIcon />}
-          error={error}
-          placeholder={'your@email.com'}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <LoginFormTextField
-          ref={passRef}
-          icon={<LockIcon />}
-          type={'password'}
-          onKeyDown={keyEnterPress}
-          placeholder={'**********'}
-          error={error}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Grid
-          container
-          direction={'row'}
-          alignItems={'center'}
-          alignContent={'center'}
-          justify={'center'}
-        >
-          <Grid item style={{ marginBottom: 12, minHeight: 32 }}>
-            {error && (
-              <Chip
-                icon={<MessagesIcon />}
-                label={error}
-                onDelete={handleDeleteError}
-                color={'primary'}
-              />
-            )}
-          </Grid>
-
-          <Grid item xs={6}>
-            <LoginFormBtnComponent onClick={handleSubmit} />
+    <form>
+      <Grid
+        container
+        direction={'column'}
+        alignItems={'stretch'}
+        justify={'center'}
+        spacing={2}
+      >
+        <Grid item xs={12}>
+          <LoginFormTextField
+            onKeyDown={keyEnterPress}
+            ref={emailRef}
+            icon={<LetterIcon />}
+            error={error}
+            placeholder={'your@email.com'}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <LoginFormTextField
+            ref={passRef}
+            icon={<LockIcon />}
+            type={'password'}
+            onKeyDown={keyEnterPress}
+            placeholder={'**********'}
+            error={error}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Grid
+            container
+            direction={'row'}
+            alignItems={'center'}
+            alignContent={'center'}
+            justify={'center'}
+          >
+            <Grid item style={{ marginBottom: 12, minHeight: 32 }}>
+              {error && (
+                <Chip
+                  icon={<MessagesIcon />}
+                  label={error}
+                  onDelete={handleDeleteError}
+                  color={'primary'}
+                />
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              <LoginFormBtnComponent onClick={handleSubmit} />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </form>
   );
 }
 

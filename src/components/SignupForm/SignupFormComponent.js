@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import {
   Button,
   Checkbox,
+  Chip,
   FormControlLabel,
   Grid,
   TextField,
@@ -15,6 +16,7 @@ import {
 } from './SignupFormComponent.func';
 import AuthService from '../../services/AuthService';
 import LoginButton from '../buttons/LoginButton';
+import { MessagesIcon } from '../../constants/Icons';
 
 function SignupFormComponent(props) {
   const { onSubmit } = props;
@@ -61,11 +63,21 @@ function SignupFormComponent(props) {
     setShowPassword(!showPassword);
   }, [showPassword, setShowPassword]);
 
+  const handleDeleteAlert = React.useCallback(() => {
+    setErrors({ ...errors, alert: null });
+  }, [errors]);
+
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container direction={'column'} spacing={2}>
+      <Grid
+        container
+        direction={'column'}
+        spacing={2}
+        style={{ minWidth: 400 }}
+      >
         <Grid item>
           <TextField
+            fullWidth={true}
             InputLabelProps={{ shrink: true }}
             label={'Name'}
             name={'name'}
@@ -78,9 +90,11 @@ function SignupFormComponent(props) {
         </Grid>
         <Grid item>
           <TextField
+            fullWidth={true}
             InputLabelProps={{ shrink: true }}
             label={'Email'}
             name={'email'}
+            autoComplete={'username'}
             value={formData['email']}
             onChange={handleChange}
             error={!!errors.email}
@@ -89,6 +103,7 @@ function SignupFormComponent(props) {
         </Grid>
         <Grid item>
           <TextField
+            fullWidth={true}
             InputLabelProps={{ shrink: true }}
             type={showPassword ? 'text' : 'password'}
             label={'Password'}
@@ -102,6 +117,7 @@ function SignupFormComponent(props) {
         </Grid>
         <Grid item>
           <TextField
+            fullWidth={true}
             InputLabelProps={{ shrink: true }}
             type={showPassword ? 'text' : 'password'}
             label={'Password Confirmation'}
@@ -121,6 +137,16 @@ function SignupFormComponent(props) {
             labelPlacement={'end'}
             onChange={handleChangeShowPassword}
           />
+        </Grid>
+        <Grid item>
+          {errors.alert && (
+            <Chip
+              icon={<MessagesIcon />}
+              label={errors.alert}
+              onDelete={handleDeleteAlert}
+              color={'primary'}
+            />
+          )}
         </Grid>
         <Grid item>
           <Grid container justify={'flex-end'} direction={'row'}>
