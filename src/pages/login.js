@@ -57,7 +57,7 @@ function LogIn() {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Grid container direction={'row'} justify={'center'}>
+            <Grid container direction={'row'} justify={'center'} spacing={2}>
               <Grid item xs={12} md={8}>
                 <LoginFormComponent />
               </Grid>

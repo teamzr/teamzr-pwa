@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { Grid, Container, Box, Typography } from '@material-ui/core';
+import { Grid, Container, Box, Typography, Link } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 import { LogoTeamzrVertical } from '../constants/Icons';
-import LoginFormComponent from '../components/LoginForm/LoginFormComponent';
+
 import { useStartPageStyle } from '../pagesStyle/start.Style';
 import useAuthContext from '../context/AuthContext';
-import LoginButton from '../components/buttons/LoginButton';
+import SignupFormComponent from '../components/SignupForm';
+import AuthService from '../services/AuthService';
 
 function SignUp() {
   const authContext = useAuthContext();
@@ -17,7 +18,7 @@ function SignUp() {
     router.push('/login');
   }, [router]);
 
-  const handleSignUp = React.useCallback(() => {
+  const handleBack = React.useCallback(() => {
     router.push('/signup');
   }, [router]);
 
@@ -42,7 +43,31 @@ function SignUp() {
             <LogoTeamzrVertical className={classes.logo} />
           </Grid>
           <Grid item xs={12}>
-            <Typography color={'secondary'}>Coming soon...</Typography>
+            <SignupFormComponent onSubmit={AuthService.signUp} />
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction={'row'}
+              justify={'center'}
+              alignContent={'flex-end'}
+              alignItems={'baseline'}
+              spacing={1}
+            >
+              <Grid item>
+                <Link href="#" onClick={handleLogin} color={'secondary'}>
+                  Log In
+                </Link>
+              </Grid>
+              <Grid item>
+                <Typography color={'secondary'}> or </Typography>
+              </Grid>
+              <Grid item>
+                <Link href="#" onClick={handleBack} color={'secondary'}>
+                  Go Back
+                </Link>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
