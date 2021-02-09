@@ -6,7 +6,7 @@ import useAuthContext from '../context/AuthContext';
 import { useQuery, gql } from '@apollo/client';
 import { protectRoute } from '../utils/ProtectRoute';
 import Start from './start';
-import ExploreUsersComponent from '../components/ExploreUsersCarousel/ExploreUsersComponent';
+import DiscoverUsersComponent from '../components/DiscoverUsersCarousel/DiscoverUsersComponent';
 
 const ME_QUERY = gql`
   {
@@ -39,7 +39,8 @@ function HomePage() {
   }
   return (
     <DefautltLayout>
-      <ExploreUsersComponent data={data.communityUsers} />
+      <Button onClick={handleLogout}>Log Out</Button>
+      <DiscoverUsersComponent data={data.communityUsers} />
     </DefautltLayout>
   );
 }

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 9000",
     "build": "next build",
     "preStart": "npm run build",
+    "start:dev": "next -p 9000",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -41,7 +41,6 @@
     "immutability-helper": "^3.1.1",
     "is-touch-device": "^1.0.1",
     "js-cookie": "^2.2.1",
-    "material-auto-rotating-carousel": "^3.0.2",
     "moment": "^2.27.0",
     "next": "^10.0.5",
     "react": "^16.13.1",
