@@ -1,4 +1,5 @@
 import { Box, Grid, Typography } from '@material-ui/core';
+import { useRouter } from 'next/router';
 
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -6,38 +7,48 @@ import DiscoverUsersCardComponent from './DiscoverUsersCardComponent';
 
 function DiscoverUsersComponent(props) {
   const { data } = props;
-  // TODO: https://www.figma.com/file/gSax4ny49qzOkRQG7IbHIN/Draft-Honza-Sovi%C5%A1?node-id=318%3A54
+  const router = useRouter();
+
+  const handleProfile = React.useCallback(
+    (username) => {
+      router.push('/users/[username]', `/users/${username}`);
+    },
+    [router]
+  );
+
+  const usersCards = [...data, ...data, ...data, ...data];
+
   return (
-    <Grid container direction={'column'}>
+    <Grid
+      container
+      direction={'column'}
+      style={{
+        maxWidth: '100vw',
+        overflow: 'hidden',
+      }}
+    >
       <Grid item xs={12}>
         <Typography>Discover users</Typography>
         <Typography>Browse</Typography>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        style={{
-          maxWidth: '100vw',
-          overflow: 'hidden',
-        }}
-      >
+      <Grid item xs={12} style={{ overflowX: 'auto', overflowY: 'hidden' }}>
         <Box display={'inline'} display={'inline-flex'} width={'max-content'}>
           <Grid container direction={'row'} spacing={1}>
-            <SwipeableViews
-              enableMouseEvents
-              style={{ padding: '0 30px' }}
-              slideStyle={{ padding: '0 10px' }}
-            >
-              {data.map((user, i) => (
-                <Grid
-                  item
-                  component={'div'}
-                  style={{ padding: 15, minHeight: 100 }}
+            {usersCards.map((user, i) => (
+              <Grid
+                key={i}
+                item
+                component={'div'}
+                style={{ padding: 15, minHeight: 200 }}
+              >
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleProfile(user.id)}
                 >
-                  <DiscoverUsersCardComponent key={i} name={user.name} />
-                </Grid>
-              ))}
-            </SwipeableViews>
+                  <DiscoverUsersCardComponent name={user.name} />
+                </div>
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Grid>

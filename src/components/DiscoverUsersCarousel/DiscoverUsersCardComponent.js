@@ -12,7 +12,7 @@ import {
 function DiscoverUsersCardComponent({ name, text }) {
   const classes = useDiscoverUsersCardStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} elevation={3}>
       <CardContent className={classes.content}>
         <Typography variant={'h5'} color={'secondary'}>
           {name}
@@ -37,7 +37,7 @@ const useDiscoverUsersCardStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     width: 300,
-    height: 150,
+    height: 200,
     background: theme.palette.primary.main,
   },
   content: {
