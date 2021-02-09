@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Link, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
 import propTypes from 'prop-types';
@@ -26,10 +26,19 @@ function DiscoverUsersComponent(props) {
         maxWidth: '100vw',
         overflow: 'hidden',
       }}
+      spacing={1}
     >
       <Grid item xs={12}>
-        <Typography>Discover users</Typography>
-        <Typography>Browse</Typography>
+        <Grid container direction={'row'} justify={'space-between'}>
+          <Grid item>
+            <Typography variant={'h6'}>Discover users</Typography>
+          </Grid>
+          <Grid item>
+            <Link>
+              <Typography variant={'h6'}>Browse</Typography>
+            </Link>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs={12} style={{ overflowX: 'auto', overflowY: 'hidden' }}>
         <Box display={'inline'} display={'inline-flex'} width={'max-content'}>

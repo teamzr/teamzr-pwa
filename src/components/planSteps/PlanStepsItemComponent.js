@@ -111,10 +111,7 @@ function PlanStepsItemComponent(props) {
           className={classes.date}
           secondary={endDate && moment(new Date(endDate)).format('DD.MM.YYYY')}
         />
-        <ListItemText
-          className={classes.date}
-          secondary={`${planStepId} parent: ${parentId}`}
-        />
+
         <ListItemIcon>
           <PlanStepsItemComponentPopover
             planId={planId}

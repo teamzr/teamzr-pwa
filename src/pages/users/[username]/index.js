@@ -8,6 +8,7 @@ import DefaultLayout from '../../../pagesLayouts/DefaultLayout';
 import LoadingIndicatorComponent from '../../../components/LoadingIndicatorComponent';
 import { Avatar, Grid, IconButton, Typography } from '@material-ui/core';
 import { BackArrowIcon } from '../../../constants/Icons';
+import UserProfileComponent from '../../../components/UserProfile/UserProfileComponent';
 
 const USER_QUERY = gql`
   query user($userId: ID!) {
@@ -41,29 +42,7 @@ function UserPage(props) {
           </IconButton>
         </Grid>
         <Grid item>
-          <Grid
-            container
-            direction={'column'}
-            justify={'center'}
-            alignContent={'center'}
-            alignItems={'center'}
-          >
-            <Grid item>
-              <Avatar
-                style={{ width: '100%', height: '100%' }}
-                src={`https://randomuser.me/api/portraits/${
-                  Math.random() < 0.5 ? 'men' : 'men'
-                }/${Math.ceil(Math.random() * 100)}.jpg`}
-                elevation={2}
-              />
-            </Grid>
-            <Grid item>
-              <Typography variant={'h3'}>{data.user.name}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant={'h5'}>{data.user.email}</Typography>
-            </Grid>
-          </Grid>
+          <UserProfileComponent user={data.user} />
         </Grid>
       </Grid>
     </DefaultLayout>

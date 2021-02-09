@@ -24,9 +24,7 @@ const httpLink = createHttpLink({
   credentials: 'same-origin',
 });
 
-const error = onError(({ response, operation, networkError }) => {
-  console.log('Network error', networkError);
-});
+const error = onError(({ response, operation, networkError }) => {});
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
