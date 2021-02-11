@@ -25,7 +25,7 @@ function UserSendMessageButton(props) {
     const { data } = await createConversation({
       variables: {
         input: {
-          users: [me.id, userId],
+          users: [userId],
         },
       },
     });

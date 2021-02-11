@@ -16,7 +16,7 @@ function DiscoverUsersComponent(props) {
     [router]
   );
 
-  const usersCards = [...data, ...data, ...data, ...data];
+  const usersCards = [...data];
 
   return (
     <Grid
