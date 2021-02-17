@@ -10,6 +10,7 @@ import {
 } from '../../constants/Icons';
 import { route } from 'next/dist/next-server/server/router';
 import useAuthContext from '../../context/AuthContext';
+import NavigationMainBottomPanelMessagesBtn from './NavigationMainButtomPanelMessagesBtn';
 
 function NavigationMainBottomPanel(props) {
   const classes = useMavigationMainBottomPanelStyle();
@@ -51,9 +52,10 @@ function NavigationMainBottomPanel(props) {
           </IconButton>
         </Grid>
         <Grid item xs={3} md={2} className={classes.item}>
-          <IconButton onClick={handleMessages}>
-            <MessagesIcon className={classes.item} />
-          </IconButton>
+          <NavigationMainBottomPanelMessagesBtn
+            className={classes.item}
+            onClick={handleMessages}
+          />
         </Grid>
       </Grid>
     </Box>
