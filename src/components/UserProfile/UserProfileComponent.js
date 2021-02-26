@@ -71,7 +71,7 @@ function UserProfileComponent(props) {
         {isActualUser && (
           <TextField
             multiline
-            value={user.description}
+            defaultValue={user.description}
             onBlur={handleDesriptionUpdate}
           />
         )}
