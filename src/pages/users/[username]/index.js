@@ -16,6 +16,7 @@ const USER_QUERY = gql`
       id
       name
       email
+      description
     }
   }
 `;

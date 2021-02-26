@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-function DiscoverUsersCardComponent({ name, text }) {
+function DiscoverUsersCardComponent({ name, description }) {
   const classes = useDiscoverUsersCardStyles();
   return (
     <Card className={classes.root} elevation={3}>
@@ -17,11 +17,7 @@ function DiscoverUsersCardComponent({ name, text }) {
         <Typography variant={'h5'} color={'secondary'}>
           {name}
         </Typography>
-        <Typography color={'secondary'}>
-          orem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-        </Typography>
+        <Typography color={'secondary'}>{description}</Typography>
       </CardContent>
       <CardMedia
         className={classes.cover}

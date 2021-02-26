@@ -54,7 +54,10 @@ function DiscoverUsersComponent(props) {
                   style={{ cursor: 'pointer' }}
                   onClick={() => handleProfile(user.id)}
                 >
-                  <DiscoverUsersCardComponent name={user.name} />
+                  <DiscoverUsersCardComponent
+                    name={user.name}
+                    description={user.description}
+                  />
                 </div>
               </Grid>
             ))}

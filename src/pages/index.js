@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Container, Box, Button } from '@material-ui/core';
+import Link from 'next/link';
 
 import DefautltLayout from '../pagesLayouts/DefaultLayout';
 import useAuthContext from '../context/AuthContext';
@@ -18,6 +19,7 @@ const ME_QUERY = gql`
     communityUsers {
       id
       name
+      description
       interests {
         id
         name
@@ -29,6 +31,7 @@ const ME_QUERY = gql`
 
 function HomePage() {
   const authContext = useAuthContext();
+  const { user } = authContext;
   const { loading, error, data } = useQuery(ME_QUERY);
 
   const handleLogout = React.useCallback(() => {
@@ -40,6 +43,7 @@ function HomePage() {
   return (
     <DefautltLayout>
       <Button onClick={handleLogout}>Log Out</Button>
+      <Link href={`/users/${user.id}`}>My profile</Link>
       <DiscoverUsersComponent data={data.communityUsers} />
     </DefautltLayout>
   );
