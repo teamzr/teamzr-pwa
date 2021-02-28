@@ -34,16 +34,11 @@ function HomePage() {
   const { user } = authContext;
   const { loading, error, data } = useQuery(ME_QUERY);
 
-  const handleLogout = React.useCallback(() => {
-    authContext.logout();
-  });
   if (loading) {
     return '...Loading';
   }
   return (
     <DefautltLayout>
-      <Button onClick={handleLogout}>Log Out</Button>
-      <Link href={`/users/${user.id}`}>My profile</Link>
       <DiscoverUsersComponent data={data.communityUsers} />
     </DefautltLayout>
   );

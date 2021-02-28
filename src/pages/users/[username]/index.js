@@ -17,6 +17,7 @@ const USER_QUERY = gql`
       name
       email
       description
+      avatar
     }
   }
 `;
@@ -33,7 +34,7 @@ function UserPage(props) {
     variables: { userId: username },
   });
 
-  if (loading) return <LoadingIndicatorComponent />;
+  if (loading || !username) return <LoadingIndicatorComponent />;
   return (
     <DefaultLayout>
       <Grid container direction={'row'} justify={'center'}>

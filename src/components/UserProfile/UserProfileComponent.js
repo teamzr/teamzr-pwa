@@ -51,9 +51,7 @@ function UserProfileComponent(props) {
       <Grid item>
         <Avatar
           style={{ width: '100%', height: '100%' }}
-          src={`https://randomuser.me/api/portraits/${
-            Math.random() < 0.5 ? 'men' : 'men'
-          }/${Math.ceil(Math.random() * 100)}.jpg`}
+          src={user.avatar}
           elevation={2}
         />
       </Grid>
