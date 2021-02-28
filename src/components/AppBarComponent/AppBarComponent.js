@@ -44,6 +44,7 @@ function AppBarComponent() {
   const onAvatarClick = React.useCallback(
     (event) => {
       const target = event.target;
+
       setAvatarMenuEl(target);
     },
     [setAvatarMenuEl]
@@ -69,15 +70,16 @@ function AppBarComponent() {
         <Toolbar>
           <div className={classes.avatar}>
             <IconButton
-              onClick={onAvatarClick}
               aria-controls="avatar-menu"
               aria-haspopup="true"
+              onClick={onAvatarClick}
             >
               <Avatar sizes={'sm'} />
             </IconButton>
 
             <Menu
               id={'avatar-menu'}
+              anchorEl={avatarMenuEl}
               open={!!avatarMenuEl}
               onClose={onCloseAvatarMenu}
               className={classes.avatarMenu}
@@ -86,8 +88,7 @@ function AppBarComponent() {
               <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </Menu>
           </div>
-
-          <Typography>{authContext.user.name}</Typography>
+          <Typography>{authContext.user && authContext.user.name}</Typography>
           <div>
             <IconButton>
               <SearchIcon color={'secondary'} />

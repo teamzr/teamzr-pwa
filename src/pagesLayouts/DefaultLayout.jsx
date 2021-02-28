@@ -1,16 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import {
-  Grid,
-  makeStyles,
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-} from '@material-ui/core';
-
-import NavigationMainBottomPanel from '../components/navigation/NavigationMainBottomPanel';
-import AppBarComponent from '../components/AppBarComponent/AppBarComponent';
+import { Grid, makeStyles } from '@material-ui/core';
 
 function DefaultLayout(props) {
   const { children } = props;
@@ -26,7 +16,6 @@ function DefaultLayout(props) {
         justify={'center'}
       >
         <Grid item xs={12}>
-          <AppBarComponent />
           {children}
         </Grid>
       </Grid>
