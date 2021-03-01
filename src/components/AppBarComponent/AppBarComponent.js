@@ -53,7 +53,7 @@ function AppBarComponent() {
   const onCloseAvatarMenu = React.useCallback(() => {
     setAvatarMenuEl(null);
   }, [setAvatarMenuEl]);
-
+  if (!authContext.isAuthenticated) return false;
   return (
     <div className={classes.root}>
       <AppBar position={'static'}>
