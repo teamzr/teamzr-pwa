@@ -29,7 +29,6 @@ DefaultLayout.propTypes = {
 
 const useDefaultLayoutStyle = makeStyles((theme) => ({
   container: {
-    height: '100vh',
     backgroundColor: theme.palette.secondary.dark,
   },
 }));
