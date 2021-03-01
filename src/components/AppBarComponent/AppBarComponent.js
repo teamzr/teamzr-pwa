@@ -44,7 +44,8 @@ function AppBarComponent() {
 
   const handleMyProfile = React.useCallback(() => {
     router.push(`/users/[userName]`, `/users/${authContext.user.id}`);
-  });
+    setAvatarMenuEl(null);
+  }, [router, setAvatarMenuEl]);
 
   const handleSignOut = React.useCallback(() => {
     authContext.logout();
