@@ -821,3 +821,25 @@ export const RemoveCircleIcon = (props) => {
     </SvgIcon>
   );
 };
+
+export const MessageIcon = (props) => {
+  return (
+    <SvgIcon width="20" height="20" viewBox="0 0 20 20" fill="none" {...props}>
+      <path
+        d="M18 0H2C0.9 0 0.00999999 0.9 0.00999999 2L0 20L4 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0ZM4 7H16V9H4V7ZM12 12H4V10H12V12ZM16 6H4V4H16V6Z"
+        fill="white"
+      />
+    </SvgIcon>
+  );
+};
+
+export const AddPersonIcon = (props) => {
+  return (
+    <SvgIcon width="22" height="16" viewBox="0 0 22 16" fill="none">
+      <path
+        d="M14 8C16.21 8 18 6.21 18 4C18 1.79 16.21 0 14 0C11.79 0 10 1.79 10 4C10 6.21 11.79 8 14 8ZM5 6V3H3V6H0V8H3V11H5V8H8V6H5ZM14 10C11.33 10 6 11.34 6 14V16H22V14C22 11.34 16.67 10 14 10Z"
+        fill="white"
+      />
+    </SvgIcon>
+  );
+};

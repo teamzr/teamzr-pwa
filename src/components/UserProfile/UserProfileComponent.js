@@ -1,11 +1,18 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Avatar, Grid, TextField, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import UserConnectButton from './UserConnectButton';
 import UserSendMessageButton from './UserSendMessageButton';
 import useAuthContext from '../../context/AuthContext';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
+import UserProfileInterestsComponent from './UserProfileInterestsComponent';
 
 const UPDATE_USER_MUTATION = gql`
   mutation meUpdate($input: ActualUserInput) {
@@ -47,6 +54,7 @@ function UserProfileComponent(props) {
       justify={'center'}
       alignContent={'center'}
       alignItems={'center'}
+      spacing={2}
     >
       <Grid item>
         <Avatar
@@ -62,10 +70,6 @@ function UserProfileComponent(props) {
         <Typography variant={'h5'}>{user.email}</Typography>
       </Grid>
       <Grid item>
-        <UserConnectButton />
-        <UserSendMessageButton userId={user.id} />
-      </Grid>
-      <Grid item>
         {isActualUser && (
           <TextField
             multiline
@@ -76,6 +80,21 @@ function UserProfileComponent(props) {
         {!isActualUser && (
           <Typography variant={'body1'}>{user.description}</Typography>
         )}
+      </Grid>
+      <Grid item>
+        <Grid container spacing={2}>
+          <Grid item>
+            <UserSendMessageButton userId={user.id} />
+          </Grid>
+          <Grid item>
+            <UserConnectButton />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Divider width={'100%'} />
+      <Grid item>
+        <Typography variant={'h6'}>Interests</Typography>
+        <UserProfileInterestsComponent />
       </Grid>
     </Grid>
   );

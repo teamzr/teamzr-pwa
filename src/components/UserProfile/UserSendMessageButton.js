@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import { gql, useMutation } from '@apollo/client';
 import useAuthContext from '../../context/AuthContext';
 import { useRouter } from 'next/router';
+import { MessageIcon } from '../../constants/Icons';
 
 const CREATE_CONVERSATION = gql`
   mutation createConversation($input: ConversationCreateInput!) {
@@ -36,7 +37,16 @@ function UserSendMessageButton(props) {
     );
   };
 
-  return <Button onClick={handleClick}>Send message</Button>;
+  return (
+    <Button
+      variant={'contained'}
+      color={'primary'}
+      onClick={handleClick}
+      startIcon={<MessageIcon />}
+    >
+      Message
+    </Button>
+  );
 }
 
 export default UserSendMessageButton;
