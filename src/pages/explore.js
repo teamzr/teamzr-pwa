@@ -40,7 +40,6 @@ function Explore() {
   }
   return (
     <DefautltLayout>
-      <AppBarComponent />
       <DiscoverUsersComponent data={data.communityUsers} />
     </DefautltLayout>
   );

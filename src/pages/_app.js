@@ -15,6 +15,7 @@ import theme from '../constants/DefaultTheme';
 import NavigationMainBottomPanel from '../components/navigation/NavigationMainBottomPanel';
 import Head from 'next/head';
 import { COLORS } from '../constants/Colors';
+import AppBarComponent from '../components/AppBarComponent/AppBarComponent';
 
 function App({ Component, pageprops }) {
   React.useEffect(() => {
@@ -46,6 +47,7 @@ function App({ Component, pageprops }) {
             <ThemeProvider theme={theme}>
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <CssBaseline />
+                <AppBarComponent />
                 <Component {...pageprops} />
 
                 <NavigationMainBottomPanel />

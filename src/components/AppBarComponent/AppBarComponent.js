@@ -19,20 +19,10 @@ import SearchIcon from '@material-ui/icons/Search';
 const useAppBarComponentStyle = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    display: 'flex',
   },
-  menuButton: {
-    position: 'relative',
-
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  avatarMenu: {
-    position: 'absolute',
-    top: '24px',
+  title: {
+    flexGrow: 1,
   },
 }));
 
@@ -68,37 +58,31 @@ function AppBarComponent() {
     <div className={classes.root}>
       <AppBar position={'static'}>
         <Toolbar>
-          <div className={classes.avatar}>
-            <IconButton
-              aria-controls="avatar-menu"
-              aria-haspopup="true"
-              onClick={onAvatarClick}
-            >
-              <Avatar sizes={'sm'} />
-            </IconButton>
-
-            <Menu
-              id={'avatar-menu'}
-              anchorEl={avatarMenuEl}
-              open={!!avatarMenuEl}
-              onClose={onCloseAvatarMenu}
-              className={classes.avatarMenu}
-            >
-              <MenuItem onClick={handleMyProfile}>My profile</MenuItem>
-              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
-            </Menu>
-          </div>
-          <Typography>{authContext.user && authContext.user.name}</Typography>
-          <div>
-            <IconButton>
-              <SearchIcon color={'secondary'} />
-            </IconButton>
-          </div>
-          <div className={classes.menuButton}>
-            <IconButton color={'secondary'}>
-              <MenuIcon />
-            </IconButton>
-          </div>
+          <IconButton
+            aria-controls="avatar-menu"
+            aria-haspopup="true"
+            onClick={onAvatarClick}
+          >
+            <Avatar sizes={'sm'} />
+          </IconButton>
+          <Menu
+            id={'avatar-menu'}
+            anchorEl={avatarMenuEl}
+            open={!!avatarMenuEl}
+            onClose={onCloseAvatarMenu}
+          >
+            <MenuItem onClick={handleMyProfile}>My profile</MenuItem>
+            <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+          </Menu>
+          <Typography variant={'h6'} className={classes.title}>
+            {authContext.user && authContext.user.name}
+          </Typography>
+          <IconButton>
+            <SearchIcon color={'secondary'} />
+          </IconButton>
+          <IconButton color={'secondary'}>
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
