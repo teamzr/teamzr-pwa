@@ -19,7 +19,7 @@ function SignUp() {
   }, [router]);
 
   const handleBack = React.useCallback(() => {
-    router.push('/signup');
+    router.push('/');
   }, [router]);
 
   React.useEffect(() => {
@@ -44,7 +44,8 @@ function SignUp() {
             <LogoTeamzrVertical className={classes.logo} />
           </Grid>
           <Grid item xs={12}>
-            <SignupFormComponent onSubmit={AuthService.signUp} />
+            <Typography color={'secondary'}>Coming soon...</Typography>
+            {false && <SignupFormComponent onSubmit={AuthService.signUp} />}
           </Grid>
           <Grid item>
             <Grid

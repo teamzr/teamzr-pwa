@@ -33,10 +33,10 @@ function Start() {
         <Grid
           container
           direction={'column'}
-          alignItems={'stretch'}
-          alignContent={'stretch'}
           className={classes.container}
           justify={'center'}
+          alignIntems={'center'}
+          alignContent={'center'}
         >
           <Grid item xs={12}>
             <Grid
@@ -54,16 +54,16 @@ function Start() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={9} md={6}>
             <Grid
               container
-              direction={'column'}
+              direction={'row'}
               justify={'space-around'}
               alignContent={'center'}
               alignItems={'center'}
               spacing={2}
             >
-              <Grid item xs={9} md={4}>
+              <Grid item xs={12}>
                 <LoginButton
                   className={classes.button}
                   fullWidth={true}
@@ -74,7 +74,8 @@ function Start() {
                   Log In
                 </LoginButton>
               </Grid>
-              <Grid item xs={9} md={4}>
+
+              <Grid item xs={12}>
                 <LoginButton
                   className={classes.button}
                   fullWidth={true}
