@@ -28,7 +28,7 @@ function UserProfileInterestsComponent() {
           {option.title}
         </React.Fragment>
       )}
-      style={{ width: 500 }}
+      style={{ width: '100%' }}
       renderInput={(params) => (
         <TextField
           {...params}

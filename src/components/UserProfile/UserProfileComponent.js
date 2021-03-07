@@ -2,8 +2,11 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import {
   Avatar,
+  Badge,
   Divider,
   Grid,
+  IconButton,
+  makeStyles,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -13,6 +16,7 @@ import useAuthContext from '../../context/AuthContext';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 import UserProfileInterestsComponent from './UserProfileInterestsComponent';
+import { Edit } from '@material-ui/icons';
 
 const UPDATE_USER_MUTATION = gql`
   mutation meUpdate($input: ActualUserInput) {
@@ -26,10 +30,16 @@ const UPDATE_USER_MUTATION = gql`
 function UserProfileComponent(props) {
   const { user } = props;
   const { user: actualUser } = useAuthContext();
+  const classes = useUserProfileComponentStyle();
+  const avatarInputRef = React.useRef();
 
   const [meUpdate] = useMutation(UPDATE_USER_MUTATION);
-
+  const [isEditing, setIsEditing] = React.useState(false);
   const isActualUser = actualUser.id === user.id;
+
+  const handleEdit = React.useCallback(() => {
+    setIsEditing(!isEditing);
+  }, [isEditing, setIsEditing]);
 
   const handleDesriptionUpdate = React.useCallback(
     (event) => {
@@ -43,9 +53,26 @@ function UserProfileComponent(props) {
           },
         },
       });
+      setIsEditing(false);
     },
-    [actualUser, meUpdate]
+    [actualUser, meUpdate, setIsEditing]
   );
+
+  const onAvatarInputChange = React.useCallback(async () => {
+    const avatar = avatarInputRef.current.files[0];
+    const validity = avatarInputRef.current.validity;
+
+    if (validity.valid) {
+      await meUpdate({
+        variables: {
+          input: {
+            id: actualUser.id,
+            avatar,
+          },
+        },
+      });
+    }
+  }, [actualUser, avatarInputRef, meUpdate]);
 
   return (
     <Grid
@@ -57,11 +84,32 @@ function UserProfileComponent(props) {
       spacing={2}
     >
       <Grid item>
-        <Avatar
-          style={{ width: '100%', height: '100%' }}
-          src={user.avatar}
-          elevation={2}
-        />
+        <Badge
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          badgeContent={
+            isActualUser && (
+              <>
+                <input
+                  hidden
+                  ref={avatarInputRef}
+                  id={'user-profile-avatar'}
+                  type={'file'}
+                  accept={'image/*'}
+                  onChange={onAvatarInputChange}
+                />
+                <label htmlFor={'user-profile-avatar'}>
+                  <Edit style={{ cursor: 'pointer' }} />
+                </label>
+              </>
+            )
+          }
+        >
+          <Avatar
+            className={classes.avatar}
+            src={'/uploads/s.jpg'}
+            elevation={2}
+          />
+        </Badge>
       </Grid>
       <Grid item>
         <Typography variant={'h3'}>{user.name}</Typography>
@@ -70,18 +118,30 @@ function UserProfileComponent(props) {
         <Typography variant={'h5'}>{user.email}</Typography>
       </Grid>
       <Grid item>
-        {isActualUser && (
+        {isEditing && (
           <TextField
+            autoFocus={true}
             multiline
             defaultValue={user.description}
             onBlur={handleDesriptionUpdate}
           />
         )}
-        {!isActualUser && (
-          <Typography variant={'body1'}>{user.description}</Typography>
+        {!isEditing && (
+          <Badge
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            badgeContent={
+              isActualUser && (
+                <IconButton onClick={handleEdit}>
+                  <Edit />
+                </IconButton>
+              )
+            }
+          >
+            <Typography variant={'body1'}>{user.description}</Typography>
+          </Badge>
         )}
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
           <Grid item>
             <UserSendMessageButton userId={user.id} />
@@ -92,12 +152,19 @@ function UserProfileComponent(props) {
         </Grid>
       </Grid>
       <Divider width={'100%'} />
-      <Grid item>
+      <Grid item xs={12}>
         <Typography variant={'h6'}>Interests</Typography>
         <UserProfileInterestsComponent />
       </Grid>
     </Grid>
   );
 }
+
+const useUserProfileComponentStyle = makeStyles((theme) => ({
+  avatar: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+  },
+}));
 
 export default UserProfileComponent;

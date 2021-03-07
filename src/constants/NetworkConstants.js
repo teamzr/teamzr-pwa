@@ -1,1 +1,1 @@
-export const POOL_INTERVAL_MEDIUM = 2000;
+export const POOL_INTERVAL_MEDIUM = 10000;
