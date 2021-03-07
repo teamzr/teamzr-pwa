@@ -9,6 +9,10 @@ const CONVERSATION_QUERY = gql`
     conversation(id: $id) {
       id
       name
+      users {
+        id
+        name
+      }
     }
   }
 `;
@@ -32,7 +36,11 @@ function ConversationTitleComponent(props) {
   const [name, setName] = React.useState('');
 
   React.useEffect(() => {
-    setName(data?.conversation?.name);
+    if (data?.conversation?.users.length > 2) {
+      setName(data?.conversation?.name);
+    } else {
+      setName(data?.conversation?.users[0].name);
+    }
   }, [data?.conversation?.name, setName]);
 
   const handleChange = React.useCallback(
@@ -57,6 +65,7 @@ function ConversationTitleComponent(props) {
     <TextField
       InputProps={{ disableUnderline: true }}
       fullWidth
+      disabled={data?.conversation?.users.length <= 2}
       value={name}
       variant={'standard'}
       onChange={handleChange}
