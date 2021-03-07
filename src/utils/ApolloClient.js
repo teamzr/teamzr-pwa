@@ -7,6 +7,7 @@ import {
 import { onError } from '@apollo/client/link/error';
 import Cookies from 'js-cookie';
 import { setContext } from 'apollo-link-context';
+import { createUploadLink } from 'apollo-upload-client';
 
 const authLink = setContext(async (_, { headers }) => {
   const token = Cookies.get('token');
@@ -19,7 +20,7 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
   credentials: 'same-origin',
 });
