@@ -14,28 +14,11 @@ import clsx from 'clsx';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 
-const MARK_CONVERSATION_AS_READ_MUTATION = gql`
-  mutation markConversationAsRead($id: ID!) {
-    markConversationAsRead(id: $id) {
-      id
-      readByIds
-    }
-  }
-`;
-
 function ConversationComponent(props) {
   const { id, name, messageAt, messages, users, read } = props;
   const classes = useConversationComponentStyle();
-
   const router = useRouter();
   const { conversationId } = router.query;
-
-  const [markConversationAsRead] = useMutation(
-    MARK_CONVERSATION_AS_READ_MUTATION
-  );
-  if (conversationId == id && !read) {
-    markConversationAsRead({ variables: { id: conversationId } });
-  }
 
   const date = moment(moment(parseInt(messageAt))).format('DD.MM.YYYY');
 

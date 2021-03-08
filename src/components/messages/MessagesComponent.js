@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { useQuery, gql } from '@apollo/react-hooks';
+import { useQuery, gql, useMutation } from '@apollo/react-hooks';
 import moment from 'moment';
 import { Grid, makeStyles } from '@material-ui/core';
 
@@ -30,10 +30,26 @@ export const GET_MESSAGES_FROM_QUERY = gql`
   }
 `;
 
+const MARK_CONVERSATION_AS_READ_MUTATION = gql`
+  mutation markConversationAsRead($id: ID!) {
+    markConversationAsRead(id: $id) {
+      id
+      readByIds
+    }
+  }
+`;
+
 function MessagesComponent(props) {
   const { conversationId } = props;
 
   const classes = useMessagesComponent();
+
+  // TODO: Solve it for mobile.
+  const [markConversationAsRead] = useMutation(
+    MARK_CONVERSATION_AS_READ_MUTATION
+  );
+
+  markConversationAsRead({ variables: { id: conversationId } });
 
   const { loading, error, data } = useQuery(GET_MESSAGES_FROM_QUERY, {
     variables: {
