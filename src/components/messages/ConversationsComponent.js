@@ -162,7 +162,7 @@ ConversationsComponent.propType = {};
 
 const useConversationComponentStyle = makeStyles((theme) => ({
   container: {
-    height: 'calc(100vh - 49px)',
+    height: 'calc(100vh - 149px)',
     overflowY: 'scroll',
   },
   panel: {
