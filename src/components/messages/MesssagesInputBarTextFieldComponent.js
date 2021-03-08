@@ -38,7 +38,7 @@ const useMessagesInputBarTextFieldComponent = makeStyles((theme) => ({
     borderRadius: '20px',
     minHeight: '35px',
     maxHeight: '55px',
-    overflowY: 'scroll',
+    overflowY: 'hidden',
     paddingLeft: theme.spacing(),
     paddingRight: theme.spacing(),
   },

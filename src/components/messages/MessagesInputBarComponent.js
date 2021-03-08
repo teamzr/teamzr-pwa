@@ -109,14 +109,14 @@ function MessagesInputBarComponent(props) {
         alignContent={'center'}
         spacing={1}
       >
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           <Grid container direction={'column'} justify={'flex-start'}>
             <Grid item>
               <MessagesInputBarImagesButtonComponent />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <Grid
             container
             direction={'column'}
@@ -133,7 +133,7 @@ function MessagesInputBarComponent(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           <Grid container direction={'column'} justify={'flex-start'}>
             <Grid item>
               <MessagesInputBarSendButtonComponent onClick={handleSend} />
