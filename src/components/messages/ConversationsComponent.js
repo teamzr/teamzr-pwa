@@ -122,7 +122,6 @@ function ConversationsComponent(props) {
                 justify={'space-between'}
                 alignItems={'center'}
                 alignContent={'center'}
-                spacing={2}
               >
                 <Grid item xs={2}>
                   <Hidden mdUp>
