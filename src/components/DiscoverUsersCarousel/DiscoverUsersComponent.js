@@ -57,7 +57,7 @@ function DiscoverUsersComponent(props) {
                   <DiscoverUsersCardComponent
                     name={user.name}
                     description={user.description}
-                    avatar={user.avatr}
+                    avatar={user.avatar}
                   />
                 </div>
               </Grid>

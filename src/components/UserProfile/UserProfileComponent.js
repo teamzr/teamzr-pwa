@@ -23,6 +23,7 @@ const UPDATE_USER_MUTATION = gql`
     meUpdate(input: $input) {
       id
       description
+      avatar
     }
   }
 `;
