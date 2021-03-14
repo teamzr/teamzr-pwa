@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-function DiscoverUsersCardComponent({ name, description }) {
+function DiscoverUsersCardComponent({ name, description, avatar }) {
   const classes = useDiscoverUsersCardStyles();
   return (
     <Card className={classes.root} elevation={3}>
@@ -19,12 +19,7 @@ function DiscoverUsersCardComponent({ name, description }) {
         </Typography>
         <Typography color={'secondary'}>{description}</Typography>
       </CardContent>
-      <CardMedia
-        className={classes.cover}
-        image={`https://randomuser.me/api/portraits/${
-          Math.random() < 0.5 ? 'men' : 'men'
-        }/${Math.ceil(Math.random() * 100)}.jpg`}
-      />
+      <CardMedia className={classes.cover} image={avatar} />
     </Card>
   );
 }

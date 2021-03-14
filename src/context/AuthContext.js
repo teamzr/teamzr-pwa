@@ -15,6 +15,7 @@ const getUserFromToken = async (token) => {
           me {
             id
             name
+            avatar
           }
         }
       `,

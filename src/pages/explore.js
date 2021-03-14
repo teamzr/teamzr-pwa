@@ -20,6 +20,7 @@ const ME_QUERY = gql`
     communityUsers {
       id
       name
+      avatar
       description
       interests {
         id

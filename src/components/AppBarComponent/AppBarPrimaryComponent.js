@@ -46,7 +46,7 @@ function AppBarPrimaryComponent() {
         aria-haspopup="true"
         onClick={onAvatarClick}
       >
-        <Avatar sizes={'sm'} />
+        <Avatar sizes={'sm'} src={authContext.user.avatar} />
       </IconButton>
       <Menu
         id={'avatar-menu'}

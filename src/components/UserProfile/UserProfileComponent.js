@@ -106,7 +106,7 @@ function UserProfileComponent(props) {
         >
           <Avatar
             className={classes.avatar}
-            src={'/uploads/s.jpg'}
+            src={actualUser.avatar}
             elevation={2}
           />
         </Badge>
