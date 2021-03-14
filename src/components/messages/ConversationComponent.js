@@ -44,7 +44,7 @@ function ConversationComponent(props) {
         spacing={2}
       >
         <Grid item xs={'auto'}>
-          <Avatar className={classes.avatar} />
+          <Avatar className={classes.avatar} src={users[0].avatar} />
         </Grid>
         <Grid item xs={true}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>

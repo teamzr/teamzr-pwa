@@ -105,11 +105,7 @@ function UserProfileComponent(props) {
             )
           }
         >
-          <Avatar
-            className={classes.avatar}
-            src={actualUser.avatar}
-            elevation={2}
-          />
+          <Avatar className={classes.avatar} src={user.avatar} elevation={2} />
         </Badge>
       </Grid>
       <Grid item>

@@ -38,6 +38,7 @@ const GET_CONVERSATIONS_QUERY = gql`
       users {
         id
         name
+        avatar
       }
     }
     me {
