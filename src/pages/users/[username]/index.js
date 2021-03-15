@@ -32,6 +32,7 @@ function UserPage(props) {
 
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: { userId: username },
+    skip: !username,
   });
 
   if (loading || !username) return <LoadingIndicatorComponent />;
