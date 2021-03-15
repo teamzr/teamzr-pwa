@@ -17,7 +17,7 @@ const authLink = setContext(async (_, { headers }) => {
 
 const httpLink = createUploadLink({
   uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
-  credentials: 'same-origin',
+  credentials: false,
 });
 
 const error = onError(({ response, operation, networkError }) => {});

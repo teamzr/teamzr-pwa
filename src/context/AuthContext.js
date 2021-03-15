@@ -43,11 +43,9 @@ export const AuthProvider = ({ children }) => {
 
       setLoading(false);
     }
-    const token = Cookies.get('token');
-    setUser(token);
 
     getUserFromCookies();
-  }, []);
+  }, [children]);
 
   const login = React.useCallback(async (email, password) => {
     try {
