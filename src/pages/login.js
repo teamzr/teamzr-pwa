@@ -40,7 +40,7 @@ function LogIn() {
         <Grid
           container
           direction={'column'}
-          alignContent={'strech'}
+          alignContent={'stretch'}
           alignItems={'stretch'}
           className={classes.container}
           justify={'center'}
