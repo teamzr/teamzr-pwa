@@ -13,12 +13,14 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
+import useAuthContext from '../../context/AuthContext';
 
 function ConversationComponent(props) {
   const { id, name, messageAt, messages, users, read } = props;
   const classes = useConversationComponentStyle();
   const router = useRouter();
   const { conversationId } = router.query;
+  const authContext = useAuthContext();
 
   const date = moment(moment(parseInt(messageAt))).format('DD.MM.YYYY');
 
@@ -26,7 +28,8 @@ function ConversationComponent(props) {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
   }, [router, id]);
 
-  const conversationName = users.length > 2 ? name : users[0].name;
+  const oppositeUser = users.find((user) => user.id != authContext.user.id);
+  const conversationName = users.length > 2 ? name : oppositeUser.name;
   return (
     <Box
       margin={2}
@@ -44,7 +47,7 @@ function ConversationComponent(props) {
         spacing={2}
       >
         <Grid item xs={'auto'}>
-          <Avatar className={classes.avatar} src={users[0].avatar} />
+          <Avatar className={classes.avatar} src={oppositeUser.avatar} />
         </Grid>
         <Grid item xs={true}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>

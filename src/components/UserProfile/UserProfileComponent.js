@@ -138,16 +138,19 @@ function UserProfileComponent(props) {
           </Badge>
         )}
       </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <UserSendMessageButton userId={user.id} />
-          </Grid>
-          <Grid item>
-            <UserConnectButton />
+      {!isActualUser && (
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <UserSendMessageButton userId={user.id} />
+            </Grid>
+            <Grid item>
+              <UserConnectButton />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
+
       <Divider width={'100%'} />
       <Grid item xs={12}>
         <Typography variant={'h6'}>Interests</Typography>
