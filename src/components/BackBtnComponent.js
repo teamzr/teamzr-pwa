@@ -5,9 +5,9 @@ import { BackArrowIcon } from '../constants/Icons';
 
 function BackBtnComponent(props) {
   const router = useRouter();
-  const handleBackToConversations = React.useCallback(() => {
+  const handleBackToConversations = () => {
     router.back();
-  }, []);
+  };
   return (
     <IconButton onClick={handleBackToConversations}>
       <BackArrowIcon style={{ color: 'transparent' }} />

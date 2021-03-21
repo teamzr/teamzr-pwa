@@ -28,12 +28,12 @@ function LogIn() {
     }
   }, [authContext]);
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = () => {
     router.push('/');
-  });
-  const handleSignup = React.useCallback(() => {
+  };
+  const handleSignup = () => {
     router.push('/signup');
-  });
+  };
   return (
     <div className={classes.background}>
       <Container maxWidth={'sm'}>

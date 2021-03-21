@@ -16,14 +16,11 @@ import { useRouter } from 'next/router';
 function AppBarPrimaryComponent() {
   const authContext = useAuthContext();
   const [avatarMenuEl, setAvatarMenuEl] = React.useState(null);
-  const onAvatarClick = React.useCallback(
-    (event) => {
-      const target = event.target;
+  const onAvatarClick = (event) => {
+    const target = event.target;
 
-      setAvatarMenuEl(target);
-    },
-    [setAvatarMenuEl]
-  );
+    setAvatarMenuEl(target);
+  };
 
   const router = useRouter();
 
