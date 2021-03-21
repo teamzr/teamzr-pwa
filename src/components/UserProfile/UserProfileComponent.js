@@ -145,7 +145,7 @@ function UserProfileComponent(props) {
               <UserSendMessageButton userId={user.id} />
             </Grid>
             <Grid item>
-              <UserConnectButton />
+              <UserConnectButton user={user} />
             </Grid>
           </Grid>
         </Grid>

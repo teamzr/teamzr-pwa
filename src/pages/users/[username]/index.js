@@ -18,6 +18,7 @@ const USER_QUERY = gql`
       email
       description
       avatar
+      connected
     }
   }
 `;
