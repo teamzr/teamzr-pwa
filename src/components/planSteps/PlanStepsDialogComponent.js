@@ -82,25 +82,19 @@ const PlanStepsDialogComponent = (props) => {
 
   const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
 
-  const handleUpdate = React.useCallback(
-    async (values) => {
-      const inputVariables = values ? values : planStepState;
+  const handleUpdate = async (values) => {
+    const inputVariables = values ? values : planStepState;
 
-      await updatePlanStep({
-        variables: { input: { id: planStepId, ...inputVariables } },
-      });
-    },
-    [planStepId, planStepState, updatePlanStep, handleClose]
-  );
+    await updatePlanStep({
+      variables: { input: { id: planStepId, ...inputVariables } },
+    });
+  };
 
-  const handleValueChange = React.useCallback(
-    (event) => {
-      const target = event.target;
+  const handleValueChange = (event) => {
+    const target = event.target;
 
-      setPlanStepState({ ...planStepState, [target.name]: target.value });
-    },
-    [planStepState, setPlanStepState]
-  );
+    setPlanStepState({ ...planStepState, [target.name]: target.value });
+  };
 
   if (loading) return '...';
   return (

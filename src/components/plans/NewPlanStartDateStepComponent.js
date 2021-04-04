@@ -10,17 +10,17 @@ function NewCampaignStartDateStepComponent(props) {
   const { data, setStep, onDataChange } = props;
   const { startDate } = data;
 
-  const handleDateChange = React.useCallback((value) => {
+  const handleDateChange = (value) => {
     onDataChange('startDate', moment(value));
-  }, []);
+  };
 
-  const handleBackClick = React.useCallback(() => {
+  const handleBackClick = () => {
     setStep(NEW_CAMPAING_STEPS.DETAILS);
-  }, []);
+  };
 
-  const handleNextClick = React.useCallback(() => {
+  const handleNextClick = () => {
     setStep(NEW_CAMPAING_STEPS.STEP_DURATION);
-  }, []);
+  };
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>

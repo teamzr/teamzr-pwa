@@ -5,9 +5,9 @@ import { Button } from '@material-ui/core';
 function MyPlansConversationFilterButton(props) {
   const { active, conversationId, setConversationId, children } = props;
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = () => {
     setConversationId(conversationId);
-  }, [conversationId, setConversationId]);
+  };
 
   return (
     <Button

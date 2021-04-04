@@ -25,20 +25,17 @@ function PlanListItemPopperComponent(props) {
   const router = useRouter();
   const conversationId = router.query.conversationId;
 
-  const handleEdit = React.useCallback(() => {}, [conversationId]);
+  const handleEdit = () => {};
 
-  const handleRemove = React.useCallback(() => {}, [conversationId]);
+  const handleRemove = () => {};
 
-  const togglePopover = React.useCallback(
-    (event) => {
-      if (anchorEl) {
-        setAnchorEl(null);
-      } else {
-        setAnchorEl(event.target);
-      }
-    },
-    [anchorEl, setAnchorEl]
-  );
+  const togglePopover = (event) => {
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.target);
+    }
+  };
 
   return (
     <>

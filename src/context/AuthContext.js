@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     getUserFromCookies();
   }, [children]);
 
-  const login = React.useCallback(async (email, password) => {
+  const login = async (email, password) => {
     try {
       const res = await axios.post('/auth', { email, password });
       const token = res.data && res.data.token;
@@ -61,9 +61,9 @@ export const AuthProvider = ({ children }) => {
     } catch (e) {
       throw { message: 'Invalid name or password!' };
     }
-  }, []);
+  };
 
-  const logout = React.useCallback(() => {
+  const logout = () => {
     Cookies.remove('token');
     setUser(null);
     apolloClient.resetStore();
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       router.push(notAuthFallback);
       window.location.pathname = '/';
     }
-  }, []);
+  };
 
   return (
     <AuthContext.Provider

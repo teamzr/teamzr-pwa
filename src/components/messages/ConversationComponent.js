@@ -24,9 +24,9 @@ function ConversationComponent(props) {
 
   const date = moment(moment(parseInt(messageAt))).format('DD.MM.YYYY');
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = () => {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
-  }, [router, id]);
+  };
 
   const oppositeUser = users.find((user) => user.id != authContext.user.id);
   const conversationName = users.length > 2 ? name : oppositeUser.name;

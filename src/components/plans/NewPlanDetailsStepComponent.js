@@ -7,19 +7,16 @@ function NewPlanDetailsStepComponent(props) {
   const { data, onDataChange, setStep } = props;
   const { name, description } = data;
 
-  const handleChange = React.useCallback(
-    (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-      onDataChange(name, value);
-    },
-    [onDataChange]
-  );
+    onDataChange(name, value);
+  };
 
-  const handleNextClick = React.useCallback(() => {
+  const handleNextClick = () => {
     setStep(NEW_CAMPAING_STEPS.START_DATE);
-  }, []);
+  };
 
   return (
     <Grid container direction={'column'} spacing={2}>

@@ -8,18 +8,15 @@ function PlanStepsDialogSubstepsComponent(props) {
   const [substeps, setSubSteps] = React.useState([]);
   const newSubstepRef = React.useRef();
 
-  const handleAddSubstep = React.useCallback(() => {
+  const handleAddSubstep = () => {
     setSubSteps([...substeps, newSubstepRef.current.value]);
     newSubstepRef.current.value = '';
-  }, [newSubstepRef.current, substeps, setSubSteps]);
+  };
 
-  const handleRemoveSubstep = React.useCallback(
-    (i) => {
-      substeps.splice(i, 1);
-      setSubSteps([...substeps]);
-    },
-    [substeps, setSubSteps]
-  );
+  const handleRemoveSubstep = (i) => {
+    substeps.splice(i, 1);
+    setSubSteps([...substeps]);
+  };
 
   return (
     <Grid container spacing={1}>

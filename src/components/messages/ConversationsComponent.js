@@ -57,9 +57,9 @@ function ConversationsComponent(props) {
 
   const { conversationId } = router.query;
 
-  const handleGoBack = React.useCallback(() => {
+  const handleGoBack = () => {
     router.push('/');
-  }, []);
+  };
 
   const messagesRef = React.useRef();
 

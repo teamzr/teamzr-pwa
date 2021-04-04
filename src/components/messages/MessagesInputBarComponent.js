@@ -70,34 +70,33 @@ function MessagesInputBarComponent(props) {
   });
 
   // TODO: Add: recipinets in order to create new conversation
-  const handleSend = React.useCallback(() => {
+  const handleSend = () => {
     if (inputText == '') return;
     createMessage({
       variables: { conversationId, text: inputText },
     });
     setInputText('');
-  }, [inputText]);
+  }
 
-  const toggleMultiline = React.useCallback(() => {
+  const toggleMultiline =() => {
     setMultiline(!multiline);
-  }, [multiline, setMultiline]);
+  }
 
-  const onMessageChange = React.useCallback((event) => {
+  const onMessageChange = (event) => {
     const value = event.target.value;
     setInputText(value);
 
     event.preventDefault();
   });
 
-  const keyEnterPress = React.useCallback(
+  const keyEnterPress = 
     (e) => {
       if (e.keyCode == 13) {
         handleSend();
         e.preventDefault();
       }
-    },
-    [handleSend]
-  );
+    }
+    
 
   return (
     <Box className={clsx(classes.container, { [classes.focused]: multiline })}>

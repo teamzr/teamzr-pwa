@@ -27,7 +27,7 @@ function PlanStepsItemComponentPopover(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
-  const handleEdit = React.useCallback(() => {}, []);
+  const handleEdit = () => {};
 
   const apolloCLient = useApolloClient();
   const [deletePlanStep] = useMutation(DELETE_PLAN_STEP_MUTATION, {
@@ -60,21 +60,18 @@ function PlanStepsItemComponentPopover(props) {
     },
   });
 
-  const handleRemove = React.useCallback(async () => {
+  const handleRemove = async () => {
     await deletePlanStep({ variables: { id: planStepId } });
     setAnchorEl(null);
-  }, [planStepId, setAnchorEl]);
+  };
 
-  const togglePopover = React.useCallback(
-    (event) => {
-      if (anchorEl) {
-        setAnchorEl(null);
-      } else {
-        setAnchorEl(event.target);
-      }
-    },
-    [anchorEl, setAnchorEl]
-  );
+  const togglePopover = (event) => {
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.target);
+    }
+  };
 
   return (
     <>

@@ -27,9 +27,9 @@ function UserPage(props) {
   const router = useRouter();
   const { username } = router.query;
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = () => {
     router.back();
-  }, []);
+  };
 
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: { userId: username },

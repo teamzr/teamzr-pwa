@@ -25,16 +25,13 @@ function PlanStepsComponent(props) {
     planStepId: null,
   });
 
-  const handleStepClick = React.useCallback(
-    (planStepId) => {
-      setStepDialogState({ planStepId });
-    },
-    [setStepDialogState]
-  );
+  const handleStepClick = (planStepId) => {
+    setStepDialogState({ planStepId });
+  };
 
-  const handleCloseStepsDialog = React.useCallback(() => {
+  const handleCloseStepsDialog = () => {
     setStepDialogState({ ...stepDialogState, planStepId: null });
-  }, [setStepDialogState, setStepDialogState]);
+  };
 
   const [, drop] = useDrop({ accept: ItemTypes.PLAN_STEP });
 
@@ -65,33 +62,27 @@ function PlanStepsComponent(props) {
     },
   });
 
-  const moveStep = React.useCallback(
-    (id, atIndex, didDrop) => {
-      const { planStep, index } = findStep(id);
-      setPlanSteps(
-        update(planSteps, {
-          $splice: [
-            [index, 1],
-            [atIndex, 0, planStep],
-          ],
-        })
-      );
-    },
-    [planSteps, setPlanSteps]
-  );
+  const moveStep = (id, atIndex, didDrop) => {
+    const { planStep, index } = findStep(id);
+    setPlanSteps(
+      update(planSteps, {
+        $splice: [
+          [index, 1],
+          [atIndex, 0, planStep],
+        ],
+      })
+    );
+  };
 
-  const findStep = React.useCallback(
-    (id) => {
-      const planStep = planSteps.filter((c) => `${c.id}` === id)[0];
-      const index = planSteps.indexOf(planStep);
+  const findStep = (id) => {
+    const planStep = planSteps.filter((c) => `${c.id}` === id)[0];
+    const index = planSteps.indexOf(planStep);
 
-      return {
-        planStep,
-        index,
-      };
-    },
-    [planSteps]
-  );
+    return {
+      planStep,
+      index,
+    };
+  };
 
   return (
     <>

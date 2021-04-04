@@ -15,9 +15,9 @@ function Campaign(props) {
   const router = useRouter();
   const { planId } = router.query;
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = () => {
     router.back();
-  }, []);
+  };
 
   if (!planId) return <LoadingIndicatorComponent />;
   return (

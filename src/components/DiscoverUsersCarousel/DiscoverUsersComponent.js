@@ -9,12 +9,9 @@ function DiscoverUsersComponent(props) {
   const { data } = props;
   const router = useRouter();
 
-  const handleProfile = React.useCallback(
-    (username) => {
-      router.push('/users/[username]', `/users/${username}`);
-    },
-    [router]
-  );
+  const handleProfile = (username) => {
+    router.push('/users/[username]', `/users/${username}`);
+  };
 
   const usersCards = [...data];
 

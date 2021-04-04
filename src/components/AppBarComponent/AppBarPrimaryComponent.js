@@ -24,18 +24,18 @@ function AppBarPrimaryComponent() {
 
   const router = useRouter();
 
-  const handleMyProfile = React.useCallback(() => {
+  const handleMyProfile = () => {
     router.push(`/users/[userName]`, `/users/${authContext.user.id}`);
     setAvatarMenuEl(null);
-  }, [authContext, router, setAvatarMenuEl]);
+  };
 
-  const handleSignOut = React.useCallback(() => {
+  const handleSignOut = () => {
     authContext.logout();
-  }, [authContext]);
+  };
 
-  const onCloseAvatarMenu = React.useCallback(() => {
+  const onCloseAvatarMenu = () => {
     setAvatarMenuEl(null);
-  }, [setAvatarMenuEl]);
+  };
   return (
     <>
       <IconButton

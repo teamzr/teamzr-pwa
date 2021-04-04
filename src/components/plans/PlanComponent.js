@@ -79,13 +79,13 @@ function PlanComponent(props) {
     variables: { planId },
   });
 
-  const handlePlanStartDateChange = React.useCallback((value) => {
+  const handlePlanStartDateChange = (value) => {
     updatePlan({
       variables: {
         input: { id: planId, startDate: value.utc() },
       },
     });
-  });
+  };
 
   if (loading || planStepsLoading) return <LoadingIndicatorComponent />;
   return (

@@ -5,14 +5,11 @@ import { Button, Grid } from '@material-ui/core';
 function PlanStepsDialogDurationComponent(props) {
   const { duration, handleUpdate } = props;
 
-  const hadleDurationClick = React.useCallback(
-    (value) => {
-      handleUpdate({
-        duration: value,
-      });
-    },
-    [handleUpdate]
-  );
+  const hadleDurationClick = (value) => {
+    handleUpdate({
+      duration: value,
+    });
+  };
 
   return (
     <Grid container direction={'row'} spacing={2}>

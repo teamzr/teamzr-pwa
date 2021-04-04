@@ -63,7 +63,7 @@ function PlanStepsComponentAddStepBtn(props) {
     },
   });
 
-  const handleCreate = React.useCallback(async () => {
+  const handleCreate = async () => {
     await createPlanStep({
       variables: {
         input: {
@@ -73,7 +73,7 @@ function PlanStepsComponentAddStepBtn(props) {
         },
       },
     });
-  }, [planId, parentId, inputState, createPlanStep]);
+  };
 
   return (
     <ListItem alignItems={'center'}>

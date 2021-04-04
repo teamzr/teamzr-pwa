@@ -14,13 +14,13 @@ function SignUp() {
   const classes = useStartPageStyle();
   const router = useRouter();
 
-  const handleLogin = React.useCallback(() => {
+  const handleLogin = () => {
     router.push('/login');
-  }, [router]);
+  };
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = () => {
     router.push('/');
-  }, [router]);
+  };
 
   React.useEffect(() => {
     if (authContext.isAuthenticated && !authContext.loading) {

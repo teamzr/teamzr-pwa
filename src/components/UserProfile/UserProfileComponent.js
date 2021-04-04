@@ -38,28 +38,25 @@ function UserProfileComponent(props) {
   const [isEditing, setIsEditing] = React.useState(false);
   const isActualUser = actualUser.id === user.id;
 
-  const handleEdit = React.useCallback(() => {
+  const handleEdit = () => {
     setIsEditing(!isEditing);
-  }, [isEditing, setIsEditing]);
+  };
 
-  const handleDesriptionUpdate = React.useCallback(
-    (event) => {
-      const value = event.target.value;
+  const handleDesriptionUpdate = (event) => {
+    const value = event.target.value;
 
-      meUpdate({
-        variables: {
-          input: {
-            id: actualUser.id,
-            description: value,
-          },
+    meUpdate({
+      variables: {
+        input: {
+          id: actualUser.id,
+          description: value,
         },
-      });
-      setIsEditing(false);
-    },
-    [actualUser, meUpdate, setIsEditing]
-  );
+      },
+    });
+    setIsEditing(false);
+  };
 
-  const onAvatarInputChange = React.useCallback(async () => {
+  const onAvatarInputChange = async () => {
     const avatar = avatarInputRef.current.files[0];
     const validity = avatarInputRef.current.validity;
 
@@ -73,7 +70,7 @@ function UserProfileComponent(props) {
         },
       });
     }
-  }, [actualUser, avatarInputRef, meUpdate]);
+  };
 
   return (
     <Grid

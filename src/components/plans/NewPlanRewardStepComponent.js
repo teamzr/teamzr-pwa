@@ -8,13 +8,13 @@ function NewPlanRewardStepComponent(props) {
   const { data, onDataChange, setStep } = props;
   const { rewardDescription } = data;
 
-  const handleChange = React.useCallback((event) => {
+  const handleChange = (event) => {
     onDataChange(event.target.name, event.target.value);
-  }, []);
+  };
 
-  const handleBackClick = React.useCallback(() => {
+  const handleBackClick = () => {
     setStep(NEW_CAMPAING_STEPS.STEP_DURATION);
-  }, []);
+  };
 
   return (
     <Grid container direction={'column'} spacing={2}>

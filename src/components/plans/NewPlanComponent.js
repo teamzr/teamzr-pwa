@@ -51,18 +51,15 @@ function NewPlanComponent(props) {
 
   const [createPlan] = useMutation(CREATE_PLAN_MUTATION);
 
-  const onDataChange = React.useCallback(
-    (name, value) => {
-      setData(Object.assign({}, data, { [name]: value }));
-    },
-    [data]
-  );
+  const onDataChange = (name, value) => {
+    setData(Object.assign({}, data, { [name]: value }));
+  };
 
-  const handleCreate = React.useCallback(async () => {
+  const handleCreate = async () => {
     const res = await createPlan({ variables: { input: data } });
     const planId = res.data.createPlan.id;
     router.push(`/plans/[planId]`, `/plans/${planId}`);
-  }, [data, createPlan]);
+  };
 
   const Step = stepComponentMap[step];
   return (

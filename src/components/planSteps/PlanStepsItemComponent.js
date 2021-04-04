@@ -38,12 +38,9 @@ function PlanStepsItemComponent(props) {
   const classes = usePlanStepsItemComponent();
 
   const [isDragActive, setIsDragActive] = React.useState(false);
-  const onMouseDown = React.useCallback(
-    (event) => {
-      setIsDragActive(true);
-    },
-    [setIsDragActive]
-  );
+  const onMouseDown = (event) => {
+    setIsDragActive(true);
+  };
 
   const originalIndex = findStep(planStepId).index;
 
@@ -85,9 +82,9 @@ function PlanStepsItemComponent(props) {
     },
   });
 
-  const handleCLick = React.useCallback(() => {
+  const handleCLick = () => {
     onClick(planStepId);
-  }, [planStepId]);
+  };
 
   const opacity = isDragging && !isTouchDevice() ? 0 : 1;
 

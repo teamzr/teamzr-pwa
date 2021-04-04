@@ -23,24 +23,21 @@ function ConversationPopperComponent(props) {
   const router = useRouter();
   const conversationId = router.query.conversationId;
 
-  const handleAddCampaign = React.useCallback(() => {
+  const handleAddCampaign = () => {
     router.push({ pathname: '/plans/new', query: { conversationId } });
-  }, [conversationId]);
+  };
 
-  const handleViewPlans = React.useCallback(() => {
+  const handleViewPlans = () => {
     router.push({ pathname: '/my-plans', query: { conversationId } });
-  }, [conversationId]);
+  };
 
-  const togglePopover = React.useCallback(
-    (event) => {
-      if (anchorEl) {
-        setAnchorEl(null);
-      } else {
-        setAnchorEl(event.target);
-      }
-    },
-    [anchorEl, setAnchorEl]
-  );
+  const togglePopover = (event) => {
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.target);
+    }
+  };
 
   return (
     <>

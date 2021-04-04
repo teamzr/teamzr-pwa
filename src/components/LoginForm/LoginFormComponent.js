@@ -14,7 +14,7 @@ function LoginFormComponent(props) {
   const passRef = React.useRef();
   const router = useRouter();
 
-  const handleSubmit = React.useCallback(async () => {
+  const handleSubmit = async () => {
     const email = emailRef.current.value;
     const pass = passRef.current.value;
     try {
@@ -23,20 +23,17 @@ function LoginFormComponent(props) {
     } catch (e) {
       setError(e.message);
     }
-  }, [emailRef, passRef]);
+  };
 
-  const handleDeleteError = React.useCallback(() => {
+  const handleDeleteError = () => {
     setError(null);
-  }, [setError]);
+  };
 
-  const keyEnterPress = React.useCallback(
-    (e) => {
-      if (e.keyCode == 13) {
-        handleSubmit();
-      }
-    },
-    [handleSubmit]
-  );
+  const keyEnterPress = (e) => {
+    if (e.keyCode == 13) {
+      handleSubmit();
+    }
+  };
 
   return (
     <form>

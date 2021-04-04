@@ -18,17 +18,17 @@ function NavigationMainBottomPanel(props) {
 
   const authCtx = useAuthContext();
 
-  const handleExplore = React.useCallback(() => {
+  const handleExplore = () => {
     router.push('/explore');
-  }, [router]);
+  };
 
-  const handleCampaings = React.useCallback(() => {
+  const handleCampaings = () => {
     router.push('/my-plans');
-  }, [router]);
+  };
 
-  const handleMessages = React.useCallback(() => {
+  const handleMessages = () => {
     router.push('/messages');
-  }, [router]);
+  };
 
   if (!authCtx.isAuthenticated) return false;
   return (

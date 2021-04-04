@@ -31,41 +31,35 @@ function SignupFormComponent(props) {
 
   const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
-  const handleSubmit = React.useCallback(
-    async (event) => {
-      event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-      try {
-        await validateData(formData);
-        const response = await AuthService.signUp(formData);
+    try {
+      await validateData(formData);
+      const response = await AuthService.signUp(formData);
 
-        router.push('/login');
-      } catch (error) {
-        const processedErrors = processValidationError(error);
-        setErrors({ ...processedErrors });
-        console.log(error);
-      }
-    },
-    [formData, errors, setErrors]
-  );
+      router.push('/login');
+    } catch (error) {
+      const processedErrors = processValidationError(error);
+      setErrors({ ...processedErrors });
+      console.log(error);
+    }
+  };
 
-  const handleChange = React.useCallback(
-    (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-      setFormData({ ...formData, [name]: value });
-    },
-    [formData, setFormData]
-  );
+    setFormData({ ...formData, [name]: value });
+  };
 
-  const handleChangeShowPassword = React.useCallback(() => {
+  const handleChangeShowPassword = () => {
     setShowPassword(!showPassword);
-  }, [showPassword, setShowPassword]);
+  };
 
-  const handleDeleteAlert = React.useCallback(() => {
+  const handleDeleteAlert = () => {
     setErrors({ ...errors, alert: null });
-  }, [errors]);
+  };
 
   return (
     <form onSubmit={handleSubmit}>

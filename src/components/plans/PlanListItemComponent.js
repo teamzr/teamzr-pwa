@@ -17,9 +17,9 @@ function PlanListItemComponent(props) {
   const { planId, name, conversationName } = props;
   const router = useRouter();
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = () => {
     router.push('/plans/[planId]', `/plans/${planId}`);
-  }, [planId]);
+  };
   return (
     <>
       <ListItem>
