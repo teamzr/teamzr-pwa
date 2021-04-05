@@ -8,7 +8,6 @@ import { useQuery, gql } from '@apollo/client';
 import { protectRoute } from '../utils/ProtectRoute';
 import Start from './start';
 import DiscoverUsersComponent from '../components/DiscoverUsersCarousel/DiscoverUsersComponent';
-import AppBarComponent from '../components/AppBarComponent/AppBarComponent';
 
 const ME_QUERY = gql`
   {
