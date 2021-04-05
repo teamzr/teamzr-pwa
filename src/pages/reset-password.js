@@ -8,8 +8,10 @@ import { useStartPageStyle } from '../pagesStyle/start.Style';
 import useAuthContext from '../context/AuthContext';
 import SignupFormComponent from '../components/SignupForm';
 import AuthService from '../services/AuthService';
+import ResetPasswordEmailFormComponent from '../components/passwordReset/ResetPasswordEmailFormComponent';
+import axios from '../utils/Axios';
 
-function SignUp() {
+function ResetPassword() {
   const authContext = useAuthContext();
   const classes = useStartPageStyle();
   const router = useRouter();
@@ -28,6 +30,12 @@ function SignUp() {
     }
   }, [authContext]);
 
+  const onEmailSubmit = (email) => {
+    if (email == '') return;
+    axios.post('/reset-password', { email });
+    router.push('/login');
+  };
+
   return (
     <div className={classes.background}>
       <Container>
@@ -43,8 +51,15 @@ function SignUp() {
             <LogoTeamzrVertical className={classes.logo} />
           </Grid>
           <Grid item xs={12}>
-            <Typography color={'secondary'}>Coming soon...</Typography>
-            {false && <SignupFormComponent onSubmit={AuthService.signUp} />}
+            <Typography variant={'h5'} color={'secondary'}>
+              Reset Password
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <ResetPasswordEmailFormComponent
+              onSubmit={onEmailSubmit}
+              placeholder={'Email'}
+            />
           </Grid>
           <Grid item>
             <Grid
@@ -76,4 +91,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default ResetPassword;

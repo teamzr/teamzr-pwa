@@ -6,6 +6,7 @@ import LoginFormBtnComponent from './LoginFormBtnComponent';
 import LoginFormTextField from './LoginFormTextField';
 import useAuthContext from '../../context/AuthContext';
 import { LetterIcon, LockIcon, MessagesIcon } from '../../constants/Icons';
+import Link from 'next/link';
 
 function LoginFormComponent(props) {
   const [error, setError] = React.useState(null);
@@ -62,6 +63,7 @@ function LoginFormComponent(props) {
             placeholder={'**********'}
             error={error}
           />
+          <Link href={'reset-password'}>Forgot your password?</Link>
         </Grid>
         <Grid item xs={12}>
           <Grid

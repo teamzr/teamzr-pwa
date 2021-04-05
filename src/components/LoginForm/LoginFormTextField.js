@@ -16,7 +16,6 @@ const LoginFormTextField = React.forwardRef((props, ref) => {
         classes: { root: classes.root },
         disableUnderline: true,
         error: error,
-
         startAdornment: (
           <>
             {!!icon && (
@@ -51,6 +50,7 @@ const LoginFormTextField = React.forwardRef((props, ref) => {
           </>
         ),
       }}
+      FormHelperTextProps={{ classes: { root: classes.helperText } }}
       classes={{ root: classes.root }}
       {...props}
     />

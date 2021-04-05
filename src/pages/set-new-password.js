@@ -6,13 +6,20 @@ import { LogoTeamzrVertical } from '../constants/Icons';
 
 import { useStartPageStyle } from '../pagesStyle/start.Style';
 import useAuthContext from '../context/AuthContext';
-import SignupFormComponent from '../components/SignupForm';
-import AuthService from '../services/AuthService';
+import axios from '../utils/Axios';
+import SetNewPasswordFormComponent from '../components/passwordReset/SetNewPasswordFormComponent';
+import { signupValidationSchema } from '../components/passwordReset/SetNewPasswordForm.Func';
+import { processValidationError } from '../components/SignupForm/SignupFormComponent.func';
 
-function SignUp() {
+function SetNewPassword() {
   const authContext = useAuthContext();
   const classes = useStartPageStyle();
   const router = useRouter();
+
+  const [errors, setErrors] = React.useState({
+    newPass: null,
+    newPassConfirm: null,
+  });
 
   const handleLogin = () => {
     router.push('/login');
@@ -27,6 +34,23 @@ function SignUp() {
       router.push('/');
     }
   }, [authContext]);
+
+  const onSubmit = async (pass) => {
+    try {
+      const result = await signupValidationSchema.validate(pass, {
+        abortEarly: false,
+      });
+      await axios.post(`/set-new-password?token=${router.query.token}`, {
+        newPass: result.newPass,
+        newPassConfirm: result.newPassConfirm,
+      });
+      router.push('/login');
+    } catch (error) {
+      const errors = processValidationError(error);
+      console.log(errors);
+      setErrors(errors);
+    }
+  };
 
   return (
     <div className={classes.background}>
@@ -43,8 +67,12 @@ function SignUp() {
             <LogoTeamzrVertical className={classes.logo} />
           </Grid>
           <Grid item xs={12}>
-            <Typography color={'secondary'}>Coming soon...</Typography>
-            {false && <SignupFormComponent onSubmit={AuthService.signUp} />}
+            <Typography variant={'h5'} color={'secondary'}>
+              Set New Password
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <SetNewPasswordFormComponent errors={errors} onSubmit={onSubmit} />
           </Grid>
           <Grid item>
             <Grid
@@ -76,4 +104,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SetNewPassword;

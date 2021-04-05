@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useLoginFormTextField = makeStyles((theme) => ({
+  helperText: {
+    marginTop: '10px',
+  },
   textField: {
     border: '2px solid #FFFFFF',
     opacity: '1',
