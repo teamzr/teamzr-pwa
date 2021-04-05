@@ -76,27 +76,25 @@ function MessagesInputBarComponent(props) {
       variables: { conversationId, text: inputText },
     });
     setInputText('');
-  }
+  };
 
-  const toggleMultiline =() => {
+  const toggleMultiline = () => {
     setMultiline(!multiline);
-  }
+  };
 
   const onMessageChange = (event) => {
     const value = event.target.value;
     setInputText(value);
 
     event.preventDefault();
-  });
+  };
 
-  const keyEnterPress = 
-    (e) => {
-      if (e.keyCode == 13) {
-        handleSend();
-        e.preventDefault();
-      }
+  const keyEnterPress = (e) => {
+    if (e.keyCode == 13) {
+      handleSend();
+      e.preventDefault();
     }
-    
+  };
 
   return (
     <Box className={clsx(classes.container, { [classes.focused]: multiline })}>
