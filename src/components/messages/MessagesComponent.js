@@ -49,7 +49,9 @@ function MessagesComponent(props) {
     MARK_CONVERSATION_AS_READ_MUTATION
   );
 
-  markConversationAsRead({ variables: { id: conversationId } });
+  if (conversationId != null) {
+    markConversationAsRead({ variables: { id: conversationId } });
+  }
 
   const { loading, error, data } = useQuery(GET_MESSAGES_FROM_QUERY, {
     variables: {
