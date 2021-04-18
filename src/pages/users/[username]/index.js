@@ -19,6 +19,10 @@ const USER_QUERY = gql`
       description
       avatar
       connected
+      interests {
+        id
+        name
+      }
     }
   }
 `;
@@ -45,7 +49,7 @@ function UserPage(props) {
             <BackArrowIcon />
           </IconButton>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={6}>
           <UserProfileComponent user={data.user} />
         </Grid>
       </Grid>

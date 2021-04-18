@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import {
   Avatar,
   Badge,
+  Box,
   Divider,
   Grid,
   IconButton,
@@ -15,8 +16,9 @@ import UserSendMessageButton from './UserSendMessageButton';
 import useAuthContext from '../../context/AuthContext';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
-import UserProfileInterestsComponent from './UserProfileInterestsComponent';
 import { Edit } from '@material-ui/icons';
+
+import UserProfileInterests from './UserProfileInterests';
 
 const UPDATE_USER_MUTATION = gql`
   mutation meUpdate($input: ActualUserInput) {
@@ -73,87 +75,115 @@ function UserProfileComponent(props) {
   };
 
   return (
-    <Grid
-      container
-      direction={'column'}
-      justify={'center'}
-      alignContent={'center'}
-      alignItems={'center'}
-      spacing={2}
-    >
-      <Grid item>
-        <Badge
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          badgeContent={
-            isActualUser && (
-              <>
-                <input
-                  hidden
-                  ref={avatarInputRef}
-                  id={'user-profile-avatar'}
-                  type={'file'}
-                  accept={'image/*'}
-                  onChange={onAvatarInputChange}
-                />
-                <label htmlFor={'user-profile-avatar'}>
-                  <Edit style={{ cursor: 'pointer' }} />
-                </label>
-              </>
-            )
-          }
-        >
-          <Avatar className={classes.avatar} src={user.avatar} elevation={2} />
-        </Badge>
-      </Grid>
-      <Grid item>
-        <Typography variant={'h3'}>{user.name}</Typography>
-      </Grid>
-      <Grid item>
-        <Typography variant={'h5'}>{user.email}</Typography>
-      </Grid>
-      <Grid item>
-        {isEditing && (
-          <TextField
-            autoFocus={true}
-            multiline
-            defaultValue={user.description}
-            onBlur={handleDesriptionUpdate}
-          />
-        )}
-        {!isEditing && (
+    <>
+      <Grid
+        container
+        direction={'column'}
+        justify={'center'}
+        alignContent={'center'}
+        alignItems={'center'}
+        spacing={2}
+      >
+        <Grid item xs={12} sm={8} md={6}>
           <Badge
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             badgeContent={
               isActualUser && (
-                <IconButton onClick={handleEdit}>
-                  <Edit />
-                </IconButton>
+                <>
+                  <input
+                    hidden
+                    ref={avatarInputRef}
+                    id={'user-profile-avatar'}
+                    type={'file'}
+                    accept={'image/*'}
+                    onChange={onAvatarInputChange}
+                  />
+                  <label htmlFor={'user-profile-avatar'}>
+                    <Edit style={{ cursor: 'pointer' }} />
+                  </label>
+                </>
               )
             }
           >
-            <Typography variant={'body1'}>{user.description}</Typography>
+            <Avatar
+              className={classes.avatar}
+              src={user.avatar}
+              elevation={2}
+            />
           </Badge>
-        )}
-      </Grid>
-      {!isActualUser && (
+        </Grid>
+        <Grid item>
+          <Typography variant={'h3'}>{user.name}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant={'h5'}>{user.email}</Typography>
+        </Grid>
         <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <UserSendMessageButton userId={user.id} />
-            </Grid>
-            <Grid item>
-              <UserConnectButton user={user} />
+          <Box margin={2}>
+            {isEditing && (
+              <TextField
+                fullWidth={true}
+                autoFocus={true}
+                multiline
+                rows={2}
+                variant={'outlined'}
+                defaultValue={user.description}
+                onBlur={handleDesriptionUpdate}
+              />
+            )}
+
+            {!isEditing && (
+              <Typography
+                variant={'body1'}
+                onClick={isActualUser && handleEdit}
+              >
+                {user.description}
+              </Typography>
+            )}
+          </Box>
+        </Grid>
+        {!isActualUser && (
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item>
+                <UserSendMessageButton userId={user.id} />
+              </Grid>
+              <Grid item>
+                <UserConnectButton user={user} />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      )}
-
-      <Divider width={'100%'} />
-      <Grid item xs={12}>
-        <Typography variant={'h6'}>Interests</Typography>
-        <UserProfileInterestsComponent />
+        )}
       </Grid>
-    </Grid>
+      <Divider
+        width={'100%'}
+        style={{ marginTop: '20px', marginBottom: '20px' }}
+      />
+      <Grid container>
+        <Grid item xs={2}>
+          <Typography variant={'h6'}>Interests</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Box minWidth={'300px'}>
+            <Grid
+              container
+              direction={'row'}
+              justify={'center'}
+              alignContent={'center'}
+              alignItems={'center'}
+            >
+              <Grid item>
+                <UserProfileInterests
+                  value={user.interests}
+                  userId={user.id}
+                  disabled={!isActualUser}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
