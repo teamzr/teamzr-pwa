@@ -165,7 +165,7 @@ function UserProfileComponent(props) {
           <Typography variant={'h6'}>Interests</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box minWidth={'300'}>
+          <Box minWidth={'400'}>
             <Grid
               container
               direction={'row'}

@@ -53,6 +53,10 @@ function UserProfileInterestsComponent({
   return (
     <Autocomplete
       fullWidth={true}
+      autoComplete={true}
+      autoHighlight={true}
+      clearOnEscape={true}
+      closeIcon={true}
       multiple
       disabled={disabled}
       id="userprofile-interests"
@@ -109,6 +113,7 @@ function UserProfileInterestsComponent({
             [disabled && 'endAdornment']: false,
             disableUnderline: true,
             fullWidth: true,
+            style: { minWidth: '300px' },
           }}
         />
       )}
