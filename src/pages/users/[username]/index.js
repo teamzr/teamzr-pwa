@@ -38,6 +38,7 @@ function UserPage(props) {
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: { userId: username },
     skip: !username,
+    fetchPolicy: 'cache-and-network',
   });
 
   if (loading || !username) return <LoadingIndicatorComponent />;

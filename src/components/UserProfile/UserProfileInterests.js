@@ -35,7 +35,9 @@ const ME_ADD_INEREST = gql`
 
 function UserProfileInterests(props) {
   const { value, userId, disabled } = props;
-  const { data, loading, error } = useQuery(INTERESTS_QUERY);
+  const { data, loading, error } = useQuery(INTERESTS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
   const [isLoading, setIsLoading] = React.useState(loading);
   React.useEffect(() => {
     setIsLoading(loading);
