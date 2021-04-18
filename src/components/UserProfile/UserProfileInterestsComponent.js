@@ -22,7 +22,12 @@ function UserProfileInterestsComponent({
   const [inputValue, setInputValue] = React.useState('');
 
   const onAutocompleteChange = (event, selectedOpt) => {
+    if (selectedOpt.length > 7) {
+      selectedOpt[6] = selectedOpt[7];
+      selectedOpt.splice(6, 1);
+    }
     onChange(selectedOpt);
+
     setInputValue('');
   };
 
@@ -56,6 +61,7 @@ function UserProfileInterestsComponent({
       autoComplete={true}
       autoHighlight={true}
       clearOnEscape={true}
+      clearOnBlur={true}
       closeIcon={true}
       multiple
       disabled={disabled}

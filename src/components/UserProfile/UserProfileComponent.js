@@ -162,7 +162,9 @@ function UserProfileComponent(props) {
       />
       <Grid container>
         <Grid item xs={2}>
-          <Typography variant={'h6'}>Interests</Typography>
+          <Typography variant={'h6'}>
+            Interests<Typography variant={'subtitle2'}>* 7 max</Typography>
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <Box minWidth={'400'}>
