@@ -30,6 +30,7 @@ DefaultLayout.propTypes = {
 const useDefaultLayoutStyle = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.secondary.dark,
+    marginBottom: '45px',
   },
 }));
 

@@ -136,6 +136,7 @@ function UserProfileComponent(props) {
               <Typography
                 variant={'body1'}
                 onClick={isActualUser && handleEdit}
+                style={{ cursor: isActualUser ? 'pointer' : 'unset' }}
               >
                 {user.description}
               </Typography>
@@ -164,7 +165,7 @@ function UserProfileComponent(props) {
           <Typography variant={'h6'}>Interests</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box minWidth={'300px'}>
+          <Box minWidth={'300'}>
             <Grid
               container
               direction={'row'}

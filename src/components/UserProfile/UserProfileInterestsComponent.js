@@ -38,8 +38,10 @@ function UserProfileInterestsComponent({
         !value.find((elm) => opt.name == elm.name)
       );
     });
+
     if (result.length < 2 && inputValue != '') {
-      result.push({ id: null, name: inputValue });
+      const newItem = { id: null, name: inputValue };
+      result.push(newItem);
     }
     return result;
   };
@@ -107,7 +109,6 @@ function UserProfileInterestsComponent({
             [disabled && 'endAdornment']: false,
             disableUnderline: true,
             fullWidth: true,
-            style: { minWidth: '400px' },
           }}
         />
       )}
