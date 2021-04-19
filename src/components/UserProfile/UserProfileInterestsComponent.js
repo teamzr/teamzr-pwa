@@ -62,7 +62,7 @@ function UserProfileInterestsComponent({
       autoHighlight={true}
       clearOnEscape={true}
       clearOnBlur={true}
-      closeIcon={true}
+      disableClearable={true}
       multiple
       disabled={disabled}
       id="userprofile-interests"
@@ -71,7 +71,6 @@ function UserProfileInterestsComponent({
       options={options}
       loading={loading}
       getOptionSelected={getOptionSelected}
-      disableCloseOnSelect
       filterOptions={filterOptions}
       getOptionLabel={(option) => option.name}
       renderOption={(option, { selected }) => (
