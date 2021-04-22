@@ -8,15 +8,26 @@ import { useQuery, gql } from '@apollo/client';
 import { protectRoute } from '../utils/ProtectRoute';
 import Start from './start';
 import DiscoverUsersComponent from '../components/DiscoverUsersCarousel/DiscoverUsersComponent';
+import UserProfileInterestsComponent from '../components/UserProfile/UserProfileInterestsComponent';
+import InterestsFilterComponent from '../components/InterestsFilter/InterestsFilterComponent';
+import LoadingIndicatorComponent from '../components/LoadingIndicatorComponent';
 
 const ME_QUERY = gql`
   {
     me {
       id
       name
+      interests {
+        id
+        name
+      }
     }
+  }
+`;
 
-    communityUsers {
+const COMMUNITY_QUERY = gql`
+  query($interestId: ID) {
+    communityUsers(interestId: $interestId) {
       id
       name
       avatar
@@ -33,14 +44,30 @@ const ME_QUERY = gql`
 function Explore() {
   const authContext = useAuthContext();
   const { user } = authContext;
-  const { loading, error, data } = useQuery(ME_QUERY);
+  const [interestId, setInterestId] = React.useState(null);
+  const { loading: meLoading, error: meError, data: meData } = useQuery(
+    ME_QUERY
+  );
+  const { loading, error, data } = useQuery(COMMUNITY_QUERY, {
+    variables: { interestId },
+  });
 
-  if (loading) {
+  if (meLoading) {
     return '...Loading';
   }
+
   return (
     <DefautltLayout>
-      <DiscoverUsersComponent data={data.communityUsers} />
+      <InterestsFilterComponent
+        interests={meData.me.interests}
+        value={interestId}
+        onChange={setInterestId}
+      />
+      {loading ? (
+        <LoadingIndicatorComponent />
+      ) : (
+        <DiscoverUsersComponent data={data.communityUsers} />
+      )}
     </DefautltLayout>
   );
 }
