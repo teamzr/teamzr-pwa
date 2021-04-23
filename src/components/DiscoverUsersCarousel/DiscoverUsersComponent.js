@@ -3,17 +3,16 @@ import { useRouter } from 'next/router';
 
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
+import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import DiscoverUsersCardComponent from './DiscoverUsersCardComponent';
 
 function DiscoverUsersComponent(props) {
-  const { data } = props;
+  const { data, loading } = props;
   const router = useRouter();
 
   const handleProfile = (username) => {
     router.push('/users/[username]', `/users/${username}`);
   };
-
-  const usersCards = [...data];
 
   return (
     <Grid
@@ -37,31 +36,34 @@ function DiscoverUsersComponent(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} style={{ overflowX: 'auto', overflowY: 'hidden' }}>
-        <Box display={'inline'} display={'inline-flex'} width={'max-content'}>
-          <Grid container direction={'row'} spacing={1}>
-            {usersCards.map((user, i) => (
-              <Grid
-                key={i}
-                item
-                component={'div'}
-                style={{ padding: 15, minHeight: 200 }}
-              >
-                <div
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleProfile(user.id)}
+      {loading && <LoadingIndicatorComponent />}
+      {!loading && (
+        <Grid item xs={12} style={{ overflowX: 'auto', overflowY: 'hidden' }}>
+          <Box display={'inline'} display={'inline-flex'} width={'max-content'}>
+            <Grid container direction={'row'} spacing={1}>
+              {data.map((user, i) => (
+                <Grid
+                  key={i}
+                  item
+                  component={'div'}
+                  style={{ padding: 15, minHeight: 200 }}
                 >
-                  <DiscoverUsersCardComponent
-                    name={user.name}
-                    description={user.description}
-                    avatar={user.avatar}
-                  />
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </Grid>
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleProfile(user.id)}
+                  >
+                    <DiscoverUsersCardComponent
+                      name={user.name}
+                      description={user.description}
+                      avatar={user.avatar}
+                    />
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Grid>
+      )}
     </Grid>
   );
 }

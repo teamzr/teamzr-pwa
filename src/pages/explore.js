@@ -63,11 +63,8 @@ function Explore() {
         value={interestId}
         onChange={setInterestId}
       />
-      {loading ? (
-        <LoadingIndicatorComponent />
-      ) : (
-        <DiscoverUsersComponent data={data.communityUsers} />
-      )}
+
+      <DiscoverUsersComponent data={data?.communityUsers} loading={loading} />
     </DefautltLayout>
   );
 }
