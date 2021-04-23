@@ -139,6 +139,7 @@ function UserProfileComponent(props) {
                 style={{ cursor: isActualUser ? 'pointer' : 'unset' }}
               >
                 {user.description}
+                <Edit />
               </Typography>
             )}
           </Box>
