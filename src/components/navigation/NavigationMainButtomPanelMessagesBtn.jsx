@@ -4,7 +4,7 @@ import { MessagesIcon } from '../../constants/Icons';
 import { Grid, IconButton, makeStyles, Box, Badge } from '@material-ui/core';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
-import { POOL_INTERVAL_MEDIUM } from '../../constants/NetworkConstants';
+import { POLL_INTERVAL_MEDIUM } from '../../constants/NetworkConstants';
 
 const MESSAGES_COUNT_QUERY = gql`
   {
@@ -16,7 +16,7 @@ function NavigationMainBottomPanelMessagesBtn(props) {
   const { onClick, className } = props;
 
   const { data, loading, error } = useQuery(MESSAGES_COUNT_QUERY, {
-    pollInterval: POOL_INTERVAL_MEDIUM,
+    pollInterval: POLL_INTERVAL_MEDIUM,
   });
   return (
     <IconButton onClick={onClick}>
