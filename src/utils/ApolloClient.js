@@ -20,7 +20,11 @@ const httpLink = createUploadLink({
   credentials: false,
 });
 
-const error = onError(({ response, operation, networkError }) => {});
+const error = onError(({ response, operation, networkError }) => {
+  if (networkError.statusCode == 400) {
+    //TODO
+  }
+});
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
