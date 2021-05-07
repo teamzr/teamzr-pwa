@@ -17,6 +17,7 @@ import PlanStepsDialogPhaseDiagram from './PlanStepsDialogPhaseDiagram';
 import PlanStepsDialogSubstepsComponent from './PlanStepsDialogSubstepsComponent';
 import PlanStepsDialogDurationComponent from './PlanStepsDialogDurationComponent';
 import { PLAN_STEP_STATUSES } from './PlanStepsConstants';
+import PlanStepDetailTabsComponent from '../planStepDetail/PlanStepDetailTabsComponent';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -104,7 +105,7 @@ const PlanStepsDialogComponent = (props) => {
       open={!!planStepId}
       scroll={'body'}
       fullWidth={true}
-      maxWidth={'md'}
+      fullScreen={true}
     >
       <Grid
         container
@@ -118,11 +119,6 @@ const PlanStepsDialogComponent = (props) => {
             <LeftChevronIcon />
           </IconButton>
         </Grid>
-        <Grid item xs={10}>
-          <Typography align={'center'} variant={'h5'}>
-            Step definition
-          </Typography>
-        </Grid>
         <Grid item xs={1}>
           <IconButton>
             <VerticalDotsIcon />
@@ -134,11 +130,10 @@ const PlanStepsDialogComponent = (props) => {
         <Grid container direction={'column'} spacing={2}>
           <Grid item>
             <Grid container justify={'center'}>
-              <Grid item>
-                <PlanStepsDialogPhaseDiagram />
+              <Grid item xs={12}>
+                <PlanStepDetailTabsComponent />
               </Grid>
             </Grid>
-            <Divider />
           </Grid>
           <Grid item>
             <Typography variant={'h6'}>About</Typography>
