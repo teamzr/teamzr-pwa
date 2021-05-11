@@ -34,7 +34,7 @@ const ChipSelect = () => {
     setValue(value);
   };
   return (
-    <div style={{ width: '400px' }}>
+    <div style={{ width: '200px' }}>
       <ChipSelectComponent
         value={value}
         options={options}

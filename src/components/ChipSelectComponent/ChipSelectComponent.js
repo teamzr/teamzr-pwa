@@ -9,9 +9,8 @@ function ChipSelectComponent(props) {
   return (
     <div className={classes.container}>
       {options.map((opt, key) => (
-        <div className={classes.chipContainer}>
+        <div key={key} className={classes.chipContainer}>
           <ChipSelectOption
-            key={key}
             checked={value == opt.value}
             value={opt.value}
             label={opt.label}
@@ -29,7 +28,8 @@ ChipSelectComponent.propTypes = {
 
 const useChipsetSelectComponent = makeStyles((theme) => ({
   container: {
-    overflow: 'scroll',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
     width: '100%',
     display: 'flex',
   },

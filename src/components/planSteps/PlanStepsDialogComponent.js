@@ -25,6 +25,8 @@ const GET_PLANSTEP_QUERY = gql`
 const PlanStepsDialogComponent = (props) => {
   const { planStepId, handleClose } = props;
 
+  const [tab, setTab] = React.useState(0);
+
   const {
     loading,
     error,
@@ -34,6 +36,10 @@ const PlanStepsDialogComponent = (props) => {
       id: planStepId,
     },
   });
+
+  const onChangeTab = (event, value) => {
+    setTab(value);
+  };
 
   if (loading) return '...';
   return (
@@ -67,13 +73,15 @@ const PlanStepsDialogComponent = (props) => {
       <DialogContent>
         <Grid container justify={'center'}>
           <Grid item xs={12}>
-            <PlanStepDetailTabsComponent />
+            <PlanStepDetailTabsComponent tab={tab} onChange={onChangeTab} />
           </Grid>
           <Grid item xs={12} md={8}>
-            <PlanStepDetailSettingsTab
-              planStepId={planStepId}
-              stepData={stepData}
-            />
+            {tab == 0 && (
+              <PlanStepDetailSettingsTab
+                planStepId={planStepId}
+                stepData={stepData}
+              />
+            )}
           </Grid>
         </Grid>
       </DialogContent>
