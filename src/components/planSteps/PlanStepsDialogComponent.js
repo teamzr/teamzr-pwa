@@ -97,6 +97,10 @@ const PlanStepsDialogComponent = (props) => {
     setPlanStepState({ ...planStepState, [target.name]: target.value });
   };
 
+  const onBlur = () => {
+    handleUpdate();
+  };
+
   if (loading) return '...';
   return (
     <Dialog
@@ -165,7 +169,7 @@ const PlanStepsDialogComponent = (props) => {
               autoComplete={'off'}
               InputProps={{ autoComplete: 'off', disableUnderline: true }}
               inputProps={{ autoComplete: 'off' }}
-              onBlur={() => handleUpdate()}
+              onBlur={onBlur}
             />
           </Grid>
           <Grid item xs={12}>
@@ -173,7 +177,7 @@ const PlanStepsDialogComponent = (props) => {
             <PlanStepsDialogSubstepsComponent />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant={'h6'}>Step duration</Typography>
+            <Typography variant={'h6'}>Duration</Typography>
             <PlanStepsDialogDurationComponent
               handleValueChange={handleValueChange}
               duration={planStepState.duration}
