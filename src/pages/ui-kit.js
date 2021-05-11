@@ -9,7 +9,7 @@ function UiKit() {
         <Grid container alignContent={'center'}>
           {true && (
             <Grid item>
-              <Typography variant={'h2'}>ChipsetSelect</Typography>
+              <Typography variant={'h6'}>ChipsetSelect</Typography>
               <ChipSelect />
             </Grid>
           )}

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid } from '@material-ui/core';
+import moment from 'moment';
+import { Grid, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../ChipSelectComponent/ChipSelectComponent';
 
 function PlanStepsDialogDurationComponent(props) {
-  const { duration, handleUpdate } = props;
+  const { duration, handleUpdate, stepData } = props;
 
   const handleDurationClick = (value) => {
     handleUpdate({
@@ -20,13 +21,19 @@ function PlanStepsDialogDurationComponent(props) {
   ];
 
   return (
-    <Grid container direction={'row'} spacing={2}>
+    <Grid container direction={'column'} spacing={2}>
       <Grid item>
         <ChipSelectComponent
           options={options}
           value={duration}
           onChange={handleDurationClick}
         />
+      </Grid>
+      <Grid item>
+        <Typography variant={'text'}>
+          Starts: {moment(stepData.startDate).format('DD.MM.YYYY')}; Ends:{' '}
+          {moment(moment(stepData.endDate)).format('DD.MM.YYYY')}
+        </Typography>
       </Grid>
     </Grid>
   );

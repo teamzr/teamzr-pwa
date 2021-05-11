@@ -787,9 +787,9 @@ export const LeftChevronIcon = (props) => {
       <path
         d="M8.172 1L1 8.18L8.172 15.36"
         stroke="#707070"
-        stroke-width="1.619"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.619"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </SvgIcon>
   );

@@ -8,9 +8,9 @@ import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
 import PlanStepsItemComponent from './PlanStepsItemComponent';
 import PlanStepsDialogComponent from './PlanStepsDialogComponent';
 import { ItemTypes } from './PlanStepsConstants';
-import { UPDATE_PLAN_STEP_MUTATION } from './PlanStepsDialogComponent';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
+import { UPDATE_PLAN_STEP_MUTATION } from '../planStepDetail/PlanStepDetailSettingsTab';
 
 function PlanStepsComponent(props) {
   const { planId, planStepsData } = props;
@@ -90,29 +90,30 @@ function PlanStepsComponent(props) {
         <Grid item>
           <List innerRef={drop}>
             {planSteps.map((step, i) => (
-              <PlanStepsItemComponent
-                key={step.id}
-                id={step.id}
-                planId={planId}
-                parentId={step?.parent?.id}
-                findStep={findStep}
-                moveStep={moveStep}
-                planStepId={step.id}
-                name={step.name}
-                description={step.description}
-                number={step.number}
-                status={step.status}
-                endDate={step.endDate}
-                onClick={handleStepClick}
-                updatePlanStep={updatePlanStep}
-              />
+              <div key={i}>
+                <PlanStepsItemComponent
+                  id={step.id}
+                  planId={planId}
+                  parentId={step?.parent?.id}
+                  findStep={findStep}
+                  moveStep={moveStep}
+                  planStepId={step.id}
+                  name={step.name}
+                  description={step.description}
+                  number={step.number}
+                  status={step.status}
+                  endDate={step.endDate}
+                  onClick={handleStepClick}
+                  updatePlanStep={updatePlanStep}
+                />
+              </div>
             ))}
           </List>
-          {planSteps.length == 0 && (
+          {
             <Grid item>
               <PlanStepsComponentAddStepBtn planId={planId} />
             </Grid>
-          )}
+          }
         </Grid>
       </Grid>
       {stepDialogState.planStepId && (
