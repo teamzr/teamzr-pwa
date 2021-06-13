@@ -6,7 +6,7 @@ import { useDrop } from 'react-dnd';
 
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
 import PlanStepsItemComponent from './PlanStepsItemComponent';
-import PlanStepsDialogComponent from './PlanStepsDialogComponent';
+import PlanStepsDialogComponent from './../planStepDetail/PlanStepsDialogComponent';
 import { ItemTypes } from './PlanStepsConstants';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';

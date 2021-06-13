@@ -1,7 +1,7 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import PlanStepsDialogSubstepsComponent from '../planSteps/PlanStepsDialogSubstepsComponent';
-import PlanStepsDialogDurationComponent from '../planSteps/PlanStepsDialogDurationComponent';
+import PlanStepsDialogSubstepsComponent from './PlanStepsDialogSubstepsComponent';
+import PlanStepsDialogDurationComponent from './PlanStepsDialogDurationComponent';
 import { Grid, TextField, Typography } from '@material-ui/core';
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
@@ -27,13 +27,13 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
 
 function PlanStepDetailSettingsTab(props) {
   const { planStepId, stepData } = props;
+  const planStep = stepData.planStep;
 
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
     description: '',
   });
   React.useEffect(() => {
-    const planStep = stepData.planStep;
     setPlanStepState({
       name: planStep.name,
       description: planStep.description,
@@ -43,7 +43,7 @@ function PlanStepDetailSettingsTab(props) {
           ? PLAN_STEP_STATUSES.UPCOMING
           : planStep.status,
     });
-  }, [stepData]);
+  }, [planStep]);
 
   const [updatePlanStep] = useMutation(UPDATE_PLAN_STEP_MUTATION);
 
@@ -107,7 +107,7 @@ function PlanStepDetailSettingsTab(props) {
         <PlanStepsDialogDurationComponent
           duration={planStepState.duration}
           handleUpdate={handleUpdate}
-          stepData={stepData}
+          planStep={planStep}
         />
       </Grid>
       <Grid item xs={12}>

@@ -4,8 +4,9 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
 import { Dialog, DialogContent, Grid, IconButton } from '@material-ui/core';
 import { LeftChevronIcon, VerticalDotsIcon } from '../../constants/Icons';
-import PlanStepDetailTabsComponent from '../planStepDetail/PlanStepDetailTabsComponent';
-import PlanStepDetailSettingsTab from '../planStepDetail/PlanStepDetailSettingsTab';
+import PlanStepDetailTabsComponent from './PlanStepDetailTabsComponent';
+import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
+import PlanStepDetailProgressTab from './PlanStepDetailProgressTab';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -27,11 +28,7 @@ const PlanStepsDialogComponent = (props) => {
 
   const [tab, setTab] = React.useState(0);
 
-  const {
-    loading,
-    error,
-    data: stepData,
-  } = useQuery(GET_PLANSTEP_QUERY, {
+  const { loading, error, data: stepData } = useQuery(GET_PLANSTEP_QUERY, {
     variables: {
       id: planStepId,
     },
@@ -82,6 +79,7 @@ const PlanStepsDialogComponent = (props) => {
                 stepData={stepData}
               />
             )}
+            {tab == 1 && <PlanStepDetailProgressTab />}
           </Grid>
         </Grid>
       </DialogContent>
