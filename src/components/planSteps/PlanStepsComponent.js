@@ -102,6 +102,7 @@ function PlanStepsComponent(props) {
                   description={step.description}
                   number={step.number}
                   status={step.status}
+                  startDate={step.startDate}
                   endDate={step.endDate}
                   onClick={handleStepClick}
                   updatePlanStep={updatePlanStep}

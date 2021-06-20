@@ -2,12 +2,12 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import moment from 'moment';
 import {
-  Box,
+  Divider,
+  Grid,
   ListItem,
   ListItemIcon,
   ListItemText,
   makeStyles,
-  Typography,
 } from '@material-ui/core';
 import { useDrag, useDrop } from 'react-dnd';
 import { gql } from 'apollo-boost';
@@ -26,6 +26,7 @@ function PlanStepsItemComponent(props) {
     planStepId,
     name,
     description: descriptionProp,
+    startDate,
     endDate,
     number,
     status,
@@ -89,7 +90,8 @@ function PlanStepsItemComponent(props) {
   const opacity = isDragging && !isTouchDevice() ? 0 : 1;
 
   const description =
-    descriptionProp || (status == 'UNDEFINED' && 'Tap to specify step details');
+    `${descriptionProp}` ||
+    (status == 'UNDEFINED' && 'Tap to specify step details');
   return (
     <li ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
@@ -103,7 +105,7 @@ function PlanStepsItemComponent(props) {
           className={classes.itemTest}
           primary={name}
           secondary={description}
-        />       
+        />
         <ListItemIcon>
           <PlanStepsItemComponentPopover
             planId={planId}
@@ -112,12 +114,24 @@ function PlanStepsItemComponent(props) {
           />
         </ListItemIcon>
       </ListItem>
-
-      <PlanStepsComponentAddStepBtn
-        parentId={planStepId}
-        planId={planId}
-        number={number}
-      />
+      <Grid container>
+        <Grid item>
+          <PlanStepsComponentAddStepBtn
+            parentId={planStepId}
+            planId={planId}
+            number={number}
+          />
+        </Grid>
+        <Grid item>
+          <ListItemText
+            onClick={handleCLick}
+            style={{ cursor: 'pointer' }}
+            className={classes.itemTest}
+            secondary={`Due date ${moment(endDate).format('DD.MM.YYYY')}`}
+          />
+          <Divider />
+        </Grid>
+      </Grid>
     </li>
   );
 }
