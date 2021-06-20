@@ -56,6 +56,22 @@ const UPDATE_PLAN_MUTATION = gql`
       name
       description
       startDate
+      steps {
+        id
+        name
+        description
+        startDate
+        endDate
+        number
+        status
+        duration
+        plan {
+          id
+        }
+        parent {
+          id
+        }
+      }
     }
   }
 `;
@@ -82,7 +98,7 @@ function PlanComponent(props) {
   const handlePlanStartDateChange = (value) => {
     updatePlan({
       variables: {
-        input: { id: planId, startDate: value.utc() },
+        input: { id: planId, startDate: value.utc().toString() },
       },
     });
   };
