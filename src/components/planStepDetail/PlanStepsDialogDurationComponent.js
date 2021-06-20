@@ -13,6 +13,7 @@ function PlanStepsDialogDurationComponent(props) {
     });
   };
 
+  console.log(planStep);
   const options = [
     { value: 'DAY', label: '1 Day' },
     { value: 'WEEK', label: '1 Week' },
@@ -31,7 +32,9 @@ function PlanStepsDialogDurationComponent(props) {
       <Grid item>
         <Typography variant={'text'}>
           Starts: {moment(planStep.startDate).format('DD.MM.YYYY')}; Ends:{' '}
-          {moment(moment(planStep.endDate)).format('DD.MM.YYYY')}
+          {planStep.endDate
+            ? moment(planStep.endDate).format('DD.MM.YYYY')
+            : null}
         </Typography>
       </Grid>
     </Grid>

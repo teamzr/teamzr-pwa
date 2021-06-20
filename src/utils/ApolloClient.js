@@ -21,7 +21,7 @@ const httpLink = createUploadLink({
 });
 
 const error = onError(({ response, operation, networkError }) => {
-  if (networkError.statusCode == 400) {
+  if (networkError?.statusCode == 400) {
     //TODO
   }
 });

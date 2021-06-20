@@ -17,6 +17,7 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
       status
       duration
       startDate
+      endDate
       parent {
         id
         name
