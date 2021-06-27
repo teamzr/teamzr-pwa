@@ -110,11 +110,11 @@ function PlanStepsComponent(props) {
               </div>
             ))}
           </List>
-          {
+          {!planSteps.length && (
             <Grid item>
               <PlanStepsComponentAddStepBtn planId={planId} />
             </Grid>
-          }
+          )}
         </Grid>
       </Grid>
       {stepDialogState.planStepId && (

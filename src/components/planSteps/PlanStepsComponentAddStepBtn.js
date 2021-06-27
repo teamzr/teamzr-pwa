@@ -42,7 +42,7 @@ function PlanStepsComponentAddStepBtn(props) {
       });
 
       const parentIndex = planSteps.findIndex(
-        (item) => item.id == createPlanStep.parent.id
+        (item) => item.id == createPlanStep?.parent?.id
       );
 
       const newPlanSteps = [...planSteps];
