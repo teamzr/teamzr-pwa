@@ -43,7 +43,7 @@ function NewPlanComponent(props) {
     name: '',
     description: '',
     startDate: moment().format(),
-    stepDuration: '14',
+    stepDuration: 'WEEK',
     rewardDescription: '',
     conversationId,
   });
