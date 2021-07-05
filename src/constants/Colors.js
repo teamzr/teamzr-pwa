@@ -24,6 +24,6 @@ export const COLORS = {
   textSecondary: '#757575',
   planStepCompleted: '#A9E164',
   planStepUpcoming: '#06ADB7',
-  planStepCurrent: '#FF512F',
+  planStepCurrent: '#647688',
   planStepUndefined: '#647688',
 };
