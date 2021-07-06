@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Button } from '@material-ui/core';
+import { Button, useTheme } from '@material-ui/core';
 import { AddPersonIcon } from '../../constants/Icons';
 import { gql, useMutation } from '@apollo/client';
 
@@ -29,6 +29,8 @@ function UserConnectButton(props) {
 
   const [meDisconnectUser] = useMutation(ME_DISCONNECT_USER_MUTATION);
 
+  const [isHovered, setIsHovered] = React.useState(false);
+
   const handleClick = () => {
     if (user.connected) {
       meDisconnectUser({
@@ -44,15 +46,22 @@ function UserConnectButton(props) {
       });
     }
   };
+  const theme = useTheme();
 
   return (
     <Button
-      variant={'contained'}
+      variant={user.connected ? 'outlined' : 'contained'}
       color={'primary'}
-      startIcon={<AddPersonIcon />}
+      startIcon={
+        <AddPersonIcon
+          fill={user.connected ? theme.palette.primary.main : null}
+        />
+      }
       onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {user.connected ? 'Unfollow' : 'Follow'}
+      {user.connected ? (isHovered ? 'Disconnect' : 'Connected') : 'Connect'}
     </Button>
   );
 }
