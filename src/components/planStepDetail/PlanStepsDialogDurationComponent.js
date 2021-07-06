@@ -31,9 +31,15 @@ function PlanStepsDialogDurationComponent(props) {
       </Grid>
       <Grid item>
         <Typography variant={'text'}>
-          Starts: {moment(planStep.startDate).format('DD.MM.YYYY')}; Ends:{' '}
+          Starts:{' '}
+          {moment(new Date(planStep.startDate))
+            .utc()
+            .format('DD.MM.YYYY HH:mm:ss')}
+          ; Ends:{' '}
           {planStep.endDate
-            ? moment(planStep.endDate).format('DD.MM.YYYY')
+            ? moment(new Date(planStep.endDate))
+                .utc()
+                .format('DD.MM.YYYY HH:mm:ss')
             : null}
         </Typography>
       </Grid>

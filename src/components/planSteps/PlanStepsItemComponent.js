@@ -127,7 +127,7 @@ function PlanStepsItemComponent(props) {
             onClick={handleCLick}
             style={{ cursor: 'pointer' }}
             className={classes.itemTest}
-            secondary={`Due date ${moment(endDate).format('DD.MM.YYYY')}`}
+            secondary={`Due date ${moment(endDate).utc().format('DD.MM.YYYY')}`}
           />
           <Divider />
         </Grid>
