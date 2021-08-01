@@ -1,17 +1,19 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, TextField, Typography } from '@material-ui/core';
+import FulfillmentChipBarAdapter from '../../adapters/FulfillmentChipBarAdapter';
 
-import FullfilmentChipBarSelect from './FullfilmentChipBarSelect';
-
-function PlanStepDetailProgressTab() {
+function PlanStepDetailProgressTab(props) {
+  const { planStepId } = props;
   return (
-    <Grid container direction={'column'} style={{ margin: '10px 0 0 0' }}>
+    <Grid
+      container
+      direction={'column'}
+      alignContent={'center'}
+      style={{ margin: '10px 0 0 0' }}
+    >
       <Grid item>
-        <Typography>Your fullfilment</Typography>
-      </Grid>
-      <Grid item>
-        <FullfilmentChipBarSelect />
+        <FulfillmentChipBarAdapter planStepId={planStepId} />
       </Grid>
     </Grid>
   );

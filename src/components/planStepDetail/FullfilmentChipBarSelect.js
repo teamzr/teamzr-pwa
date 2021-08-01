@@ -1,36 +1,53 @@
+import * as React from 'react';
 import { Button } from '@material-ui/core';
 import { Chip, Grid, Typography, makeStyles, styled } from '@material-ui/core';
 import { BorderColor } from '@material-ui/icons';
 import clsx from 'clsx';
-import * as React from 'react';
+
+const FULFILLMENT_VALUE = {
+  FAILED: 'FAILED',
+  SUCEEDED: 'SUCEEDED',
+  NOT_RATED: 'NOT_RATED',
+};
 
 function FullfilmentChipBarSelect(props) {
+  const { onChange, value } = props;
+
   return (
     <Grid container direction={'column'}>
-      <Grid item>
-        <Typography>Subtask1</Typography>
-      </Grid>
       <Grid item>
         <Grid container spacing={2}>
           <Grid item>
             <ChipBarItem
-              variant={'outline'}
+              value={FULFILLMENT_VALUE.FAILED}
               label={'Failed'}
               clickable={true}
+              onClick={onChange}
+              variant={
+                value == FULFILLMENT_VALUE.FAILED ? 'default' : 'outlined'
+              }
             />
           </Grid>
           <Grid item>
             <ChipBarItem
-              variant={'outline'}
+              value={FULFILLMENT_VALUE.SUCEEDED}
               label={'Succeeded'}
               clickable={true}
+              onClick={onChange}
+              variant={
+                value == FULFILLMENT_VALUE.SUCEEDED ? 'default' : 'outlined'
+              }
             />
           </Grid>
           <Grid item>
             <ChipBarItem
+              value={FULFILLMENT_VALUE.NOT_RATED}
+              variant={
+                value == FULFILLMENT_VALUE.NOT_RATED ? 'default' : 'outlined'
+              }
               color={'default'}
-              variant={'contained'}
               label={'Not Rated'}
+              onClick={onChange}
             />
           </Grid>
         </Grid>
@@ -45,11 +62,16 @@ const NotRatedButton = styled(Button)({
 });
 
 const ChipBarItem = (props) => {
-  const { label } = props;
+  const { variant, label, value, onClick } = props;
   const classes = makeChipBarItemStyle();
+
+  const handleClick = () => {
+    onClick(value);
+  };
   return (
     <Chip
-      variant={'default'}
+      onClick={handleClick}
+      variant={variant}
       classes={{
         colorPrimary: clsx({
           [classes.failed]: false,

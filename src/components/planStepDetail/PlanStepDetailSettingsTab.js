@@ -99,10 +99,12 @@ function PlanStepDetailSettingsTab(props) {
           onBlur={onBlur}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant={'h6'}>Substeps</Typography>
-        <PlanStepsDialogSubstepsComponent />
-      </Grid>
+      {false && (
+        <Grid item xs={12}>
+          <Typography variant={'h6'}>Substeps</Typography>
+          <PlanStepsDialogSubstepsComponent />
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Typography variant={'h6'}>Duration</Typography>
         <PlanStepsDialogDurationComponent
