@@ -7,6 +7,7 @@ import { LeftChevronIcon, VerticalDotsIcon } from '../../constants/Icons';
 import PlanStepDetailTabsComponent from './PlanStepDetailTabsComponent';
 import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
 import PlanStepDetailProgressTab from './PlanStepDetailProgressTab';
+import PlanStepDetailOverviewTab from './PlanStepDetailOverview';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -80,6 +81,7 @@ const PlanStepsDialogComponent = (props) => {
               />
             )}
             {tab == 1 && <PlanStepDetailProgressTab planStepId={planStepId} />}
+            {tab == 2 && <PlanStepDetailOverviewTab planStepId={planStepId} />}
           </Grid>
         </Grid>
       </DialogContent>
