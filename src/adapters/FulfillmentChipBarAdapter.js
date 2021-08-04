@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { gql, useApolloClient, useMutation, useQuery } from '@apollo/client';
 import useAuthContext from '../context/AuthContext';
 import FullfilmentChipBarSelect from '../components/planStepDetail/FullfilmentChipBarSelect';
 
@@ -29,15 +29,21 @@ function FulfillmentChipBarAdapter(props) {
 
   const { loading, error, data, refetch } = useQuery(FULFILLMENT_QUERY, {
     variables: { planStepId },
-    fetchPolicy: 'cache-and-network',
   });
-  const [setFulfillment] = useMutation(SET_FULFILLMENT_QUERY);
+  const apolloClient = useApolloClient();
+  const [setFulfillment] = useMutation(SET_FULFILLMENT_QUERY, {
+    update: (cache, { data: { setFulfillment } }) => {
+      apolloClient.writeQuery({
+        query: FULFILLMENT_QUERY,
+        data: { fulfillment: setFulfillment },
+        variables: { planStepId },
+      });
+    },
+  });
 
-  const onChange = async (value) => {
-    await setFulfillment({ variables: { input: { planStepId, value } } });
+  const onChange = (value) => {
+    setFulfillment({ variables: { input: { planStepId, value } } });
   };
-
-  if (loading) return '...loading';
 
   return (
     <FullfilmentChipBarSelect
