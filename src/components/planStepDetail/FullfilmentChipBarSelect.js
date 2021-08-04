@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import { Chip, Grid, Typography, makeStyles, styled } from '@material-ui/core';
 import { BorderColor } from '@material-ui/icons';
 import clsx from 'clsx';
+import { COLORS } from '../../constants/Colors';
 
 const FULFILLMENT_VALUE = {
   FAILED: 'FAILED',
@@ -19,6 +20,10 @@ function FullfilmentChipBarSelect(props) {
         <Grid container spacing={1}>
           <Grid item>
             <ChipBarItem
+              style={{
+                background:
+                  value == FULFILLMENT_VALUE.FAILED && COLORS.planStepFailed,
+              }}
               value={FULFILLMENT_VALUE.FAILED}
               label={'Failed'}
               clickable={true}
@@ -30,6 +35,11 @@ function FullfilmentChipBarSelect(props) {
           </Grid>
           <Grid item>
             <ChipBarItem
+              style={{
+                background:
+                  value == FULFILLMENT_VALUE.SUCEEDED &&
+                  COLORS.planStepSuceeded,
+              }}
               value={FULFILLMENT_VALUE.SUCEEDED}
               label={'Succeeded'}
               clickable={true}
@@ -41,6 +51,11 @@ function FullfilmentChipBarSelect(props) {
           </Grid>
           <Grid item>
             <ChipBarItem
+              style={{
+                background:
+                  value == FULFILLMENT_VALUE.NOT_RATED &&
+                  COLORS.planStepNotRated,
+              }}
               value={FULFILLMENT_VALUE.NOT_RATED}
               variant={
                 value == FULFILLMENT_VALUE.NOT_RATED ? 'default' : 'outlined'
@@ -62,7 +77,7 @@ const NotRatedButton = styled(Button)({
 });
 
 const ChipBarItem = (props) => {
-  const { variant, label, value, onClick } = props;
+  const { variant, label, value, onClick, style } = props;
   const classes = makeChipBarItemStyle();
 
   const handleClick = () => {
@@ -70,6 +85,7 @@ const ChipBarItem = (props) => {
   };
   return (
     <Chip
+      style={style}
       onClick={handleClick}
       variant={variant}
       classes={{

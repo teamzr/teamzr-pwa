@@ -90,7 +90,7 @@ function PlanStepDetailOverviewTab(props) {
             <Chip
               style={{
                 width: 100,
-                background: 'linear-gradient(180deg, #333333 0%, #828282 100%)',
+                background: COLORS.planStepNotRated,
               }}
               variant={'default'}
               color={'primary'}
@@ -116,19 +116,25 @@ const PlanStepOverviewAvatarGroup = ({ loading, data, progress }) => {
   );
 
   return (
-    <AvatarGroup max={4}>
+    <>
       {loading && (
-        <Skeleton>
-          <Avatar />
-        </Skeleton>
+        <AvatarGroup max={2}>
+          <Skeleton variant={'circle'} width={40} height={40}></Skeleton>
+          <Skeleton variant={'circle'} width={40} height={40}></Skeleton>
+          <Skeleton variant={'circle'} width={40} height={40}></Skeleton>
+        </AvatarGroup>
       )}
-      {!loading &&
-        fulfillments?.map((f, key) => (
-          <Tooltip key={key} title={f?.user?.name}>
-            <Avatar alt={f?.user?.name} src={f?.user?.avatar} />
-          </Tooltip>
-        ))}
-    </AvatarGroup>
+      {!loading && (
+        <AvatarGroup max={4}>
+          {!loading &&
+            fulfillments?.map((f, key) => (
+              <Tooltip key={key} title={f?.user?.name}>
+                <Avatar alt={f?.user?.name} src={f?.user?.avatar} />
+              </Tooltip>
+            ))}
+        </AvatarGroup>
+      )}
+    </>
   );
 };
 
