@@ -1,10 +1,14 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid, Button, Box } from '@material-ui/core';
+
+import { Grid, Button, Box, Avatar } from '@material-ui/core';
 import ConversationFilterButton from './MyPlansConversationFilterButton';
+import useAuthContext from '../../context/AuthContext';
 
 function MyPlansConversationFilterComponent(props) {
   const { conversations, conversationId, setConversationId } = props;
+
+  const { user } = useAuthContext();
 
   return (
     <Box overflow={'scroll'} height={'auto'} paddingBottom={1}>
@@ -23,7 +27,18 @@ function MyPlansConversationFilterComponent(props) {
             conversationId={c.id}
             setConversationId={setConversationId}
           >
-            {c.name}
+            <Grid
+              container
+              spacing={1}
+              alignItems={'center'}
+              alignContent={'center'}
+              direction={'row'}
+            >
+              <Grid item>
+                <Avatar src={c.users.find((u) => u.id != user.id).avatar} />
+              </Grid>
+              <Grid item>{c.name}</Grid>
+            </Grid>
           </ConversationFilterButton>
         ))}
       </Box>

@@ -18,6 +18,10 @@ const PLANS_QUERY = gql`
       conversation {
         id
         name
+        users {
+          id
+          avatar
+        }
       }
     }
   }
