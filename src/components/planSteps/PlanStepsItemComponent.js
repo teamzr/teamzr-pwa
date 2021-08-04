@@ -14,7 +14,6 @@ import {
 } from '@material-ui/core';
 import { useDrag, useDrop } from 'react-dnd';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/client';
 
 import PlanStepItemComponentIcon from './PlanStepsItemComponentIcon';
 import PlanStepsItemDragIconComponent from './PlanStepsItemDragIconComponent';
@@ -24,6 +23,8 @@ import { ItemTypes } from './PlanStepsConstants';
 import isTouchDevice from 'is-touch-device';
 import { AvatarGroup } from '@material-ui/lab';
 import { COLORS } from '../../constants/Colors';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 
 function PlanStepsItemComponent(props) {
   const {
@@ -137,11 +138,9 @@ function PlanStepsItemComponent(props) {
           />
           {!!fulfillments?.filter?.((f) => f.value == 'SUCEEDED').length && (
             <AvatarGroup max={7}>
-              <Avatar
-                alt={''}
-                key={11}
-                style={{ background: COLORS.planStepSuceeded }}
-              />
+              <Avatar key={11} style={{ background: COLORS.planStepSuceeded }}>
+                <CheckIcon />
+              </Avatar>
               {fulfillments
                 ?.filter?.((f) => f.value == 'SUCEEDED')
                 ?.map((fulfillment, key) => (
@@ -151,11 +150,9 @@ function PlanStepsItemComponent(props) {
           )}
           {!!fulfillments?.filter?.((f) => f.value == 'FAILED').length && (
             <AvatarGroup max={7}>
-              <Avatar
-                alt={''}
-                key={12}
-                style={{ background: COLORS.planStepFailed }}
-              />
+              <Avatar key={12} style={{ background: COLORS.planStepFailed }}>
+                <CloseIcon />{' '}
+              </Avatar>
               {fulfillments
                 ?.filter?.((f) => f.value == 'FAILED')
                 ?.map((fulfillment, key) => (
