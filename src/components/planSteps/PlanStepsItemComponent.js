@@ -2,12 +2,15 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import moment from 'moment';
 import {
+  Avatar,
+  Badge,
   Divider,
   Grid,
   ListItem,
   ListItemIcon,
   ListItemText,
   makeStyles,
+  Tooltip,
 } from '@material-ui/core';
 import { useDrag, useDrop } from 'react-dnd';
 import { gql } from 'apollo-boost';
@@ -19,6 +22,8 @@ import PlanStepsItemComponentPopover from './PlanStepsItemComponentPopover';
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
 import { ItemTypes } from './PlanStepsConstants';
 import isTouchDevice from 'is-touch-device';
+import { AvatarGroup } from '@material-ui/lab';
+import { COLORS } from '../../constants/Colors';
 
 function PlanStepsItemComponent(props) {
   const {
@@ -35,6 +40,7 @@ function PlanStepsItemComponent(props) {
     moveStep,
     findStep,
     updatePlanStep,
+    fulfillments,
   } = props;
   const classes = usePlanStepsItemComponent();
 
@@ -129,7 +135,34 @@ function PlanStepsItemComponent(props) {
             className={classes.itemTest}
             secondary={`Due date ${moment(endDate).utc().format('DD.MM.YYYY')}`}
           />
-
+          {!!fulfillments?.filter?.((f) => f.value == 'SUCEEDED').length && (
+            <AvatarGroup max={7}>
+              <Avatar
+                alt={''}
+                key={11}
+                style={{ background: COLORS.planStepSuceeded }}
+              />
+              {fulfillments
+                ?.filter?.((f) => f.value == 'SUCEEDED')
+                ?.map((fulfillment, key) => (
+                  <Avatar src={fulfillment.user.avatar} />
+                ))}
+            </AvatarGroup>
+          )}
+          {!!fulfillments?.filter?.((f) => f.value == 'FAILED').length && (
+            <AvatarGroup max={7}>
+              <Avatar
+                alt={''}
+                key={11}
+                style={{ background: COLORS.planStepFailed }}
+              />
+              {fulfillments
+                ?.filter?.((f) => f.value == 'FAILED')
+                ?.map((fulfillment, key) => (
+                  <Avatar src={fulfillment.user.avatar} />
+                ))}
+            </AvatarGroup>
+          )}
           <Divider />
         </Grid>
       </Grid>

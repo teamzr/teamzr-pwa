@@ -4,6 +4,7 @@ import { Avatar, Chip, Grid, Tooltip } from '@material-ui/core';
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client';
 import { AvatarGroup, Skeleton } from '@material-ui/lab';
+import { COLORS } from '../../constants/Colors';
 
 const OVERVIEW_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -44,7 +45,7 @@ function PlanStepDetailOverviewTab(props) {
             <Chip
               style={{
                 width: 100,
-                background: 'linear-gradient(180deg, #14D866 0%, #0E9747 100%)',
+                background: COLORS.planStepSuceeded,
               }}
               color={'primary'}
               variant={'default'}
@@ -69,7 +70,7 @@ function PlanStepDetailOverviewTab(props) {
               label={'Failed'}
               color={'primary'}
               style={{
-                background: 'linear-gradient(180deg, #F09819 0%, #FF512F 100%)',
+                background: COLORS.planStepFailed,
                 width: 100,
               }}
             />

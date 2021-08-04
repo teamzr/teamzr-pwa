@@ -106,6 +106,7 @@ function PlanStepsComponent(props) {
                   endDate={step.endDate}
                   onClick={handleStepClick}
                   updatePlanStep={updatePlanStep}
+                  fulfillments={step.fulfillments}
                 />
               </div>
             ))}

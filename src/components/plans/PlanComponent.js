@@ -39,6 +39,14 @@ export const PLAN_STEPS_QUERY = gql`
       number
       status
       duration
+      fulfillments {
+        id
+        value
+        user {
+          id
+          avatar
+        }
+      }
       plan {
         id
       }
