@@ -2,7 +2,13 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/client';
-import { Dialog, DialogContent, Grid, IconButton } from '@material-ui/core';
+import {
+  Dialog,
+  DialogContent,
+  Grid,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
 import { LeftChevronIcon, VerticalDotsIcon } from '../../constants/Icons';
 import PlanStepDetailTabsComponent from './PlanStepDetailTabsComponent';
 import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
@@ -38,7 +44,7 @@ const PlanStepsDialogComponent = (props) => {
   const onChangeTab = (event, value) => {
     setTab(value);
   };
-
+  console.log(stepData);
   if (loading) return '...';
   return (
     <Dialog
@@ -60,6 +66,11 @@ const PlanStepsDialogComponent = (props) => {
           <IconButton onClick={handleClose}>
             <LeftChevronIcon />
           </IconButton>
+        </Grid>
+        <Grid item xs={10}>
+          <Typography variant={'h6'} color={'primary'} align={'center'}>
+            {`#${stepData.planStep.number} ${stepData.planStep.name}`}
+          </Typography>
         </Grid>
         <Grid item xs={1}>
           <IconButton>

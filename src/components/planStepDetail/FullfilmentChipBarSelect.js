@@ -16,7 +16,7 @@ function FullfilmentChipBarSelect(props) {
   return (
     <Grid container direction={'column'}>
       <Grid item xs={12}>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item>
             <ChipBarItem
               value={FULFILLMENT_VALUE.FAILED}

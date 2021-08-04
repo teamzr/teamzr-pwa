@@ -129,6 +129,7 @@ function PlanStepsItemComponent(props) {
             className={classes.itemTest}
             secondary={`Due date ${moment(endDate).utc().format('DD.MM.YYYY')}`}
           />
+
           <Divider />
         </Grid>
       </Grid>
