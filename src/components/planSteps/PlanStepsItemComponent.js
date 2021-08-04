@@ -145,7 +145,7 @@ function PlanStepsItemComponent(props) {
               {fulfillments
                 ?.filter?.((f) => f.value == 'SUCEEDED')
                 ?.map((fulfillment, key) => (
-                  <Avatar src={fulfillment.user.avatar} />
+                  <Avatar src={fulfillment?.user?.avatar} />
                 ))}
             </AvatarGroup>
           )}
@@ -153,13 +153,13 @@ function PlanStepsItemComponent(props) {
             <AvatarGroup max={7}>
               <Avatar
                 alt={''}
-                key={11}
+                key={12}
                 style={{ background: COLORS.planStepFailed }}
               />
               {fulfillments
                 ?.filter?.((f) => f.value == 'FAILED')
                 ?.map((fulfillment, key) => (
-                  <Avatar src={fulfillment.user.avatar} />
+                  <Avatar src={fulfillment?.user?.avatar} />
                 ))}
             </AvatarGroup>
           )}
