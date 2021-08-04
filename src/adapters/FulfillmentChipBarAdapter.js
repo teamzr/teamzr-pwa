@@ -18,6 +18,18 @@ const SET_FULFILLMENT_QUERY = gql`
     setFulfillment(input: $input) {
       id
       value
+      planStep {
+        id
+        fulfillments {
+          id
+          value
+          user {
+            id
+            name
+            avatar
+          }
+        }
+      }
     }
   }
 `;
