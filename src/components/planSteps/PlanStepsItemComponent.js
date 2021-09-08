@@ -19,7 +19,7 @@ import PlanStepItemComponentIcon from './PlanStepsItemComponentIcon';
 import PlanStepsItemDragIconComponent from './PlanStepsItemDragIconComponent';
 import PlanStepsItemComponentPopover from './PlanStepsItemComponentPopover';
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
-import { ItemTypes } from './PlanStepsConstants';
+import { ItemTypes, PLAN_STEP_STATUSES } from './PlanStepsConstants';
 import isTouchDevice from 'is-touch-device';
 import { AvatarGroup } from '@material-ui/lab';
 import { COLORS } from '../../constants/Colors';
@@ -50,6 +50,8 @@ function PlanStepsItemComponent(props) {
     setIsDragActive(true);
   };
 
+  const isDragable = status != PLAN_STEP_STATUSES.COMPLETED
+
   const originalIndex = findStep(planStepId).index;
 
   const [{ isDragging }, drag] = useDrag({
@@ -58,7 +60,7 @@ function PlanStepsItemComponent(props) {
       isDragging: monitor.isDragging(),
     }),
     canDrag: (monitor) => {
-      return isDragActive;
+      return isDragActive && isDragable;
     },
     end: (dropResult, monitor) => {
       const { id: droppedId, originalIndex } = monitor.getItem();
@@ -66,6 +68,7 @@ function PlanStepsItemComponent(props) {
       if (!didDrop) {
         moveStep(droppedId, originalIndex, didDrop);
       } else {
+        if(!isDragable) return false;
         const { planStep, index } = findStep(droppedId);
         updatePlanStep({
           variables: {
@@ -85,6 +88,7 @@ function PlanStepsItemComponent(props) {
     hover({ id: draggedId }) {
       if (draggedId !== planStepId) {
         const { index: overIndex } = findStep(planStepId);
+        if(!isDragable) return false;
         moveStep(draggedId, overIndex);
       }
     },
@@ -102,7 +106,7 @@ function PlanStepsItemComponent(props) {
   return (
     <li ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
-        <PlanStepsItemDragIconComponent onMouseDown={onMouseDown} />
+        {isDragable && (<PlanStepsItemDragIconComponent onMouseDown={onMouseDown} />)}
         <ListItemIcon onClick={handleCLick} style={{ cursor: 'pointer' }}>
           <PlanStepItemComponentIcon status={status} number={number} />
         </ListItemIcon>
@@ -122,13 +126,13 @@ function PlanStepsItemComponent(props) {
         </ListItemIcon>
       </ListItem>
       <Grid container>
-        <Grid item>
+        {status != PLAN_STEP_STATUSES.COMPLETED && (<Grid item>
           <PlanStepsComponentAddStepBtn
             parentId={planStepId}
             planId={planId}
             number={number}
           />
-        </Grid>
+        </Grid>)}        
         <Grid item>
           <ListItemText
             onClick={handleCLick}
