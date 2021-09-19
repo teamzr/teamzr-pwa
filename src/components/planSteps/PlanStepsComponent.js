@@ -7,7 +7,7 @@ import { useDrop } from 'react-dnd';
 import PlanStepsComponentAddStepBtn from './PlanStepsComponentAddStepBtn';
 import PlanStepsItemComponent from './PlanStepsItemComponent';
 import PlanStepsDialogComponent from './../planStepDetail/PlanStepsDialogComponent';
-import { ItemTypes } from './PlanStepsConstants';
+import { ItemTypes, PLAN_STEP_STATUSES } from './PlanStepsConstants';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
 import { UPDATE_PLAN_STEP_MUTATION } from '../planStepDetail/PlanStepDetailSettingsTab';
@@ -24,7 +24,7 @@ function PlanStepsComponent(props) {
   const [stepDialogState, setStepDialogState] = React.useState({
     planStepId: null,
   });
-
+  
   const handleStepClick = (planStepId) => {
     setStepDialogState({ planStepId });
   };
@@ -119,7 +119,7 @@ function PlanStepsComponent(props) {
         </Grid>
       </Grid>
       {stepDialogState.planStepId && (
-        <PlanStepsDialogComponent
+        <PlanStepsDialogComponent       
           planStepId={stepDialogState.planStepId}
           handleClose={handleCloseStepsDialog}
         />

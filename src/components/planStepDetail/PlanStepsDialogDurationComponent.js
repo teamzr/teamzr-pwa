@@ -13,8 +13,7 @@ function PlanStepsDialogDurationComponent(props) {
       duration: value,
     });
   };
-
-  console.log(planStep);
+  
   const options = [
     { value: 'DAY', label: '1 Day' },
     { value: 'WEEK', label: '1 Week' },

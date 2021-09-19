@@ -12,7 +12,7 @@ const FULFILLMENT_VALUE = {
 };
 
 function FullfilmentChipBarSelect(props) {
-  const { onChange, value } = props;
+  const { disabled, onChange, value } = props;
 
   return (
     <Grid container direction={'column'}>
@@ -20,6 +20,7 @@ function FullfilmentChipBarSelect(props) {
         <Grid container spacing={1}>
           <Grid item>
             <ChipBarItem
+            disabled={disabled}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.FAILED && COLORS.planStepFailed,
@@ -35,6 +36,7 @@ function FullfilmentChipBarSelect(props) {
           </Grid>
           <Grid item>
             <ChipBarItem
+            disabled={disabled}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.SUCEEDED &&
@@ -51,6 +53,7 @@ function FullfilmentChipBarSelect(props) {
           </Grid>
           <Grid item>
             <ChipBarItem
+            disabled={disabled}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.NOT_RATED &&
@@ -77,7 +80,7 @@ const NotRatedButton = styled(Button)({
 });
 
 const ChipBarItem = (props) => {
-  const { variant, label, value, onClick, style } = props;
+  const { disabled, variant, label, value, onClick, style } = props;
   const classes = makeChipBarItemStyle();
 
   const handleClick = () => {
@@ -85,6 +88,7 @@ const ChipBarItem = (props) => {
   };
   return (
     <Chip
+      disabled={disabled}
       style={style}
       onClick={handleClick}
       variant={variant}

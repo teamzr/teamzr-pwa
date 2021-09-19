@@ -14,6 +14,7 @@ import PlanStepDetailTabsComponent from './PlanStepDetailTabsComponent';
 import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
 import PlanStepDetailProgressTab from './PlanStepDetailProgressTab';
 import PlanStepDetailOverviewTab from './PlanStepDetailOverview';
+import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -31,9 +32,7 @@ const GET_PLANSTEP_QUERY = gql`
 `;
 
 const PlanStepsDialogComponent = (props) => {
-  const { planStepId, handleClose } = props;
-
-  const [tab, setTab] = React.useState(0);
+  const { planStepId, handleClose } = props;  
 
   const { loading, error, data: stepData } = useQuery(GET_PLANSTEP_QUERY, {
     variables: {
@@ -44,7 +43,20 @@ const PlanStepsDialogComponent = (props) => {
   const onChangeTab = (event, value) => {
     setTab(value);
   };
-  console.log(stepData);
+  let tabNo = 0
+  const [tab, setTab] = React.useState(tabNo );
+  switch(stepData?.planStep?.status) {
+    case PLAN_STEP_STATUSES.CURRENT:
+      tabNo = 1
+    break;
+    case PLAN_STEP_STATUSES.COMPLETED:
+      tabNo = 2
+    break;
+  }
+  React.useEffect(()=>{
+    setTab(tabNo)
+  }, [loading])
+    
   if (loading) return '...';
   return (
     <Dialog

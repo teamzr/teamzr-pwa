@@ -42,7 +42,7 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   const conversations = Object.values(conversationsObject);
-  console.log(error);
+  
   if (loading || error) return <LoadingIndicatorComponent />;
 
   return (
