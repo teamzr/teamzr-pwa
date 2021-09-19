@@ -42,8 +42,8 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   const conversations = Object.values(conversationsObject);
-
-  if (loading) return <LoadingIndicatorComponent />;
+  console.log(error);
+  if (loading || error) return <LoadingIndicatorComponent />;
 
   return (
     <DefaultLayout>
@@ -63,7 +63,7 @@ function Campaigns(props) {
             <Grid container direction={'row'} justify={'center'}>
               <Grid item xs={12}>
                 <PlanListComponent
-                  plans={data.plans}
+                  plans={data?.plans}
                   conversationId={conversationId}
                 />
               </Grid>

@@ -3,7 +3,7 @@ import { Chip } from '@material-ui/core';
 import propTypes from 'prop-types';
 
 function ChipSelectOption(props) {
-  const { value, onChange, label, checked } = props;
+  const { disabled, value, onChange, label, checked } = props;
 
   const onClick = () => {
     onChange(value);
@@ -11,6 +11,7 @@ function ChipSelectOption(props) {
 
   return (
     <Chip
+      disabled={disabled}
       color={'primary'}
       label={label}
       onClick={onClick}

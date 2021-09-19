@@ -5,9 +5,10 @@ import { Grid, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../ChipSelectComponent/ChipSelectComponent';
 
 function PlanStepsDialogDurationComponent(props) {
-  const { duration, handleUpdate, planStep } = props;
+  const { disabled,duration, handleUpdate, planStep } = props;
 
   const handleDurationClick = (value) => {
+    if(disabled) return false; 
     handleUpdate({
       duration: value,
     });
@@ -24,6 +25,7 @@ function PlanStepsDialogDurationComponent(props) {
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
         <ChipSelectComponent
+          disabled={disabled}
           options={options}
           value={duration}
           onChange={handleDurationClick}

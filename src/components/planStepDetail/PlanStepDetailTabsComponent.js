@@ -12,7 +12,7 @@ function PlanStepDetailTabsComponent(props) {
       textColor={'primary'}
       onChange={onChange}
     >
-      <Tab label={'Settings'} />
+      <Tab label={'Detail'} />
       <Tab label={'Progress'} />
       <Tab label={'Overview'} />
     </Tabs>

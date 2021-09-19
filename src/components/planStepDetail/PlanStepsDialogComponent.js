@@ -80,7 +80,7 @@ const PlanStepsDialogComponent = (props) => {
       </Grid>
 
       <DialogContent>
-        <Grid container justify={'center'}>
+        <Grid container justify={'center'} spacing={2}>
           <Grid item xs={12}>
             <PlanStepDetailTabsComponent tab={tab} onChange={onChangeTab} />
           </Grid>

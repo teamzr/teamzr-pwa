@@ -30,6 +30,8 @@ function PlanStepDetailSettingsTab(props) {
   const { planStepId, stepData } = props;
   const planStep = stepData.planStep;
 
+  const isViewOnly = planStep.status == PLAN_STEP_STATUSES.COMPLETED || planStep.status == PLAN_STEP_STATUSES.CURRENT
+
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
     description: '',
@@ -68,9 +70,9 @@ function PlanStepDetailSettingsTab(props) {
 
   return (
     <Grid container direction={'column'} spacing={2}>
-      <Grid item>
-        <Typography variant={'h6'}>About</Typography>
+      <Grid item >        
         <TextField
+          disabled={isViewOnly}
           fullWidth
           style={{ borderRadius: '12px' }}
           value={planStepState.name}
@@ -85,6 +87,7 @@ function PlanStepDetailSettingsTab(props) {
       </Grid>
       <Grid item>
         <TextField
+        disabled={isViewOnly}
           multiline
           rows={3}
           rowsMax={6}
@@ -108,6 +111,7 @@ function PlanStepDetailSettingsTab(props) {
       <Grid item xs={12}>
         <Typography variant={'h6'}>Duration</Typography>
         <PlanStepsDialogDurationComponent
+          disabled={isViewOnly}
           duration={planStepState.duration}
           handleUpdate={handleUpdate}
           planStep={planStep}
