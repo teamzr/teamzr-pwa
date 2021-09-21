@@ -103,7 +103,7 @@ const PlanStepsDialogComponent = (props) => {
                 stepData={stepData}
               />
             )}
-            {tab == 1 && <PlanStepDetailProgressTab planStepId={planStepId} />}
+            {tab == 1 && <PlanStepDetailProgressTab planStepId={planStepId} status={stepData?.planStep?.status} />}
             {tab == 2 && <PlanStepDetailOverviewTab planStepId={planStepId} />}
           </Grid>
         </Grid>

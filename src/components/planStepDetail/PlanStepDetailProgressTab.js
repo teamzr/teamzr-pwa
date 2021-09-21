@@ -4,7 +4,7 @@ import { Grid, TextField, Typography } from '@material-ui/core';
 import FulfillmentChipBarAdapter from '../../adapters/FulfillmentChipBarAdapter';
 
 function PlanStepDetailProgressTab(props) {
-  const { planStepId } = props;
+  const { planStepId, status } = props;
   return (
     <Grid
       container
@@ -13,7 +13,7 @@ function PlanStepDetailProgressTab(props) {
       style={{ margin: '10px 0 0 0' }}
     >
       <Grid item>
-        <FulfillmentChipBarAdapter planStepId={planStepId} />
+        <FulfillmentChipBarAdapter planStepId={planStepId} status={status} />
       </Grid>
     </Grid>
   );

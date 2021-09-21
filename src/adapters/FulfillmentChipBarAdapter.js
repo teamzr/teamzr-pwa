@@ -41,7 +41,7 @@ const SET_FULFILLMENT_QUERY = gql`
 `;
 
 function FulfillmentChipBarAdapter(props) {
-  const { planStepId } = props;
+  const { planStepId, status } = props;
 
   const { user } = useAuthContext();
 
@@ -49,7 +49,7 @@ function FulfillmentChipBarAdapter(props) {
     variables: { planStepId },
   });
   
-  const disabled = data?.fulfillment?.planStep?.status != PLAN_STEP_STATUSES.CURRENT;
+  const disabled = status != PLAN_STEP_STATUSES.CURRENT;
   const apolloClient = useApolloClient();
   const [setFulfillment] = useMutation(SET_FULFILLMENT_QUERY, {
     update: (cache, { data: { setFulfillment } }) => {
