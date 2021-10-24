@@ -21,6 +21,7 @@ import useAuthContext from '../../context/AuthContext';
 import ConversationTitleComponent from './ConversationTitleComponent';
 import ConversationPopperComponent from './ConversationPopperComponent';
 import BackBtnComponent from '../BackBtnComponent';
+import CreateConversationDialButton from './CreateConversationDialButton';
 
 const GET_CONVERSATIONS_QUERY = gql`
   {
@@ -95,7 +96,7 @@ function ConversationsComponent(props) {
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
               {data.conversations &&
                 data.conversations.map((c, key) => {
-                  const isRead = c.readByIds.includes(authCtx.user.id);
+                  const isRead = c.readByIds.includes(authCtx?.user?.id);
                   return (
                     <ConversationComponent
                       key={key}
@@ -110,6 +111,9 @@ function ConversationsComponent(props) {
                   );
                 })}
             </Grid>
+            <div style={{ position: 'relative' }}>
+              <CreateConversationDialButton />
+            </div>
           </Grid>
         </Grid>
       </Hidden>

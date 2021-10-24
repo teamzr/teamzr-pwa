@@ -62,7 +62,7 @@ function AppBarPrimaryComponent() {
       </IconButton>
       <IconButton color={'secondary'}>
         <MenuIcon />
-      </IconButton>{' '}
+      </IconButton>
     </>
   );
 }
