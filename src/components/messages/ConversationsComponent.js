@@ -2,13 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import {
-  Grid,
-  makeStyles,
-  Hidden,
-  Button,
-  IconButton,
-} from '@material-ui/core';
+import { Grid, makeStyles, Hidden, IconButton } from '@material-ui/core';
 
 import ConversationComponent from './ConversationComponent';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
@@ -44,6 +38,7 @@ const GET_CONVERSATIONS_QUERY = gql`
     }
     me {
       id
+      name
     }
   }
 `;

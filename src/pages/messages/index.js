@@ -18,11 +18,6 @@ const GET_CONVERSATIONS_QUERY = gql`
         id
         text
       }
-
-      users {
-        id
-        name
-      }
     }
   }
 `;
@@ -31,4 +26,4 @@ function MessagesIndex(props) {
   return <Messages />;
 }
 
-export default Messages;
+export default MessagesIndex;

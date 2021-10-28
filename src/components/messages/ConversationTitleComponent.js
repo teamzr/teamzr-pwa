@@ -2,7 +2,8 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
-import { TextField } from '@material-ui/core';
+import { Avatar, Box, Grid, TextField } from '@material-ui/core';
+import { AvatarGroup } from '@material-ui/lab';
 
 const CONVERSATION_QUERY = gql`
   query conversation($id: ID!) {
@@ -12,6 +13,7 @@ const CONVERSATION_QUERY = gql`
       users {
         id
         name
+        avatar
       }
     }
   }
@@ -56,15 +58,26 @@ function ConversationTitleComponent(props) {
 
   if (loading) return '';
   return (
-    <TextField
-      InputProps={{ disableUnderline: true }}
-      fullWidth
-      disabled={data?.conversation?.users.length <= 2}
-      value={name}
-      variant={'standard'}
-      onChange={handleChange}
-      onBlur={handleRename}
-    />
+    <Grid container direction={'row'} alignItems={'center'} spacing={1}>
+      <Grid item xs={2}>
+        <AvatarGroup max={5}>
+          {data.conversation.users.map((u) => (
+            <Avatar src={u.avatar} />
+          ))}
+        </AvatarGroup>
+      </Grid>
+      <Grid item xs={8}>
+        <TextField
+          InputProps={{ disableUnderline: true }}
+          fullWidth
+          disabled={data?.conversation?.users.length <= 2}
+          value={name}
+          variant={'standard'}
+          onChange={handleChange}
+          onBlur={handleRename}
+        />
+      </Grid>
+    </Grid>
   );
 }
 

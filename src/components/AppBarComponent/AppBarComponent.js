@@ -17,7 +17,7 @@ const APP_BAR_LEVEL = {
 };
 
 function AppBarComponent(props) {
-  const { level, onBackClick } = props;
+  const { level, title, end, onBackClick } = props;
   const classes = useAppBarComponentStyle();
   const authContext = useAuthContext();
 
@@ -30,7 +30,11 @@ function AppBarComponent(props) {
             <AppBarPrimaryComponent {...props} />
           )}
           {level == APP_BAR_LEVEL.SECONDARY && (
-            <AppBarSecondaryComponent onBackClick={onBackClick} />
+            <AppBarSecondaryComponent
+              title={title}
+              end={end}
+              onBackClick={onBackClick}
+            />
           )}
         </Toolbar>
       </AppBar>

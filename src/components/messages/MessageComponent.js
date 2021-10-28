@@ -15,9 +15,9 @@ function MessageComponent(props) {
         [classes.fromOthers]: !fromMe,
       })}
     >
-      <Grid container direction={'column'} spacing={2}>
+      <Grid container direction={'column'} spacing={3}>
         <Grid item xs={12}>
-          <Grid container spacing={2} justify={'space-between'}>
+          <Grid container spacing={3} justify={'space-between'}>
             <Grid item>{authorName}</Grid>
             <Grid item>{date}</Grid>
           </Grid>

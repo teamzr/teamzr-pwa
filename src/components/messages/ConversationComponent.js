@@ -7,6 +7,7 @@ import {
   Typography,
   makeStyles,
   Badge,
+  Tooltip,
 } from '@material-ui/core';
 import moment from 'moment';
 import { useRouter } from 'next/router';
@@ -14,9 +15,11 @@ import clsx from 'clsx';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 import useAuthContext from '../../context/AuthContext';
+import { AvatarGroup } from '@material-ui/lab';
 
 function ConversationComponent(props) {
   const { id, name, messageAt, messages, users, read } = props;
+  const isGroup = users.length > 1;
   const classes = useConversationComponentStyle();
   const router = useRouter();
   const { conversationId } = router.query;
@@ -29,7 +32,7 @@ function ConversationComponent(props) {
   };
 
   const oppositeUser = users.find((user) => user.id != authContext.user.id);
-  const conversationName = users.length > 2 ? name : oppositeUser.name;
+  const conversationName = users.length > 1 ? name : oppositeUser.name;
   return (
     <Box
       margin={2}
@@ -46,8 +49,23 @@ function ConversationComponent(props) {
         justify={'space-between'}
         spacing={2}
       >
-        <Grid item xs={'auto'}>
-          <Avatar className={classes.avatar} src={oppositeUser.avatar} />
+        <Grid item xs={2}>
+          {isGroup && (
+            <AvatarGroup max={1}>
+              {users?.map((user, key) => (
+                <Tooltip key={key} title={user?.name}>
+                  <Avatar
+                    className={classes.avatarItemGroup}
+                    alt={user?.name}
+                    src={user?.avatar}
+                  />
+                </Tooltip>
+              ))}
+            </AvatarGroup>
+          )}
+          {!isGroup && (
+            <Avatar className={classes.avatar} src={oppositeUser.avatar} />
+          )}
         </Grid>
         <Grid item xs={true}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
@@ -84,10 +102,15 @@ ConversationComponent.propTypes = {
 
 const useConversationComponentStyle = makeStyles((theme) => ({
   avatar: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+  },
+  avatarItemGroup: {
+    width: theme.spacing(8),
+    height: theme.spacing(8),
   },
   conversationBox: {
+    height: theme.spacing(10),
     cursor: 'pointer',
     borderRadius: theme.spacing(2),
     '&:hover': {

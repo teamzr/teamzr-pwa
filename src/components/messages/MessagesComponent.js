@@ -16,10 +16,6 @@ export const GET_MESSAGES_FROM_QUERY = gql`
         id
         name
       }
-      conversation {
-        id
-        readByIds
-      }
       text
       createdAt
     }

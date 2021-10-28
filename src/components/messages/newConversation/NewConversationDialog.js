@@ -1,10 +1,47 @@
-import { Dialog, DialogContent, Slide } from '@material-ui/core';
+import { useMutation } from '@apollo/client';
+import { Button, Dialog, Slide } from '@material-ui/core';
+import { gql } from 'apollo-boost';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import AppBarComponent from '../../AppBarComponent/AppBarComponent';
 import NewConversationUserList from './NewConversationUserLis';
 
+const CREATE_CONVERSATION = gql`
+  mutation createConversation($input: ConversationCreateInput!) {
+    createConversation(input: $input) {
+      id
+    }
+  }
+`;
+
 function NewConversationDialog(props) {
   const { open, onClose } = props;
+
+  const [users, setUsers] = React.useState([]);
+  const [name, setName] = React.useState('');
+
+  const [createConversation] = useMutation(CREATE_CONVERSATION);
+  const router = useRouter();
+
+  const handleCreateConversation = async (name, users) => {
+    const { data } = await createConversation({
+      variables: {
+        input: {
+          name: name ? name : undefined,
+          users: users,
+        },
+      },
+    });
+
+    router.push(
+      '/messages/[conversationId]',
+      `/messages/${data.createConversation.id}`
+    );
+  };
+
+  const handleNextClick = () => {
+    handleCreateConversation(name, users);
+  };
   return (
     <>
       <Dialog
@@ -14,8 +51,27 @@ function NewConversationDialog(props) {
         maxWidth={true}
         TransitionComponent={Transition}
       >
-        <AppBarComponent level={'secondary'} onBackClick={onClose} />
-        <NewConversationUserList />
+        <AppBarComponent
+          level={'secondary'}
+          title={'Create new conversation'}
+          onBackClick={onClose}
+          end={
+            <Button
+              onClick={handleNextClick}
+              color={'secondary'}
+              variant={'text'}
+            >
+              Next
+            </Button>
+          }
+        />
+        <NewConversationUserList
+          users={users}
+          setUsers={setUsers}
+          handleCreateConversation={handleCreateConversation}
+          name={name}
+          setName={setName}
+        />
       </Dialog>
     </>
   );
