@@ -39,20 +39,21 @@ function NewConversationUserList({
   handleCreateConversation,
   name,
   setName,
+  isCreatingGroup,
+  setIsCreatingGroup,
 }) {
   const { loading, data, error } = useQuery(COMMUNITY_USER_QUERY);
-  const [isCraetingGroup, setIsCreatingGroup] = React.useState(false);
 
   const handleUserClick = (event) => {
     const userId = event.currentTarget.dataset.user;
-    if (isCraetingGroup) {
+    if (isCreatingGroup) {
       const newUsers = users?.includes(userId)
         ? users.filter((val) => val != userId)
         : [...users, userId];
       setUsers(newUsers);
     }
 
-    if (!isCraetingGroup) {
+    if (!isCreatingGroup) {
       handleCreateConversation(name, [userId]);
     }
   };
@@ -60,7 +61,7 @@ function NewConversationUserList({
   if (loading) return '...';
 
   const toggleIsCreatingGroup = () => {
-    setIsCreatingGroup(!isCraetingGroup);
+    setIsCreatingGroup(!isCreatingGroup);
   };
 
   const onNameChange = (event, val) => {
@@ -71,10 +72,10 @@ function NewConversationUserList({
     <Grid container direction={'column'}>
       <Grid item md={3} sm={0}></Grid>
       <Grid item md={6} sm={12}>
-        {!isCraetingGroup && (
+        {!isCreatingGroup && (
           <Button
             onClick={toggleIsCreatingGroup}
-            variant={isCraetingGroup ? 'contained' : 'outlined'}
+            variant={isCreatingGroup ? 'contained' : 'outlined'}
             color={'primary'}
             fullWidth={true}
             startIcon={
@@ -87,7 +88,7 @@ function NewConversationUserList({
             New group
           </Button>
         )}
-        {isCraetingGroup && (
+        {isCreatingGroup && (
           <Box margin={'12px'}>
             <TextField
               fullWidth
@@ -112,7 +113,7 @@ function NewConversationUserList({
                 <Avatar src={user.avatar} />
               </ListItemAvatar>
               <ListItemText id={user.id} primary={user.name} />
-              {isCraetingGroup && (
+              {isCreatingGroup && (
                 <ListItemSecondaryAction>
                   <PersonAdd
                     onClick={handleUserClick}

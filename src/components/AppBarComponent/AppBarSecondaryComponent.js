@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import { Grid, IconButton, Typography, useTheme } from '@material-ui/core';
+import { Box, Grid, IconButton, Typography, useTheme } from '@material-ui/core';
 import useAuthContext from '../../context/AuthContext';
 import { useRouter } from 'next/router';
 import BackBtnComponent from '../BackBtnComponent';
@@ -15,7 +15,12 @@ function AppBarSecondaryComponent(props) {
 
   return (
     <>
-      <Grid container alignItems={'center'} alignContent={'space-around'}>
+      <Grid
+        container
+        direction={'row'}
+        alignItems={'center'}
+        alignContent={'stretch'}
+      >
         <Grid item xs={2}>
           <IconButton onClick={onBackClick}>
             <ArrowBack
@@ -24,10 +29,10 @@ function AppBarSecondaryComponent(props) {
             />
           </IconButton>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Typography align={'center'}>{title}</Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           {end}
         </Grid>
       </Grid>

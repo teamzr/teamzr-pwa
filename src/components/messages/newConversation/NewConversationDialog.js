@@ -19,6 +19,7 @@ function NewConversationDialog(props) {
 
   const [users, setUsers] = React.useState([]);
   const [name, setName] = React.useState('');
+  const [isCreatingGroup, setIsCreatingGroup] = React.useState(false);
 
   const [createConversation] = useMutation(CREATE_CONVERSATION);
   const router = useRouter();
@@ -40,7 +41,18 @@ function NewConversationDialog(props) {
   };
 
   const handleNextClick = () => {
-    handleCreateConversation(name, users);
+    if (users.length > 1) {
+      handleCreateConversation(name, users);
+    }
+  };
+
+  const handleBackClick = () => {
+    if (isCreatingGroup) {
+      setIsCreatingGroup(false);
+    }
+    if (!isCreatingGroup) {
+      onClose();
+    }
   };
   return (
     <>
@@ -53,28 +65,30 @@ function NewConversationDialog(props) {
       >
         <AppBarComponent
           level={'secondary'}
-          title={'Create new conversation'}
-          onBackClick={onClose}
+          title={
+            !isCreatingGroup ? 'Create single conversation' : 'Create  group'
+          }
+          onBackClick={handleBackClick}
           end={
             <>
-              {users?.length > 1 && (
-                <Button
-                  onClick={handleNextClick}
-                  color={'secondary'}
-                  variant={'text'}
-                >
-                  Create group
-                </Button>
-              )}
+              <Button
+                onClick={handleNextClick}
+                color={'secondary'}
+                variant={'text'}
+              >
+                Create
+              </Button>
             </>
           }
         />
         <NewConversationUserList
+          isCreatingGroup={isCreatingGroup}
           users={users}
           setUsers={setUsers}
           handleCreateConversation={handleCreateConversation}
           name={name}
           setName={setName}
+          setIsCreatingGroup={setIsCreatingGroup}
         />
       </Dialog>
     </>
