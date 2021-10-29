@@ -31,8 +31,8 @@ function ConversationComponent(props) {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
   };
 
-  const oppositeUser = users.find((user) => user.id != authContext.user.id);
-  const conversationName = users.length > 1 ? name : oppositeUser.name;
+  const oppositeUser = users.find((user) => user?.id != authContext.user?.id);
+  const conversationName = isGroup ? name : oppositeUser.name;
   return (
     <Box
       margin={2}
@@ -49,9 +49,9 @@ function ConversationComponent(props) {
         justify={'space-between'}
         spacing={2}
       >
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           {isGroup && (
-            <AvatarGroup max={1}>
+            <AvatarGroup max={1} spacing={'small'}>
               {users?.map((user, key) => (
                 <Tooltip key={key} title={user?.name}>
                   <Avatar
@@ -106,8 +106,8 @@ const useConversationComponentStyle = makeStyles((theme) => ({
     height: theme.spacing(8),
   },
   avatarItemGroup: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
   conversationBox: {
     height: theme.spacing(10),

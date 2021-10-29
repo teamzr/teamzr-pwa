@@ -2,7 +2,7 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
-import { Avatar, Box, Grid, TextField } from '@material-ui/core';
+import { Avatar, Box, Grid, TextField, Tooltip } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
 
 const CONVERSATION_QUERY = gql`
@@ -38,7 +38,7 @@ function ConversationTitleComponent(props) {
   const [name, setName] = React.useState('');
 
   React.useEffect(() => {
-    if (data?.conversation?.users.length > 2) {
+    if (data?.conversation?.users.length > 1) {
       setName(data?.conversation?.name);
     } else {
       setName(data?.conversation?.users[0].name);
@@ -59,10 +59,12 @@ function ConversationTitleComponent(props) {
   if (loading) return '';
   return (
     <Grid container direction={'row'} alignItems={'center'} spacing={1}>
-      <Grid item xs={2}>
+      <Grid item xs={'auto'}>
         <AvatarGroup max={5}>
           {data.conversation.users.map((u) => (
-            <Avatar src={u.avatar} />
+            <Tooltip title={u.name}>
+              <Avatar src={u.avatar} />
+            </Tooltip>
           ))}
         </AvatarGroup>
       </Grid>
@@ -70,7 +72,7 @@ function ConversationTitleComponent(props) {
         <TextField
           InputProps={{ disableUnderline: true }}
           fullWidth
-          disabled={data?.conversation?.users.length <= 2}
+          disabled={data?.conversation?.users.length < 2}
           value={name}
           variant={'standard'}
           onChange={handleChange}

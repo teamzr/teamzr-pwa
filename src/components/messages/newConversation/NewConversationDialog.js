@@ -56,13 +56,17 @@ function NewConversationDialog(props) {
           title={'Create new conversation'}
           onBackClick={onClose}
           end={
-            <Button
-              onClick={handleNextClick}
-              color={'secondary'}
-              variant={'text'}
-            >
-              Next
-            </Button>
+            <>
+              {users?.length > 1 && (
+                <Button
+                  onClick={handleNextClick}
+                  color={'secondary'}
+                  variant={'text'}
+                >
+                  Create group
+                </Button>
+              )}
+            </>
           }
         />
         <NewConversationUserList

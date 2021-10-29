@@ -69,6 +69,7 @@ function NewConversationUserList({
 
   return (
     <Grid container direction={'column'}>
+      <Grid item md={3} sm={0}></Grid>
       <Grid item md={6} sm={12}>
         {!isCraetingGroup && (
           <Button
