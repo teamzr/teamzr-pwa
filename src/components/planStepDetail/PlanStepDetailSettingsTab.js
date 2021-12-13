@@ -30,7 +30,7 @@ function PlanStepDetailSettingsTab(props) {
   const { planStepId, stepData } = props;
   const planStep = stepData.planStep;
 
-  const isViewOnly = planStep.status == PLAN_STEP_STATUSES.COMPLETED || planStep.status == PLAN_STEP_STATUSES.CURRENT
+  const isViewOnly = planStep.status == PLAN_STEP_STATUSES.COMPLETED
 
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
