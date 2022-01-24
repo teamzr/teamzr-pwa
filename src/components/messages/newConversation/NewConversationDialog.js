@@ -21,7 +21,11 @@ function NewConversationDialog(props) {
   const [name, setName] = React.useState('');
   const [isCreatingGroup, setIsCreatingGroup] = React.useState(false);
 
-  const [createConversation] = useMutation(CREATE_CONVERSATION);
+  const [createConversation] = useMutation(CREATE_CONVERSATION, {
+    onCompleted: () => {
+      onClose()
+    }
+  });
   const router = useRouter();
 
   const handleCreateConversation = async (name, users) => {
