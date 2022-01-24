@@ -13,7 +13,7 @@ import MessagesComponent from './MessagesComponent';
 import MessagesInputBarComponent from './MessagesInputBarComponent';
 import useAuthContext from '../../context/AuthContext';
 import ConversationTitleComponent from './ConversationTitleComponent';
-import ConversationPopperComponent from './ConversationPopperComponent';
+import ConversationSidebarComponent from './ConversationSidebarComponent';
 import BackBtnComponent from '../BackBtnComponent';
 import CreateConversationDialButton from './CreateConversationDialButton';
 
@@ -134,7 +134,7 @@ function ConversationsComponent(props) {
                 <Grid item xs={2}>
                   <Grid container direction={'row'} justify={'flex-end'}>
                     <Grid item>
-                      <ConversationPopperComponent />
+                      <ConversationSidebarComponent />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -151,8 +151,8 @@ function ConversationsComponent(props) {
           {!!conversationId && (
             <MessagesInputBarComponent conversationId={conversationId} />
           )}
-        </Grid>
-      </Hidden>
+        </Grid>       
+      </Hidden>      
     </Grid>
   );
 }
