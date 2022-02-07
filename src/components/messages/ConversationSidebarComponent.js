@@ -20,7 +20,8 @@ import ConversationSidebarUsers from './ConversationSidebarUsers'
 const useStyles = makeStyles({
   root: {},
   paper: {
-    top: 68
+    top: 68,
+    height: 'calc(100% - 68px)'
   }
 })
 
@@ -55,6 +56,7 @@ function ConversationSidebarComponent(props) {
         <VerticalDotsIcon />
       </IconButton>        
       <Drawer  
+        disablePortal={true}        
         classes={drawerClasses}                 
         hideBackdrop={true}
         elevation={0}
@@ -63,14 +65,14 @@ function ConversationSidebarComponent(props) {
         anchorEl={anchorEl}
         onClose={togglePopover}
         sx={{width: '520px'}}
-      >
-     <div>
+      >     
+      <div>
         <IconButton onClick={togglePopover} variant={'contained'}>
           <CloseIcon />
         </IconButton>
         <ConversationSidebarPlans />
-        <ConversationSidebarUsers />          
-      </div>
+        <ConversationSidebarUsers conversationId={conversationId} />            
+        </div>
       </Drawer>      
     </>
   );

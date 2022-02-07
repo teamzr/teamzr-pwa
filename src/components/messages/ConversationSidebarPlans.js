@@ -8,18 +8,18 @@ export default function CoversationSidebarPlans() {
 
     return (
       <AccordionComponent summaryTitle={'Plans'}>
-       <List component={'nav'}>            
+       <List component={'nav'}>   
+       <ListItem button >
+              <ListItemIcon>
+                <TeamzrButtonIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Plans'} />
+            </ListItem>         
             <ListItem button>
               <ListItemIcon>
                 <AddStepIcon />
               </ListItemIcon>
               <ListItemText primary={'Create Plan'} />
-            </ListItem>
-            <ListItem button >
-              <ListItemIcon>
-                <TeamzrButtonIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Plans'} />
             </ListItem>
           </List>
       </AccordionComponent>
