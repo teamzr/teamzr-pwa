@@ -25,7 +25,9 @@ function ConversationComponent(props) {
   const { conversationId } = router.query;
   const authContext = useAuthContext();
 
-  const date = moment(moment(parseInt(messageAt))).format('DD.MM.YYYY');
+  const atDate = parseInt(messageAt);
+
+  const date = Date.now() - atDate  > 600000000 ? moment(moment(atDate)).format('DD.MM.YYYY')  : moment(moment(atDate), 'DD.MM.YYYY').fromNow(true);
 
   const handleClick = () => {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
@@ -41,7 +43,22 @@ function ConversationComponent(props) {
         [classes.active]: conversationId === id,
         [classes.bold]: !read,
       })}
-    >
+    ><Box style={{position: 'absolute', top: 0, right: 0, width: '56%', textAlign: 'right'}}>
+      <Grid
+        container
+        direction={'row'}
+        justify={'flex-end'}
+        alignContent={'center'}
+        alignItems={'center'}        
+      >
+        <Grid item xs={10} >
+          <Typography variant={'subtitle2'}>{date}</Typography>
+        </Grid>
+        <Grid item xs={2} >
+          {!read && <ConversationsCircle />}
+        </Grid>
+      </Grid>
+      </Box>
       <Grid
         container
         direction={'row'}
@@ -49,7 +66,7 @@ function ConversationComponent(props) {
         justify={'space-between'}
         spacing={2}
       >
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           {isGroup && (
             <AvatarGroup max={1} spacing={'small'}>
               {users?.map((user, key) => (
@@ -67,28 +84,12 @@ function ConversationComponent(props) {
             <Avatar className={classes.avatar} src={oppositeUser.avatar} />
           )}
         </Grid>
-        <Grid item xs={true}>
+        <Grid item xs={8}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
           <Typography variant={'subtitle2'}>
             {messages[messages.length - 1] &&
               messages[messages.length - 1].text.substring(0, 10)}
           </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Grid
-            container
-            direction={'row'}
-            justify={'flex-end'}
-            alignContent={'flex-end'}
-            alignItems={'flex-end'}
-          >
-            <Grid item xs={12}>
-              <Typography variant={'subtitle2'}>{date}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              {!read && <ConversationsCircle />}
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
     </Box>
@@ -110,6 +111,7 @@ const useConversationComponentStyle = makeStyles((theme) => ({
     height: theme.spacing(7),
   },
   conversationBox: {
+    position:'relative',
     height: theme.spacing(10),
     cursor: 'pointer',
     borderRadius: theme.spacing(2),
