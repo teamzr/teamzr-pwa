@@ -21,7 +21,8 @@ const useStyles = makeStyles({
   root: {},
   paper: {
     top: 68,
-    height: 'calc(100% - 68px)'
+    height: 'calc(100% - 175px)',
+    backgroundColor: '#f1f6f7'
   }
 })
 
@@ -56,15 +57,16 @@ function ConversationSidebarComponent(props) {
         <VerticalDotsIcon />
       </IconButton>        
       <Drawer  
-        disablePortal={true}        
-        classes={drawerClasses}                 
+        variant={'persistent'}               
+        classes={drawerClasses}                         
         hideBackdrop={true}
         elevation={0}
         open={open}
         anchor={'right'}
         anchorEl={anchorEl}
         onClose={togglePopover}
-        sx={{width: '520px'}}
+        BackdropProps={{invisible: true, style: {zIndex:'0'}}}
+        
       >     
       <div>
         <IconButton onClick={togglePopover} variant={'contained'}>

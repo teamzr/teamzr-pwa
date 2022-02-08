@@ -1,7 +1,7 @@
-import { Avatar, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
+import { Avatar, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import * as React from 'react';
 import { useQuery } from '@apollo/client';
-import { AddStepIcon, TeamzrButtonIcon } from '../../constants/Icons';
+import { AddStepIcon, TeamzrButtonIcon, VerticalDotsIcon } from '../../constants/Icons';
 import AccordionComponent from '../AccordionComponent';
 import { gql } from '@apollo/client/core';
 
@@ -39,7 +39,11 @@ export default function CoversationSidebarUsers({ conversationId }) {
               <Avatar src={u.avatar} />
             </ListItemIcon>
             <ListItemText primary={u.name} />
-            <ListItemSecondaryAction />
+            <ListItemSecondaryAction >
+              <IconButton style={{height: '12px', width: '12px'}} >
+                <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
+              </IconButton>
+            </ListItemSecondaryAction >
           </ListItem>
         ))}
         <ListItem button onClick={onAddUserClick}>
