@@ -16,6 +16,7 @@ import {
 } from '../../constants/Icons';
 import AccordionComponent from '../AccordionComponent';
 import { gql } from '@apollo/client/core';
+import UserSelectModal from '../UserSelectModal/UserSelectModal';
 
 const USERS_QUERY = gql`
   query conversation($conversationId: ID!) {
@@ -40,33 +41,43 @@ export default function CoversationSidebarUsers({ conversationId }) {
 
   const [openAdd, setOpenAdd] = React.useState(false);
 
-  const onAddUserClick = () => {};
+  const onAddUserClick = () => {
+    setOpenAdd(!openAdd);
+  };
+
+  const onCancelClick = () => {
+    setOpenAdd(false);
+  };
+
   if (data?.conversation?.type == 'DIRECT') {
     return false;
   }
   return (
-    <AccordionComponent summaryTitle={'Users'}>
-      <List component={'nav'}>
-        {data?.conversation?.users?.map((u) => (
-          <ListItem button>
+    <>
+      <AccordionComponent summaryTitle={'Users'}>
+        <List component={'nav'}>
+          {data?.conversation?.users?.map((u) => (
+            <ListItem button>
+              <ListItemIcon>
+                <Avatar src={u.avatar} />
+              </ListItemIcon>
+              <ListItemText primary={u.name} />
+              <ListItemSecondaryAction>
+                <IconButton style={{ height: '12px', width: '12px' }}>
+                  <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+          <ListItem button onClick={onAddUserClick}>
             <ListItemIcon>
-              <Avatar src={u.avatar} />
+              <AddStepIcon />
             </ListItemIcon>
-            <ListItemText primary={u.name} />
-            <ListItemSecondaryAction>
-              <IconButton style={{ height: '12px', width: '12px' }}>
-                <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
-              </IconButton>
-            </ListItemSecondaryAction>
+            <ListItemText primary={'Add user'} />
           </ListItem>
-        ))}
-        <ListItem button onClick={onAddUserClick}>
-          <ListItemIcon>
-            <AddStepIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Add user'} />
-        </ListItem>
-      </List>
-    </AccordionComponent>
+        </List>
+      </AccordionComponent>
+      <UserSelectModal open={openAdd} onCancelClick={onCancelClick} />
+    </>
   );
 }

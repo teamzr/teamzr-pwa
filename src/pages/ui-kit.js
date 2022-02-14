@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { Grid, Container, Box, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectComponent';
+import UserSelectModalUIKitItem from '../components/uiKitItems/UserSelectModalUIKitItem';
 
 function UiKit() {
   return (
     <div>
       <Container maxWidth={'md'}>
         <Grid container alignContent={'center'}>
-          {true && (
+          {false && (
             <Grid item>
               <Typography variant={'h6'}>ChipsetSelect</Typography>
               <ChipSelect />
             </Grid>
           )}
+          {true && <UserSelectModalUIKitItem />}
         </Grid>
       </Container>
     </div>
