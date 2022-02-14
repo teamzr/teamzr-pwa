@@ -13,7 +13,10 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
-function UserSearchListComponent({ users, loading }) {
+function UserSearchListComponent({ users, loading, onUserItemClick }) {
+  const handleItemClick = (userId) => {
+    onUserItemClick(userId);
+  };
   return (
     <Box>
       <Box>
@@ -35,7 +38,11 @@ function UserSearchListComponent({ users, loading }) {
           )}
           {!loading &&
             users.map((user, i) => (
-              <ListItem key={i} button={true}>
+              <ListItem
+                key={i}
+                button={true}
+                onClick={() => handleItemClick(user.id)}
+              >
                 <ListItemAvatar>
                   <Avatar src={user.avatar} />
                 </ListItemAvatar>

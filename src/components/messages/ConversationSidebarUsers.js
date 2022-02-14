@@ -16,7 +16,7 @@ import {
 } from '../../constants/Icons';
 import AccordionComponent from '../AccordionComponent';
 import { gql } from '@apollo/client/core';
-import UserSelectModal from '../UserSelectModal/UserSelectModal';
+import ConversationAddUsersDialog from './ConversationAddUsersDialog';
 
 const USERS_QUERY = gql`
   query conversation($conversationId: ID!) {
@@ -77,7 +77,11 @@ export default function CoversationSidebarUsers({ conversationId }) {
           </ListItem>
         </List>
       </AccordionComponent>
-      <UserSelectModal open={openAdd} onCancelClick={onCancelClick} />
+      <ConversationAddUsersDialog
+        open={openAdd}
+        conversationId={conversationId}
+        onCancelClick={onCancelClick}
+      />
     </>
   );
 }
