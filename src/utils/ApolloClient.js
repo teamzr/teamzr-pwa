@@ -5,7 +5,7 @@ import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = Cookies.get('token');
+  const token = Cookies.get('token') || req.header('token');
 
   return {
     headers: {
@@ -27,6 +27,7 @@ const error = onError(({ response, operation, networkError }) => {
 });
 
 const client = new ApolloClient({
+  ssrMode: true,
   cache: new InMemoryCache(),
   link: ApolloLink.from([authLink, error, httpLink]),
 });
