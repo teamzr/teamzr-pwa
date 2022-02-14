@@ -27,7 +27,10 @@ function ConversationComponent(props) {
 
   const atDate = parseInt(messageAt);
 
-  const date = Date.now() - atDate  > 600000000 ? moment(moment(atDate)).format('DD.MM.YYYY')  : moment(moment(atDate), 'DD.MM.YYYY').fromNow(true);
+  const date =
+    Date.now() - atDate > 600000000
+      ? moment(moment(atDate)).format('DD.MM.YYYY')
+      : moment(moment(atDate), 'DD.MM.YYYY').fromNow(true);
 
   const handleClick = () => {
     router.push(`/messages?conversationId=${id}`, `/messages/${id}`);
@@ -43,46 +46,62 @@ function ConversationComponent(props) {
         [classes.active]: conversationId === id,
         [classes.bold]: !read,
       })}
-    ><Box style={{position: 'absolute', top: 0, right: 0, width: '56%', textAlign: 'right'}}>
-      <Grid
-        container
-        direction={'row'}
-        justify={'flex-end'}
-        alignContent={'center'}
-        alignItems={'center'}        
+    >
+      <Box
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: '56%',
+          textAlign: 'right',
+        }}
       >
-        <Grid item xs={10} >
-          <Typography variant={'subtitle2'}>{date}</Typography>
+        <Grid
+          container
+          direction={'row'}
+          justify={'flex-end'}
+          alignContent={'center'}
+          alignItems={'center'}
+        >
+          <Grid item xs={10}>
+            <Box margin={'2px'}>
+              <Typography variant={'subtitle2'} style={{ fontSize: '10px' }}>
+                {date}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            {!read && <ConversationsCircle />}
+          </Grid>
         </Grid>
-        <Grid item xs={2} >
-          {!read && <ConversationsCircle />}
-        </Grid>
-      </Grid>
       </Box>
       <Grid
         container
         direction={'row'}
         alignItems={'center'}
+        alignContent={'center'}
         justify={'space-between'}
         spacing={2}
       >
         <Grid item xs={4}>
-          {isGroup && (
-            <AvatarGroup max={1} spacing={'small'}>
-              {users?.map((user, key) => (
-                <Tooltip key={key} title={user?.name}>
-                  <Avatar
-                    className={classes.avatarItemGroup}
-                    alt={user?.name}
-                    src={user?.avatar}
-                  />
-                </Tooltip>
-              ))}
-            </AvatarGroup>
-          )}
-          {!isGroup && (
-            <Avatar className={classes.avatar} src={oppositeUser.avatar} />
-          )}
+          <Box width={'fit-content'} style={{ margin: 'auto' }}>
+            {isGroup && (
+              <AvatarGroup max={1} spacing={'small'}>
+                {users?.map((user, key) => (
+                  <Tooltip key={key} title={user?.name}>
+                    <Avatar
+                      className={classes.avatarItemGroup}
+                      alt={user?.name}
+                      src={user?.avatar}
+                    />
+                  </Tooltip>
+                ))}
+              </AvatarGroup>
+            )}
+            {!isGroup && (
+              <Avatar className={classes.avatar} src={oppositeUser.avatar} />
+            )}
+          </Box>
         </Grid>
         <Grid item xs={8}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
@@ -111,7 +130,7 @@ const useConversationComponentStyle = makeStyles((theme) => ({
     height: theme.spacing(7),
   },
   conversationBox: {
-    position:'relative',
+    position: 'relative',
     height: theme.spacing(10),
     cursor: 'pointer',
     borderRadius: theme.spacing(2),
