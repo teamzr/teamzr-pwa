@@ -3,6 +3,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { gql } from 'apollo-boost';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import { AddStepIcon, TeamzrButtonIcon } from '../../constants/Icons';
 import AccordionComponent from '../AccordionComponent';
 
@@ -33,9 +34,12 @@ export default function CoversationSidebarPlans({
 
   return (
     <AccordionComponent summaryTitle={'Plans'}>
-      <List component={'nav'}>
+      <List style={{ width: '100%' }}>
         {data?.plans?.map((plan, i) => (
           <ListItem button key={i} onClick={() => handlePlanClick(plan.id)}>
+            <ListItemIcon>
+              <DateRangeIcon />
+            </ListItemIcon>
             <ListItemText primary={plan.name} />
           </ListItem>
         ))}
