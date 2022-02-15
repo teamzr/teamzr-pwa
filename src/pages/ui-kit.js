@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Grid, Container, Box, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectComponent';
-import UserSelectModalUIKitItem from '../components/uiKitItems/UserSelectModalUIKitItem';
+import UserSelectModalUIKitItem from '../components/UIKitItems/UserSelectModalUIKitItem';
 import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
 
 function UiKit() {
