@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   IconButton,
   List,
   ListItem,
@@ -17,6 +18,7 @@ import {
 import AccordionComponent from '../AccordionComponent';
 import { gql } from '@apollo/client/core';
 import ConversationAddUsersDialog from './ConversationAddUsersDialog';
+import AlertDialogComponent from '../AlertDialog/AlertDialogComponent';
 
 const USERS_QUERY = gql`
   query conversation($conversationId: ID!) {
@@ -48,6 +50,10 @@ export default function CoversationSidebarUsers({ conversationId }) {
   const onCancelClick = () => {
     setOpenAdd(false);
   };
+  const [removeDialogOpen, setRemoveDialogOpen] = React.useState(false);
+  const handleUserRemove = () => {
+    setRemoveDialogOpen(!removeDialogOpen);
+  };
 
   if (data?.conversation?.type == 'DIRECT') {
     return false;
@@ -63,7 +69,10 @@ export default function CoversationSidebarUsers({ conversationId }) {
               </ListItemIcon>
               <ListItemText primary={u.name} />
               <ListItemSecondaryAction>
-                <IconButton style={{ height: '12px', width: '12px' }}>
+                <IconButton
+                  onClick={handleUserRemove}
+                  style={{ width: '12px', height: '12px' }}
+                >
                   <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -81,6 +90,29 @@ export default function CoversationSidebarUsers({ conversationId }) {
         open={openAdd}
         conversationId={conversationId}
         onCancelClick={onCancelClick}
+      />
+      <AlertDialogComponent
+        open={removeDialogOpen}
+        title={'Remove confirmation'}
+        text={'Sure you want to remove this user?'}
+        actionButtons={
+          <>
+            <Button
+              color={'primary'}
+              variant={'outlined'}
+              onClick={handleUserRemove}
+            >
+              Cancel
+            </Button>
+            <Button
+              color={'primary'}
+              variant={'contained'}
+              onClick={handleUserRemove}
+            >
+              Remove
+            </Button>
+          </>
+        }
       />
     </>
   );

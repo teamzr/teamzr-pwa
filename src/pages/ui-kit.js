@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Grid, Container, Box, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectComponent';
 import UserSelectModalUIKitItem from '../components/uiKitItems/UserSelectModalUIKitItem';
+import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
 
 function UiKit() {
   return (
@@ -14,7 +15,8 @@ function UiKit() {
               <ChipSelect />
             </Grid>
           )}
-          {true && <UserSelectModalUIKitItem />}
+          {false && <UserSelectModalUIKitItem />}
+          {true && <AlertDialogUIKitItem />}
         </Grid>
       </Container>
     </div>
