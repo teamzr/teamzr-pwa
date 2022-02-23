@@ -94,7 +94,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
       <AlertDialogComponent
         open={removeDialogOpen}
         title={'Remove confirmation'}
-        text={'Sure you want to remove this user?'}
+        text={'Sure you want to remove this user from conversation?'}
         actionButtons={
           <>
             <Button

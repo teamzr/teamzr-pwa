@@ -63,10 +63,10 @@ function ConversationsComponent(props) {
     if (messagesRef.current) {
       setTimeout(() => {
         messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-      }, 200);
+      }, 1000);
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  }, [messagesRef.current, conversationId]);
+  }, [loading, messagesRef.current, conversationId]);
 
   if (loading) return <LoadingIndicatorComponent />;
   return (
@@ -151,8 +151,8 @@ function ConversationsComponent(props) {
           {!!conversationId && (
             <MessagesInputBarComponent conversationId={conversationId} />
           )}
-        </Grid>       
-      </Hidden>      
+        </Grid>
+      </Hidden>
     </Grid>
   );
 }
