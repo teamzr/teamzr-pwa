@@ -22,6 +22,7 @@ const GET_CONVERSATIONS_QUERY = gql`
     conversations {
       id
       name
+      type
       readByIds
       updatedAt
       messageAt
@@ -29,7 +30,6 @@ const GET_CONVERSATIONS_QUERY = gql`
         id
         text
       }
-
       users {
         id
         name
@@ -102,6 +102,7 @@ function ConversationsComponent(props) {
                       users={c.users}
                       messages={c.messages}
                       read={isRead}
+                      type={c.type}
                     />
                   );
                 })}

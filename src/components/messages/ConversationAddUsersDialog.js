@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { gql } from '@apollo/client/core';
 import * as React from 'react';
 import UserSelectModalComponent from '../UserSelectModal/UserSelectModalComponent';
@@ -11,7 +11,7 @@ const COMMUNITY_USER_QUERY = gql`
         id
       }
     }
-    communityUsers {
+    users {
       id
       name
       avatar
@@ -25,17 +25,35 @@ const COMMUNITY_USER_QUERY = gql`
   }
 `;
 
+const UPDATE_CONVERSATION_MUTATION = gql`
+  mutation updateConversation($input: ConversationUpdateInput!) {
+    updateConversation(input: $input) {
+      id
+      name
+      users {
+        id
+        name
+      }
+    }
+  }
+`;
+
 function ConversationAddUsersDialog(props) {
-  const { open, onCancelClick, conversationId } = props;
+  const { open, setOpen, onCancelClick, conversationId } = props;
+
+  const [updateConversation] = useMutation(UPDATE_CONVERSATION_MUTATION);
   const { loading, error, data } = useQuery(COMMUNITY_USER_QUERY, {
     variables: { conversationId },
   });
 
   const [selectedUserIds, setSelectedUserIds] = React.useState([]);
+  React.useEffect(() => {
+    setSelectedUserIds([]);
+  }, [open]);
 
   const usersAlreadyIncludedIds = data?.conversation?.users?.map((u) => u.id);
 
-  const users = data?.communityUsers
+  const users = data?.users
     .filter((u) => !usersAlreadyIncludedIds.includes(u.id))
     .map((u) => ({ ...u, selected: selectedUserIds.includes(u.id) }));
 
@@ -47,12 +65,28 @@ function ConversationAddUsersDialog(props) {
     }
   };
 
+  const onAddUsersClick = () => {
+    updateConversation({
+      variables: {
+        input: {
+          id: conversationId,
+          users: {
+            values: selectedUserIds,
+            action: 'ADD',
+          },
+        },
+      },
+    });
+    setOpen(false);
+  };
+
   return (
     <UserSelectModalComponent
       loading={loading}
       users={users}
       open={open}
       onCancelClick={onCancelClick}
+      onAddUsersClick={onAddUsersClick}
       onUserItemClick={onUserItemClick}
     />
   );

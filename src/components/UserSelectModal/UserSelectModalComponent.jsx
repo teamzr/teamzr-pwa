@@ -11,7 +11,14 @@ import {
 import UserSearchListComponent from '../UserSearchListComponent/UserSearchListComponent';
 
 function UserSelectModalComponent(props) {
-  const { open, users, loading, onCancelClick, onUserItemClick } = props;
+  const {
+    open,
+    users,
+    loading,
+    onAddUsersClick,
+    onCancelClick,
+    onUserItemClick,
+  } = props;
 
   return (
     <Dialog scroll={'paper'} open={open} maxWidth={'sm'} fullWidth={true}>
@@ -25,7 +32,11 @@ function UserSelectModalComponent(props) {
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancelClick}>Cancel</Button>
-        <Button color={'primary'} variant={'contained'}>
+        <Button
+          color={'primary'}
+          variant={'contained'}
+          onClick={onAddUsersClick}
+        >
           Add users
         </Button>
       </DialogActions>

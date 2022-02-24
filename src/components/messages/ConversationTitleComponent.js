@@ -37,8 +37,10 @@ function ConversationTitleComponent(props) {
 
   const [name, setName] = React.useState('');
 
+  const isGroup = data?.conversation?.type != 'DIRECT';
+
   React.useEffect(() => {
-    if (data?.conversation?.users.length > 1) {
+    if (isGroup) {
       setName(data?.conversation?.name);
     } else {
       setName(data?.conversation?.users[0].name);
@@ -72,7 +74,7 @@ function ConversationTitleComponent(props) {
         <TextField
           InputProps={{ disableUnderline: true }}
           fullWidth
-          disabled={data?.conversation?.users.length < 2}
+          disabled={!isGroup}
           value={name}
           variant={'standard'}
           onChange={handleChange}

@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import * as React from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import {
   AddStepIcon,
   TeamzrButtonIcon,
@@ -34,6 +34,19 @@ const USERS_QUERY = gql`
   }
 `;
 
+const UPDATE_CONVERSATION_MUTATION = gql`
+  mutation updateConversation($input: ConversationUpdateInput!) {
+    updateConversation(input: $input) {
+      id
+      name
+      users {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export default function CoversationSidebarUsers({ conversationId }) {
   const { loading, error, data } = useQuery(USERS_QUERY, {
     variables: {
@@ -42,6 +55,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
   });
 
   const [openAdd, setOpenAdd] = React.useState(false);
+  const [actionUserId, setActionUserId] = React.useState(0);
 
   const onAddUserClick = () => {
     setOpenAdd(!openAdd);
@@ -51,8 +65,28 @@ export default function CoversationSidebarUsers({ conversationId }) {
     setOpenAdd(false);
   };
   const [removeDialogOpen, setRemoveDialogOpen] = React.useState(false);
-  const handleUserRemove = () => {
+
+  const handleUserRemoveDialogShow = (id) => {
+    setRemoveDialogOpen(true);
+    setActionUserId(id);
+  };
+  const handleUserRemoveCancel = () => {
     setRemoveDialogOpen(!removeDialogOpen);
+  };
+  const [updateConversation] = useMutation(UPDATE_CONVERSATION_MUTATION);
+  const handleUserRemove = () => {
+    updateConversation({
+      variables: {
+        input: {
+          id: conversationId,
+          users: {
+            values: [actionUserId],
+            action: 'REMOVE',
+          },
+        },
+      },
+    });
+    setRemoveDialogOpen(false);
   };
 
   if (data?.conversation?.type == 'DIRECT') {
@@ -70,7 +104,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
               <ListItemText primary={u.name} />
               <ListItemSecondaryAction>
                 <IconButton
-                  onClick={handleUserRemove}
+                  onClick={() => handleUserRemoveDialogShow(u.id)}
                   style={{ width: '12px', height: '12px' }}
                 >
                   <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
@@ -89,6 +123,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
       <ConversationAddUsersDialog
         open={openAdd}
         conversationId={conversationId}
+        setOpen={setOpenAdd}
         onCancelClick={onCancelClick}
       />
       <AlertDialogComponent
@@ -100,7 +135,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
             <Button
               color={'primary'}
               variant={'outlined'}
-              onClick={handleUserRemove}
+              onClick={handleUserRemoveCancel}
             >
               Cancel
             </Button>

@@ -6,20 +6,17 @@ import {
   Grid,
   Typography,
   makeStyles,
-  Badge,
   Tooltip,
 } from '@material-ui/core';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/client';
 import useAuthContext from '../../context/AuthContext';
 import { AvatarGroup } from '@material-ui/lab';
 
 function ConversationComponent(props) {
-  const { id, name, messageAt, messages, users, read } = props;
-  const isGroup = users.length > 1;
+  const { id, name, messageAt, messages, users, read, type } = props;
+  const isGroup = type != 'DIRECT';
   const classes = useConversationComponentStyle();
   const router = useRouter();
   const { conversationId } = router.query;

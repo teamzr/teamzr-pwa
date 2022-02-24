@@ -48,7 +48,11 @@ function UserSearchListComponent({ users, loading, onUserItemClick }) {
                 </ListItemAvatar>
                 <ListItemText id={user.id} primary={user.name} />
                 <ListItemSecondaryAction>
-                  <Checkbox color={'primary'} checked={user.selected} />
+                  <Checkbox
+                    color={'primary'}
+                    checked={user.selected}
+                    onClick={() => handleItemClick(user.id)}
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
