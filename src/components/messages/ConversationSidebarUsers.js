@@ -9,6 +9,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
 import {
   AddStepIcon,
@@ -19,6 +20,7 @@ import AccordionComponent from '../AccordionComponent';
 import { gql } from '@apollo/client/core';
 import ConversationAddUsersDialog from './ConversationAddUsersDialog';
 import AlertDialogComponent from '../AlertDialog/AlertDialogComponent';
+import { ConversationSidebarUsersItemActions } from './ConversationSidebarUsersItemActions';
 
 const USERS_QUERY = gql`
   query conversation($conversationId: ID!) {
@@ -88,6 +90,10 @@ export default function CoversationSidebarUsers({ conversationId }) {
     });
     setRemoveDialogOpen(false);
   };
+  const router = useRouter();
+  const onProfileClick = (id) => {
+    router.push('/users/[username]', `/users/${id}`);
+  };
 
   if (data?.conversation?.type == 'DIRECT') {
     return false;
@@ -103,12 +109,11 @@ export default function CoversationSidebarUsers({ conversationId }) {
               </ListItemIcon>
               <ListItemText primary={u.name} />
               <ListItemSecondaryAction>
-                <IconButton
-                  onClick={() => handleUserRemoveDialogShow(u.id)}
-                  style={{ width: '12px', height: '12px' }}
-                >
-                  <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
-                </IconButton>
+                <ConversationSidebarUsersItemActions
+                  userId={u.id}
+                  onRemoveClick={handleUserRemoveDialogShow}
+                  onProfileClick={onProfileClick}
+                />
               </ListItemSecondaryAction>
             </ListItem>
           ))}
