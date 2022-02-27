@@ -28,6 +28,7 @@ export function ConversationSidebarUsersItemActions(props) {
   };
 
   const handleRemove = () => {
+    setAnchorEl(null);
     onRemoveClick(userId);
   };
 
