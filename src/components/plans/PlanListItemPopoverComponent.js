@@ -18,7 +18,7 @@ import {
   VerticalDotsIcon,
 } from '../../constants/Icons';
 
-function PlanListItemPopperComponent(props) {
+function PlanListItemPopperComponent({ onRemoveClick }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
@@ -27,7 +27,9 @@ function PlanListItemPopperComponent(props) {
 
   const handleEdit = () => {};
 
-  const handleRemove = () => {};
+  const handleRemove = () => {
+    onRemoveClick();
+  };
 
   const togglePopover = (event) => {
     if (anchorEl) {

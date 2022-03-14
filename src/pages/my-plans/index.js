@@ -28,7 +28,11 @@ const PLANS_QUERY = gql`
 `;
 
 function Campaigns(props) {
-  const { data, error, loading } = useQuery(PLANS_QUERY);
+  const { data, error, loading } = useQuery(PLANS_QUERY, {
+    //TODO: Remove plan invalidate cache and filter out the plan
+    pollInterval: 1500,
+    fetchPolicy: 'network-only',
+  });
 
   const router = useRouter();
   const [conversationId, setConversationId] = React.useState(
@@ -42,7 +46,7 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   const conversations = Object.values(conversationsObject);
-  
+
   if (loading || error) return <LoadingIndicatorComponent />;
 
   return (
