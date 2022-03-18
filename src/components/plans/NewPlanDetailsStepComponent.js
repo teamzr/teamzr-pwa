@@ -29,8 +29,8 @@ function NewPlanDetailsStepComponent(props) {
           value={name}
           onChange={handleChange}
           name={'name'}
-          label={`Name (${name.length} characters out of 30 max)`}
-          inputProps={{ maxlength: 30 }}
+          label={`Name (${name.length} characters out of 40 max)`}
+          inputProps={{ maxlength: 40 }}
           autoComplete={false}
         />
       </Grid>
