@@ -10,7 +10,7 @@ import PlanListComponent from '../../components/plans/PlanListComponent';
 import { useRouter } from 'next/router';
 import MyPlansHeaderComponent from '../../components/plans/MyPlansHeaderComponent';
 
-const PLANS_QUERY = gql`
+export const PLANS_QUERY = gql`
   {
     plans {
       id
@@ -28,11 +28,7 @@ const PLANS_QUERY = gql`
 `;
 
 function Campaigns(props) {
-  const { data, error, loading } = useQuery(PLANS_QUERY, {
-    //TODO: Remove plan invalidate cache and filter out the plan
-    pollInterval: 1500,
-    fetchPolicy: 'network-only',
-  });
+  const { data, error, loading } = useQuery(PLANS_QUERY);
 
   const router = useRouter();
   const [conversationId, setConversationId] = React.useState(

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { gql } from 'apollo-boost';
 import {
   Button,
@@ -13,6 +13,7 @@ import {
 import { MoneyRewardIcon, VerticalDotsIcon } from '../../constants/Icons';
 import PlanListItemPopoverComponent from './PlanListItemPopoverComponent';
 import AlertDialogComponent from '../AlertDialog/AlertDialogComponent';
+import { PLANS_QUERY } from '../../pages/my-plans';
 
 const DELETE_PLAN_MUTATION = gql`
   mutation deletePlan($id: ID!) {
@@ -25,10 +26,24 @@ function PlanListItemComponent(props) {
   const router = useRouter();
 
   const [alertDialogOpen, setAlertDialogOpen] = React.useState(false);
-
+  const apolloClient = useApolloClient();
   const [deletePlan] = useMutation(DELETE_PLAN_MUTATION, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       setAlertDialogOpen(false);
+    },
+    update: (cache, { data }) => {
+      const { plans } = apolloClient.readQuery({
+        query: PLANS_QUERY,
+      });
+
+      const newPlans = [...plans];
+      const index = newPlans.findIndex((s) => s.id == planId);
+      newPlans.splice(index, 1);
+
+      apolloClient.writeQuery({
+        query: PLANS_QUERY,
+        data: { plans: newPlans },
+      });
     },
   });
 

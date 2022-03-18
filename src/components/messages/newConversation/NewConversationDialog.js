@@ -23,8 +23,8 @@ function NewConversationDialog(props) {
 
   const [createConversation] = useMutation(CREATE_CONVERSATION, {
     onCompleted: () => {
-      onClose()
-    }
+      onClose();
+    },
   });
   const router = useRouter();
 
@@ -64,7 +64,7 @@ function NewConversationDialog(props) {
         open={open}
         onClose={onClose}
         fullScreen={true}
-        maxWidth={true}
+        maxWidth={'md'}
         TransitionComponent={Transition}
       >
         <AppBarComponent

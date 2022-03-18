@@ -28,6 +28,7 @@ function PlanListItemPopperComponent({ onRemoveClick }) {
   const handleEdit = () => {};
 
   const handleRemove = () => {
+    setAnchorEl(null);
     onRemoveClick();
   };
 
