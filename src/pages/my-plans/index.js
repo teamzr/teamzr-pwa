@@ -28,7 +28,9 @@ export const PLANS_QUERY = gql`
 `;
 
 function Campaigns(props) {
-  const { data, error, loading } = useQuery(PLANS_QUERY);
+  const { data, error, loading } = useQuery(PLANS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
 
   const router = useRouter();
   const [conversationId, setConversationId] = React.useState(
