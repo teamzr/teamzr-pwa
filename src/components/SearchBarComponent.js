@@ -5,6 +5,7 @@ import { InputBase, makeStyles } from '@material-ui/core';
 import { SearchIcon } from '../constants/Icons';
 
 function SearchBarComponent(props) {
+  const { onChange } = props;
   const classes = useSearchBarComponent();
   return (
     <div className={classes.search}>
@@ -12,6 +13,7 @@ function SearchBarComponent(props) {
         <SearchIcon />
       </div>
       <InputBase
+        onChange={onChange}
         placeholder="Search"
         classes={{
           root: classes.inputRoot,

@@ -17,10 +17,34 @@ function UserSearchListComponent({ users, loading, onUserItemClick }) {
   const handleItemClick = (userId) => {
     onUserItemClick(userId);
   };
+
+  const handleOnUserItemClick = (id) => {
+    onUserItemClick(id);
+  };
+
+  const [usersValue, setUsersValue] = React.useState(users);
+  const [searchValue, setSearchValue] = React.useState('');
+
+  React.useEffect(() => {
+    setUsersValue(
+      users.filter((user) =>
+        user?.name?.toLowerCase().startsWith(searchValue.toLowerCase())
+      )
+    );
+  }, [users]);
+
+  const onChange = (event) => {
+    const val = event.target.value;
+    setSearchValue(val);
+    const filtered = users.filter((user) =>
+      user.name.toLowerCase().startsWith(val.toLowerCase())
+    );
+    setUsersValue(filtered);
+  };
   return (
     <Box>
       <Box>
-        <SearchBarComponent />
+        <SearchBarComponent onChange={onChange} />
       </Box>
       <Box
         style={{
@@ -37,11 +61,11 @@ function UserSearchListComponent({ users, loading, onUserItemClick }) {
             </>
           )}
           {!loading &&
-            users.map((user, i) => (
+            usersValue.map((user, i) => (
               <ListItem
                 key={i}
                 button={true}
-                onClick={() => handleItemClick(user.id)}
+                onClick={() => handleOnUserItemClick(user.id)}
               >
                 <ListItemAvatar>
                   <Avatar src={user.avatar} />
