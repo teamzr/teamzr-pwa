@@ -49,7 +49,7 @@ function NewPlanComponent(props) {
   });
   const router = useRouter();
 
-  const [createPlan] = useMutation(CREATE_PLAN_MUTATION, upda);
+  const [createPlan] = useMutation(CREATE_PLAN_MUTATION);
 
   const onDataChange = (name, value) => {
     setData(Object.assign({}, data, { [name]: value }));
