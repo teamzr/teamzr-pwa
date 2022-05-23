@@ -9,6 +9,7 @@ import MyPlansConversationFilterComponent from '../../components/plans/MyPlansCo
 import PlanListComponent from '../../components/plans/PlanListComponent';
 import { useRouter } from 'next/router';
 import MyPlansHeaderComponent from '../../components/plans/MyPlansHeaderComponent';
+import CreatePlanDialButton from '../../components/plans/CreatePlanDialButton';
 
 export const PLANS_QUERY = gql`
   {
@@ -48,32 +49,35 @@ function Campaigns(props) {
   if (loading || error) return <LoadingIndicatorComponent />;
 
   return (
-    <DefaultLayout>
-      <Container style={{ marginTop: '8px' }}>
-        <Grid container direction={'column'} spacing={1}>
-          <Grid item xs={12}>
-            <MyPlansHeaderComponent />
-          </Grid>
-          <Grid item xs={12}>
-            <MyPlansConversationFilterComponent
-              conversations={conversations}
-              conversationId={conversationId}
-              setConversationId={setConversationId}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container direction={'row'} justify={'center'}>
-              <Grid item xs={12}>
-                <PlanListComponent
-                  plans={data?.plans}
-                  conversationId={conversationId}
-                />
+    <>
+      <DefaultLayout>
+        <Container style={{ marginTop: '8px' }}>
+          <Grid container direction={'column'} spacing={1}>
+            <Grid item xs={12}>
+              <MyPlansHeaderComponent />
+            </Grid>
+            <Grid item xs={12}>
+              <MyPlansConversationFilterComponent
+                conversations={conversations}
+                conversationId={conversationId}
+                setConversationId={setConversationId}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container direction={'row'} justify={'center'}>
+                <Grid item xs={12}>
+                  <PlanListComponent
+                    plans={data?.plans}
+                    conversationId={conversationId}
+                  />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </DefaultLayout>
+        </Container>
+      </DefaultLayout>
+      <CreatePlanDialButton />
+    </>
   );
 }
 
