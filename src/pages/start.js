@@ -35,7 +35,7 @@ function Start() {
           direction={'column'}
           className={classes.container}
           justify={'center'}
-          alignIntems={'center'}
+          alignItems={'center'}
           alignContent={'center'}
         >
           <Grid item xs={12}>
