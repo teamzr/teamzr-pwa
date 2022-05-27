@@ -4,14 +4,7 @@ import { gql } from 'apollo-boost';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import AppBarComponent from '../AppBarComponent/AppBarComponent';
-
-const CREATE_CONVERSATION = gql`
-  mutation createConversation($input: ConversationCreateInput!) {
-    createConversation(input: $input) {
-      id
-    }
-  }
-`;
+import { PlanSettingsFormComponent } from './PlanSettingsFormComponent';
 
 function PlanSettingsDialog(props) {
   const { open, onClose } = props;
@@ -20,23 +13,9 @@ function PlanSettingsDialog(props) {
   const [name, setName] = React.useState('');
   const [isCreatingGroup, setIsCreatingGroup] = React.useState(false);
 
-  const [createConversation] = useMutation(CREATE_CONVERSATION, {
-    onCompleted: () => {
-      onClose();
-    },
-  });
   const router = useRouter();
 
   const handleCreateConversation = async (name, users) => {
-    const { data } = await createConversation({
-      variables: {
-        input: {
-          name: name ? name : undefined,
-          users: users,
-        },
-      },
-    });
-
     router.push(
       '/messages/[conversationId]',
       `/messages/${data.createConversation.id}`
@@ -82,6 +61,7 @@ function PlanSettingsDialog(props) {
             </>
           }
         />
+        <PlanSettingsFormComponent />
       </Dialog>
     </>
   );

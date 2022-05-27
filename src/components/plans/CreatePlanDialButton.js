@@ -1,7 +1,7 @@
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/lab';
 import * as React from 'react';
 import { AddStepIcon } from '../../constants/Icons';
-import PlanSettingsDialog from './PlanSettingsDialog';
+import PlanSettingsDialog from '../PlanSettings/PlanSettingsDialog';
 
 const actions = [
   { name: 'Group', icon: AddStepIcon },
