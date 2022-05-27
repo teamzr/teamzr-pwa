@@ -2,17 +2,16 @@ import { Grid } from '@material-ui/core';
 import * as React from 'react';
 
 import { TextFieldComponent } from '../form/TextFieldComponent';
-import UserProfileInterestsComponent from '../UserProfile/UserProfileInterestsComponent';
 import DateSelect from './DateSelect';
 import DurationSelect from './DurationSelect';
+import PlanSettingsFormInterests from './PlanSettingsFormInterests';
 
 export function PlanSettingsFormComponent(props) {
-  const [value, setValue] = React.useState('');
-  const [duration, setDuration] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [duration, setDuration] = React.useState('DAY');
+  const [interests, setInterests] = React.useState([]);
 
-  const handleChange = (val) => {
-    setValue(val);
-  };
   return (
     <Grid container direction={'column'}>
       <Grid xs={2}></Grid>
@@ -21,8 +20,8 @@ export function PlanSettingsFormComponent(props) {
           <Grid item>About plan</Grid>
           <Grid item xs={12}>
             <TextFieldComponent
-              value={value}
-              onChange={handleChange}
+              value={name}
+              onChange={setName}
               placeholder={'Name your plan'}
               maxLenght={40}
             />
@@ -30,15 +29,18 @@ export function PlanSettingsFormComponent(props) {
           <Grid item>
             <TextFieldComponent
               multiline
-              value={value}
-              onChange={handleChange}
+              value={description}
+              onChange={setDescription}
               placeholder={'Describe the goal'}
               maxLenght={150}
             />
           </Grid>
           <Grid item>
             Interests
-            <UserProfileInterestsComponent />
+            <PlanSettingsFormInterests
+              value={interests}
+              onChange={setInterests}
+            />
           </Grid>
           <Grid item>
             Start Date
