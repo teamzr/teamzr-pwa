@@ -14,8 +14,14 @@ export const CREATE_PLAN_MUTATION = gql`
     createPlan(input: $input) {
       id
       name
-      description
-      conversation
+      conversation {
+        id
+        name
+        users {
+          id
+          avatar
+        }
+      }
     }
   }
 `;

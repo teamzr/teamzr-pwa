@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { VerticalDotsIcon } from '../../constants/Icons';
 import ConversationSidebarPlans from './ConversationSidebarPlans';
 import ConversationSidebarUsers from './ConversationSidebarUsers';
+import PlanSettingsDialog from '../PlanSettings/PlanSettingsDialog';
 
 const useStyles = makeStyles({
   root: {},
@@ -25,8 +26,13 @@ function ConversationSidebarComponent(props) {
   const router = useRouter();
   const conversationId = router.query.conversationId;
 
+  const [planDialogOpen, setPlanDialogOpen] = React.useState(false);
+  const onClosePlanDialog = () => {
+    setPlanDialogOpen(!planDialogOpen);
+  };
+
   const handleAddCampaign = () => {
-    router.push({ pathname: '/plans/new', query: { conversationId } });
+    setPlanDialogOpen(true);
   };
 
   const handleViewPlans = () => {
@@ -69,6 +75,13 @@ function ConversationSidebarComponent(props) {
           <ConversationSidebarUsers conversationId={conversationId} />
         </div>
       </Drawer>
+      {planDialogOpen && (
+        <PlanSettingsDialog
+          open={planDialogOpen}
+          onClose={onClosePlanDialog}
+          conversationId={conversationId}
+        />
+      )}
     </>
   );
 }
