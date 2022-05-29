@@ -30,7 +30,7 @@ export const PLANS_QUERY = gql`
 
 function Campaigns(props) {
   const { data, error, loading } = useQuery(PLANS_QUERY, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   });
 
   const router = useRouter();
@@ -76,7 +76,7 @@ function Campaigns(props) {
           </Grid>
         </Container>
       </DefaultLayout>
-      <CreatePlanDialButton />
+      <CreatePlanDialButton conversationId={conversationId} />
     </>
   );
 }

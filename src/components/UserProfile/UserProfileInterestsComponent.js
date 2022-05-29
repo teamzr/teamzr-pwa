@@ -16,13 +16,14 @@ function UserProfileInterestsComponent({
   onChange,
   loading,
   disabled,
+  max,
 }) {
   const [inputValue, setInputValue] = React.useState('');
 
   const onAutocompleteChange = (event, selectedOpt) => {
-    if (selectedOpt.length > 7) {
-      selectedOpt[6] = selectedOpt[7];
-      selectedOpt.splice(6, 1);
+    if (max != null && selectedOpt.length > max) {
+      selectedOpt[max - 1] = selectedOpt[max - 1];
+      selectedOpt.splice(max - 1, 1);
     }
     onChange(selectedOpt);
 
@@ -102,7 +103,7 @@ function UserProfileInterestsComponent({
           fullWidth={true}
           label={false}
           variant={'standard'}
-          placeholder={!disabled && 'Find or create Interest'}
+          placeholder={!disabled && 'Type an interest'}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

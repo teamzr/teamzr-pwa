@@ -1,9 +1,15 @@
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import moment from 'moment';
 import * as React from 'react';
 
-export default function DateSelect(props) {
+export default function DateSelect({ value, onChange, minDate, ...props }) {
   return (
-    <KeyboardDatePicker format={'DD/MM/YY'} minDate={moment()} fullWidth left />
+    <KeyboardDatePicker
+      fullWidth
+      format={'DD.MM.YYYY'}
+      minDate={minDate}
+      value={value}
+      onChange={onChange}
+      {...props}
+    />
   );
 }

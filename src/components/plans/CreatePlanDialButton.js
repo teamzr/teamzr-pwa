@@ -1,4 +1,4 @@
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/lab';
+import { SpeedDial, SpeedDialIcon } from '@material-ui/lab';
 import * as React from 'react';
 import { AddStepIcon } from '../../constants/Icons';
 import PlanSettingsDialog from '../PlanSettings/PlanSettingsDialog';
@@ -10,6 +10,7 @@ const actions = [
 ];
 
 export default function CreatePlanDialButton(props) {
+  const { conversationId } = props;
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -22,7 +23,11 @@ export default function CreatePlanDialButton(props) {
         icon={<SpeedDialIcon />}
         onClick={toggleDialog}
       ></SpeedDial>
-      <PlanSettingsDialog open={isDialogOpen} onClose={toggleDialog} />
+      <PlanSettingsDialog
+        open={isDialogOpen}
+        onClose={toggleDialog}
+        conversationId={conversationId}
+      />
     </>
   );
 }

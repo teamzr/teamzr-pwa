@@ -8,3 +8,14 @@ export const ME_ADD_INTEREST = gql`
     }
   }
 `;
+
+export const CREATE_PLAN_MUTATION = gql`
+  mutation createPlan($input: PlanCreateInput!) {
+    createPlan(input: $input) {
+      id
+      name
+      description
+      conversation
+    }
+  }
+`;

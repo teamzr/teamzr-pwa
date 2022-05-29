@@ -37,7 +37,7 @@ export default function PlanSettingsFormInterests({
       }
     }
 
-    onChange(data?.interests.filter((i) => interests.includes(i.id)));
+    onChange(values);
     setIsLoading(false);
   };
 
@@ -48,6 +48,7 @@ export default function PlanSettingsFormInterests({
       value={value}
       loading={isLoading}
       disabled={disabled}
+      x
     />
   );
 }

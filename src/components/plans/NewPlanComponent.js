@@ -11,6 +11,7 @@ import NewCampaignRewardStepComponent from './NewPlanRewardStepComponent';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/client';
 import BackBtnComponent from '../BackBtnComponent';
+import { CREATE_PLAN_MUTATION } from '../../gql-mutations/mutations';
 
 export const NEW_CAMPAING_STEPS = {
   DETAILS: 'DETAILS',
@@ -25,16 +26,6 @@ const stepComponentMap = {
   [NEW_CAMPAING_STEPS.STEP_DURATION]: NewCampaignDurationStepComponent,
   [NEW_CAMPAING_STEPS.REWARD]: NewCampaignRewardStepComponent,
 };
-
-const CREATE_PLAN_MUTATION = gql`
-  mutation createPlan($input: PlanCreateInput!) {
-    createPlan(input: $input) {
-      id
-      name
-      description
-    }
-  }
-`;
 
 function NewPlanComponent(props) {
   const { conversationId } = props;
