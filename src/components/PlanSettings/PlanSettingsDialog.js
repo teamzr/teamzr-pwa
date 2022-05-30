@@ -32,6 +32,7 @@ function PlanSettingsDialog(props) {
           stepDuration: duration,
           rewardDescription,
           conversationId,
+          interests: interests.map((i) => i.id),
         },
       },
     });
