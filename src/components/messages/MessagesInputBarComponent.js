@@ -37,8 +37,10 @@ const SEND_MESSAGE_MUTATION = gql`
       id
       author {
         id
+        name
       }
       text
+      createdAt
     }
   }
 `;
@@ -59,7 +61,6 @@ function MessagesInputBarComponent(props) {
         query: GET_MESSAGES_FROM_QUERY,
         variables: { conversationId },
       });
-      createMessage.createdAt = Date.now();
 
       cache.writeQuery({
         query: GET_MESSAGES_FROM_QUERY,

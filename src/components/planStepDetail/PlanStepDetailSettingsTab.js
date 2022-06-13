@@ -13,14 +13,24 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
       id
       name
       description
+      startDate
+      endDate
       number
       status
       duration
-      startDate
-      endDate
+      fulfillments {
+        id
+        value
+        user {
+          id
+          avatar
+        }
+      }
+      plan {
+        id
+      }
       parent {
         id
-        name
       }
     }
   }
@@ -30,7 +40,7 @@ function PlanStepDetailSettingsTab(props) {
   const { planStepId, stepData } = props;
   const planStep = stepData.planStep;
 
-  const isViewOnly = planStep.status == PLAN_STEP_STATUSES.COMPLETED
+  const isViewOnly = planStep.status == PLAN_STEP_STATUSES.COMPLETED;
 
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
@@ -70,7 +80,7 @@ function PlanStepDetailSettingsTab(props) {
 
   return (
     <Grid container direction={'column'} spacing={2}>
-      <Grid item >        
+      <Grid item>
         <TextField
           disabled={isViewOnly}
           fullWidth
@@ -87,7 +97,7 @@ function PlanStepDetailSettingsTab(props) {
       </Grid>
       <Grid item>
         <TextField
-        disabled={isViewOnly}
+          disabled={isViewOnly}
           multiline
           rows={3}
           rowsMax={6}

@@ -73,6 +73,14 @@ const UPDATE_PLAN_MUTATION = gql`
         number
         status
         duration
+        fulfillments {
+          id
+          value
+          user {
+            id
+            avatar
+          }
+        }
         plan {
           id
         }
@@ -100,6 +108,7 @@ function PlanComponent(props) {
     data: planStepsData,
   } = useQuery(PLAN_STEPS_QUERY, {
     fetchPolicy: 'network-only',
+    pollInterval: 2000,
     variables: { planId },
   });
 
