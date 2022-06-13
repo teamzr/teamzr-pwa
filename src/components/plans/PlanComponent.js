@@ -1,11 +1,10 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
-import { gql } from 'apollo-boost';
 import moment from 'moment';
 
 import PlanStepsComponent from '../planSteps/PlanStepsComponent';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery, gql, useMutation } from '@apollo/react-hooks';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import { DatePicker } from '@material-ui/pickers';
 

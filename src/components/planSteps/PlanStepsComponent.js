@@ -24,7 +24,7 @@ function PlanStepsComponent(props) {
   const [stepDialogState, setStepDialogState] = React.useState({
     planStepId: null,
   });
-  
+
   const handleStepClick = (planStepId) => {
     setStepDialogState({ planStepId });
   };
@@ -119,7 +119,7 @@ function PlanStepsComponent(props) {
         </Grid>
       </Grid>
       {stepDialogState.planStepId && (
-        <PlanStepsDialogComponent       
+        <PlanStepsDialogComponent
           planStepId={stepDialogState.planStepId}
           handleClose={handleCloseStepsDialog}
         />

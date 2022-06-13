@@ -28,6 +28,24 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
       }
       plan {
         id
+        steps {
+          id
+          name
+          description
+          number
+          startDate
+          endDate
+          duration
+          status
+          fulfillments {
+            id
+            value
+            user {
+              id
+              avatar
+            }
+          }
+        }
       }
       parent {
         id

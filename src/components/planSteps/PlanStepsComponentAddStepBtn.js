@@ -13,7 +13,18 @@ const CREATE_PLAN_TASK_MUTATION = gql`
       name
       description
       number
+      startDate
+      endDate
+      duration
       status
+      fulfillments {
+        id
+        value
+        user {
+          id
+          avatar
+        }
+      }
       plan {
         id
         name
