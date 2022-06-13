@@ -16,6 +16,10 @@ export const GET_MESSAGES_FROM_QUERY = gql`
         id
         name
       }
+      conversation {
+        id
+        readByIds
+      }
       text
       createdAt
     }
@@ -45,10 +49,6 @@ function MessagesComponent(props) {
     MARK_CONVERSATION_AS_READ_MUTATION
   );
 
-  if (conversationId != null) {
-    markConversationAsRead({ variables: { id: conversationId } });
-  }
-
   const { loading, error, data } = useQuery(GET_MESSAGES_FROM_QUERY, {
     variables: {
       conversationId,
@@ -71,6 +71,12 @@ function MessagesComponent(props) {
         {data.messages.map((m, key) => {
           const fromMe = m.author.id == authCtx.user.id;
           const date = moment(parseInt(m.createdAt)).format('DD.MM. HH:mm');
+          if (
+            m?.conversation?.id == conversationId &&
+            !m?.conversation?.readByIds?.includes(authCtx.user.id)
+          ) {
+            markConversationAsRead({ variables: { id: conversationId } });
+          }
           return (
             <Grid
               key={key}
