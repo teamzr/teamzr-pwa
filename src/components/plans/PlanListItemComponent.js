@@ -72,7 +72,7 @@ function PlanListItemComponent(props) {
           <PlanListItemPopoverComponent onRemoveClick={handleOpenDialog} />
         </ListItemIcon>
       </ListItem>
-      <Divider variant={'inset'} component={'li'} />
+      <Divider variant={'inset'} component={'div'} />
       <AlertDialogComponent
         open={alertDialogOpen}
         title={'Plan delete confirmation'}

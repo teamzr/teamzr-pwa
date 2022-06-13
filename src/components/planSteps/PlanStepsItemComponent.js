@@ -50,7 +50,7 @@ function PlanStepsItemComponent(props) {
     setIsDragActive(true);
   };
 
-  const isDragable = status != PLAN_STEP_STATUSES.COMPLETED
+  const isDragable = status != PLAN_STEP_STATUSES.COMPLETED;
 
   const originalIndex = findStep(planStepId).index;
 
@@ -60,7 +60,7 @@ function PlanStepsItemComponent(props) {
       isDragging: monitor.isDragging(),
     }),
     canDrag: (monitor) => {
-      return isDragActive && isDragable;
+      return isDragActive && isDragable;
     },
     end: (dropResult, monitor) => {
       const { id: droppedId, originalIndex } = monitor.getItem();
@@ -68,7 +68,7 @@ function PlanStepsItemComponent(props) {
       if (!didDrop) {
         moveStep(droppedId, originalIndex, didDrop);
       } else {
-        if(!isDragable) return false;
+        if (!isDragable) return false;
         const { planStep, index } = findStep(droppedId);
         updatePlanStep({
           variables: {
@@ -88,7 +88,7 @@ function PlanStepsItemComponent(props) {
     hover({ id: draggedId }) {
       if (draggedId !== planStepId) {
         const { index: overIndex } = findStep(planStepId);
-        if(!isDragable) return false;
+        if (!isDragable) return false;
         moveStep(draggedId, overIndex);
       }
     },
@@ -104,9 +104,11 @@ function PlanStepsItemComponent(props) {
     `${descriptionProp}` ||
     (status == 'UNDEFINED' && 'Tap to specify step details');
   return (
-    <li ref={(node) => drag(drop(node))} style={{ opacity }}>
+    <div ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
-        {isDragable && (<PlanStepsItemDragIconComponent onMouseDown={onMouseDown} />)}
+        {isDragable && (
+          <PlanStepsItemDragIconComponent onMouseDown={onMouseDown} />
+        )}
         <ListItemIcon onClick={handleCLick} style={{ cursor: 'pointer' }}>
           <PlanStepItemComponentIcon status={status} number={number} />
         </ListItemIcon>
@@ -126,13 +128,15 @@ function PlanStepsItemComponent(props) {
         </ListItemIcon>
       </ListItem>
       <Grid container>
-        {status != PLAN_STEP_STATUSES.COMPLETED && (<Grid item>
-          <PlanStepsComponentAddStepBtn
-            parentId={planStepId}
-            planId={planId}
-            number={number}
-          />
-        </Grid>)}        
+        {status != PLAN_STEP_STATUSES.COMPLETED && (
+          <Grid item>
+            <PlanStepsComponentAddStepBtn
+              parentId={planStepId}
+              planId={planId}
+              number={number}
+            />
+          </Grid>
+        )}
         <Grid item>
           <ListItemText
             onClick={handleCLick}
@@ -167,7 +171,7 @@ function PlanStepsItemComponent(props) {
           <Divider />
         </Grid>
       </Grid>
-    </li>
+    </div>
   );
 }
 
