@@ -27,7 +27,8 @@ const error = onError(({ response, operation, networkError }) => {
 });
 
 const client = new ApolloClient({
-  ssrMode: true,
+  // TODO: After is ssrMode set to true – pollintarvel does not work
+  ssrMode: false,
   cache: new InMemoryCache(),
   link: ApolloLink.from([authLink, error, httpLink]),
 });
