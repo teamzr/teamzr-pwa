@@ -8,3 +8,27 @@ export const INTERESTS_QUERY = gql`
     }
   }
 `;
+
+export const PLAN_QUERY = gql`
+  query plan($planId: ID!) {
+    plan(id: $planId) {
+      id
+      name
+      description
+      startDate
+      author {
+        id
+        name
+      }
+      conversation {
+        id
+        name
+      }
+      interests {
+        id
+        name
+      }
+      stepDuration
+    }
+  }
+`;

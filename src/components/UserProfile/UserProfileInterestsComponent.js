@@ -38,7 +38,7 @@ function UserProfileInterestsComponent({
   const filterOptions = (options, state) => {
     const result = options.filter((opt) => {
       return (
-        opt.name.startsWith(state.inputValue) &&
+        opt?.name?.startsWith(state.inputValue) &&
         !value.find((elm) => opt.name == elm.name)
       );
     });

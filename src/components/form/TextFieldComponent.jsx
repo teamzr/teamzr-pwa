@@ -4,7 +4,7 @@ import * as React from 'react';
 export function TextFieldComponent({
   name,
   value,
-  maxLenght,
+  maxLength,
   onChange,
   ...props
 }) {
@@ -19,7 +19,7 @@ export function TextFieldComponent({
       value={value}
       onChange={handleChange}
       name={name}
-      inputProps={{ maxlength: 200 }}
+      inputProps={{ maxlength: maxLenght }}
       InputProps={{
         endAdornment:
           !!maxLenght && `${(!!value && value.length) || 0}/${maxLenght}`,

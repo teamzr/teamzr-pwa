@@ -7,25 +7,8 @@ import PlanStepsComponent from '../planSteps/PlanStepsComponent';
 import { useQuery, gql, useMutation } from '@apollo/react-hooks';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import { DatePicker } from '@material-ui/pickers';
-
-const PLAN_QUERY = gql`
-  query plan($planId: ID!) {
-    plan(id: $planId) {
-      id
-      name
-      description
-      startDate
-      author {
-        id
-        name
-      }
-      conversation {
-        id
-        name
-      }
-    }
-  }
-`;
+import { PLAN_QUERY } from '../../gql-queries/queries';
+import { UPDATE_PLAN_MUTATION } from '../../gql-mutations/mutations';
 
 export const PLAN_STEPS_QUERY = gql`
   query planSteps($planId: ID!) {
@@ -51,41 +34,6 @@ export const PLAN_STEPS_QUERY = gql`
       }
       parent {
         id
-      }
-    }
-  }
-`;
-
-const UPDATE_PLAN_MUTATION = gql`
-  mutation updatePlan($input: PlanUpdateInput!) {
-    updatePlan(input: $input) {
-      id
-      name
-      description
-      startDate
-      steps {
-        id
-        name
-        description
-        startDate
-        endDate
-        number
-        status
-        duration
-        fulfillments {
-          id
-          value
-          user {
-            id
-            avatar
-          }
-        }
-        plan {
-          id
-        }
-        parent {
-          id
-        }
       }
     }
   }

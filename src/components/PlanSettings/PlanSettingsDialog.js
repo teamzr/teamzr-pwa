@@ -1,15 +1,36 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Button, Dialog, Slide } from '@material-ui/core';
 
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { CREATE_PLAN_MUTATION } from '../../gql-mutations/mutations';
+import {
+  CREATE_PLAN_MUTATION,
+  UPDATE_PLAN_MUTATION,
+} from '../../gql-mutations/mutations';
+import { PLAN_QUERY } from '../../gql-queries/queries';
+
 import AppBarComponent from '../AppBarComponent/AppBarComponent';
 import { PlanSettingsFormComponent } from './PlanSettingsFormComponent';
 
 function PlanSettingsDialog(props) {
   const { open, onClose, planId, conversationId } = props;
+
+  const isEditing = !!planId;
+
+  const { data, loading } = useQuery(PLAN_QUERY, {
+    variables: { planId },
+    skip: !isEditing,
+  });
+
+  React.useEffect(() => {
+    if (!isEditing) return;
+
+    setName(data?.plan?.name);
+    setDescription(data?.plan?.description);
+    setInterests(data?.plan?.interests);
+    setDuration(data?.plan?.stepDuration);
+  }, [loading]);
 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -41,6 +62,26 @@ function PlanSettingsDialog(props) {
     router.push(`/plans/[planId]`, `/plans/${id}`);
   };
 
+  React.useEffect(() => {
+    if (loading || !isEditing) return;
+    handleSavePlan();
+  }, [name, description, startDate]);
+
+  const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
+  const handleSavePlan = async () => {
+    updatePlan({
+      variables: {
+        input: {
+          id: planId,
+          name,
+          description,
+          startDate,
+          interests: interests.map((i) => i.id),
+        },
+      },
+    });
+  };
+
   const handleBackClick = () => {
     onClose();
   };
@@ -55,17 +96,28 @@ function PlanSettingsDialog(props) {
       >
         <AppBarComponent
           level={'secondary'}
-          title={'Create new plan'}
+          title={isEditing ? 'Edit plan' : 'Create new plan'}
           onBackClick={handleBackClick}
           end={
             <>
-              <Button
-                onClick={handleCreatePlan}
-                color={'secondary'}
-                variant={'text'}
-              >
-                Create
-              </Button>
+              {!isEditing && (
+                <Button
+                  onClick={handleCreatePlan}
+                  color={'secondary'}
+                  variant={'text'}
+                >
+                  Create
+                </Button>
+              )}
+              {isEditing && (
+                <Button
+                  onClick={handleSavePlan}
+                  color={'secondary'}
+                  variant={'text'}
+                >
+                  Save
+                </Button>
+              )}
             </>
           }
         />

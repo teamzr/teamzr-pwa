@@ -39,7 +39,7 @@ export function PlanSettingsFormComponent(props) {
               value={name}
               onChange={setName}
               placeholder={'Name your plan'}
-              maxLenght={40}
+              maxlength={40}
             />
           </Grid>
           <Grid item>
@@ -48,7 +48,7 @@ export function PlanSettingsFormComponent(props) {
               value={description}
               onChange={setDescription}
               placeholder={'Describe the goal'}
-              maxLenght={150}
+              maxlength={150}
             />
           </Grid>
           <Grid item>

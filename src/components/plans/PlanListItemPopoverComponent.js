@@ -18,14 +18,16 @@ import {
   VerticalDotsIcon,
 } from '../../constants/Icons';
 
-function PlanListItemPopperComponent({ onRemoveClick }) {
+function PlanListItemPopperComponent({ onRemoveClick, onEditClick }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
   const router = useRouter();
   const conversationId = router.query.conversationId;
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    onEditClick();
+  };
 
   const handleRemove = () => {
     setAnchorEl(null);

@@ -14,6 +14,7 @@ import { MoneyRewardIcon, VerticalDotsIcon } from '../../constants/Icons';
 import PlanListItemPopoverComponent from './PlanListItemPopoverComponent';
 import AlertDialogComponent from '../AlertDialog/AlertDialogComponent';
 import { PLANS_QUERY } from '../../pages/my-plans';
+import PlanSettingsDialog from '../PlanSettings/PlanSettingsDialog';
 
 const DELETE_PLAN_MUTATION = gql`
   mutation deletePlan($id: ID!) {
@@ -26,6 +27,7 @@ function PlanListItemComponent(props) {
   const router = useRouter();
 
   const [alertDialogOpen, setAlertDialogOpen] = React.useState(false);
+  const [planEditOpen, setPlanEditOpen] = React.useState(false);
   const apolloClient = useApolloClient();
   const [deletePlan] = useMutation(DELETE_PLAN_MUTATION, {
     onCompleted: (data) => {
@@ -59,6 +61,10 @@ function PlanListItemComponent(props) {
     setAlertDialogOpen(true);
   };
 
+  const onToggleEditClick = () => {
+    setPlanEditOpen(!planEditOpen);
+  };
+
   return (
     <>
       <ListItem>
@@ -69,7 +75,10 @@ function PlanListItemComponent(props) {
           <ListItemText primary={name} secondary={conversationName} />
         </ListItem>
         <ListItemIcon>
-          <PlanListItemPopoverComponent onRemoveClick={handleOpenDialog} />
+          <PlanListItemPopoverComponent
+            onRemoveClick={handleOpenDialog}
+            onEditClick={onToggleEditClick}
+          />
         </ListItemIcon>
       </ListItem>
       <Divider variant={'inset'} component={'div'} />
@@ -89,6 +98,11 @@ function PlanListItemComponent(props) {
             <Button onClick={onRemoveClick}>Yes</Button>
           </>
         }
+      />
+      <PlanSettingsDialog
+        open={planEditOpen}
+        onClose={onToggleEditClick}
+        planId={planId}
       />
     </>
   );

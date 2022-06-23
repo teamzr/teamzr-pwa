@@ -25,3 +25,42 @@ export const CREATE_PLAN_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_PLAN_MUTATION = gql`
+  mutation updatePlan($input: PlanUpdateInput!) {
+    updatePlan(input: $input) {
+      id
+      name
+      description
+      startDate
+      steps {
+        id
+        name
+        description
+        startDate
+        endDate
+        number
+        status
+        duration
+        fulfillments {
+          id
+          value
+          user {
+            id
+            avatar
+          }
+        }
+        plan {
+          id
+        }
+        parent {
+          id
+        }
+      }
+      interests {
+        id
+        name
+      }
+    }
+  }
+`;

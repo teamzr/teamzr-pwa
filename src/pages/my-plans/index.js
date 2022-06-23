@@ -24,6 +24,10 @@ export const PLANS_QUERY = gql`
           avatar
         }
       }
+      interests {
+        id
+        name
+      }
     }
   }
 `;
