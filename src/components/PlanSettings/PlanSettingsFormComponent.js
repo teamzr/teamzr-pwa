@@ -76,7 +76,7 @@ export function PlanSettingsFormComponent(props) {
               value={rewardDescription}
               onChange={setRewardDescription}
               placeholder={'Reward details'}
-              maxLenght={40}
+              maxlength={40}
             />
           </Grid>
           <Grid item>
