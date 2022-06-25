@@ -31,6 +31,7 @@ function PlanSettingsDialog(props) {
     setDescription(data?.plan?.description);
     setInterests(data?.plan?.interests);
     setDuration(data?.plan?.stepDuration);
+    setRewardDescription(data?.plan?.rewardDescription);
   }, [loading]);
 
   const [name, setName] = React.useState('');
@@ -65,6 +66,7 @@ function PlanSettingsDialog(props) {
 
   React.useEffect(() => {
     if (loading || !isEditing) return;
+    // Todo: add Timeout
     handleSavePlan();
   }, [name, description, startDate, interests, duration, rewardDescription]);
 

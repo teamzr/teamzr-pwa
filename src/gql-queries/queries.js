@@ -29,6 +29,7 @@ export const PLAN_QUERY = gql`
         name
       }
       stepDuration
+      rewardDescription
     }
   }
 `;
