@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { Button, Dialog, Slide } from '@material-ui/core';
+import { Button, Dialog, IconButton, Slide } from '@material-ui/core';
 
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { VerticalDotsIcon } from '../../constants/Icons';
 import {
   CREATE_PLAN_MUTATION,
   UPDATE_PLAN_MUTATION,
@@ -65,7 +66,7 @@ function PlanSettingsDialog(props) {
   React.useEffect(() => {
     if (loading || !isEditing) return;
     handleSavePlan();
-  }, [name, description, startDate]);
+  }, [name, description, startDate, interests, duration, rewardDescription]);
 
   const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
   const handleSavePlan = async () => {
@@ -76,6 +77,8 @@ function PlanSettingsDialog(props) {
           name,
           description,
           startDate,
+          rewardDescription,
+          stepDuration: duration,
           interests: interests.map((i) => i.id),
         },
       },
@@ -110,13 +113,9 @@ function PlanSettingsDialog(props) {
                 </Button>
               )}
               {isEditing && (
-                <Button
-                  onClick={handleSavePlan}
-                  color={'secondary'}
-                  variant={'text'}
-                >
-                  Save
-                </Button>
+                <IconButton>
+                  <VerticalDotsIcon color={'white'} />
+                </IconButton>
               )}
             </>
           }
