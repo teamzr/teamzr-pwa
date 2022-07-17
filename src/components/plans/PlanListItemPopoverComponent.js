@@ -23,9 +23,12 @@ function PlanListItemPopperComponent({ onRemoveClick, onEditClick }) {
   const open = !!anchorEl;
 
   const router = useRouter();
+
+  // TODO ??
   const conversationId = router.query.conversationId;
 
   const handleEdit = () => {
+    setAnchorEl(null);
     onEditClick();
   };
 
