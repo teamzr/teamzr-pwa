@@ -48,7 +48,7 @@ export default function PlanSettingsFormInterests({
       value={value}
       loading={isLoading}
       disabled={disabled}
-      x
+      max={7}
     />
   );
 }
