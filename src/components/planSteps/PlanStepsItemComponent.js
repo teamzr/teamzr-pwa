@@ -102,7 +102,7 @@ function PlanStepsItemComponent(props) {
 
   const opacity = isDragging && !isTouchDevice() ? 0 : 1;
 
-  const description = { descriptionProp };
+  const description = descriptionProp;
   return (
     <div ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
