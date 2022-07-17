@@ -102,7 +102,7 @@ function PlanStepsItemComponent(props) {
 
   const opacity = isDragging && !isTouchDevice() ? 0 : 1;
 
-  const description = `${descriptionProp}`;
+  const description = { descriptionProp };
   return (
     <div ref={(node) => drag(drop(node))} style={{ opacity }}>
       <ListItem>
@@ -117,7 +117,9 @@ function PlanStepsItemComponent(props) {
           style={{ cursor: 'pointer' }}
           className={classes.itemTest}
           primary={name}
-          secondary={description || 'Tap to specify step details'}
+          secondary={
+            !!description ? description : 'Tap to specify step details'
+          }
         />
         <ListItemIcon>
           <PlanStepsItemComponentPopover
