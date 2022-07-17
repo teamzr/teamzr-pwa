@@ -32,6 +32,7 @@ function PlanSettingsDialog(props) {
     setInterests(data?.plan?.interests);
     setDuration(data?.plan?.stepDuration);
     setRewardDescription(data?.plan?.rewardDescription);
+    setStartDate(data?.plan?.startDate);
   }, [loading]);
 
   const [name, setName] = React.useState('');
@@ -122,23 +123,25 @@ function PlanSettingsDialog(props) {
             </>
           }
         />
-        <PlanSettingsFormComponent
-          planId={planId}
-          conversationId={conversationId}
-          name={name}
-          setName={setName}
-          description={description}
-          setDescription={setDescription}
-          duration={duration}
-          setDuration={setDuration}
-          interests={interests}
-          setInterests={setInterests}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          rewardDescription={rewardDescription}
-          setRewardDescription={setRewardDescription}
-          handleCreatePlan={handleCreatePlan}
-        />
+        {open && (
+          <PlanSettingsFormComponent
+            planId={planId}
+            conversationId={conversationId}
+            name={name}
+            setName={setName}
+            description={description}
+            setDescription={setDescription}
+            duration={duration}
+            setDuration={setDuration}
+            interests={interests}
+            setInterests={setInterests}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            rewardDescription={rewardDescription}
+            setRewardDescription={setRewardDescription}
+            handleCreatePlan={handleCreatePlan}
+          />
+        )}
       </Dialog>
     </>
   );

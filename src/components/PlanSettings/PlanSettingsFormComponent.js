@@ -63,7 +63,7 @@ export function PlanSettingsFormComponent(props) {
             <DateSelect
               value={startDate}
               onChange={setStartDate}
-              minDate={moment()}
+              minDate={!isEditing && moment()}
             />
           </Grid>
           <Grid item>
