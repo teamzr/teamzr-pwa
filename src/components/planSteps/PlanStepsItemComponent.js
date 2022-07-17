@@ -42,6 +42,8 @@ function PlanStepsItemComponent(props) {
     findStep,
     updatePlanStep,
     fulfillments,
+    planStepDuration,
+    planStepStatus,
   } = props;
   const classes = usePlanStepsItemComponent();
 
@@ -124,6 +126,14 @@ function PlanStepsItemComponent(props) {
             planId={planId}
             planStepId={planStepId}
             number={number}
+            planStep={{
+              name,
+              description,
+              planStepId,
+              status,
+              duration: planStepDuration,
+              status: planStepStatus,
+            }}
           />
         </ListItemIcon>
       </ListItem>

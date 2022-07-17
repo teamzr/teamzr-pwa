@@ -6,7 +6,7 @@ import { gql } from 'apollo-boost';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { PLAN_STEPS_QUERY } from '../plans/PlanComponent';
 
-const CREATE_PLAN_TASK_MUTATION = gql`
+export const CREATE_PLAN_TASK_MUTATION = gql`
   mutation createPlanStep($input: PlanStepCreateInput!) {
     createPlanStep(input: $input) {
       id
