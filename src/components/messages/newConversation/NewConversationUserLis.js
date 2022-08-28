@@ -16,6 +16,7 @@ import {
 import { Group, PersonAdd } from '@material-ui/icons';
 import { useRouter } from 'next/router';
 import { gql } from 'apollo-boost';
+import useAuthContext from '../../../context/AuthContext';
 
 const COMMUNITY_USER_QUERY = gql`
   {
@@ -44,6 +45,8 @@ function NewConversationUserList({
 }) {
   const { loading, data, error } = useQuery(COMMUNITY_USER_QUERY);
 
+  const { user } = useAuthContext();
+
   const handleUserClick = (event) => {
     const userId = event.currentTarget.dataset.user;
     if (isCreatingGroup) {
@@ -67,6 +70,11 @@ function NewConversationUserList({
   const onNameChange = (event, val) => {
     setName(event.target.value);
   };
+
+  const communityUsers = [
+    user,
+    ...(Array.isArray(data?.communityUsers) ? data?.communityUsers : []),
+  ];
 
   return (
     <Grid container direction={'column'}>
@@ -102,7 +110,7 @@ function NewConversationUserList({
           <ListItem key={'title'}>
             <Typography color={'primary'}>Suggested</Typography>
           </ListItem>
-          {data?.communityUsers.map((user) => (
+          {communityUsers?.map((user) => (
             <ListItem
               key={user.id}
               data-user={user.id}

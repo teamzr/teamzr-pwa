@@ -20,27 +20,35 @@ function MyPlansConversationFilterComponent(props) {
           All
         </ConversationFilterButton>
 
-        {conversations.map((c, i) => (
-          <ConversationFilterButton
-            key={i}
-            active={conversationId == c.id}
-            conversationId={c.id}
-            setConversationId={setConversationId}
-          >
-            <Grid
-              container
-              spacing={1}
-              alignItems={'center'}
-              alignContent={'center'}
-              direction={'row'}
+        {conversations.map((c, i) => {
+          let avatarSrc;
+          if (c?.users?.length == 1) {
+            avatarSrc = c?.users[0]?.avatar;
+          } else {
+            avatarSrc = c?.users.find((u) => u.id != user.id)?.avatar;
+          }
+          return (
+            <ConversationFilterButton
+              key={i}
+              active={conversationId == c.id}
+              conversationId={c.id}
+              setConversationId={setConversationId}
             >
-              <Grid item>
-                <Avatar src={c.users.find((u) => u.id != user.id).avatar} />
+              <Grid
+                container
+                spacing={1}
+                alignItems={'center'}
+                alignContent={'center'}
+                direction={'row'}
+              >
+                <Grid item>
+                  <Avatar src={avatarSrc} />
+                </Grid>
+                <Grid item>{c.name}</Grid>
               </Grid>
-              <Grid item>{c.name}</Grid>
-            </Grid>
-          </ConversationFilterButton>
-        ))}
+            </ConversationFilterButton>
+          );
+        })}
       </Box>
     </Box>
   );
