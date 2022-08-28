@@ -95,7 +95,7 @@ export default function CoversationSidebarUsers({ conversationId }) {
     router.push('/users/[username]', `/users/${id}`);
   };
 
-  if (data?.conversation?.type == 'DIRECT') {
+  if (data?.conversation?.type != 'GROUP') {
     return false;
   }
   return (
