@@ -23,7 +23,8 @@ const DELETE_PLAN_MUTATION = gql`
 `;
 
 function PlanListItemComponent(props) {
-  const { planId, name, conversationName } = props;
+  const { planId, name, conversationName, conversations, conversationId } =
+    props;
   const router = useRouter();
 
   const [alertDialogOpen, setAlertDialogOpen] = React.useState(false);
@@ -103,6 +104,8 @@ function PlanListItemComponent(props) {
         open={planEditOpen}
         onClose={onToggleEditClick}
         planId={planId}
+        conversations={conversations}
+        conversationId={conversationId}
       />
     </>
   );

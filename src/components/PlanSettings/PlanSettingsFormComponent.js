@@ -1,14 +1,19 @@
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Select, Typography } from '@material-ui/core';
 import moment from 'moment';
 import * as React from 'react';
+import useAuthContext from '../../context/AuthContext';
 
 import { TextFieldComponent } from '../form/TextFieldComponent';
+import SelectComponent from '../SelectComponent/SelectComponent';
 import DateSelect from './DateSelect';
 import DurationSelect from './DurationSelect';
 import PlanSettingsFormInterests from './PlanSettingsFormInterests';
 
 export function PlanSettingsFormComponent(props) {
   const {
+    conversationId,
+    conversations,
+    setConversationId,
     planId,
     name,
     setName,
@@ -25,6 +30,17 @@ export function PlanSettingsFormComponent(props) {
     handleCreatePlan,
   } = props;
   const isEditing = !!planId;
+
+  const selectOptions = conversations?.map((t) => ({
+    value: t.id,
+    label: t.name,
+  }));
+
+  const me = useAuthContext();
+  const optionsWithMe = [
+    { label: `${me?.user?.name} (me)`, value: 'me' },
+    ...selectOptions,
+  ];
 
   return (
     <Grid container direction={'column'}>
@@ -49,6 +65,14 @@ export function PlanSettingsFormComponent(props) {
               onChange={setDescription}
               placeholder={'Describe the goal'}
               maxlength={150}
+            />
+          </Grid>
+          <Grid item>
+            <SelectComponent
+              label={'Related conversation'}
+              options={optionsWithMe}
+              value={conversationId || 'me'}
+              onChange={setConversationId}
             />
           </Grid>
           <Grid item>

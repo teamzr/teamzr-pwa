@@ -10,7 +10,7 @@ const actions = [
 ];
 
 export default function CreatePlanDialButton(props) {
-  const { conversationId } = props;
+  const { conversationId, conversations, setConversationId } = props;
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -24,9 +24,11 @@ export default function CreatePlanDialButton(props) {
         onClick={toggleDialog}
       ></SpeedDial>
       <PlanSettingsDialog
+        conversations={conversations}
         open={isDialogOpen}
         onClose={toggleDialog}
         conversationId={conversationId}
+        setConversationId={setConversationId}
       />
     </>
   );

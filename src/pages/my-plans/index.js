@@ -73,6 +73,7 @@ function Campaigns(props) {
                   <PlanListComponent
                     plans={data?.plans}
                     conversationId={conversationId}
+                    conversations={conversations}
                   />
                 </Grid>
               </Grid>
@@ -80,7 +81,11 @@ function Campaigns(props) {
           </Grid>
         </Container>
       </DefaultLayout>
-      <CreatePlanDialButton conversationId={conversationId} />
+      <CreatePlanDialButton
+        setConversationId={setConversationId}
+        conversationId={conversationId}
+        conversations={conversations}
+      />
     </>
   );
 }

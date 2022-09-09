@@ -15,7 +15,14 @@ import AppBarComponent from '../AppBarComponent/AppBarComponent';
 import { PlanSettingsFormComponent } from './PlanSettingsFormComponent';
 
 function PlanSettingsDialog(props) {
-  const { open, onClose, planId, conversationId } = props;
+  const {
+    open,
+    onClose,
+    planId,
+    conversationId,
+    conversations,
+    setConversationId,
+  } = props;
 
   const isEditing = !!planId;
 
@@ -126,7 +133,9 @@ function PlanSettingsDialog(props) {
         {open && (
           <PlanSettingsFormComponent
             planId={planId}
+            conversations={conversations}
             conversationId={conversationId}
+            setConversationId={setConversationId}
             name={name}
             setName={setName}
             description={description}

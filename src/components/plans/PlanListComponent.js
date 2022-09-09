@@ -4,7 +4,7 @@ import { Grid, Button, List, makeStyles } from '@material-ui/core';
 import PlanListItemComponent from './PlanListItemComponent';
 
 function PlanListComponent(props) {
-  const { plans, conversationId } = props;
+  const { plans, conversationId, conversations } = props;
 
   const classes = usePlanListComponent();
 
@@ -22,6 +22,8 @@ function PlanListComponent(props) {
               name={plan.name}
               planId={plan.id}
               conversationName={plan.conversation.name}
+              conversations={conversations}
+              conversationId={conversationId}
             />
           ))}
         </List>
