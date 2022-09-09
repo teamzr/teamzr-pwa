@@ -23,7 +23,7 @@ function PlanListComponent(props) {
               planId={plan.id}
               conversationName={plan.conversation.name}
               conversations={conversations}
-              conversationId={conversationId}
+              conversationId={plan?.conversation?.id}
             />
           ))}
         </List>

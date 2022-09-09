@@ -73,6 +73,7 @@ export function PlanSettingsFormComponent(props) {
               options={optionsWithMe}
               value={conversationId || 'me'}
               onChange={setConversationId}
+              disabled={isEditing}
             />
           </Grid>
           <Grid item>
