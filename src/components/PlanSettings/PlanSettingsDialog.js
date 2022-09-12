@@ -30,6 +30,7 @@ function PlanSettingsDialog(props) {
     variables: { planId },
     skip: !isEditing,
     fetchPolicy: 'network-only',
+    skip: !open,
   });
 
   React.useEffect(() => {
