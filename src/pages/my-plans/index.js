@@ -53,8 +53,18 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   let conversations = Object.values(conversationsObject);
-  conversations.sort((a, b) => (a.name.localeCompare(b.name) ? 1 : -1));
-  conversations.sort((a, b) => (a.type == 'SELF' ? -1 : 1));
+  let selfConversation = conversations.find((c) => c.type == 'SELF');
+  conversations = conversations.filter(
+    (conversation) => conversation.type != 'SELF'
+  );
+  conversations.sort((a, b) => {
+    var textA = a.name.toUpperCase();
+    var textB = b.name.toUpperCase();
+    return textA < textB ? -1 : textA > textB ? 1 : 0;
+  });
+  if (selfConversation) {
+    conversations.unshift(selfConversation);
+  }
 
   console.log(conversations);
 
