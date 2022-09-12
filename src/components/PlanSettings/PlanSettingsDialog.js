@@ -29,6 +29,7 @@ function PlanSettingsDialog(props) {
   const { data, loading } = useQuery(PLAN_QUERY, {
     variables: { planId },
     skip: !isEditing,
+    fetchPolicy: 'network-only',
   });
 
   React.useEffect(() => {
