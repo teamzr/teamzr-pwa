@@ -37,6 +37,8 @@ export function PlanSettingsFormComponent(props) {
   }));
 
   const me = useAuthContext();
+
+  //TODO: remove duplicate ME conversation (type SELF)
   const optionsWithMe = [
     { label: `${me?.user?.name} (me)`, value: 'me' },
     ...selectOptions,
