@@ -24,6 +24,7 @@ export const PLANS_QUERY = gql`
           id
           avatar
         }
+        type
       }
       interests {
         id
