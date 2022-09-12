@@ -53,6 +53,7 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   let conversations = Object.values(conversationsObject);
+  conversations.sort((a, b) => (a.name.localeCompare(b.name) ? -1 : 1));
   conversations.sort((a, b) => (a.type == 'SELF' ? -1 : 1));
 
   console.log(conversations);
