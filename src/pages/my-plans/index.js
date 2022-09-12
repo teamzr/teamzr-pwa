@@ -53,7 +53,9 @@ function Campaigns(props) {
       conversationsObject[conversation.id] = conversation;
     });
   let conversations = Object.values(conversationsObject);
-  conversations.sort((a, b) => a.type != 'SELF');
+  conversations.sort((a, b) => (a.type == 'SELF' ? -1 : 1));
+
+  console.log(conversations);
 
   if (loading || error) return <LoadingIndicatorComponent />;
 
