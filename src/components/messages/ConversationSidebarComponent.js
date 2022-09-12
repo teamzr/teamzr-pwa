@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ConversationSidebarComponent(props) {
+function ConversationSidebarComponent({ conversations }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
@@ -80,6 +80,7 @@ function ConversationSidebarComponent(props) {
           open={planDialogOpen}
           onClose={onClosePlanDialog}
           conversationId={conversationId}
+          conversations={conversations}
         />
       )}
     </>

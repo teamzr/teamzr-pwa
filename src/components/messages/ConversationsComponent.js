@@ -135,7 +135,9 @@ function ConversationsComponent(props) {
                 <Grid item xs={2}>
                   <Grid container direction={'row'} justify={'flex-end'}>
                     <Grid item>
-                      <ConversationSidebarComponent />
+                      <ConversationSidebarComponent
+                        conversations={data?.conversations}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>
