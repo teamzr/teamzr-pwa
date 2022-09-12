@@ -10,6 +10,7 @@ import PlanListComponent from '../../components/plans/PlanListComponent';
 import { useRouter } from 'next/router';
 import MyPlansHeaderComponent from '../../components/plans/MyPlansHeaderComponent';
 import CreatePlanDialButton from '../../components/plans/CreatePlanDialButton';
+import useAuthContext from '../../context/AuthContext';
 
 export const PLANS_QUERY = gql`
   {
@@ -42,13 +43,16 @@ function Campaigns(props) {
     router?.query?.conversationId
   );
 
+  const { user } = useAuthContext();
+
   const conversationsObject = {};
   data &&
     data.plans.forEach((p) => {
       const conversation = p.conversation;
       conversationsObject[conversation.id] = conversation;
     });
-  const conversations = Object.values(conversationsObject);
+  let conversations = Object.values(conversationsObject);
+  conversations.sort((a, b) => a.type != 'SELF');
 
   if (loading || error) return <LoadingIndicatorComponent />;
 
