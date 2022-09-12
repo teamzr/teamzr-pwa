@@ -76,8 +76,18 @@ function PlanSettingsDialog(props) {
   React.useEffect(() => {
     if (loading || !isEditing) return;
     // Todo: add Timeout
-    handleSavePlan();
-  }, [name, description, startDate, interests, duration, rewardDescription]);
+    if (open) {
+      handleSavePlan();
+    }
+  }, [
+    name,
+    description,
+    startDate,
+    interests,
+    duration,
+    rewardDescription,
+    open,
+  ]);
 
   const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
   const handleSavePlan = async () => {
