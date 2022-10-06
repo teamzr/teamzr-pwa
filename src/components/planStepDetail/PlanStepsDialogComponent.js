@@ -15,6 +15,7 @@ import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
 import PlanStepDetailProgressTab from './PlanStepDetailProgressTab';
 import PlanStepDetailOverviewTab from './PlanStepDetailOverview';
 import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
+import CommentsComponent from '../CommentsComponent/CommentsComponent';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -32,9 +33,13 @@ const GET_PLANSTEP_QUERY = gql`
 `;
 
 const PlanStepsDialogComponent = (props) => {
-  const { planStepId, handleClose } = props;  
+  const { planStepId, handleClose } = props;
 
-  const { loading, error, data: stepData } = useQuery(GET_PLANSTEP_QUERY, {
+  const {
+    loading,
+    error,
+    data: stepData,
+  } = useQuery(GET_PLANSTEP_QUERY, {
     variables: {
       id: planStepId,
     },
@@ -43,20 +48,20 @@ const PlanStepsDialogComponent = (props) => {
   const onChangeTab = (event, value) => {
     setTab(value);
   };
-  let tabNo = 0
-  const [tab, setTab] = React.useState(tabNo );
-  switch(stepData?.planStep?.status) {
+  let tabNo = 0;
+  const [tab, setTab] = React.useState(tabNo);
+  switch (stepData?.planStep?.status) {
     case PLAN_STEP_STATUSES.CURRENT:
-      tabNo = 1
-    break;
+      tabNo = 1;
+      break;
     case PLAN_STEP_STATUSES.COMPLETED:
-      tabNo = 2
-    break;
+      tabNo = 2;
+      break;
   }
-  React.useEffect(()=>{
-    setTab(tabNo)
-  }, [loading])
-    
+  React.useEffect(() => {
+    setTab(tabNo);
+  }, [loading]);
+
   if (loading) return '...';
   return (
     <Dialog
@@ -103,8 +108,16 @@ const PlanStepsDialogComponent = (props) => {
                 stepData={stepData}
               />
             )}
-            {tab == 1 && <PlanStepDetailProgressTab planStepId={planStepId} status={stepData?.planStep?.status} />}
+            {tab == 1 && (
+              <PlanStepDetailProgressTab
+                planStepId={planStepId}
+                status={stepData?.planStep?.status}
+              />
+            )}
             {tab == 2 && <PlanStepDetailOverviewTab planStepId={planStepId} />}
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <CommentsComponent />
           </Grid>
         </Grid>
       </DialogContent>

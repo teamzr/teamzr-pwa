@@ -3,6 +3,7 @@ import { Grid, Container, Box, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectComponent';
 import UserSelectModalUIKitItem from '../components/UIKitItems/UserSelectModalUIKitItem';
 import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
+import CommentsUIKitItem from '../components/UIKitItems/CommentsUIKitItem';
 
 function UiKit() {
   return (
@@ -16,7 +17,8 @@ function UiKit() {
             </Grid>
           )}
           {false && <UserSelectModalUIKitItem />}
-          {true && <AlertDialogUIKitItem />}
+          {false && <AlertDialogUIKitItem />}
+          <CommentsUIKitItem />
         </Grid>
       </Container>
     </div>
