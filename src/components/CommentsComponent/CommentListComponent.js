@@ -27,7 +27,8 @@ export default function CommentListComponent({ loading, comments }) {
         comments?.map((v) => (
           <CommentListItemComponent
             key={v.id}
-            username={v.author.name}
+            avatar={v.author?.avatar}
+            username={v.author?.name}
             text={v.text}
             createdAt={v.createdAt}
           />
