@@ -66,8 +66,6 @@ function Campaigns(props) {
     conversations.unshift(selfConversation);
   }
 
-  console.log(conversations);
-
   if (loading || error) return <LoadingIndicatorComponent />;
 
   return (

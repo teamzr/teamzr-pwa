@@ -15,7 +15,8 @@ import PlanStepDetailSettingsTab from './PlanStepDetailSettingsTab';
 import PlanStepDetailProgressTab from './PlanStepDetailProgressTab';
 import PlanStepDetailOverviewTab from './PlanStepDetailOverview';
 import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
-import CommentsComponent from '../CommentsComponent/CommentsComponent';
+
+import PlanStepDetailComments from './PlanStepDetailComments';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -117,7 +118,7 @@ const PlanStepsDialogComponent = (props) => {
             {tab == 2 && <PlanStepDetailOverviewTab planStepId={planStepId} />}
           </Grid>
           <Grid item xs={12} md={8}>
-            <CommentsComponent />
+            <PlanStepDetailComments planStepId={planStepId} />
           </Grid>
         </Grid>
       </DialogContent>

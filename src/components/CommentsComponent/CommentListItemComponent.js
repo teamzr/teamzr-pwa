@@ -7,9 +7,14 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
+import moment from 'moment';
 import * as React from 'react';
 
-export default function CommentListItemComponent({ username, text }) {
+export default function CommentListItemComponent({
+  username,
+  text,
+  createdAt,
+}) {
   const theme = useTheme();
   return (
     <Card
@@ -24,12 +29,24 @@ export default function CommentListItemComponent({ username, text }) {
       <CardContent>
         <Grid container direction={'column'} spacing={1}>
           <Grid item xs={12}>
-            <Grid container direction={'row'} spacing={1}>
-              <Grid item>
+            <Grid
+              container
+              direction={'row'}
+              spacing={1}
+              alignContent={'right'}
+            >
+              <Grid item xs={3}>
                 <Avatar />
               </Grid>
-              <Grid item>
+              <Grid item xs={7}>
                 <Typography variant={'subtitle1'}>{username}</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography variant={'caption'}>
+                  {moment(moment(parseInt(createdAt)), 'DD.MM.YYYY').fromNow(
+                    true
+                  )}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
