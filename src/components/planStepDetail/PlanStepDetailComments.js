@@ -16,9 +16,21 @@ const COMMENTS_QUERY = gql`
       id
       text
       createdAt
+      parent {
+        id
+        text
+      }
       author {
         name
         avatar
+      }
+      children {
+        id
+        text
+        parent {
+          id
+        }
+        createdAt
       }
     }
   }
@@ -40,9 +52,11 @@ export default function PlanStepDetailComments({ planStepId }) {
     return () => stopPolling();
   });
 
-  const onSubmit = async (text) => {
+  const onSubmit = async (text, parent) => {
     await createComment({
-      variables: { input: { text, type: 'PlanStep', typeId: planStepId } },
+      variables: {
+        input: { text, type: 'PlanStep', typeId: planStepId, parent },
+      },
     });
   };
 

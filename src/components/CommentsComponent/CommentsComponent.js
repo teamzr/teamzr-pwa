@@ -15,7 +15,11 @@ export default function CommentsComponent(props) {
         <CommentEditorComponent onSubmit={onSubmit} />
       </Box>
       <Box>
-        <CommentListComponent comments={comments} loading={loading} />
+        <CommentListComponent
+          comments={comments}
+          loading={loading}
+          onSubmit={onSubmit}
+        />
       </Box>
     </>
   );

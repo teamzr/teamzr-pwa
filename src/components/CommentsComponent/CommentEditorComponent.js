@@ -1,7 +1,7 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
 import * as React from 'react';
 
-export default function CommentEditorComponent({ onSubmit }) {
+export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
   const [value, setValue] = React.useState('');
 
   const handleOnChange = (event) => {
@@ -35,6 +35,15 @@ export default function CommentEditorComponent({ onSubmit }) {
             children={'Submit'}
             onClick={handleSubmit}
           />
+          {!!onCancelClick && (
+            <Button
+              style={{ float: 'right' }}
+              color={'primary'}
+              variant={'outlined'}
+              children={'Cancel'}
+              onClick={onCancelClick}
+            />
+          )}
         </Grid>
       }
     </Grid>
