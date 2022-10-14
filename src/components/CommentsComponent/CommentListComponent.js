@@ -1,4 +1,4 @@
-import { Box, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import * as React from 'react';
 import CommentEditorComponent from './CommentEditorComponent';
@@ -36,6 +36,7 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
               text={v.text}
               createdAt={v.createdAt}
               onSubmit={onSubmit}
+              disableReply={v.children.length > 0}
             />
             <Box marginLeft={4}>
               {v.children.map((child, index) => (
@@ -51,8 +52,9 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
                     disableReply={true}
                   />
                   {index >= v.children?.length - 1 && (
-                    <CommentEditorComponent
-                      onSubmit={(value) => onSubmit(value, v.id)}
+                    <CommentListComponentChildReplyBtn
+                      onSubmit={onSubmit}
+                      parent={v.id}
                     />
                   )}
                 </>
@@ -63,3 +65,27 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
     </Box>
   );
 }
+
+const CommentListComponentChildReplyBtn = ({ parent, onSubmit }) => {
+  const handleSubmit = (value) => {
+    onSubmit(value, parent);
+  };
+
+  const [isReplying, setIsReplying] = React.useState(false);
+
+  return (
+    <>
+      {!isReplying && (
+        <Button variant={'outlined'} onClick={() => setIsReplying(true)}>
+          Reply
+        </Button>
+      )}
+      {isReplying && (
+        <CommentEditorComponent
+          onSubmit={handleSubmit}
+          onCancelClick={() => setIsReplying(false)}
+        />
+      )}
+    </>
+  );
+};
