@@ -36,7 +36,6 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
               text={v.text}
               createdAt={v.createdAt}
               onSubmit={onSubmit}
-              disableReply={v.children.length > 0}
             />
             <Box marginLeft={4}>
               {v.children.map((child, index) => (
