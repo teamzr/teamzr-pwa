@@ -10,6 +10,7 @@ const CONVERSATION_QUERY = gql`
     conversation(id: $id) {
       id
       name
+      type
       users {
         id
         name
@@ -37,7 +38,7 @@ function ConversationTitleComponent(props) {
 
   const [name, setName] = React.useState('');
 
-  const isGroup = data?.conversation?.type != 'DIRECT';
+  const isGroup = data?.conversation?.type == 'GROUP';
 
   React.useEffect(() => {
     if (isGroup) {
