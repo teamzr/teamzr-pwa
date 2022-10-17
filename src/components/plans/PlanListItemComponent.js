@@ -68,11 +68,8 @@ function PlanListItemComponent(props) {
 
   return (
     <>
-      <ListItem>
-        <ListItem button onClick={handleClick}>
-          <ListItemIcon>
-            <MoneyRewardIcon style={{ width: '40px', height: '40px' }} />
-          </ListItemIcon>
+      <ListItem button>
+        <ListItem onClick={handleClick}>
           <ListItemText primary={name} secondary={conversationName} />
         </ListItem>
         <ListItemIcon>
