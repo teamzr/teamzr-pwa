@@ -89,8 +89,8 @@ function ConversationsComponent(props) {
               <ConversationsSearchBarComponent />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '50px' }}>
-              {data.conversations &&
-                data.conversations.map((c, key) => {
+              {data?.conversations &&
+                data?.conversations.map((c, key) => {
                   const isRead = c.readByIds.includes(authCtx?.user?.id);
                   return (
                     <ConversationComponent
