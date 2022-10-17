@@ -34,7 +34,7 @@ function ConversationComponent(props) {
   };
 
   const oppositeUser = users.find((user) => user?.id != authContext.user?.id);
-  const conversationName = isGroup ? name : oppositeUser.name;
+  const conversationName = isGroup ? name : oppositeUser?.name;
   return (
     <Box
       margin={2}
@@ -96,7 +96,7 @@ function ConversationComponent(props) {
               </AvatarGroup>
             )}
             {!isGroup && (
-              <Avatar className={classes.avatar} src={oppositeUser.avatar} />
+              <Avatar className={classes.avatar} src={oppositeUser?.avatar} />
             )}
           </Box>
         </Grid>
