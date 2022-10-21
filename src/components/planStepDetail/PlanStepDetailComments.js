@@ -21,6 +21,7 @@ const COMMENTS_QUERY = gql`
         text
       }
       author {
+        id
         name
         avatar
       }
@@ -29,6 +30,11 @@ const COMMENTS_QUERY = gql`
         text
         parent {
           id
+        }
+        author {
+          id
+          name
+          avatar
         }
         createdAt
       }
