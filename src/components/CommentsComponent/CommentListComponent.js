@@ -17,7 +17,7 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
   };
 
   const handleSubmit = (value) => {
-    onSubmit(value, commentId);
+    onSubmit(value, isReplying);
     setIsReplying(false);
   };
   return (
