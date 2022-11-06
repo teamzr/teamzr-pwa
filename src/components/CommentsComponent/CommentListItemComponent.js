@@ -18,25 +18,15 @@ export default function CommentListItemComponent({
   text,
   createdAt,
   avatar,
-  onSubmit,
   disableReply,
+  handleReplyClick,
 }) {
   const theme = useTheme();
 
-  const [isReplying, setIsReplying] = React.useState(false);
-
-  const handleReplyClick = () => {
-    setIsReplying(true);
+  const onReplyClick = () => {
+    handleReplyClick(commentId);
   };
 
-  const handleCancelClick = () => {
-    setIsReplying(false);
-  };
-
-  const handleSubmit = (value) => {
-    onSubmit(value, commentId);
-    setIsReplying(false);
-  };
   return (
     <>
       <Card
@@ -94,7 +84,7 @@ export default function CommentListItemComponent({
               <Grid container alignItems={'center'} alignContent={'center'}>
                 {!disableReply && (
                   <Grid item>
-                    <Button variant={'text'} onClick={handleReplyClick}>
+                    <Button variant={'text'} onClick={onReplyClick}>
                       Reply
                     </Button>
                   </Grid>
@@ -104,12 +94,6 @@ export default function CommentListItemComponent({
           </Grid>
         </CardContent>
       </Card>
-      {isReplying && (
-        <CommentEditorComponent
-          onCancelClick={handleCancelClick}
-          onSubmit={handleSubmit}
-        />
-      )}
     </>
   );
 }

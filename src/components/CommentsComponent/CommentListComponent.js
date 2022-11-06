@@ -6,7 +6,20 @@ import CommentListItemComponent from './CommentListItemComponent';
 
 // TODO: Add CommentList adapter component
 export default function CommentListComponent({ loading, comments, onSubmit }) {
-  console.log(comments);
+  const [isReplying, setIsReplying] = React.useState(false);
+
+  const handleReplyClick = (commentId) => {
+    setIsReplying(commentId);
+  };
+
+  const handleCancelClick = () => {
+    setIsReplying(false);
+  };
+
+  const handleSubmit = (value) => {
+    onSubmit(value, commentId);
+    setIsReplying(false);
+  };
   return (
     <Box>
       {loading && (
@@ -36,6 +49,7 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
               text={v.text}
               createdAt={v.createdAt}
               onSubmit={onSubmit}
+              handleReplyClick={handleReplyClick}
             />
             <Box marginLeft={4}>
               {v.children.map((child, index) => (
@@ -50,36 +64,39 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
                     onSubmit={onSubmit}
                     disableReply={true}
                   />
-                  {index >= v.children?.length - 1 && (
-                    <CommentListComponentChildReplyBtn
-                      onSubmit={onSubmit}
-                      parent={v.id}
-                    />
-                  )}
                 </>
               ))}
             </Box>
+            <CommentListComponentChildReplyBtn
+              onSubmit={handleSubmit}
+              parent={v.id}
+              isReplying={isReplying}
+              setIsReplying={setIsReplying}
+            />
           </>
         ))}
     </Box>
   );
 }
 
-const CommentListComponentChildReplyBtn = ({ parent, onSubmit }) => {
+const CommentListComponentChildReplyBtn = ({
+  parent,
+  isReplying,
+  onSubmit,
+  setIsReplying,
+}) => {
   const handleSubmit = (value) => {
     onSubmit(value, parent);
   };
 
-  const [isReplying, setIsReplying] = React.useState(false);
-
   return (
     <>
       {!isReplying && (
-        <Button variant={'outlined'} onClick={() => setIsReplying(true)}>
+        <Button variant={'outlined'} onClick={() => setIsReplying(parent)}>
           Reply
         </Button>
       )}
-      {isReplying && (
+      {parent == isReplying && (
         <CommentEditorComponent
           onSubmit={handleSubmit}
           onCancelClick={() => setIsReplying(false)}

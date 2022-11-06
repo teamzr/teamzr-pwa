@@ -13,6 +13,12 @@ export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
     setValue('');
   };
 
+  const inputRef = React.useRef();
+
+  React.useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <Grid container spacing={1} direction={'column'}>
       <Grid item xs={12}>
@@ -29,6 +35,7 @@ export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
       {
         <Grid item xs={12}>
           <Button
+            buttonRef={inputRef}
             style={{ float: 'right' }}
             color={'primary'}
             variant={'contained'}
