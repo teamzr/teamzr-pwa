@@ -14,8 +14,10 @@ export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
   };
 
   const inputRef = React.useRef();
+  const buttonRef = React.useRef();
 
   React.useEffect(() => {
+    buttonRef.current.focus();
     inputRef.current.focus();
   }, []);
 
@@ -24,6 +26,7 @@ export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
       <Grid item xs={12}>
         <TextField
           fullWidth
+          inputRef={inputRef}
           value={value}
           onChange={handleOnChange}
           placeholder={'Your comment'}
@@ -35,7 +38,7 @@ export default function CommentEditorComponent({ onSubmit, onCancelClick }) {
       {
         <Grid item xs={12}>
           <Button
-            buttonRef={inputRef}
+            buttonRef={buttonRef}
             style={{ float: 'right' }}
             color={'primary'}
             variant={'contained'}
