@@ -1,11 +1,9 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
 import {
-  Button,
   IconButton,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Paper,
   Popover,
@@ -18,7 +16,11 @@ import {
   VerticalDotsIcon,
 } from '../../constants/Icons';
 
-function PlanListItemPopperComponent({ onRemoveClick, onEditClick }) {
+function PlanListItemPopoverComponent({
+  onRemoveClick,
+  onEditClick,
+  ...restProps
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = !!anchorEl;
 
@@ -48,7 +50,10 @@ function PlanListItemPopperComponent({ onRemoveClick, onEditClick }) {
   return (
     <>
       <IconButton onClick={togglePopover}>
-        <VerticalDotsIcon style={{ width: '24px', height: '16px' }} />
+        <VerticalDotsIcon
+          style={{ width: '24px', height: '16px' }}
+          {...restProps}
+        />
       </IconButton>
       <Popover open={open} onClose={togglePopover} anchorEl={anchorEl}>
         <Paper>
@@ -66,4 +71,4 @@ function PlanListItemPopperComponent({ onRemoveClick, onEditClick }) {
   );
 }
 
-export default PlanListItemPopperComponent;
+export default PlanListItemPopoverComponent;

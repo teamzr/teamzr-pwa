@@ -1,12 +1,5 @@
 import * as React from 'react';
-import propTypes from 'prop-types';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
-
-import { Box, Grid, IconButton, Typography, useTheme } from '@material-ui/core';
-import useAuthContext from '../../context/AuthContext';
-import { useRouter } from 'next/router';
-import BackBtnComponent from '../BackBtnComponent';
+import { Grid, IconButton, Typography, useTheme } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 
 function AppBarSecondaryComponent(props) {

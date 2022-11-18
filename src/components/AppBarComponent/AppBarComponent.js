@@ -4,6 +4,7 @@ import { AppBar, makeStyles, Toolbar } from '@material-ui/core';
 import useAuthContext from '../../context/AuthContext';
 import AppBarPrimaryComponent from './AppBarPrimaryComponent';
 import AppBarSecondaryComponent from './AppBarSecondaryComponent';
+import { useRouter } from 'next/router';
 
 const useAppBarComponentStyle = makeStyles((theme) => ({
   root: {
@@ -11,15 +12,26 @@ const useAppBarComponentStyle = makeStyles((theme) => ({
   },
 }));
 
-const APP_BAR_LEVEL = {
+export const APP_BAR_LEVEL = {
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
 };
 
 function AppBarComponent(props) {
   const { level, title, end, onBackClick } = props;
+
+  const router = useRouter();
   const classes = useAppBarComponentStyle();
   const authContext = useAuthContext();
+
+  const handleOnbackClick = () => {
+    if (!onBackClick) {
+      router.back();
+    }
+    if (onBackClick) {
+      onBackClick();
+    }
+  };
 
   if (!authContext.isAuthenticated) return false;
   return (
@@ -33,7 +45,7 @@ function AppBarComponent(props) {
             <AppBarSecondaryComponent
               title={title}
               end={end}
-              onBackClick={onBackClick}
+              onBackClick={handleOnbackClick}
             />
           )}
         </Toolbar>

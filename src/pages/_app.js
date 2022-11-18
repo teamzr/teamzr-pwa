@@ -15,7 +15,12 @@ import theme from '../constants/DefaultTheme';
 import NavigationMainBottomPanel from '../components/navigation/NavigationMainBottomPanel';
 import Head from 'next/head';
 import { COLORS } from '../constants/Colors';
-import AppBarComponent from '../components/AppBarComponent/AppBarComponent';
+import AppBarComponent, {
+  APP_BAR_LEVEL,
+} from '../components/AppBarComponent/AppBarComponent';
+import { useRouter } from 'next/router';
+import PlanListItemPopperComponent from '../components/plans/PlanListItemPopoverComponent';
+import EditPlanPopover from '../components/plans/EditPlanPopover';
 
 function App({ Component, pageprops }) {
   React.useEffect(() => {
@@ -25,6 +30,21 @@ function App({ Component, pageprops }) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  const router = useRouter();
+
+  let appBarEndComponent = <></>;
+  let appBarLevel = APP_BAR_LEVEL.PRIMARY;
+  if (router.asPath.includes('plans/')) {
+    appBarLevel = APP_BAR_LEVEL.SECONDARY;
+    const { planId } = router.query;
+    appBarEndComponent = (
+      <>
+        <EditPlanPopover fill={'white'} planId={planId} />
+      </>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -47,9 +67,8 @@ function App({ Component, pageprops }) {
             <ThemeProvider theme={theme}>
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <CssBaseline />
-                <AppBarComponent />
+                <AppBarComponent level={appBarLevel} end={appBarEndComponent} />
                 <Component {...pageprops} />
-
                 <NavigationMainBottomPanel />
               </MuiPickersUtilsProvider>
             </ThemeProvider>

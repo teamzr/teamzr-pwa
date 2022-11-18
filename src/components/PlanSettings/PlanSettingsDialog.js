@@ -4,7 +4,6 @@ import { Button, Dialog, IconButton, Slide } from '@material-ui/core';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { VerticalDotsIcon } from '../../constants/Icons';
 import {
   CREATE_PLAN_MUTATION,
   UPDATE_PLAN_MUTATION,
@@ -133,11 +132,6 @@ function PlanSettingsDialog(props) {
                 >
                   Create
                 </Button>
-              )}
-              {isEditing && (
-                <IconButton>
-                  <VerticalDotsIcon color={'white'} />
-                </IconButton>
               )}
             </>
           }

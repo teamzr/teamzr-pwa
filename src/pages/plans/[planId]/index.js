@@ -23,11 +23,7 @@ function Campaign(props) {
   return (
     <DefaultLayout>
       <Grid container direction={'row'} justify={'center'}>
-        <Grid item xs={12} style={{ position: 'static' }}>
-          <IconButton onClick={handleBack}>
-            <BackArrowIcon />
-          </IconButton>
-        </Grid>
+        <Grid item xs={12} style={{ position: 'static' }}></Grid>
         <Grid item>
           <PlanComponent planId={planId} />
         </Grid>

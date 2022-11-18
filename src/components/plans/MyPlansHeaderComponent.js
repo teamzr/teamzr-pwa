@@ -22,25 +22,15 @@ function MyPlansHeaderComponent(props) {
             justify={'space-between'}
             alignItems={'center'}
           >
-            <Grid item xs={'auto'}>
-              <Avatar />
-            </Grid>
-            <Grid item xs={9} md={10}>
-              <Typography>My Plans</Typography>
-            </Grid>
             <Grid item xs={1}>
               <Grid container justify={'flex-end'}>
-                <Grid item>
-                  <IconButton>
-                    <DrawerToggleIcon />
-                  </IconButton>
-                </Grid>
+                <Grid item></Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item className={classes.search}>
-          <SearchBarComponent />
+          <Grid item className={classes.search}>
+            <SearchBarComponent />
+          </Grid>
         </Grid>
       </Grid>
     </>
