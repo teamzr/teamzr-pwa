@@ -5,8 +5,10 @@ import useAuthContext from '../../context/AuthContext';
 
 import { TextFieldComponent } from '../form/TextFieldComponent';
 import SelectComponent from '../SelectComponent/SelectComponent';
+
 import DateSelect from './DateSelect';
 import DurationSelect from './DurationSelect';
+import PlanSettignsCoversationUsersSelect from './PlanSettingsConversationUsersSelect';
 import PlanSettingsFormInterests from './PlanSettingsFormInterests';
 
 export function PlanSettingsFormComponent(props) {
@@ -28,6 +30,10 @@ export function PlanSettingsFormComponent(props) {
     rewardDescription,
     setRewardDescription,
     handleCreatePlan,
+    members,
+    mentors,
+    setMentors,
+    setMembers,
   } = props;
   const isEditing = !!planId;
 
@@ -78,6 +84,28 @@ export function PlanSettingsFormComponent(props) {
               disabled={isEditing}
             />
           </Grid>
+          {conversationId != 'me' && (
+            <Grid item xs={12}>
+              <Grid container spacing={3} direction={'column'}>
+                <Grid item xs={12}>
+                  <PlanSettignsCoversationUsersSelect
+                    label={'Members'}
+                    conversationId={conversationId}
+                    value={members}
+                    onChange={setMembers}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <PlanSettignsCoversationUsersSelect
+                    label={'Mentors'}
+                    conversationId={conversationId}
+                    value={mentors}
+                    onChange={setMentors}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
           <Grid item>
             <Typography variant={'h6'}>Interests</Typography>
             <PlanSettingsFormInterests

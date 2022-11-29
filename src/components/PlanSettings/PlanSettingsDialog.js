@@ -32,6 +32,8 @@ function PlanSettingsDialog(props) {
     skip: !open,
   });
 
+  const [dataLoaded, setDataLoaded] = React.useState(false);
+
   React.useEffect(() => {
     if (!isEditing) return;
 
@@ -41,6 +43,10 @@ function PlanSettingsDialog(props) {
     setDuration(data?.plan?.stepDuration);
     setRewardDescription(data?.plan?.rewardDescription);
     setStartDate(data?.plan?.startDate);
+
+    setMentors(data?.plan?.mentors?.map((m) => m.user.id));
+    setMembers(data?.plan?.members?.map((m) => m.user.id));
+    setDataLoaded(true);
   }, [loading]);
 
   const [name, setName] = React.useState('');
@@ -49,6 +55,8 @@ function PlanSettingsDialog(props) {
   const [interests, setInterests] = React.useState([]);
   const [startDate, setStartDate] = React.useState(moment());
   const [rewardDescription, setRewardDescription] = React.useState('');
+  const [members, setMembers] = React.useState([]);
+  const [mentors, setMentors] = React.useState([]);
 
   const router = useRouter();
 
@@ -74,9 +82,9 @@ function PlanSettingsDialog(props) {
   };
 
   React.useEffect(() => {
-    if (loading || !isEditing) return;
+    if (loading || !data || !isEditing) return;
     // Todo: add Timeout
-    if (open) {
+    if (open && dataLoaded) {
       handleSavePlan();
     }
   }, [
@@ -87,11 +95,13 @@ function PlanSettingsDialog(props) {
     duration,
     rewardDescription,
     open,
+    members,
+    mentors,
   ]);
 
   const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
   const handleSavePlan = async () => {
-    updatePlan({
+    await updatePlan({
       variables: {
         input: {
           id: planId,
@@ -101,6 +111,8 @@ function PlanSettingsDialog(props) {
           rewardDescription,
           stepDuration: duration,
           interests: interests.map((i) => i.id),
+          members: members,
+          mentors: mentors,
         },
       },
     });
@@ -155,6 +167,10 @@ function PlanSettingsDialog(props) {
             rewardDescription={rewardDescription}
             setRewardDescription={setRewardDescription}
             handleCreatePlan={handleCreatePlan}
+            members={members}
+            setMembers={setMembers}
+            mentors={mentors}
+            setMentors={setMentors}
           />
         )}
       </Dialog>

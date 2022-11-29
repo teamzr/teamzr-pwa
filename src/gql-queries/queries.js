@@ -30,6 +30,20 @@ export const PLAN_QUERY = gql`
       }
       stepDuration
       rewardDescription
+      members {
+        role
+        user {
+          name
+          id
+        }
+      }
+      mentors {
+        role
+        user {
+          name
+          id
+        }
+      }
     }
   }
 `;

@@ -4,6 +4,7 @@ import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectCom
 import UserSelectModalUIKitItem from '../components/UIKitItems/UserSelectModalUIKitItem';
 import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
 import CommentsUIKitItem from '../components/UIKitItems/CommentsUIKitItem';
+import UserMultiselectComponentUiKitItem from '../components/UIKitItems/UserMultiSelectComponentUIKitItem';
 
 function UiKit() {
   return (
@@ -18,7 +19,8 @@ function UiKit() {
           )}
           {false && <UserSelectModalUIKitItem />}
           {false && <AlertDialogUIKitItem />}
-          <CommentsUIKitItem />
+          {false && <CommentsUIKitItem />}
+          <UserMultiselectComponentUiKitItem />
         </Grid>
       </Container>
     </div>
