@@ -1,5 +1,5 @@
 import * as React from 'react';
-import UserMultiSelectComponent from '../UserMultiSelectComponent/UserMultselectComponent';
+import UserMultiSelectComponent from '../UserMultiSelectComponent/UserMultiSelectComponent';
 
 export default function UserMultiselectComponentUiKitItem(props) {
   const [value, setValue] = React.useState([]);

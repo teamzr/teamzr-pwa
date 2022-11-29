@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Skeleton } from '@material-ui/lab';
 import * as React from 'react';
 import { CONVERSATION_QUERY } from '../../gql-queries/conversationQueries';
-import UserMultiSelectComponent from '../UserMultiSelectComponent/UserMultselectComponent';
+import UserMultiSelectComponent from '../UserMultiSelectComponent/UserMultiSelectComponent';
 
 export default function PlanSettignsCoversationUsersSelect(props) {
   const { value, onChange, label, conversationId } = props;
