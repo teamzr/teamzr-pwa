@@ -19,6 +19,15 @@ const OVERVIEW_PLANSTEP_QUERY = gql`
           avatar
         }
       }
+      plan {
+        members {
+          user {
+            avatar
+            id
+            name
+          }
+        }
+      }
     }
   }
 `;
@@ -31,6 +40,15 @@ function PlanStepDetailOverviewTab(props) {
     fetchPolicy: 'network-only',
   });
 
+  for (let m of data?.planStep?.plan?.members || []) {
+    const userFill = data?.planStep?.fulfillments?.find(
+      (f) => f.user.id == m?.user?.id
+    );
+    if (!userFill) {
+      data?.planStep?.fulfillments?.push({ value: 'UNKNOWN', user: m.user });
+    }
+  }
+  console.table(data);
   return (
     <Grid
       container
@@ -39,6 +57,28 @@ function PlanStepDetailOverviewTab(props) {
       style={{ margin: '10px 0 0 0' }}
       spacing={3}
     >
+      <Grid item>
+        <Grid spacing={1} container direction={'row'} alignItems={'center'}>
+          <Grid item>
+            <Chip
+              style={{
+                width: 100,
+                background: COLORS.planStepUknown,
+              }}
+              color={'primary'}
+              variant={'default'}
+              label={'Uknown'}
+            />
+          </Grid>
+          <Grid item>
+            <PlanStepOverviewAvatarGroup
+              loading={loading}
+              data={data}
+              progress={'UNKNOWN'}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
       <Grid item>
         <Grid spacing={1} container direction={'row'} alignItems={'center'}>
           <Grid item>

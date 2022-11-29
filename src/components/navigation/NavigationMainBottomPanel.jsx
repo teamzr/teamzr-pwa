@@ -42,7 +42,7 @@ function NavigationMainBottomPanel(props) {
       >
         <Grid item xs={3} md={2} className={classes.item}>
           <IconButton onClick={handleExplore}>
-            <CompassIcon />
+            <CompassIcon fill={'black'} />
           </IconButton>
         </Grid>
         <Grid item xs={3} md={2} className={classes.item}>

@@ -29,4 +29,5 @@ export const COLORS = {
   planStepSuceeded: 'linear-gradient(180deg, #14D866 0%, #0E9747 100%',
   planStepFailed: 'linear-gradient(180deg, #F09819 0%, #FF512F 100%)',
   planStepNotRated: 'linear-gradient(180deg, #333333 0%, #828282 100%)',
+  planStepUknown: '#06ADB7',
 };
