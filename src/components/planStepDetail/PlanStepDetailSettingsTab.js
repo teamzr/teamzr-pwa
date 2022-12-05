@@ -2,10 +2,18 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 import PlanStepsDialogSubstepsComponent from './PlanStepsDialogSubstepsComponent';
 import PlanStepsDialogDurationComponent from './PlanStepsDialogDurationComponent';
-import { Grid, TextField, Typography } from '@material-ui/core';
+import {
+  Box,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
 import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
+import { TikTokEmbed } from 'react-social-media-embed';
+import { CloseRounded } from '@material-ui/icons';
 
 export const UPDATE_PLAN_STEP_MUTATION = gql`
   mutation updatePlanStep($input: PlanStepUpdateInput!) {
@@ -18,6 +26,7 @@ export const UPDATE_PLAN_STEP_MUTATION = gql`
       number
       status
       duration
+      tikTokVideoUrl
       fulfillments {
         id
         value
@@ -63,12 +72,14 @@ function PlanStepDetailSettingsTab(props) {
   const [planStepState, setPlanStepState] = React.useState({
     name: '',
     description: '',
+    tikTokVideoUrl: '',
   });
   React.useEffect(() => {
     setPlanStepState({
       name: planStep.name,
       description: planStep.description,
       duration: planStep.duration,
+      tikTokVideoUrl: planStep.tikTokVideoUrl,
       status:
         planStep.status == PLAN_STEP_STATUSES.UNDEFINED
           ? PLAN_STEP_STATUSES.UPCOMING
@@ -91,6 +102,12 @@ function PlanStepDetailSettingsTab(props) {
       variables: { input: { id: planStepId, ...inputVariables } },
     });
   };
+
+  React.useEffect(() => {
+    if (planStepState.tikTokVideoUrl) {
+      handleUpdate();
+    }
+  }, [planStepState.tikTokVideoUrl]);
 
   const onBlur = () => {
     handleUpdate();
@@ -129,6 +146,40 @@ function PlanStepDetailSettingsTab(props) {
           inputProps={{ autoComplete: 'off' }}
           onBlur={onBlur}
         />
+      </Grid>
+      <Grid item>
+        {!planStepState.tikTokVideoUrl && (
+          <>
+            <TextField
+              disabled={isViewOnly}
+              rows={1}
+              fullWidth
+              placeholder={'Tik Tok Url'}
+              name={'tikTokVideoUrl'}
+              value={planStepState.tikTokVideoUrl}
+              onChange={(e) => {
+                handleValueChange(e);
+              }}
+              autoComplete={'off'}
+              InputProps={{ autoComplete: 'off' }}
+              inputProps={{ autoComplete: 'off' }}
+              onBlur={onBlur}
+            />
+          </>
+        )}
+        {!!planStepState.tikTokVideoUrl && (
+          <Box>
+            <IconButton
+              styl
+              onClick={() =>
+                setPlanStepState({ ...planStepState, tikTokVideoUrl: '' })
+              }
+            >
+              <CloseRounded />
+            </IconButton>
+            <TikTokEmbed url={planStepState.tikTokVideoUrl} />
+          </Box>
+        )}
       </Grid>
       {false && (
         <Grid item xs={12}>

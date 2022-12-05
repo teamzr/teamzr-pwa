@@ -29,6 +29,7 @@ const GET_PLANSTEP_QUERY = gql`
       duration
       startDate
       endDate
+      tikTokVideoUrl
     }
   }
 `;
