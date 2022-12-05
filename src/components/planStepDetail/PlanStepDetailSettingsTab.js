@@ -12,7 +12,7 @@ import {
 import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/client';
 import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
-import { TikTokEmbed } from 'react-social-media-embed';
+import { TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import { CloseRounded } from '@material-ui/icons';
 
 export const UPDATE_PLAN_STEP_MUTATION = gql`
@@ -154,7 +154,7 @@ function PlanStepDetailSettingsTab(props) {
               disabled={isViewOnly}
               rows={1}
               fullWidth
-              placeholder={'Tik Tok Url'}
+              placeholder={'Youtube / TikTok Url'}
               name={'tikTokVideoUrl'}
               value={planStepState.tikTokVideoUrl}
               onChange={(e) => {
@@ -177,7 +177,12 @@ function PlanStepDetailSettingsTab(props) {
             >
               <CloseRounded />
             </IconButton>
-            <TikTokEmbed url={planStepState.tikTokVideoUrl} />
+            {planStepState.tikTokVideoUrl.includes('tiktok') && (
+              <TikTokEmbed url={planStepState.tikTokVideoUrl} />
+            )}
+            {planStepState.tikTokVideoUrl.includes('youtu') && (
+              <YouTubeEmbed url={planStepState.tikTokVideoUrl} />
+            )}
           </Box>
         )}
       </Grid>
