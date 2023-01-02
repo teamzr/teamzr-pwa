@@ -113,6 +113,14 @@ function PlanStepDetailSettingsTab(props) {
     handleUpdate();
   };
 
+  const removeVideo = () => {
+    handleValueChange({
+      target: { name: 'tikTokVideoUrl', value: '' },
+    });
+
+    handleUpdate({ ...planStepState, tikTokVideoUrl: '' });
+  };
+
   return (
     <Grid container direction={'column'} spacing={2}>
       <Grid item>
@@ -169,12 +177,7 @@ function PlanStepDetailSettingsTab(props) {
         )}
         {!!planStepState.tikTokVideoUrl && (
           <Box>
-            <IconButton
-              styl
-              onClick={() =>
-                setPlanStepState({ ...planStepState, tikTokVideoUrl: '' })
-              }
-            >
+            <IconButton styl onClick={removeVideo}>
               <CloseRounded />
             </IconButton>
             {planStepState.tikTokVideoUrl.includes('tiktok') && (
