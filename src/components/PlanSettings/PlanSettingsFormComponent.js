@@ -1,4 +1,13 @@
-import { Button, Grid, Select, Typography } from '@material-ui/core';
+import {
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  Select,
+  Switch,
+  Typography,
+} from '@material-ui/core';
+
 import moment from 'moment';
 import * as React from 'react';
 import useAuthContext from '../../context/AuthContext';
@@ -34,6 +43,10 @@ export function PlanSettingsFormComponent(props) {
     mentors,
     setMentors,
     setMembers,
+    isMentored,
+    setIsMentored,
+    isReview,
+    setIsReview,
   } = props;
   const isEditing = !!planId;
 
@@ -95,14 +108,57 @@ export function PlanSettingsFormComponent(props) {
                     onChange={setMembers}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <PlanSettignsCoversationUsersSelect
-                    label={'Mentors'}
-                    conversationId={conversationId}
-                    value={mentors}
-                    onChange={setMentors}
-                  />
+                <Grid item>
+                  <Grid
+                    container
+                    direction={'row'}
+                    alignContent={'center'}
+                    alignItems={'center'}
+                    justifyContent={'space-around'}
+                  >
+                    <Grid item>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              color={'primary'}
+                              checked={!!isMentored}
+                              inputProps={{ checked: isMentored }}
+                              onChange={(event, value) => {
+                                setIsMentored(value);
+                              }}
+                            />
+                          }
+                          label="Mentored"
+                        />
+                      </FormGroup>
+                    </Grid>
+                    <Grid item>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={!!isReview}
+                              color={'primary'}
+                              onChange={(event, value) => setIsReview(value)}
+                            />
+                          }
+                          label={'Review mode'}
+                        />
+                      </FormGroup>
+                    </Grid>
+                  </Grid>
                 </Grid>
+                {isMentored && (
+                  <Grid item xs={12}>
+                    <PlanSettignsCoversationUsersSelect
+                      label={'Mentors'}
+                      conversationId={conversationId}
+                      value={mentors}
+                      onChange={setMentors}
+                    />
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           )}

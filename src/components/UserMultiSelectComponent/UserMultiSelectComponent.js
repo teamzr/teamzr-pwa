@@ -24,7 +24,7 @@ export default function UserMultiSelectComponent(props) {
         multiple
         multiline
         rows={3}
-        value={value}
+        value={value || []}
         onChange={handleOnChange}
         renderValue={(selected) => (
           <Box>
@@ -43,7 +43,10 @@ export default function UserMultiSelectComponent(props) {
       >
         {options.map((opt) => (
           <MenuItem key={opt.value} value={opt.value}>
-            <Checkbox color="primary" checked={value.indexOf(opt.value) > -1} />
+            <Checkbox
+              color="primary"
+              checked={value?.indexOf(opt.value) > -1}
+            />
             <ListItemText primary={opt.label} />
           </MenuItem>
         ))}

@@ -34,6 +34,8 @@ export const UPDATE_PLAN_MUTATION = gql`
       description
       rewardDescription
       startDate
+      isReview
+      isMentored
       steps {
         id
         name

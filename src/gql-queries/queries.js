@@ -44,6 +44,8 @@ export const PLAN_QUERY = gql`
           id
         }
       }
+      isReview
+      isMentored
     }
   }
 `;

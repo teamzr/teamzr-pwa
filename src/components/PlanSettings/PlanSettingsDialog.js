@@ -46,6 +46,8 @@ function PlanSettingsDialog(props) {
 
     setMentors(data?.plan?.mentors?.map((m) => m.user.id));
     setMembers(data?.plan?.members?.map((m) => m.user.id));
+    setIsMentored(data?.plan?.isMentored);
+    setIsReview(data?.plan?.isReview);
     setDataLoaded(true);
   }, [loading]);
 
@@ -57,6 +59,8 @@ function PlanSettingsDialog(props) {
   const [rewardDescription, setRewardDescription] = React.useState('');
   const [members, setMembers] = React.useState([]);
   const [mentors, setMentors] = React.useState([]);
+  const [isMentored, setIsMentored] = React.useState(false);
+  const [isReview, setIsReview] = React.useState(false);
 
   const router = useRouter();
 
@@ -97,6 +101,8 @@ function PlanSettingsDialog(props) {
     open,
     members,
     mentors,
+    isReview,
+    isMentored,
   ]);
 
   const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
@@ -113,6 +119,8 @@ function PlanSettingsDialog(props) {
           interests: interests.map((i) => i.id),
           members: members,
           mentors: mentors,
+          isReview: isReview,
+          isMentored: isMentored,
         },
       },
     });
@@ -171,6 +179,10 @@ function PlanSettingsDialog(props) {
             setMembers={setMembers}
             mentors={mentors}
             setMentors={setMentors}
+            isMentored={isMentored}
+            setIsMentored={setIsMentored}
+            isReview={isReview}
+            setIsReview={setIsReview}
           />
         )}
       </Dialog>

@@ -38,6 +38,7 @@ export default function EditPlanPopover({ planId, ...props }) {
 
   const { data, loading, error } = useQuery(PLAN_CONVERSATION_QUERY, {
     variables: { planId },
+    skip: !planEditOpen,
   });
 
   const conversationId = data?.plan?.conversation?.id;
