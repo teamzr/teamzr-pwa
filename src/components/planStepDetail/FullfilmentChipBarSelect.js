@@ -5,7 +5,7 @@ import { BorderColor } from '@material-ui/icons';
 import clsx from 'clsx';
 import { COLORS } from '../../constants/Colors';
 
-const FULFILLMENT_VALUE = {
+export const FULFILLMENT_VALUE = {
   FAILED: 'FAILED',
   SUCEEDED: 'SUCEEDED',
   NOT_RATED: 'NOT_RATED',
@@ -62,7 +62,7 @@ const NotRatedButton = styled(Button)({
   colorAdjust: 'red',
 });
 
-const ChipBarItem = (props) => {
+export const ChipBarItem = (props) => {
   const { disabled, variant, label, value, onClick, style } = props;
   const classes = makeChipBarItemStyle();
 

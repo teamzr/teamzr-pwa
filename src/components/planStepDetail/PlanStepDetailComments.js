@@ -38,6 +38,11 @@ const COMMENTS_QUERY = gql`
         }
         createdAt
       }
+      fulfillment {
+        id
+        value
+        createdAt
+      }
     }
   }
 `;

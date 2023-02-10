@@ -1,6 +1,12 @@
 import { Box, Button, Grid } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
+import moment from 'moment';
 import * as React from 'react';
+import { COLORS } from '../../constants/Colors';
+import {
+  ChipBarItem,
+  FULFILLMENT_VALUE,
+} from '../planStepDetail/FullfilmentChipBarSelect';
 import CommentEditorComponent from './CommentEditorComponent';
 import CommentListItemComponent from './CommentListItemComponent';
 
@@ -41,16 +47,49 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
       {!loading &&
         comments?.map((v) => (
           <>
-            <CommentListItemComponent
-              key={v.id}
-              commentId={v.id}
-              avatar={v.author?.avatar}
-              username={v.author?.name}
-              text={v.text}
-              createdAt={v.createdAt}
-              onSubmit={onSubmit}
-              handleReplyClick={handleReplyClick}
-            />
+            {v.fulfillment && (
+              <>
+                {console.log(v.fulfillment)}
+                <ChipBarItem
+                  disabled={false}
+                  style={{
+                    background:
+                      v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
+                        ? COLORS.planStepSuceeded
+                        : COLORS.planStepFailed,
+                  }}
+                  value={
+                    v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
+                      ? FULFILLMENT_VALUE.SUCEEDED
+                      : FULFILLMENT_VALUE.FAILED
+                  }
+                  label={
+                    v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
+                      ? 'Succeeded'
+                      : 'Failed'
+                  }
+                  clickable={false}
+                  variant={'default'}
+                />
+                {'        '}
+                {v.text}
+                {moment(moment(parseInt(v.createdAt)), 'DD.MM.YYYY').fromNow(
+                  true
+                )}
+              </>
+            )}
+            {!v.fulfillment && (
+              <CommentListItemComponent
+                key={v.id}
+                commentId={v.id}
+                avatar={v.author?.avatar}
+                username={v.author?.name}
+                text={v.text}
+                createdAt={v.createdAt}
+                onSubmit={onSubmit}
+                handleReplyClick={handleReplyClick}
+              />
+            )}
             <Box marginLeft={4}>
               {v.children.map((child, index) => (
                 <>
