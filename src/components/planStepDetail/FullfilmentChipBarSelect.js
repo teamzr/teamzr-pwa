@@ -20,7 +20,7 @@ function FullfilmentChipBarSelect(props) {
         <Grid container spacing={1}>
           <Grid item>
             <ChipBarItem
-            disabled={disabled}
+              disabled={disabled}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.FAILED && COLORS.planStepFailed,
@@ -36,7 +36,7 @@ function FullfilmentChipBarSelect(props) {
           </Grid>
           <Grid item>
             <ChipBarItem
-            disabled={disabled}
+              disabled={disabled}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.SUCEEDED &&
@@ -49,23 +49,6 @@ function FullfilmentChipBarSelect(props) {
               variant={
                 value == FULFILLMENT_VALUE.SUCEEDED ? 'default' : 'outlined'
               }
-            />
-          </Grid>
-          <Grid item>
-            <ChipBarItem
-            disabled={disabled}
-              style={{
-                background:
-                  value == FULFILLMENT_VALUE.NOT_RATED &&
-                  COLORS.planStepNotRated,
-              }}
-              value={FULFILLMENT_VALUE.NOT_RATED}
-              variant={
-                value == FULFILLMENT_VALUE.NOT_RATED ? 'default' : 'outlined'
-              }
-              color={'default'}
-              label={'Not Rated'}
-              onClick={onChange}
             />
           </Grid>
         </Grid>

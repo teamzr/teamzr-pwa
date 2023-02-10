@@ -124,28 +124,6 @@ function PlanStepDetailOverviewTab(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
-        <Grid spacing={1} container direction={'row'} alignItems={'center'}>
-          <Grid item>
-            <Chip
-              style={{
-                width: 100,
-                background: COLORS.planStepNotRated,
-              }}
-              variant={'default'}
-              color={'primary'}
-              label={'Not rated'}
-            />
-          </Grid>
-          <Grid item>
-            <PlanStepOverviewAvatarGroup
-              loading={loading}
-              data={data}
-              progress={'NOT_RATED'}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
     </Grid>
   );
 }
