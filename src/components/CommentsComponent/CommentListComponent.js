@@ -1,4 +1,11 @@
-import { Box, Button, Grid } from '@material-ui/core';
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import moment from 'moment';
 import * as React from 'react';
@@ -48,35 +55,54 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
         comments?.map((v) => (
           <>
             {v.fulfillment && (
-              <>
-                {console.log(v.fulfillment)}
-                <ChipBarItem
-                  disabled={false}
+              <Box
+                style={{
+                  marginTop: 40,
+                  marginBottom: 10,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignContent: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flex: 1,
+                  borderTopColor: COLORS.primaryMain,
+                  borderTopWidth: 1,
+                  borderTopStyle: 'solid',
+                  paddingTop: 5,
+                }}
+              >
+                <Box
                   style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: '100%',
+                    alignItems: 'center',
+                    alignContent: 'center',
+                    display: 'flex',
+                    justifyItems: 'center',
+                    justifyContent: 'center',
+                    justifySelf: 'left',
+
                     background:
                       v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
                         ? COLORS.planStepSuceeded
                         : COLORS.planStepFailed,
                   }}
-                  value={
-                    v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
-                      ? FULFILLMENT_VALUE.SUCEEDED
-                      : FULFILLMENT_VALUE.FAILED
-                  }
-                  label={
-                    v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
-                      ? 'Succeeded'
-                      : 'Failed'
-                  }
-                  clickable={false}
-                  variant={'default'}
-                />
-                {'        '}
-                {v.text}
-                {moment(moment(parseInt(v.createdAt)), 'DD.MM.YYYY').fromNow(
-                  true
-                )}
-              </>
+                >
+                  <Avatar src={v.author?.avatar} />
+                </Box>
+                <Box style={{ flex: 4 }}>
+                  <Typography variant={'caption'} style={{ margin: 12 }}>
+                    {v.text}
+                  </Typography>
+                </Box>
+                <Box>
+                  {' '}
+                  {moment(moment(parseInt(v.createdAt)), 'DD.MM.YYYY').fromNow(
+                    true
+                  )}
+                </Box>
+              </Box>
             )}
             {!v.fulfillment && (
               <CommentListItemComponent
