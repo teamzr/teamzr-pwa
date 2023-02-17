@@ -9,7 +9,7 @@ export default function CommentsComponent(props) {
   return (
     <>
       <Box>
-        <h3>Comments</h3>
+        <h3>Activity</h3>
       </Box>
       <Box marginBottom={1}>
         <CommentEditorComponent onSubmit={onSubmit} />
