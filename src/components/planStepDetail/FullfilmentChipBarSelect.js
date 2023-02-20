@@ -21,9 +21,13 @@ function FullfilmentChipBarSelect(props) {
           <Grid item>
             <ChipBarItem
               disabled={disabled}
+              type={'failed'}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.FAILED && COLORS.planStepFailed,
+                color: value == FULFILLMENT_VALUE.FAILED && COLORS.white,
+                BorderColor:
+                  value != FULFILLMENT_VALUE.FAILED && COLORS.planStepFailed,
               }}
               value={FULFILLMENT_VALUE.FAILED}
               label={'Failed'}
@@ -37,9 +41,14 @@ function FullfilmentChipBarSelect(props) {
           <Grid item>
             <ChipBarItem
               disabled={disabled}
+              type={'succeded'}
               style={{
                 background:
                   value == FULFILLMENT_VALUE.SUCEEDED &&
+                  COLORS.planStepSuceeded,
+                color: value == FULFILLMENT_VALUE.SUCEEDED && COLORS.white,
+                borderColor:
+                  value != FULFILLMENT_VALUE.SUCEEDED &&
                   COLORS.planStepSuceeded,
               }}
               value={FULFILLMENT_VALUE.SUCEEDED}
@@ -63,7 +72,7 @@ const NotRatedButton = styled(Button)({
 });
 
 export const ChipBarItem = (props) => {
-  const { disabled, variant, label, value, onClick, style } = props;
+  const { disabled, variant, label, value, onClick, style, type } = props;
   const classes = makeChipBarItemStyle();
 
   const handleClick = () => {
@@ -77,7 +86,8 @@ export const ChipBarItem = (props) => {
       variant={variant}
       classes={{
         colorPrimary: clsx({
-          [classes.failed]: false,
+          [classes.failed]: type == 'failed',
+          [classes.succeeded]: type == 'succeded',
         }),
       }}
       label={label}
@@ -89,9 +99,12 @@ export const ChipBarItem = (props) => {
 
 const makeChipBarItemStyle = makeStyles((theme) => ({
   failed: {
-    borderColor: 'red',
-    color: 'red',
-    background: 'red',
+    borderColor: COLORS.planStepFailedColor,
+    color: COLORS.planStepFailedColor,
+  },
+  succeeded: {
+    borderColor: COLORS.planStepSuceededColor,
+    color: COLORS.planStepSuceededColor,
   },
 }));
 
