@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Icon, IconButton } from '@material-ui/core';
 import { Chip, Grid, Typography, makeStyles, styled } from '@material-ui/core';
 import { BorderColor } from '@material-ui/icons';
 import clsx from 'clsx';
 import { COLORS } from '../../constants/Colors';
+
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 
 export const FULFILLMENT_VALUE = {
   FAILED: 'FAILED',
@@ -78,12 +81,19 @@ export const ChipBarItem = (props) => {
   const handleClick = () => {
     onClick(value);
   };
+
   return (
     <Chip
       disabled={disabled}
       style={style}
       onClick={handleClick}
       variant={variant}
+      icon={
+        <>
+          {type == 'succeded' && <CheckIcon />}
+          {type == 'failed' && <CloseIcon />}
+        </>
+      }
       classes={{
         colorPrimary: clsx({
           [classes.failed]: type == 'failed',
@@ -105,6 +115,12 @@ const makeChipBarItemStyle = makeStyles((theme) => ({
   succeeded: {
     borderColor: COLORS.planStepSuceededColor,
     color: COLORS.planStepSuceededColor,
+  },
+  defaultIcon: {
+    backgroundColor: 'white',
+  },
+  outlinedIcon: {
+    backgroundColor: 'transparent',
   },
 }));
 
