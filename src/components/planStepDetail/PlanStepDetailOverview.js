@@ -6,6 +6,10 @@ import { useQuery } from '@apollo/client';
 import { AvatarGroup, Skeleton } from '@material-ui/lab';
 import { COLORS } from '../../constants/Colors';
 
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import HelpOutline from '@material-ui/icons/HelpOutline';
+
 const OVERVIEW_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
     planStep(id: $id) {
@@ -62,12 +66,13 @@ function PlanStepDetailOverviewTab(props) {
           <Grid item>
             <Chip
               style={{
-                width: 100,
+                width: 130,
                 background: COLORS.planStepUknown,
               }}
               color={'primary'}
               variant={'default'}
               label={'Uknown'}
+              icon={<HelpOutline />}
             />
           </Grid>
           <Grid item>
@@ -83,8 +88,9 @@ function PlanStepDetailOverviewTab(props) {
         <Grid spacing={1} container direction={'row'} alignItems={'center'}>
           <Grid item>
             <Chip
+              icon={<CheckIcon />}
               style={{
-                width: 100,
+                width: 130,
                 background: COLORS.planStepSuceeded,
               }}
               color={'primary'}
@@ -105,13 +111,14 @@ function PlanStepDetailOverviewTab(props) {
         <Grid spacing={1} container direction={'row'} alignItems={'center'}>
           <Grid item>
             <Chip
+              icon={<CloseIcon />}
               color={'primary'}
               variant={'default'}
               label={'Failed'}
               color={'primary'}
               style={{
                 background: COLORS.planStepFailed,
-                width: 100,
+                width: 130,
               }}
             />
           </Grid>
