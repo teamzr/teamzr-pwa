@@ -5,6 +5,7 @@ import UserSelectModalUIKitItem from '../components/UIKitItems/UserSelectModalUI
 import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
 import CommentsUIKitItem from '../components/UIKitItems/CommentsUIKitItem';
 import UserMultiselectComponentUiKitItem from '../components/UIKitItems/UserMultiSelectComponentUIKitItem';
+import { UserModalComponent } from '../components/UserModalComponent';
 
 function UiKit() {
   return (
@@ -20,7 +21,8 @@ function UiKit() {
           {false && <UserSelectModalUIKitItem />}
           {false && <AlertDialogUIKitItem />}
           {false && <CommentsUIKitItem />}
-          <UserMultiselectComponentUiKitItem />
+          {false && <UserMultiselectComponentUiKitItem />}
+          <UserModalComponent open={true} title={'Users'} />
         </Grid>
       </Container>
     </div>
