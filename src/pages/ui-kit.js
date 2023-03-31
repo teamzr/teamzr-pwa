@@ -7,6 +7,7 @@ import CommentsUIKitItem from '../components/UIKitItems/CommentsUIKitItem';
 import UserMultiselectComponentUiKitItem from '../components/UIKitItems/UserMultiSelectComponentUIKitItem';
 import { UserModalComponent } from '../components/UserModalComponent';
 import { ShakeBottomAnimation } from '../animations/ShakeBottom';
+import { TeamzrButtonIcon } from '../constants/Icons';
 
 function UiKit() {
   return (
@@ -56,6 +57,16 @@ const MyFailButton = () => {
   return (
     <>
       <ShakeBottomAnimation />
+      <TeamzrButtonIcon
+        style={{
+          '-webkit-animation':
+            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+          animation:
+            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+          width: '100%',
+          height: '100%',
+        }}
+      />
       <Button
         style={{
           '-webkit-animation':
@@ -63,9 +74,7 @@ const MyFailButton = () => {
           animation:
             'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
         }}
-      >
-        Ahoj
-      </Button>
+      ></Button>
     </>
   );
 };
