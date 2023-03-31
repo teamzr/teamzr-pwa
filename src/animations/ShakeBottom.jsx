@@ -1,6 +1,16 @@
 import React from 'react';
 
-export function ShakeBottomAnimation() {
+export function ShakeBottomAnimation(props) {
+  const { children } = props;
+
+  const style = {
+    '-webkit-animation':
+      'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+    animation:
+      'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+    width: 'fill-content',
+  };
+
   return (
     <>
       <style>
@@ -73,6 +83,7 @@ export function ShakeBottomAnimation() {
        }                    
     `}
       </style>
+      <div style={style}>{children}</div>
     </>
   );
 }

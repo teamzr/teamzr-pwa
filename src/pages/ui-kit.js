@@ -55,17 +55,9 @@ const ChipSelect = () => {
 const MyFailButton = () => {
   return (
     <>
-      <ShakeBottomAnimation />
-      <Button
-        style={{
-          '-webkit-animation':
-            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
-          animation:
-            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
-        }}
-      >
-        Ahoj
-      </Button>
+      <ShakeBottomAnimation>
+        <Button>Ahoj</Button>
+      </ShakeBottomAnimation>
     </>
   );
 };
