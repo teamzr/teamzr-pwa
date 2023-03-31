@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Grid, Container, Box, Typography } from '@material-ui/core';
+import { Grid, Container, Box, Typography, Button } from '@material-ui/core';
 import ChipSelectComponent from '../components/ChipSelectComponent/ChipSelectComponent';
 import UserSelectModalUIKitItem from '../components/UIKitItems/UserSelectModalUIKitItem';
 import AlertDialogUIKitItem from '../components/UIKitItems/AlertDialogUIKitItem';
 import CommentsUIKitItem from '../components/UIKitItems/CommentsUIKitItem';
 import UserMultiselectComponentUiKitItem from '../components/UIKitItems/UserMultiSelectComponentUIKitItem';
 import { UserModalComponent } from '../components/UserModalComponent';
+import { ShakeBottomAnimation } from '../animations/ShakeBottom';
 
 function UiKit() {
   return (
@@ -22,8 +23,9 @@ function UiKit() {
           {false && <AlertDialogUIKitItem />}
           {false && <CommentsUIKitItem />}
           {false && <UserMultiselectComponentUiKitItem />}
-          <UserModalComponent open={true} title={'Users'} />
+          {false && <UserModalComponent open={false} title={'Users'} />}
         </Grid>
+        <MyFailButton />
       </Container>
     </div>
   );
@@ -45,12 +47,26 @@ const ChipSelect = () => {
   };
   return (
     <div style={{ width: '200px' }}>
-      <ChipSelectComponent
-        value={value}
-        options={options}
-        onChange={onChange}
-      />
+      <ChipSelectComponent value={value} options={options} />
     </div>
+  );
+};
+
+const MyFailButton = () => {
+  return (
+    <>
+      <ShakeBottomAnimation />
+      <Button
+        style={{
+          '-webkit-animation':
+            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+          animation:
+            'shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both',
+        }}
+      >
+        Ahoj
+      </Button>
+    </>
   );
 };
 
