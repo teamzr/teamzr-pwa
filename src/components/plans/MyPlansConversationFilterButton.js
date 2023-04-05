@@ -11,6 +11,8 @@ function MyPlansConversationFilterButton(props) {
 
   return (
     <Button
+      style={{ borderRadius: 16 }}
+      disableElevation={true}
       variant={active ? 'contained' : 'text'}
       color={'primary'}
       onClick={handleClick}

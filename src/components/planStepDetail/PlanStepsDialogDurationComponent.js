@@ -5,15 +5,15 @@ import { Grid, Typography } from '@material-ui/core';
 import ChipSelectComponent from '../ChipSelectComponent/ChipSelectComponent';
 
 function PlanStepsDialogDurationComponent(props) {
-  const { disabled,duration, handleUpdate, planStep } = props;
+  const { disabled, duration, handleUpdate, planStep } = props;
 
   const handleDurationClick = (value) => {
-    if(disabled) return false; 
+    if (disabled) return false;
     handleUpdate({
       duration: value,
     });
   };
-  
+
   const options = [
     { value: 'DAY', label: '1 Day' },
     { value: 'WEEK', label: '1 Week' },
@@ -31,18 +31,26 @@ function PlanStepsDialogDurationComponent(props) {
         />
       </Grid>
       <Grid item>
-        <Typography variant={'text'}>
-          Starts:{' '}
-          {moment(new Date(planStep.startDate))
-            .utc()
-            .format('DD.MM.YYYY HH:mm:ss')}
-          ; Ends:{' '}
-          {planStep.endDate
-            ? moment(new Date(planStep.endDate))
-                .utc()
-                .format('DD.MM.YYYY HH:mm:ss')
-            : null}
-        </Typography>
+        <Grid container direction={'column'}>
+          <Grid item>
+            <Typography variant={'text'}>
+              Starts:{' '}
+              {moment(new Date(planStep.startDate)).format(
+                'DD.MM.YYYY HH:mm:ss'
+              )}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant={'text'}>
+              Ends:{' '}
+              {planStep.endDate
+                ? moment(new Date(planStep.endDate)).format(
+                    'DD.MM.YYYY HH:mm:ss'
+                  )
+                : null}
+            </Typography>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
