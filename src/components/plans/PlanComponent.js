@@ -6,7 +6,7 @@ import moment from 'moment';
 import PlanStepsComponent from '../planSteps/PlanStepsComponent';
 import { useQuery, gql, useMutation } from '@apollo/react-hooks';
 import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
-import { DatePicker } from '@material-ui/pickers';
+import { DatePicker, TimePicker } from '@material-ui/pickers';
 import { PLAN_QUERY } from '../../gql-queries/queries';
 import { UPDATE_PLAN_MUTATION } from '../../gql-mutations/mutations';
 
@@ -81,6 +81,13 @@ function PlanComponent(props) {
               <DatePicker
                 format={'DD.MM.YYYY'}
                 label={'Start Date'}
+                value={data.plan.startDate}
+                onChange={handlePlanStartDateChange}
+              />
+              <TimePicker
+                clearable
+                ampm={false}
+                label={'Start Time'}
                 value={data.plan.startDate}
                 onChange={handlePlanStartDateChange}
               />

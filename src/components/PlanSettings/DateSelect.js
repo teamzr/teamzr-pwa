@@ -16,7 +16,13 @@ export default function DateSelect({ value, onChange, minDate, ...props }) {
         />
       </Grid>
       <Grid item xs={4}>
-        <TimePicker variant={'inline'} value={value} onChange={onChange} />
+        <TimePicker
+          variant={'inline'}
+          value={value}
+          onChange={onChange}
+          clearable
+          ampm={false}
+        />
       </Grid>
     </Grid>
   );
