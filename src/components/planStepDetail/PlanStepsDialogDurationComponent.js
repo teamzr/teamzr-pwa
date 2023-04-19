@@ -15,10 +15,12 @@ function PlanStepsDialogDurationComponent(props) {
   };
 
   const options = [
+    { value: 'MINUTE', label: '1 Minute' },
+    { value: 'HOUR', label: '1 Hour' },
     { value: 'DAY', label: '1 Day' },
     { value: 'WEEK', label: '1 Week' },
     { value: 'WEEK2', label: '2 Weeks' },
-    { value: 'MONTH', label: '1 Month' },
+    { value: 'MONTH', label: '1 Month' },    
   ];
   return (
     <Grid container direction={'column'} spacing={2}>
@@ -35,18 +37,14 @@ function PlanStepsDialogDurationComponent(props) {
           <Grid item>
             <Typography variant={'text'}>
               Starts:{' '}
-              {moment(new Date(planStep.startDate)).format(
-                'DD.MM.YYYY HH:mm:ss'
-              )}
+              {moment(new Date(planStep.startDate)).format('DD.MM.YYYY HH:mm')}
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant={'text'}>
               Ends:{' '}
               {planStep.endDate
-                ? moment(new Date(planStep.endDate)).format(
-                    'DD.MM.YYYY HH:mm:ss'
-                  )
+                ? moment(new Date(planStep.endDate)).format('DD.MM.YYYY HH:mm')
                 : null}
             </Typography>
           </Grid>
