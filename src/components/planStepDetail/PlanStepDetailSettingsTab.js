@@ -80,10 +80,6 @@ function PlanStepDetailSettingsTab(props) {
       description: planStep.description,
       duration: planStep.duration,
       tikTokVideoUrl: planStep.tikTokVideoUrl,
-      status:
-        planStep.status == PLAN_STEP_STATUSES.UNDEFINED
-          ? PLAN_STEP_STATUSES.UPCOMING
-          : planStep.status,
     });
   }, [planStep]);
 
