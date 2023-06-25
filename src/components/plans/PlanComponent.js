@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Chip, Grid, Typography } from '@material-ui/core';
 import moment from 'moment';
 
 import PlanStepsComponent from '../planSteps/PlanStepsComponent';
@@ -9,6 +9,7 @@ import LoadingIndicatorComponent from '../LoadingIndicatorComponent';
 import { DatePicker, TimePicker } from '@material-ui/pickers';
 import { PLAN_QUERY } from '../../gql-queries/queries';
 import { UPDATE_PLAN_MUTATION } from '../../gql-mutations/mutations';
+import { ChipBarItem } from '../planStepDetail/FullfilmentChipBarSelect';
 
 export const PLAN_STEPS_QUERY = gql`
   query planSteps($planId: ID!) {
@@ -74,25 +75,55 @@ function PlanComponent(props) {
         <Grid item>
           <Typography variant={'h4'}>{data.plan.name}</Typography>
           <Typography variant={'body1'}>{data.plan.description}</Typography>
+          <ChipBarItem label={data?.plan?.status} disabled={true} />
         </Grid>
         <Grid item>
-          <Grid container direction={'row'}>
-            <Grid item>
-              <DatePicker
-                format={'DD.MM.YYYY'}
-                label={'Start Date'}
-                value={data.plan.startDate}
-                onChange={handlePlanStartDateChange}
-              />
-              <TimePicker
-                clearable
-                ampm={false}
-                label={'Start Time'}
-                value={data.plan.startDate}
-                onChange={handlePlanStartDateChange}
-              />
-            </Grid>
-          </Grid>
+          <>
+            {data.plan.startDate != null && (
+              <Grid container direction={'row'}>
+                <Grid item>
+                  <DatePicker
+                    format={'DD.MM.YYYY'}
+                    label={'Start Date'}
+                    value={data.plan.startDate}
+                    onChange={handlePlanStartDateChange}
+                    disabled={
+                      data.plan.status == 'ACTIVE' ||
+                      data.plan.status == 'FINISHED'
+                    }
+                  />
+                  <TimePicker
+                    disabled={
+                      data.plan.status == 'ACTIVE' ||
+                      data.plan.status == 'FINISHED'
+                    }
+                    clearable
+                    ampm={false}
+                    label={'Start Time'}
+                    value={data.plan.startDate}
+                    onChange={handlePlanStartDateChange}
+                  />
+                </Grid>
+              </Grid>
+            )}
+            {data.plan.startDate == null && (
+              <Grid container direction={'row'}>
+                <Grid item>
+                  <Button
+                    variant={'contained'}
+                    color={'primary'}
+                    onClick={() =>
+                      handlePlanStartDateChange(
+                        moment(moment.now()).add('day', 1)
+                      )
+                    }
+                  >
+                    Schedule plan
+                  </Button>
+                </Grid>
+              </Grid>
+            )}
+          </>
         </Grid>
         <Grid item>
           <PlanStepsComponent

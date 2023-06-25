@@ -55,7 +55,7 @@ function PlanSettingsDialog(props) {
   const [description, setDescription] = React.useState('');
   const [duration, setDuration] = React.useState('DAY');
   const [interests, setInterests] = React.useState([]);
-  const [startDate, setStartDate] = React.useState(moment().hours(0).minute(0));
+  const [startDate, setStartDate] = React.useState(null); // ALT: moment().hours(0).minute(0)
   const [rewardDescription, setRewardDescription] = React.useState('');
   const [members, setMembers] = React.useState([]);
   const [mentors, setMentors] = React.useState([]);

@@ -33,7 +33,7 @@ function NewPlanComponent(props) {
   const [data, setData] = React.useState({
     name: '',
     description: '',
-    startDate: moment().format(),
+    startDate: null,
     stepDuration: 'WEEK',
     rewardDescription: '',
     conversationId,

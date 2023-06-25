@@ -15,6 +15,7 @@ export const PLAN_QUERY = gql`
       id
       name
       description
+      status
       startDate
       author {
         id
