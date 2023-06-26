@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 export const FULFILLMENT_VALUE = {
   FAILED: 'FAILED',
-  SUCEEDED: 'SUCEEDED',
+  SUCCEEDED: 'SUCCEEDED',
   NOT_RATED: 'NOT_RATED',
 };
 
@@ -47,19 +47,19 @@ function FullfilmentChipBarSelect(props) {
               type={'succeded'}
               style={{
                 background:
-                  value == FULFILLMENT_VALUE.SUCEEDED &&
+                  value == FULFILLMENT_VALUE.SUCCEEDED &&
                   COLORS.planStepSuceeded,
-                color: value == FULFILLMENT_VALUE.SUCEEDED && COLORS.white,
+                color: value == FULFILLMENT_VALUE.SUCCEEDED && COLORS.white,
                 borderColor:
-                  value != FULFILLMENT_VALUE.SUCEEDED &&
+                  value != FULFILLMENT_VALUE.SUCCEEDED &&
                   COLORS.planStepSuceeded,
               }}
-              value={FULFILLMENT_VALUE.SUCEEDED}
+              value={FULFILLMENT_VALUE.SUCCEEDED}
               label={'Succeeded'}
               clickable={true}
               onClick={onChange}
               variant={
-                value == FULFILLMENT_VALUE.SUCEEDED ? 'default' : 'outlined'
+                value == FULFILLMENT_VALUE.SUCCEEDED ? 'default' : 'outlined'
               }
             />
           </Grid>

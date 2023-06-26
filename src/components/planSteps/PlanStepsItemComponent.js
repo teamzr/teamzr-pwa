@@ -154,13 +154,13 @@ function PlanStepsItemComponent(props) {
             className={classes.itemTest}
             secondary={`Due date ${moment(endDate).utc().format('DD.MM.YYYY')}`}
           />
-          {!!fulfillments?.filter?.((f) => f.value == 'SUCEEDED').length && (
+          {!!fulfillments?.filter?.((f) => f.value == 'SUCCEEDED').length && (
             <AvatarGroup max={7}>
               <Avatar key={11} style={{ background: COLORS.planStepSuceeded }}>
                 <CheckIcon />
               </Avatar>
               {fulfillments
-                ?.filter?.((f) => f.value == 'SUCEEDED')
+                ?.filter?.((f) => f.value == 'SUCCEEDED')
                 ?.map((fulfillment, key) => (
                   <Avatar src={fulfillment?.user?.avatar} />
                 ))}

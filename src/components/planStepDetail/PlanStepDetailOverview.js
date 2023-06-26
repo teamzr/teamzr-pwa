@@ -102,7 +102,7 @@ function PlanStepDetailOverviewTab(props) {
             <PlanStepOverviewAvatarGroup
               loading={loading}
               data={data}
-              progress={'SUCEEDED'}
+              progress={'SUCCEEDED'}
             />
           </Grid>
         </Grid>

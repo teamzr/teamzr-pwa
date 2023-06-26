@@ -84,7 +84,7 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
                     justifySelf: 'left',
 
                     background:
-                      v.fulfillment.value == FULFILLMENT_VALUE.SUCEEDED
+                      v.fulfillment.value == FULFILLMENT_VALUE.SUCCEEDED
                         ? COLORS.planStepSuceeded
                         : COLORS.planStepFailed,
                   }}
