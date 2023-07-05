@@ -101,10 +101,9 @@ function PlanStepsItemComponentPopover(props) {
         input: {
           name: planStep.name,
           description: planStep.description,
-          status: planStep.status,
-          duration: planStep.duration,
-          parent: planStep.planStepId,
+          duration: planStep.duration,          
           plan: planId,
+          tikTokVideoUrl: planStep.tikTokVideoUrl
         },
       },
     });
