@@ -22,6 +22,7 @@ export const PLAN_STEPS_QUERY = gql`
       number
       status
       duration
+      tikTokVideoUrl
       fulfillments {
         id
         value

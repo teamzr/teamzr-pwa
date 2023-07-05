@@ -17,6 +17,7 @@ export const CREATE_PLAN_TASK_MUTATION = gql`
       endDate
       duration
       status
+      tikTokVideoUrl
       fulfillments {
         id
         value
