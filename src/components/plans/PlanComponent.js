@@ -47,6 +47,7 @@ function PlanComponent(props) {
   const { data, error, loading } = useQuery(PLAN_QUERY, {
     variables: { planId },
     skip: !planId,
+    pollInterval: 10000,
   });
 
   const [updatePlan] = useMutation(UPDATE_PLAN_MUTATION);
