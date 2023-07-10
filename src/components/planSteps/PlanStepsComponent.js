@@ -109,6 +109,7 @@ function PlanStepsComponent(props) {
                   fulfillments={step.fulfillments}
                   planStepDuration={step.duration}
                   planStepStatus={step.status}
+                  tikTokVideoUrl={step.tikTokVideoUrl}
                 />
               </div>
             ))}

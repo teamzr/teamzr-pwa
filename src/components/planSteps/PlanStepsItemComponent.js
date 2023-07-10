@@ -44,6 +44,7 @@ function PlanStepsItemComponent(props) {
     fulfillments,
     planStepDuration,
     planStepStatus,
+    tikTokVideoUrl
   } = props;
   const classes = usePlanStepsItemComponent();
 
@@ -133,6 +134,7 @@ function PlanStepsItemComponent(props) {
               status,
               duration: planStepDuration,
               status: planStepStatus,
+              tikTokVideoUrl
             }}
           />
         </ListItemIcon>
