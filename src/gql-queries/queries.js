@@ -47,6 +47,7 @@ export const PLAN_QUERY = gql`
       }
       isReview
       isMentored
+      coinScore
     }
   }
 `;

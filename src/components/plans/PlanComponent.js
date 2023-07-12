@@ -1,6 +1,6 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import { Button, Chip, Grid, Typography } from '@material-ui/core';
+import { Box, Button, Chip, Grid, Typography } from '@material-ui/core';
 import moment from 'moment';
 
 import PlanStepsComponent from '../planSteps/PlanStepsComponent';
@@ -134,6 +134,12 @@ function PlanComponent(props) {
             planStartDate={data.plan.startDate}
           />
         </Grid>
+        <Box style={{ position: 'fixed', top: 80, right: 30 }}>
+          <ChipBarItem
+            label={`My score: ${data?.plan?.coinScore}`}
+            disabled={true}
+          />
+        </Box>
       </Grid>
     </>
   );
