@@ -19,6 +19,7 @@ import { useMutation } from '@apollo/client';
 import { Edit } from '@material-ui/icons';
 
 import UserProfileInterests from './UserProfileInterests';
+import { ChipBarItem } from '../planStepDetail/FullfilmentChipBarSelect';
 
 const UPDATE_USER_MUTATION = gql`
   mutation meUpdate($input: ActualUserInput) {
@@ -117,6 +118,12 @@ function UserProfileComponent(props) {
         </Grid>
         <Grid item>
           <Typography variant={'h5'}>{user.email}</Typography>
+        </Grid>
+        <Grid item>
+          <ChipBarItem
+            label={`Community score: 233`}
+            disabled={true}
+          />
         </Grid>
         <Grid item xs={12}>
           <Box margin={2}>

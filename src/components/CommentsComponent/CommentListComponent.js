@@ -10,7 +10,7 @@ import { Skeleton } from '@material-ui/lab';
 import moment from 'moment';
 import * as React from 'react';
 import { COLORS } from '../../constants/Colors';
-import {
+import FullfilmentChipBarSelect, {
   ChipBarItem,
   FULFILLMENT_VALUE,
 } from '../planStepDetail/FullfilmentChipBarSelect';
@@ -94,7 +94,9 @@ export default function CommentListComponent({ loading, comments, onSubmit }) {
                 <Box style={{ flex: 4 }}>
                   <Typography variant={'caption'} style={{ margin: 12 }}>
                     {v.text}
+                    
                   </Typography>
+                  <FullfilmentChipBarSelect  />
                 </Box>
                 <Box>
                   {' '}
