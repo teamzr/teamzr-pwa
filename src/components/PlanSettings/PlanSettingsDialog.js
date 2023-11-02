@@ -67,6 +67,7 @@ function PlanSettingsDialog(props) {
   const [createPlan] = useMutation(CREATE_PLAN_MUTATION);
 
   const handleCreatePlan = async () => {
+    // TODO: Refactor
     const res = await createPlan({
       variables: {
         input: {
@@ -77,6 +78,10 @@ function PlanSettingsDialog(props) {
           rewardDescription,
           conversationId,
           interests: interests.map((i) => i.id),
+          mentors,
+          members,
+          isMentored,
+          isReview,
         },
       },
     });
