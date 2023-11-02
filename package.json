@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/teamzr/teamzr-pwa#readme",
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
