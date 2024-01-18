@@ -173,9 +173,11 @@ function PlanStepDetailSettingsTab(props) {
         )}
         {!!planStepState.tikTokVideoUrl && (
           <Box>
-            <IconButton styl onClick={removeVideo}>
-              <CloseRounded />
-            </IconButton>
+            {!isViewOnly && (
+              <IconButton styl onClick={removeVideo}>
+                <CloseRounded />
+              </IconButton>
+            )}
             {planStepState.tikTokVideoUrl.includes('tiktok') && (
               <TikTokEmbed url={planStepState.tikTokVideoUrl} />
             )}
