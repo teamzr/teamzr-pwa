@@ -43,7 +43,7 @@ function ConversationComponent(props) {
       messages[messages.length - 1] &&
       messages[messages.length - 1].text.substring(
         0,
-        textLength < 30 ? textLength - 1 : 80
+        textLength < 30 ? textLength - 1 : 70
       );
     if (lastMessage != newm) {
       setLastMessage(newm);
@@ -115,9 +115,9 @@ function ConversationComponent(props) {
             )}
           </Box>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={8} style={{overflow: "hidden", maxHeight: 80}}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
-          <Typography variant={'subtitle2'}>{lastMessage}</Typography>
+          <Typography variant={'subtitle2'} style={{ opacity: 0.7}}>{lastMessage}</Typography>
         </Grid>
       </Grid>
     </Box>
