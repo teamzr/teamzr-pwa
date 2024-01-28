@@ -35,6 +35,21 @@ function ConversationComponent(props) {
 
   const oppositeUser = users.find((user) => user?.id != authContext.user?.id);
   const conversationName = isGroup ? name : oppositeUser?.name;
+  const [lastMessage, setLastMessage] = React.useState('');
+  React.useEffect(() => {
+    const textLength = messages[messages.length - 1]?.text?.length;
+
+    const newm =
+      messages[messages.length - 1] &&
+      messages[messages.length - 1].text.substring(
+        0,
+        textLength < 30 ? textLength - 1 : 80
+      );
+    if (lastMessage != newm) {
+      setLastMessage(newm);
+    }
+  }, [messages]);
+
   return (
     <Box
       margin={2}
@@ -102,10 +117,7 @@ function ConversationComponent(props) {
         </Grid>
         <Grid item xs={8}>
           <Typography variant={'subtitle1'}>{conversationName}</Typography>
-          <Typography variant={'subtitle2'}>
-            {messages[messages.length - 1] &&
-              messages[messages.length - 1].text.substring(0, 10)}
-          </Typography>
+          <Typography variant={'subtitle2'}>{lastMessage}</Typography>
         </Grid>
       </Grid>
     </Box>
