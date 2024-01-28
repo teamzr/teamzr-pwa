@@ -3,7 +3,7 @@ import proTypes from 'prop-types';
 import { Tab, Tabs } from '@material-ui/core';
 
 function PlanStepDetailTabsComponent(props) {
-  const { onChange, tab } = props;
+  const { onChange, tab, disableProgressTab } = props;
   return (
     <Tabs
       variant={'fullWidth'}
@@ -13,7 +13,10 @@ function PlanStepDetailTabsComponent(props) {
       onChange={onChange}
     >
       <Tab label={'Detail'} />
-      <Tab label={'Progress'} />
+      {disableProgressTab == false && (
+        <Tab label={'Progress'} disabled={!!disableProgressTab} />
+      )}
+
       <Tab label={'Overview'} />
     </Tabs>
   );

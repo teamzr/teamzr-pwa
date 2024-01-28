@@ -17,6 +17,7 @@ import PlanStepDetailOverviewTab from './PlanStepDetailOverview';
 import { PLAN_STEP_STATUSES } from '../planSteps/PlanStepsConstants';
 
 import PlanStepDetailComments from './PlanStepDetailComments';
+import useAuthContext from '../../context/AuthContext';
 
 const GET_PLANSTEP_QUERY = gql`
   query planStep($id: ID!) {
@@ -30,6 +31,11 @@ const GET_PLANSTEP_QUERY = gql`
       startDate
       endDate
       tikTokVideoUrl
+      plan {
+        members {
+          user { id }
+        }
+      }
     }
   }
 `;
@@ -63,8 +69,16 @@ const PlanStepsDialogComponent = (props) => {
   React.useEffect(() => {
     setTab(tabNo);
   }, [loading]);
-
+  const { user: actualUser } = useAuthContext();
   if (loading) return '...';
+  
+  // Disable progressTab – only members can mark progress  
+  const actualUserPlanMember = stepData?.planStep?.plan?.members?.find((planUser => planUser?.user?.id == actualUser?.id));
+  if(actualUserPlanMember == null) {
+      tabNo = 0
+  }
+
+  const disableProgressTab = actualUserPlanMember == null;
   return (
     <Dialog
       onClose={handleClose}
@@ -101,7 +115,7 @@ const PlanStepsDialogComponent = (props) => {
       <DialogContent>
         <Grid container justify={'center'} spacing={2}>
           <Grid item xs={12}>
-            <PlanStepDetailTabsComponent tab={tab} onChange={onChangeTab} />
+            <PlanStepDetailTabsComponent tab={tab} onChange={onChangeTab} disableProgressTab={disableProgressTab}  />
           </Grid>
           <Grid item xs={12} md={8}>
             {tab == 0 && (
