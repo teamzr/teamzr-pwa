@@ -4,6 +4,7 @@ import ChipSelectComponent from '../ChipSelectComponent/ChipSelectComponent';
 export default function DurationSelect(props) {
   const { value, onChange } = props;
   const options = [
+    { value: 'HOUR', label: '1 Hour' },
     { value: 'DAY', label: '1 Day' },
     { value: 'WEEK', label: '1 Week' },
     { value: 'WEEK2', label: '2 Weeks' },
