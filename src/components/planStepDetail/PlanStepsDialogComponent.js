@@ -33,7 +33,9 @@ const GET_PLANSTEP_QUERY = gql`
       tikTokVideoUrl
       plan {
         members {
-          user { id }
+          user {
+            id
+          }
         }
       }
     }
@@ -71,11 +73,13 @@ const PlanStepsDialogComponent = (props) => {
   }, [loading]);
   const { user: actualUser } = useAuthContext();
   if (loading) return '...';
-  
-  // Disable progressTab – only members can mark progress  
-  const actualUserPlanMember = stepData?.planStep?.plan?.members?.find((planUser => planUser?.user?.id == actualUser?.id));
-  if(actualUserPlanMember == null) {
-      tabNo = 0
+
+  // Disable progressTab – only members can mark progress
+  const actualUserPlanMember = stepData?.planStep?.plan?.members?.find(
+    (planUser) => planUser?.user?.id == actualUser?.id
+  );
+  if (actualUserPlanMember == null) {
+    tabNo = 0;
   }
 
   const disableProgressTab = actualUserPlanMember == null;
@@ -115,7 +119,11 @@ const PlanStepsDialogComponent = (props) => {
       <DialogContent>
         <Grid container justify={'center'} spacing={2}>
           <Grid item xs={12}>
-            <PlanStepDetailTabsComponent tab={tab} onChange={onChangeTab} disableProgressTab={disableProgressTab}  />
+            <PlanStepDetailTabsComponent
+              tab={tab}
+              onChange={onChangeTab}
+              disableProgressTab={disableProgressTab}
+            />
           </Grid>
           <Grid item xs={12} md={8}>
             {tab == 0 && (
@@ -124,13 +132,16 @@ const PlanStepsDialogComponent = (props) => {
                 stepData={stepData}
               />
             )}
-            {tab == 1 && (
+            {!disableProgressTab && tab == 1 && (
               <PlanStepDetailProgressTab
                 planStepId={planStepId}
                 status={stepData?.planStep?.status}
               />
             )}
-            {tab == 2 && <PlanStepDetailOverviewTab planStepId={planStepId} />}
+            {((disableProgressTab && tab == 1) ||
+              tab == 2) && (
+                <PlanStepDetailOverviewTab planStepId={planStepId} />
+              )}
           </Grid>
           <Grid item xs={12} md={8}>
             <PlanStepDetailComments planStepId={planStepId} />
