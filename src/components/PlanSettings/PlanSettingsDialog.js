@@ -61,17 +61,19 @@ function PlanSettingsDialog(props) {
 
   const {
     data: mb,
-    isLoading,
+    isLoading: mbIsLoading,
     error,
   } = useQuery(CONVERSATION_QUERY, {
     variables: { conversationId: conversationId },
-  });
+  });  
+  const [members, setMembers] = React.useState([]);
 
-  const mbrs = mb?.conversation?.users?.map((v) => v.id) || [];
-
-  console.log(mbrs);
-
-  const [members, setMembers] = React.useState(mbrs);
+  React.useEffect(() => {
+    if(!mbIsLoading) {
+      const mbrs = mb?.conversation?.users?.map((v) => v.id) || [];
+      setMembers(mbrs)    
+    }
+  }, [mbIsLoading]);
   const [mentors, setMentors] = React.useState([]);
   const [isMentored, setIsMentored] = React.useState(false);
   const [isReview, setIsReview] = React.useState(false);
