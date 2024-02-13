@@ -12,6 +12,7 @@ import { PLAN_QUERY } from '../../gql-queries/queries';
 
 import AppBarComponent from '../AppBarComponent/AppBarComponent';
 import { PlanSettingsFormComponent } from './PlanSettingsFormComponent';
+import { CONVERSATION_QUERY } from '../../gql-queries/conversationQueries';
 
 function PlanSettingsDialog(props) {
   const {
@@ -57,7 +58,20 @@ function PlanSettingsDialog(props) {
   const [interests, setInterests] = React.useState([]);
   const [startDate, setStartDate] = React.useState(null); // ALT: moment().hours(0).minute(0)
   const [rewardDescription, setRewardDescription] = React.useState('');
-  const [members, setMembers] = React.useState([]);
+
+  const {
+    data: mb,
+    isLoading,
+    error,
+  } = useQuery(CONVERSATION_QUERY, {
+    variables: { conversationId: conversationId },
+  });
+
+  const mbrs = mb?.conversation?.users?.map((v) => v.id) || [];
+
+  console.log(mbrs);
+
+  const [members, setMembers] = React.useState(mbrs);
   const [mentors, setMentors] = React.useState([]);
   const [isMentored, setIsMentored] = React.useState(false);
   const [isReview, setIsReview] = React.useState(false);
