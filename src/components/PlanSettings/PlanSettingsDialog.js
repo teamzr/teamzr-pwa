@@ -65,13 +65,13 @@ function PlanSettingsDialog(props) {
     error,
   } = useQuery(CONVERSATION_QUERY, {
     variables: { conversationId: conversationId },
-  });  
+  });
   const [members, setMembers] = React.useState([]);
 
   React.useEffect(() => {
-    if(!mbIsLoading) {
-      const mbrs = mb?.conversation?.users?.map((v) => v.id) || [];
-      setMembers(mbrs)    
+    if (!mbIsLoading) {
+      const mbrs = mb?.conversation?.users?.map((v) => v.id);
+      setMembers(mbrs);
     }
   }, [mbIsLoading]);
   const [mentors, setMentors] = React.useState([]);
