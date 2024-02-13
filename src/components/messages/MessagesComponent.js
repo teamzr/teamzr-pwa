@@ -57,6 +57,14 @@ function MessagesComponent(props) {
   });
   const authCtx = useAuthContext();
 
+  React.useEffect(() => {
+    // Pokud je na spodní hraně odstrování, pří nových zprávách – odscroluj dolů od šířku nových zpráv
+
+
+
+
+  }, [data])
+
   if (loading) return <LoadingIndicatorComponent />;
 
   return (

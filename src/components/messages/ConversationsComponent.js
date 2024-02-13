@@ -66,7 +66,7 @@ function ConversationsComponent(props) {
       }, 1000);
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  }, [loading, messagesRef.current, conversationId]);
+  }, [loading, messagesRef.current, conversationId, data]);
 
   if (loading) return <LoadingIndicatorComponent />;
   return (
