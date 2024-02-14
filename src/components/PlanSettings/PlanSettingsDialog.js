@@ -70,9 +70,7 @@ function PlanSettingsDialog(props) {
 
   React.useEffect(() => {
     if (!mbIsLoading && !isEditing) {
-      const mbrs = mb?.conversation?.users?.map((v) => v.id);
-      console.log(mb);
-
+      const mbrs = mb?.conversation?.users?.map((v) => v.id);      
       setMembers(mbrs);
     }
   }, [mbIsLoading, mb]);
