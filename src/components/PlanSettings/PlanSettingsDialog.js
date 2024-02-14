@@ -69,11 +69,13 @@ function PlanSettingsDialog(props) {
   const [members, setMembers] = React.useState([]);
 
   React.useEffect(() => {
-    if (!mbIsLoading) {
+    if (!mbIsLoading && !isEditing) {
       const mbrs = mb?.conversation?.users?.map((v) => v.id);
+      console.log(mb);
+
       setMembers(mbrs);
     }
-  }, [mbIsLoading]);
+  }, [mbIsLoading, mb]);
   const [mentors, setMentors] = React.useState([]);
   const [isMentored, setIsMentored] = React.useState(false);
   const [isReview, setIsReview] = React.useState(false);
