@@ -44,7 +44,7 @@ function SignUp() {
           </Grid>
           <Grid item xs={12}>
             <Typography color={'secondary'}>Coming soon...</Typography>
-            {<SignupFormComponent onSubmit={AuthService.signUp} />}
+            {/* <SignupFormComponent onSubmit={AuthService.signUp} /> */}
           </Grid>
           <Grid item>
             <Grid
